@@ -1,0 +1,54 @@
+2026-08-19 09:14:17.041 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-08-19 09:14:18.725 +02:00 [WRN] The WebRootPath was not found: C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-08-19 09:14:18.871 +02:00 [WRN] The WebRootPath was not found: C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-08-19 09:14:18.969 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-08-19 09:14:18.971 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-08-19 09:14:19.002 +02:00 [INF] Server pf66lh68:39716:1f05db47 successfully announced in 5.7661 ms
+2026-08-19 09:14:19.008 +02:00 [INF] Server pf66lh68:39716:1f05db47 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-08-19 09:14:19.035 +02:00 [INF] Server pf66lh68:39716:1f05db47 all the dispatchers started
+2026-08-19 09:16:28.053 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-08-19 09:16:28.152 +02:00 [INF] HTTP OPTIONS /api/auth/register-company responded 204 in 101.7861 ms
+2026-08-19 09:16:28.817 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-19 09:16:30.585 +02:00 [INF] HTTP POST /api/auth/register-company responded 200 in 2154.8435 ms
+2026-08-19 09:16:30.962 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 1.4239 ms
+2026-08-19 09:16:30.965 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.2109 ms
+2026-08-19 09:16:31.575 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 597.6439 ms
+2026-08-19 09:16:31.609 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 32.0690 ms
+2026-08-19 09:16:39.010 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 0.5046 ms
+2026-08-19 09:16:39.156 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 129.2361 ms
+2026-08-19 09:16:40.363 +02:00 [INF] HTTP OPTIONS /api/payroll/generate responded 204 in 0.3192 ms
+2026-08-19 09:16:40.705 +02:00 [INF] HTTP POST /api/payroll/generate responded 200 in 325.1574 ms
+2026-08-19 09:16:40.767 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 36.8356 ms
+2026-08-19 09:16:43.292 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.3724 ms
+2026-08-19 09:16:43.331 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 23.4800 ms
+2026-08-19 09:16:47.767 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 16.8965 ms
+2026-08-19 09:19:24.514 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.1453 ms
+2026-08-19 09:19:24.628 +02:00 [INF] HTTP GET /api/employees responded 200 in 92.8424 ms
+2026-08-19 09:19:32.458 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.5089 ms
+2026-08-19 09:19:32.460 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.1322 ms
+2026-08-19 09:19:32.474 +02:00 [INF] HTTP GET /api/employees responded 200 in 6.4099 ms
+2026-08-19 09:19:32.486 +02:00 [INF] HTTP GET /api/employees responded 200 in 9.2167 ms
+2026-08-19 09:19:47.095 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 0.1636 ms
+2026-08-19 09:19:47.113 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 4.6683 ms
+2026-08-19 09:19:48.737 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 0.1578 ms
+2026-08-19 09:19:48.846 +02:00 [INF] HTTP GET /api/leave responded 200 in 95.0366 ms
+2026-08-19 09:19:49.549 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.6520 ms
+2026-08-19 09:19:49.565 +02:00 [INF] HTTP GET /api/employees responded 200 in 2.7011 ms
+2026-08-19 09:21:09.019 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.1783 ms
+2026-08-19 09:21:09.051 +02:00 [INF] HTTP GET /api/employees responded 200 in 7.7092 ms
+2026-08-19 09:21:28.062 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 0.5203 ms
+2026-08-19 09:21:28.093 +02:00 [INF] HTTP GET /api/leave responded 200 in 10.8621 ms
+2026-08-19 09:21:32.277 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 0.3041 ms
+2026-08-19 09:21:32.312 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 6.6314 ms
+2026-08-19 09:21:33.914 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.3508 ms
+2026-08-19 09:21:33.929 +02:00 [INF] HTTP GET /api/employees responded 200 in 4.6130 ms
+2026-08-19 09:21:35.338 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.1275 ms
+2026-08-19 09:21:35.360 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 8.0581 ms
+2026-08-19 09:23:44.121 +02:00 [INF] Server pf66lh68:39716:1f05db47 caught stopping signal...
+2026-08-19 09:23:44.130 +02:00 [INF] Server pf66lh68:39716:1f05db47 All dispatchers stopped
+2026-08-19 09:23:44.137 +02:00 [INF] Server pf66lh68:39716:1f05db47 successfully reported itself as stopped in 1.7548 ms
+2026-08-19 09:23:44.139 +02:00 [INF] Server pf66lh68:39716:1f05db47 has been stopped in total 15.2627 ms

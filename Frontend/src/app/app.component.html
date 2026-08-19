@@ -1,0 +1,76 @@
+﻿@if (showShell()) {
+	<div class="shell-bg">
+		<header class="shell-header" aria-label="Primary navigation">
+			<div class="shell-header__inner">
+				<a class="brand" routerLink="/dashboard" aria-label="Payroll SA home">
+					<span class="brand__mark">PS</span>
+					<span class="brand__text">{{ appName }}</span>
+				</a>
+
+				<button
+					type="button"
+					class="mobile-toggle"
+					(click)="toggleMobileMenu()"
+					[attr.aria-expanded]="mobileMenuOpen()"
+					aria-label="Toggle navigation menu"
+				>
+					<i class="bi" [class.bi-list]="!mobileMenuOpen()" [class.bi-x-lg]="mobileMenuOpen()"></i>
+				</button>
+
+				<nav class="menu" [class.menu--open]="mobileMenuOpen()" aria-label="Main menu">
+					<ul class="menu__links">
+						@for (item of mainNav; track item.path) {
+							@if (isAllowed(item)) {
+								<li>
+									<a
+										[routerLink]="item.path"
+										routerLinkActive="is-active"
+										[routerLinkActiveOptions]="{ exact: item.path === '/dashboard' }"
+										[class.is-active]="isRouteActive(item.path)"
+									>
+										<i class="bi" [class]="item.icon"></i>
+										<span>{{ item.label }}</span>
+									</a>
+								</li>
+							}
+						}
+					</ul>
+
+					@if (isAllowed(settingsNav[0])) {
+						<div class="settings" [class.settings--open]="settingsOpen()">
+							<button type="button" class="settings__button" (click)="toggleSettings()" [attr.aria-expanded]="settingsOpen()">
+								<i class="bi bi-gear"></i>
+								<span>Settings</span>
+								<i class="bi bi-chevron-down settings__chevron"></i>
+							</button>
+							<div class="settings__panel">
+								@for (item of settingsNav; track item.path) {
+									<a [routerLink]="item.path" [class.is-active]="isRouteActive(item.path)">
+										<i class="bi" [class]="item.icon"></i>
+										<span>{{ item.label }}</span>
+									</a>
+								}
+							</div>
+						</div>
+					}
+				</nav>
+
+				@if (isLoggedIn()) {
+					<div class="account-chip">
+						<div>
+							<p class="account-chip__name">{{ user()?.firstName }} {{ user()?.lastName }}</p>
+							<p class="account-chip__meta">{{ user()?.roles?.[0] || 'User' }}</p>
+						</div>
+						<button type="button" class="btn btn-sm btn-outline-light" (click)="logout()">Log out</button>
+					</div>
+				}
+			</div>
+		</header>
+
+		<main class="shell-main">
+			<router-outlet></router-outlet>
+		</main>
+	</div>
+} @else {
+	<router-outlet></router-outlet>
+}

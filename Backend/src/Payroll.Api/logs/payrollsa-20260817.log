@@ -1,0 +1,8 @@
+2026-08-17 09:06:27.782 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-08-17 09:06:27.943 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 175.3832 ms
+2026-08-17 09:06:28.590 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-08-17 09:06:29.259 +02:00 [INF] HTTP POST /api/auth/login responded 400 in 1255.9516 ms
+2026-08-17 09:08:28.257 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 2.0586 ms
+2026-08-17 09:08:28.830 +02:00 [INF] HTTP POST /api/auth/login responded 400 in 452.1505 ms
+2026-08-17 09:11:10.138 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 0.2474 ms
+2026-08-17 09:11:11.334 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 1171.9544 ms

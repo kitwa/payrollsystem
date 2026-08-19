@@ -1,0 +1,130 @@
+<main class="landing">
+  <header class="topbar container" aria-label="Main navigation">
+    <a class="brand" routerLink="/">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span class="brand-text">Payroll SA</span>
+    </a>
+    <nav class="topbar-actions" aria-label="Account actions">
+      <a class="btn btn-link top-link" routerLink="/login">Sign in</a>
+      <a class="btn btn-dark cta-btn" routerLink="/register">Request Demo</a>
+    </nav>
+  </header>
+
+  <section class="hero container" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow">Trusted South African Payroll Platform</p>
+      <h1 id="hero-title">Run accurate payroll in minutes, not days.</h1>
+      <p class="hero-subtitle">
+        Payroll SA gives finance teams total confidence with compliant PAYE, UIF, SDL calculations,
+        automated payslips, and executive-ready reporting in one secure workspace.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-dark btn-lg" routerLink="/register">Start Free Trial</a>
+        <a class="btn btn-outline-dark btn-lg" href="#features">Explore Platform</a>
+      </div>
+      <ul class="trust-list" aria-label="Platform trust highlights">
+        <li><i class="bi bi-shield-check"></i> Bank-grade security</li>
+        <li><i class="bi bi-file-earmark-check"></i> SARS-ready exports</li>
+        <li><i class="bi bi-lightning-charge"></i> 10-minute monthly run</li>
+      </ul>
+    </div>
+    <aside class="hero-card" aria-label="Payroll performance snapshot">
+      <div class="metric-row">
+        <span class="metric-label">Monthly payroll run</span>
+        <strong class="metric-value">8m 41s</strong>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Payslips generated</span>
+        <strong class="metric-value">1,248</strong>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Accuracy rate</span>
+        <strong class="metric-value">99.98%</strong>
+      </div>
+      <div class="status-chip">
+        <i class="bi bi-check2-circle"></i>
+        <span>Submission package validated</span>
+      </div>
+    </aside>
+  </section>
+
+  <section class="logo-strip container reveal" #reveal aria-label="Client confidence">
+    <p>Used by finance teams at high-growth companies</p>
+    <div class="logos" role="list" aria-label="Example client sectors">
+      <span role="listitem">Manufacturing</span>
+      <span role="listitem">Retail</span>
+      <span role="listitem">Logistics</span>
+      <span role="listitem">Professional Services</span>
+    </div>
+  </section>
+
+  <section id="features" class="features container reveal" #reveal aria-labelledby="features-title">
+    <div class="section-head">
+      <p class="eyebrow">Platform</p>
+      <h2 id="features-title">Everything payroll teams need to execute flawlessly</h2>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card">
+        <i class="bi bi-calculator"></i>
+        <h3>Automated payroll engine</h3>
+        <p>Rules-driven calculations for PAYE, UIF, SDL, overtime, and deductions with full audit trace.</p>
+      </article>
+      <article class="feature-card">
+        <i class="bi bi-file-earmark-pdf"></i>
+        <h3>Branded digital payslips</h3>
+        <p>Generate, protect, and distribute payslips instantly with secure employee self-service access.</p>
+      </article>
+      <article class="feature-card">
+        <i class="bi bi-graph-up-arrow"></i>
+        <h3>Executive reporting</h3>
+        <p>Live dashboards and export-ready reports for finance, HR, and compliance stakeholders.</p>
+      </article>
+      <article class="feature-card">
+        <i class="bi bi-cloud-check"></i>
+        <h3>SARS-ready submissions</h3>
+        <p>Prepare IRP5, IT3(a), EMP201 and EMP501 files with built-in validation before filing.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="workflow container reveal" #reveal aria-labelledby="workflow-title">
+    <div class="section-head">
+      <p class="eyebrow">Workflow</p>
+      <h2 id="workflow-title">From data capture to payout in three clear steps</h2>
+    </div>
+    <ol class="steps">
+      <li>
+        <span>1</span>
+        <div>
+          <h3>Capture</h3>
+          <p>Import employee data, earnings, and leave records from your current tools.</p>
+        </div>
+      </li>
+      <li>
+        <span>2</span>
+        <div>
+          <h3>Review</h3>
+          <p>Validate results, exceptions, and tax obligations before locking the payroll period.</p>
+        </div>
+      </li>
+      <li>
+        <span>3</span>
+        <div>
+          <h3>Submit</h3>
+          <p>Distribute payslips, run payments, and export compliant SARS submission files.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="cta container reveal" #reveal aria-labelledby="cta-title">
+    <h2 id="cta-title">Modern payroll infrastructure for serious businesses.</h2>
+    <p>See how Payroll SA can cut payroll processing time while increasing compliance confidence.</p>
+    <a class="btn btn-dark btn-lg" routerLink="/register">Book Your Guided Demo</a>
+  </section>
+
+  <footer class="container footer" aria-label="Site footer">
+    <p>© {{ currentYear }} Payroll SA. Built for South African businesses.</p>
+    <a routerLink="/login">Sign in</a>
+  </footer>
+</main>
