@@ -71,3 +71,7 @@ public record UpdateEmployeeDto(
     string? Department,
     decimal BasicSalary,
     EmploymentStatus Status);
+
+public record DepartmentDto(Guid Id, Guid CompanyId, string Name, bool IsSystemDepartment);
+public record CreateDepartmentDto(Guid CompanyId, string Name);
+public record UpdateDepartmentDto(string Name);

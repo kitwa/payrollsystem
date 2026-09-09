@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Payroll.Application.Common.Interfaces;
+using Payroll.Application.Common;
 using Payroll.Application.Reports.DTOs;
 using Payroll.Domain.PayrollRuns.Enums;
 using Payroll.Shared;
@@ -9,12 +10,14 @@ namespace Payroll.Application.Reports.Queries;
 
 public record GetPayrollRegisterQuery(Guid PeriodId) : IRequest<Result<PayrollRegisterDto>>;
 
-public class GetPayrollRegisterHandler(IAppDbContext db) : IRequestHandler<GetPayrollRegisterQuery, Result<PayrollRegisterDto>>
+public class GetPayrollRegisterHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<GetPayrollRegisterQuery, Result<PayrollRegisterDto>>
 {
     public async Task<Result<PayrollRegisterDto>> Handle(GetPayrollRegisterQuery request, CancellationToken ct)
     {
         var period = await db.PayrollPeriods.FirstOrDefaultAsync(p => p.Id == request.PeriodId && !p.IsDeleted, ct);
         if (period is null) return Result<PayrollRegisterDto>.Fail("Payroll period not found.");
+        if (!TenantAccess.CanAccessCompany(currentUser, period.CompanyId))
+            return Result<PayrollRegisterDto>.Fail("You are not authorized to view this report.");
 
         var lines = await db.PayrollLines
             .Include(l => l.Employee)
@@ -32,10 +35,13 @@ public class GetPayrollRegisterHandler(IAppDbContext db) : IRequestHandler<GetPa
 
 public record GetLeaveReportQuery(Guid CompanyId, DateTime From, DateTime To) : IRequest<Result<List<LeaveReportLineDto>>>;
 
-public class GetLeaveReportHandler(IAppDbContext db) : IRequestHandler<GetLeaveReportQuery, Result<List<LeaveReportLineDto>>>
+public class GetLeaveReportHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<GetLeaveReportQuery, Result<List<LeaveReportLineDto>>>
 {
     public async Task<Result<List<LeaveReportLineDto>>> Handle(GetLeaveReportQuery request, CancellationToken ct)
     {
+        if (!TenantAccess.CanAccessCompany(currentUser, request.CompanyId))
+            return Result<List<LeaveReportLineDto>>.Fail("You are not authorized to view this report.");
+
         var result = await db.LeaveRequests
             .Include(l => l.Employee)
             .Include(l => l.LeaveType)
@@ -52,12 +58,14 @@ public class GetLeaveReportHandler(IAppDbContext db) : IRequestHandler<GetLeaveR
 
 public record GetStatutoryReportQuery(Guid PeriodId, DeductionCategory Category) : IRequest<Result<StatutoryReportDto>>;
 
-public class GetStatutoryReportHandler(IAppDbContext db) : IRequestHandler<GetStatutoryReportQuery, Result<StatutoryReportDto>>
+public class GetStatutoryReportHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<GetStatutoryReportQuery, Result<StatutoryReportDto>>
 {
     public async Task<Result<StatutoryReportDto>> Handle(GetStatutoryReportQuery request, CancellationToken ct)
     {
         var period = await db.PayrollPeriods.FirstOrDefaultAsync(p => p.Id == request.PeriodId && !p.IsDeleted, ct);
         if (period is null) return Result<StatutoryReportDto>.Fail("Payroll period not found.");
+        if (!TenantAccess.CanAccessCompany(currentUser, period.CompanyId))
+            return Result<StatutoryReportDto>.Fail("You are not authorized to view this report.");
 
         var lines = await db.Deductions
             .Include(d => d.PayrollLine).ThenInclude(l => l.Employee)
@@ -75,10 +83,13 @@ public class GetStatutoryReportHandler(IAppDbContext db) : IRequestHandler<GetSt
 
 public record GetEmployeeCostReportQuery(Guid CompanyId, int Year) : IRequest<Result<EmployeeCostReportDto>>;
 
-public class GetEmployeeCostReportHandler(IAppDbContext db) : IRequestHandler<GetEmployeeCostReportQuery, Result<EmployeeCostReportDto>>
+public class GetEmployeeCostReportHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<GetEmployeeCostReportQuery, Result<EmployeeCostReportDto>>
 {
     public async Task<Result<EmployeeCostReportDto>> Handle(GetEmployeeCostReportQuery request, CancellationToken ct)
     {
+        if (!TenantAccess.CanAccessCompany(currentUser, request.CompanyId))
+            return Result<EmployeeCostReportDto>.Fail("You are not authorized to view this report.");
+
         var lines = await db.PayrollLines
             .Include(l => l.Employee)
             .Include(l => l.Deductions)

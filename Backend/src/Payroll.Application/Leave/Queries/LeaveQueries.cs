@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Payroll.Application.Common.Interfaces;
+using Payroll.Application.Common;
 using Payroll.Application.Leave.DTOs;
 using Payroll.Shared;
 
@@ -8,10 +9,13 @@ namespace Payroll.Application.Leave.Queries;
 
 public record GetLeaveRequestsQuery(Guid CompanyId, Guid? EmployeeId) : IRequest<Result<List<LeaveRequestDto>>>;
 
-public class GetLeaveRequestsHandler(IAppDbContext db) : IRequestHandler<GetLeaveRequestsQuery, Result<List<LeaveRequestDto>>>
+public class GetLeaveRequestsHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<GetLeaveRequestsQuery, Result<List<LeaveRequestDto>>>
 {
     public async Task<Result<List<LeaveRequestDto>>> Handle(GetLeaveRequestsQuery request, CancellationToken ct)
     {
+        if (!TenantAccess.CanAccessCompany(currentUser, request.CompanyId))
+            return Result<List<LeaveRequestDto>>.Fail("You are not authorized to view this company's leave.");
+
         var query = db.LeaveRequests
             .Include(l => l.Employee)
             .Include(l => l.LeaveType)
@@ -33,7 +37,7 @@ public class GetLeaveRequestsHandler(IAppDbContext db) : IRequestHandler<GetLeav
 
 public record GetLeaveRequestByIdQuery(Guid Id) : IRequest<Result<LeaveRequestDto>>;
 
-public class GetLeaveRequestByIdHandler(IAppDbContext db) : IRequestHandler<GetLeaveRequestByIdQuery, Result<LeaveRequestDto>>
+public class GetLeaveRequestByIdHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<GetLeaveRequestByIdQuery, Result<LeaveRequestDto>>
 {
     public async Task<Result<LeaveRequestDto>> Handle(GetLeaveRequestByIdQuery request, CancellationToken ct)
     {
@@ -43,6 +47,8 @@ public class GetLeaveRequestByIdHandler(IAppDbContext db) : IRequestHandler<GetL
             .FirstOrDefaultAsync(l => l.Id == request.Id && !l.IsDeleted, ct);
 
         if (l is null) return Result<LeaveRequestDto>.Fail("Leave request not found.");
+        if (!TenantAccess.CanAccessEmployee(currentUser, l.Employee.CompanyId, l.EmployeeId))
+            return Result<LeaveRequestDto>.Fail("You are not authorized to view this leave request.");
 
         return Result<LeaveRequestDto>.Ok(new LeaveRequestDto(
             l.Id, l.EmployeeId, $"{l.Employee.FirstName} {l.Employee.LastName}", l.LeaveType.Name,
@@ -52,10 +58,15 @@ public class GetLeaveRequestByIdHandler(IAppDbContext db) : IRequestHandler<GetL
 
 public record GetLeaveBalancesQuery(Guid EmployeeId) : IRequest<Result<List<LeaveBalanceDto>>>;
 
-public class GetLeaveBalancesHandler(IAppDbContext db) : IRequestHandler<GetLeaveBalancesQuery, Result<List<LeaveBalanceDto>>>
+public class GetLeaveBalancesHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<GetLeaveBalancesQuery, Result<List<LeaveBalanceDto>>>
 {
     public async Task<Result<List<LeaveBalanceDto>>> Handle(GetLeaveBalancesQuery request, CancellationToken ct)
     {
+        var employee = await db.Employees.FirstOrDefaultAsync(e => e.Id == request.EmployeeId && !e.IsDeleted, ct);
+        if (employee is null) return Result<List<LeaveBalanceDto>>.Fail("Employee not found.");
+        if (!TenantAccess.CanAccessEmployee(currentUser, employee.CompanyId, employee.Id))
+            return Result<List<LeaveBalanceDto>>.Fail("You are not authorized to view these leave balances.");
+
         var year = DateTime.UtcNow.Year;
         var result = await db.LeaveBalances
             .Include(b => b.LeaveType)

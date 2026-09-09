@@ -1,0 +1,309 @@
+2026-09-01 11:45:54.508 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-01 11:45:56.910 +02:00 [WRN] The WebRootPath was not found: C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-01 11:45:57.046 +02:00 [WRN] The WebRootPath was not found: C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-01 11:45:57.339 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-01 11:45:57.657 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-01 11:45:58.005 +02:00 [INF] Server pf66lh68:24972:a1a003b2 successfully announced in 13.7035 ms
+2026-09-01 11:45:58.248 +02:00 [INF] Server pf66lh68:24972:a1a003b2 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-01 11:45:58.441 +02:00 [INF] Server pf66lh68:24972:a1a003b2 all the dispatchers started
+2026-09-01 12:22:37.293 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-09-01 12:22:37.376 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 88.3865 ms
+2026-09-01 12:22:37.592 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-09-01 12:22:37.752 +02:00 [INF] HTTP POST /api/auth/login responded 400 in 344.2441 ms
+2026-09-01 12:24:46.016 +02:00 [INF] HTTP OPTIONS /api/auth/register-company responded 204 in 0.9939 ms
+2026-09-01 12:24:47.112 +02:00 [INF] HTTP POST /api/auth/register-company responded 200 in 1090.7938 ms
+2026-09-01 12:24:47.145 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.5832 ms
+2026-09-01 12:24:47.149 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.2318 ms
+2026-09-01 12:24:47.520 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 366.3189 ms
+2026-09-01 12:24:47.534 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 12.1416 ms
+2026-09-01 12:24:54.082 +02:00 [INF] HTTP OPTIONS /api/companies/deb19db3-77ee-476a-bc66-6a06026bddd7 responded 204 in 0.2555 ms
+2026-09-01 12:24:54.137 +02:00 [INF] HTTP GET /api/companies/deb19db3-77ee-476a-bc66-6a06026bddd7 responded 200 in 48.0571 ms
+2026-09-01 12:24:56.560 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.1778 ms
+2026-09-01 12:24:56.607 +02:00 [INF] HTTP GET /api/departments responded 200 in 38.6559 ms
+2026-09-01 12:25:05.274 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.3387 ms
+2026-09-01 12:25:05.366 +02:00 [INF] HTTP POST /api/departments responded 200 in 87.4858 ms
+2026-09-01 12:25:05.372 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.2004 ms
+2026-09-01 12:25:05.383 +02:00 [INF] HTTP GET /api/departments responded 200 in 5.9498 ms
+2026-09-01 12:32:29.296 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.1872 ms
+2026-09-01 12:32:29.319 +02:00 [INF] HTTP POST /api/departments responded 200 in 17.5066 ms
+2026-09-01 12:32:29.327 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.1060 ms
+2026-09-01 12:32:29.336 +02:00 [INF] HTTP GET /api/departments responded 200 in 4.5584 ms
+2026-09-01 12:32:33.375 +02:00 [INF] HTTP OPTIONS /api/settings/leave-types responded 204 in 0.2464 ms
+2026-09-01 12:32:33.419 +02:00 [INF] HTTP GET /api/settings/leave-types responded 200 in 38.0032 ms
+2026-09-01 12:32:36.786 +02:00 [INF] HTTP OPTIONS /api/tax/year responded 204 in 0.1668 ms
+2026-09-01 12:32:36.850 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-01 12:32:37.098 +02:00 [INF] HTTP GET /api/tax/year responded 200 in 304.4633 ms
+2026-09-01 12:32:40.934 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 0.5498 ms
+2026-09-01 12:32:41.013 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 73.1362 ms
+2026-09-01 12:32:42.824 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 0.3103 ms
+2026-09-01 12:32:42.899 +02:00 [INF] HTTP GET /api/leave responded 200 in 69.5715 ms
+2026-09-01 12:32:46.941 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 0.2612 ms
+2026-09-01 12:32:46.979 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 33.2935 ms
+2026-09-01 12:32:48.801 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 0.1867 ms
+2026-09-01 12:32:48.811 +02:00 [INF] HTTP GET /api/leave responded 200 in 4.6331 ms
+2026-09-01 12:32:50.235 +02:00 [INF] HTTP OPTIONS /api/settings/leave-types responded 204 in 0.2558 ms
+2026-09-01 12:32:50.247 +02:00 [INF] HTTP GET /api/settings/leave-types responded 200 in 4.1917 ms
+2026-09-01 12:38:27.688 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 0.1624 ms
+2026-09-01 12:38:27.704 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 5.6369 ms
+2026-09-01 12:38:33.349 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 0.1063 ms
+2026-09-01 12:38:33.370 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 6.2450 ms
+2026-09-01 12:38:33.381 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 0.0870 ms
+2026-09-01 12:38:33.402 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 5.5109 ms
+2026-09-01 12:38:39.933 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.4245 ms
+2026-09-01 12:38:40.014 +02:00 [INF] HTTP GET /api/employees responded 200 in 67.2151 ms
+2026-09-01 12:38:42.843 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.1590 ms
+2026-09-01 12:38:42.875 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 12.7884 ms
+2026-09-01 12:38:43.980 +02:00 [INF] HTTP GET /api/employees responded 200 in 7.4273 ms
+2026-09-01 12:38:44.753 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.2406 ms
+2026-09-01 12:38:44.770 +02:00 [INF] HTTP GET /api/departments responded 200 in 2.5819 ms
+2026-09-01 12:39:49.522 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.1491 ms
+2026-09-01 12:39:49.949 +02:00 [INF] HTTP POST /api/employees responded 200 in 416.1372 ms
+2026-09-01 12:39:49.984 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.0772 ms
+2026-09-01 12:39:50.004 +02:00 [INF] HTTP GET /api/employees responded 200 in 11.5754 ms
+2026-09-01 12:39:52.489 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.0626 ms
+2026-09-01 12:39:52.490 +02:00 [INF] HTTP OPTIONS /api/employees/70d415bd-040a-4ef3-82a1-6070e1b97fb2 responded 204 in 0.0721 ms
+2026-09-01 12:39:52.501 +02:00 [INF] HTTP GET /api/departments responded 200 in 2.5675 ms
+2026-09-01 12:39:52.581 +02:00 [INF] HTTP GET /api/employees/70d415bd-040a-4ef3-82a1-6070e1b97fb2 responded 200 in 79.9825 ms
+2026-09-01 12:39:56.161 +02:00 [INF] HTTP OPTIONS /api/employees/70d415bd-040a-4ef3-82a1-6070e1b97fb2 responded 204 in 0.1403 ms
+2026-09-01 12:39:56.259 +02:00 [INF] HTTP PUT /api/employees/70d415bd-040a-4ef3-82a1-6070e1b97fb2 responded 200 in 83.2172 ms
+2026-09-01 12:39:56.295 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.1326 ms
+2026-09-01 12:39:56.308 +02:00 [INF] HTTP GET /api/employees responded 200 in 2.8348 ms
+2026-09-01 12:40:08.541 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.1175 ms
+2026-09-01 12:40:08.564 +02:00 [INF] HTTP GET /api/employees responded 200 in 5.4490 ms
+2026-09-01 12:40:11.655 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.1391 ms
+2026-09-01 12:40:11.656 +02:00 [INF] HTTP OPTIONS /api/employees/70d415bd-040a-4ef3-82a1-6070e1b97fb2 responded 204 in 0.0994 ms
+2026-09-01 12:40:11.670 +02:00 [INF] HTTP GET /api/departments responded 200 in 3.5578 ms
+2026-09-01 12:40:11.678 +02:00 [INF] HTTP GET /api/employees/70d415bd-040a-4ef3-82a1-6070e1b97fb2 responded 200 in 5.4515 ms
+2026-09-01 12:40:17.533 +02:00 [INF] HTTP OPTIONS /api/employees/70d415bd-040a-4ef3-82a1-6070e1b97fb2 responded 204 in 0.1630 ms
+2026-09-01 12:40:17.578 +02:00 [INF] HTTP PUT /api/employees/70d415bd-040a-4ef3-82a1-6070e1b97fb2 responded 200 in 31.7800 ms
+2026-09-01 12:40:17.614 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.0650 ms
+2026-09-01 12:40:17.641 +02:00 [INF] HTTP GET /api/employees responded 200 in 3.6222 ms
+2026-09-01 12:41:55.198 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.0576 ms
+2026-09-01 12:41:55.224 +02:00 [INF] HTTP GET /api/employees responded 200 in 3.3292 ms
+2026-09-01 12:41:55.297 +02:00 [INF] HTTP GET /api/employees responded 200 in 2.2113 ms
+2026-09-01 12:42:13.177 +02:00 [INF] Server pf66lh68:24972:a1a003b2 caught stopping signal...
+2026-09-01 12:42:13.183 +02:00 [INF] Server pf66lh68:24972:a1a003b2 All dispatchers stopped
+2026-09-01 12:42:13.188 +02:00 [INF] Server pf66lh68:24972:a1a003b2 successfully reported itself as stopped in 1.0634 ms
+2026-09-01 12:42:13.193 +02:00 [INF] Server pf66lh68:24972:a1a003b2 has been stopped in total 14.2869 ms
+2026-09-01 12:43:29.088 +02:00 [FTL] Application startup failed.
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\src\Payroll.Api\Program.cs:line 51
+2026-09-01 12:43:56.272 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-01 12:43:57.201 +02:00 [WRN] The WebRootPath was not found: C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-01 12:43:57.250 +02:00 [WRN] The WebRootPath was not found: C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-01 12:43:57.331 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-01 12:43:57.332 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-01 12:43:57.349 +02:00 [INF] Server pf66lh68:19116:ad2ded3b successfully announced in 2.524 ms
+2026-09-01 12:43:57.354 +02:00 [INF] Server pf66lh68:19116:ad2ded3b is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-01 12:43:57.365 +02:00 [INF] Server pf66lh68:19116:ad2ded3b all the dispatchers started
+2026-09-01 12:45:54.872 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-01 12:45:55.733 +02:00 [WRN] The WebRootPath was not found: C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-01 12:45:55.776 +02:00 [WRN] The WebRootPath was not found: C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-01 12:45:55.824 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-01 12:45:55.826 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-01 12:45:55.839 +02:00 [INF] Server pf66lh68:5784:2c4aab60 successfully announced in 2.2566 ms
+2026-09-01 12:45:55.843 +02:00 [INF] Server pf66lh68:5784:2c4aab60 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-01 12:45:55.853 +02:00 [INF] Server pf66lh68:5784:2c4aab60 all the dispatchers started
+2026-09-01 12:46:17.836 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-09-01 12:46:17.980 +02:00 [INF] HTTP GET /swagger/index.html responded 200 in 144.1721 ms
+2026-09-01 12:46:19.488 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 3.3068 ms
+2026-09-01 13:00:06.821 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-01 13:00:08.247 +02:00 [WRN] The WebRootPath was not found: C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-01 13:00:08.311 +02:00 [WRN] The WebRootPath was not found: C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-01 13:00:08.397 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-01 13:00:08.399 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-01 13:00:08.422 +02:00 [INF] Server pf66lh68:35396:4d32d203 successfully announced in 4.1895 ms
+2026-09-01 13:00:08.428 +02:00 [INF] Server pf66lh68:35396:4d32d203 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-01 13:00:08.497 +02:00 [INF] Server pf66lh68:35396:4d32d203 all the dispatchers started
+2026-09-01 13:02:01.890 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-09-01 13:02:01.962 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 75.2911 ms
+2026-09-01 13:02:02.286 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-09-01 13:02:02.490 +02:00 [INF] HTTP POST /api/auth/login responded 400 in 492.9581 ms
+2026-09-01 13:03:47.800 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 1.1146 ms
+2026-09-01 13:03:48.837 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 999.8811 ms
+2026-09-01 13:11:05.005 +02:00 [INF] HTTP OPTIONS /api/companies responded 204 in 0.2205 ms
+2026-09-01 13:11:05.140 +02:00 [INF] HTTP GET /api/companies responded 200 in 101.6463 ms
+2026-09-01 13:11:05.154 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 0.1889 ms
+2026-09-01 13:11:05.321 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 159.3948 ms
+2026-09-01 13:13:02.263 +02:00 [INF] HTTP OPTIONS /api/companies responded 204 in 1.5711 ms
+2026-09-01 13:13:02.287 +02:00 [INF] HTTP GET /api/companies responded 200 in 12.0846 ms
+2026-09-01 13:13:02.301 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.2033 ms
+2026-09-01 13:13:02.423 +02:00 [INF] HTTP GET /api/departments responded 200 in 77.1592 ms
+2026-09-01 13:13:06.460 +02:00 [INF] HTTP GET /api/departments responded 200 in 5.8230 ms
+2026-09-01 13:13:21.559 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.1360 ms
+2026-09-01 13:13:21.701 +02:00 [INF] HTTP POST /api/departments responded 200 in 134.7958 ms
+2026-09-01 13:13:21.713 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.1401 ms
+2026-09-01 13:13:21.726 +02:00 [INF] HTTP GET /api/departments responded 200 in 7.2473 ms
+2026-09-01 13:13:35.190 +02:00 [INF] HTTP OPTIONS /api/tax/year responded 204 in 0.5682 ms
+2026-09-01 13:13:35.331 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-01 13:13:35.639 +02:00 [INF] HTTP GET /api/tax/year responded 200 in 437.3451 ms
+2026-09-01 13:15:21.248 +02:00 [INF] HTTP OPTIONS /api/auth/register-company responded 204 in 0.2155 ms
+2026-09-01 13:15:21.313 +02:00 [INF] HTTP POST /api/auth/register-company responded 400 in 55.1995 ms
+2026-09-01 13:15:27.303 +02:00 [INF] HTTP OPTIONS /api/auth/register-company responded 204 in 0.2212 ms
+2026-09-01 13:15:27.734 +02:00 [INF] HTTP POST /api/auth/register-company responded 200 in 419.0179 ms
+2026-09-01 13:15:28.119 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.6102 ms
+2026-09-01 13:15:28.119 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.4629 ms
+2026-09-01 13:15:28.337 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 204.5185 ms
+2026-09-01 13:15:28.352 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 14.1057 ms
+2026-09-01 13:15:31.315 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 0.5123 ms
+2026-09-01 13:15:31.374 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 48.5935 ms
+2026-09-01 13:15:37.656 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.4320 ms
+2026-09-01 13:15:37.744 +02:00 [INF] HTTP GET /api/employees responded 200 in 74.9177 ms
+2026-09-01 13:15:38.786 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.2021 ms
+2026-09-01 13:15:38.798 +02:00 [INF] HTTP GET /api/departments responded 200 in 3.5087 ms
+2026-09-01 13:16:38.092 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 1.1588 ms
+2026-09-01 13:16:38.500 +02:00 [INF] HTTP POST /api/employees responded 200 in 398.9136 ms
+2026-09-01 13:16:38.540 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.1184 ms
+2026-09-01 13:16:38.566 +02:00 [INF] HTTP GET /api/employees responded 200 in 11.8006 ms
+2026-09-01 13:16:45.999 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.1598 ms
+2026-09-01 13:16:46.013 +02:00 [INF] HTTP GET /api/departments responded 200 in 2.9947 ms
+2026-09-01 13:16:56.242 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.1295 ms
+2026-09-01 13:16:56.276 +02:00 [INF] HTTP POST /api/departments responded 200 in 27.1961 ms
+2026-09-01 13:16:56.287 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.1068 ms
+2026-09-01 13:16:56.297 +02:00 [INF] HTTP GET /api/departments responded 200 in 2.5339 ms
+2026-09-01 13:17:01.308 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.1584 ms
+2026-09-01 13:17:01.346 +02:00 [INF] HTTP POST /api/departments responded 200 in 29.1069 ms
+2026-09-01 13:17:01.359 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.1499 ms
+2026-09-01 13:17:01.378 +02:00 [INF] HTTP GET /api/departments responded 200 in 4.0769 ms
+2026-09-01 13:17:04.259 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.1745 ms
+2026-09-01 13:17:04.281 +02:00 [INF] HTTP GET /api/employees responded 200 in 4.5152 ms
+2026-09-01 13:17:06.615 +02:00 [INF] HTTP OPTIONS /api/employees/9416943c-0084-472e-9895-d66966e4c82b responded 204 in 0.0902 ms
+2026-09-01 13:17:06.621 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 5.9515 ms
+2026-09-01 13:17:06.642 +02:00 [INF] HTTP GET /api/departments responded 200 in 2.8527 ms
+2026-09-01 13:17:06.741 +02:00 [INF] HTTP GET /api/employees/9416943c-0084-472e-9895-d66966e4c82b responded 200 in 104.7438 ms
+2026-09-01 13:17:14.884 +02:00 [INF] HTTP OPTIONS /api/employees/9416943c-0084-472e-9895-d66966e4c82b responded 204 in 0.2360 ms
+2026-09-01 13:17:14.951 +02:00 [INF] HTTP PUT /api/employees/9416943c-0084-472e-9895-d66966e4c82b responded 200 in 54.3898 ms
+2026-09-01 13:17:14.972 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.0827 ms
+2026-09-01 13:17:14.981 +02:00 [INF] HTTP GET /api/employees responded 200 in 3.1979 ms
+2026-09-01 13:17:22.308 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.1122 ms
+2026-09-01 13:17:22.326 +02:00 [INF] HTTP GET /api/departments responded 200 in 3.7736 ms
+2026-09-01 13:18:19.281 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.1308 ms
+2026-09-01 13:18:19.301 +02:00 [INF] HTTP POST /api/employees responded 200 in 10.5944 ms
+2026-09-01 13:18:19.319 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.0883 ms
+2026-09-01 13:18:19.328 +02:00 [INF] HTTP GET /api/employees responded 200 in 3.0309 ms
+2026-09-01 13:18:26.625 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.1644 ms
+2026-09-01 13:18:26.642 +02:00 [INF] HTTP GET /api/employees responded 200 in 5.2048 ms
+2026-09-01 13:18:33.974 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 0.0794 ms
+2026-09-01 13:18:33.994 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 8.5323 ms
+2026-09-01 13:18:35.331 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 0.1008 ms
+2026-09-01 13:18:35.344 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 5.5614 ms
+2026-09-01 13:18:36.779 +02:00 [INF] HTTP OPTIONS /api/payroll/generate responded 204 in 0.0725 ms
+2026-09-01 13:18:37.024 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-01 13:18:37.517 +02:00 [INF] HTTP POST /api/payroll/generate responded 200 in 727.9973 ms
+2026-09-01 13:18:37.552 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 23.9868 ms
+2026-09-01 13:18:40.692 +02:00 [INF] HTTP OPTIONS /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed responded 204 in 0.1077 ms
+2026-09-01 13:18:40.694 +02:00 [INF] HTTP OPTIONS /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/lines responded 204 in 0.2100 ms
+2026-09-01 13:18:40.762 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-01 13:18:40.784 +02:00 [INF] HTTP GET /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed responded 200 in 77.9892 ms
+2026-09-01 13:18:40.910 +02:00 [INF] HTTP GET /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/lines responded 200 in 197.0856 ms
+2026-09-01 13:18:55.503 +02:00 [INF] HTTP OPTIONS /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/approve responded 204 in 0.1311 ms
+2026-09-01 13:18:55.564 +02:00 [INF] HTTP POST /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/approve responded 200 in 50.3711 ms
+2026-09-01 13:18:55.577 +02:00 [INF] HTTP OPTIONS /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed responded 204 in 0.1400 ms
+2026-09-01 13:18:55.597 +02:00 [INF] HTTP GET /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed responded 200 in 8.1436 ms
+2026-09-01 13:19:00.042 +02:00 [INF] HTTP POST /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/approve responded 400 in 7.5350 ms
+2026-09-01 13:19:05.320 +02:00 [INF] HTTP OPTIONS /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/mark-paid responded 204 in 0.0590 ms
+2026-09-01 13:19:05.345 +02:00 [INF] HTTP POST /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/mark-paid responded 400 in 19.1239 ms
+2026-09-01 13:19:12.921 +02:00 [INF] HTTP OPTIONS /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/lock responded 204 in 0.0775 ms
+2026-09-01 13:19:12.985 +02:00 [INF] HTTP POST /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/lock responded 200 in 55.0678 ms
+2026-09-01 13:19:13.002 +02:00 [INF] HTTP OPTIONS /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed responded 204 in 0.1185 ms
+2026-09-01 13:19:13.024 +02:00 [INF] HTTP GET /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed responded 200 in 6.1541 ms
+2026-09-01 13:19:18.871 +02:00 [INF] HTTP OPTIONS /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/approve responded 204 in 0.0599 ms
+2026-09-01 13:19:18.884 +02:00 [INF] HTTP POST /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/approve responded 400 in 4.3523 ms
+2026-09-01 13:19:23.199 +02:00 [INF] HTTP OPTIONS /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/mark-paid responded 204 in 0.0629 ms
+2026-09-01 13:19:23.216 +02:00 [INF] HTTP POST /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/mark-paid responded 200 in 10.6231 ms
+2026-09-01 13:19:23.224 +02:00 [INF] HTTP OPTIONS /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed responded 204 in 0.0600 ms
+2026-09-01 13:19:23.233 +02:00 [INF] HTTP GET /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed responded 200 in 3.2518 ms
+2026-09-01 13:19:31.036 +02:00 [INF] HTTP OPTIONS /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/approve responded 204 in 0.0757 ms
+2026-09-01 13:19:31.048 +02:00 [INF] HTTP POST /api/payroll/7f2051f1-c054-48d6-b154-b2c02feb08ed/approve responded 400 in 3.9492 ms
+2026-09-01 13:19:39.689 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 0.0653 ms
+2026-09-01 13:19:39.710 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 3.7678 ms
+2026-09-01 13:19:43.767 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 0.0639 ms
+2026-09-01 13:19:43.792 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 10.5415 ms
+2026-09-01 13:19:48.002 +02:00 [INF] HTTP OPTIONS /api/payslips/period/7f2051f1-c054-48d6-b154-b2c02feb08ed/email-all responded 204 in 0.9320 ms
+2026-09-01 13:19:48.110 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-01 13:19:49.887 +02:00 [INF] HTTP POST /api/payslips/period/7f2051f1-c054-48d6-b154-b2c02feb08ed/email-all responded 200 in 1874.7286 ms
+2026-09-01 13:19:49.898 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 0.0629 ms
+2026-09-01 13:19:49.907 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 2.7854 ms
+2026-09-01 13:20:24.932 +02:00 [INF] HTTP OPTIONS /api/payslips/period/7f2051f1-c054-48d6-b154-b2c02feb08ed responded 204 in 0.0610 ms
+2026-09-01 13:20:24.986 +02:00 [INF] HTTP GET /api/payslips/period/7f2051f1-c054-48d6-b154-b2c02feb08ed responded 200 in 43.7648 ms
+2026-09-01 13:20:27.793 +02:00 [INF] HTTP OPTIONS /api/payslips/4a758bdf-99eb-4e8f-88db-5905abc96c7e/download responded 204 in 0.1040 ms
+2026-09-01 13:20:27.905 +02:00 [INF] HTTP GET /api/payslips/4a758bdf-99eb-4e8f-88db-5905abc96c7e/download responded 200 in 104.3394 ms
+2026-09-01 13:20:45.776 +02:00 [INF] HTTP OPTIONS /api/payslips/4a758bdf-99eb-4e8f-88db-5905abc96c7e/email responded 204 in 0.0564 ms
+2026-09-01 13:20:45.879 +02:00 [INF] HTTP POST /api/payslips/4a758bdf-99eb-4e8f-88db-5905abc96c7e/email responded 400 in 97.5295 ms
+2026-09-01 13:20:53.522 +02:00 [INF] HTTP OPTIONS /api/payslips/4a758bdf-99eb-4e8f-88db-5905abc96c7e/detail responded 204 in 0.0587 ms
+2026-09-01 13:20:53.561 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-01 13:20:53.676 +02:00 [INF] HTTP GET /api/payslips/4a758bdf-99eb-4e8f-88db-5905abc96c7e/detail responded 200 in 146.7643 ms
+2026-09-01 13:20:57.836 +02:00 [INF] HTTP OPTIONS /api/payslips/period/7f2051f1-c054-48d6-b154-b2c02feb08ed responded 204 in 0.0577 ms
+2026-09-01 13:20:57.852 +02:00 [INF] HTTP GET /api/payslips/period/7f2051f1-c054-48d6-b154-b2c02feb08ed responded 200 in 5.3509 ms
+2026-09-01 13:21:02.510 +02:00 [INF] HTTP OPTIONS /api/payslips/4a758bdf-99eb-4e8f-88db-5905abc96c7e/email responded 204 in 0.0394 ms
+2026-09-01 13:21:02.542 +02:00 [INF] HTTP POST /api/payslips/4a758bdf-99eb-4e8f-88db-5905abc96c7e/email responded 400 in 27.9877 ms
+2026-09-01 13:21:08.710 +02:00 [INF] HTTP OPTIONS /api/payslips/4a758bdf-99eb-4e8f-88db-5905abc96c7e/email responded 204 in 0.0566 ms
+2026-09-01 13:21:08.744 +02:00 [INF] HTTP POST /api/payslips/4a758bdf-99eb-4e8f-88db-5905abc96c7e/email responded 400 in 26.3695 ms
+2026-09-01 13:27:49.917 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 0.0822 ms
+2026-09-01 13:27:49.968 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 19.0264 ms
+2026-09-01 13:28:02.045 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 0.0537 ms
+2026-09-01 13:28:02.139 +02:00 [INF] HTTP GET /api/leave responded 200 in 86.4518 ms
+2026-09-01 13:28:12.379 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.0473 ms
+2026-09-01 13:28:12.402 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 17.2512 ms
+2026-09-01 13:28:19.481 +02:00 [INF] HTTP OPTIONS /api/tax/year responded 204 in 0.8276 ms
+2026-09-01 13:28:19.504 +02:00 [INF] HTTP GET /api/tax/year responded 200 in 10.0572 ms
+2026-09-01 13:28:26.013 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.0725 ms
+2026-09-01 13:28:26.028 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 5.1759 ms
+2026-09-01 13:28:31.730 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 0.0662 ms
+2026-09-01 13:28:31.744 +02:00 [INF] HTTP GET /api/departments responded 200 in 4.0296 ms
+2026-09-01 13:28:34.995 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.1018 ms
+2026-09-01 13:28:35.009 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 4.7617 ms
+2026-09-01 13:28:48.642 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 0.0523 ms
+2026-09-01 13:28:48.651 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 3.2723 ms
+2026-09-01 13:28:48.661 +02:00 [INF] HTTP OPTIONS /api/reports/tax-report responded 204 in 0.1031 ms
+2026-09-01 13:28:48.728 +02:00 [INF] HTTP GET /api/reports/tax-report responded 200 in 60.9311 ms
+2026-09-01 13:28:55.737 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 0.0566 ms
+2026-09-01 13:28:55.750 +02:00 [INF] HTTP GET /api/employees responded 200 in 2.9840 ms
+2026-09-01 13:29:03.488 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 0.0543 ms
+2026-09-01 13:29:03.501 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 2.9434 ms
+2026-09-01 13:29:18.307 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 0.0569 ms
+2026-09-01 13:29:18.318 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 4.6404 ms
+2026-09-01 13:29:18.326 +02:00 [INF] HTTP OPTIONS /api/reports/employee-cost responded 204 in 0.0552 ms
+2026-09-01 13:29:18.414 +02:00 [INF] HTTP GET /api/reports/employee-cost responded 200 in 82.9701 ms
+2026-09-01 14:47:19.957 +02:00 [INF] 1 servers were removed due to timeout
+2026-09-01 14:47:20.288 +02:00 [WRN] Server pf66lh68:35396:4d32d203 was considered dead by other servers, restarting...
+2026-09-01 14:47:20.294 +02:00 [INF] Server pf66lh68:35396:4d32d203 caught restart signal...
+2026-09-01 14:47:20.301 +02:00 [WRN] Server pf66lh68:35396:4d32d203 stopped non-gracefully due to ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler. Outstanding work on those dispatchers could be aborted, and there can be delays in background processing. This server instance will be incorrectly shown as active for a while. To avoid non-graceful shutdowns, investigate what prevents from stopping gracefully and add CancellationToken support for those methods.
+2026-09-01 14:47:20.331 +02:00 [INF] Server pf66lh68:35396:4d32d203 successfully reported itself as stopped in 1.8934 ms
+2026-09-01 14:47:20.333 +02:00 [INF] Server pf66lh68:35396:4d32d203 has been stopped in total 35.1203 ms
+2026-09-01 14:47:20.337 +02:00 [INF] Server pf66lh68:35396:c2c978d9 successfully announced in 0.3614 ms
+2026-09-01 14:47:20.341 +02:00 [INF] Server pf66lh68:35396:c2c978d9 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-01 14:47:20.367 +02:00 [INF] Server pf66lh68:35396:c2c978d9 all the dispatchers started
+2026-09-01 19:10:16.156 +02:00 [INF] 1 servers were removed due to timeout
+2026-09-01 19:10:17.909 +02:00 [WRN] Server pf66lh68:35396:c2c978d9 was considered dead by other servers, restarting...
+2026-09-01 19:10:17.911 +02:00 [INF] Server pf66lh68:35396:c2c978d9 caught restart signal...
+2026-09-01 19:10:17.914 +02:00 [WRN] Server pf66lh68:35396:c2c978d9 stopped non-gracefully due to ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler. Outstanding work on those dispatchers could be aborted, and there can be delays in background processing. This server instance will be incorrectly shown as active for a while. To avoid non-graceful shutdowns, investigate what prevents from stopping gracefully and add CancellationToken support for those methods.
+2026-09-01 19:10:17.920 +02:00 [INF] Server pf66lh68:35396:c2c978d9 successfully reported itself as stopped in 0.4973 ms
+2026-09-01 19:10:17.927 +02:00 [INF] Server pf66lh68:35396:c2c978d9 has been stopped in total 14.3428 ms
+2026-09-01 19:10:17.928 +02:00 [INF] Server pf66lh68:35396:83eb96eb successfully announced in 0.1137 ms
+2026-09-01 19:10:17.930 +02:00 [INF] Server pf66lh68:35396:83eb96eb is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-01 19:10:17.983 +02:00 [INF] Server pf66lh68:35396:83eb96eb all the dispatchers started
+2026-09-01 19:10:39.384 +02:00 [INF] HTTP OPTIONS /api/companies responded 204 in 1.0563 ms
+2026-09-01 19:10:39.423 +02:00 [INF] HTTP GET /api/companies responded 401 in 34.7328 ms

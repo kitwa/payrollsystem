@@ -11,7 +11,10 @@ public record CompanyDto(
     string? PostalAddress,
     string? Phone,
     string? Email,
-    bool IsActive);
+    bool IsActive,
+    bool HasLogo,
+    bool IsUifEnabled,
+    bool IsSdlEnabled);
 
 public record UpdateCompanyDto(
     string Name,
@@ -22,4 +25,6 @@ public record UpdateCompanyDto(
     string? PhysicalAddress,
     string? PostalAddress,
     string? Phone,
-    string? Email);
+    string? Email,
+    bool IsUifEnabled,
+    bool IsSdlEnabled);

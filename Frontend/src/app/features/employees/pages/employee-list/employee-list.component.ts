@@ -143,7 +143,7 @@ export class EmployeeListComponent {
 	constructor() {
 		const companyId = this.auth.companyId();
 		if (companyId) {
-			this.employeeService.getAll(companyId).subscribe(employees => this.employees.set(employees));
+			this.employeeService.getAll(companyId).subscribe(page => this.employees.set(page.items));
 		}
 	}
 

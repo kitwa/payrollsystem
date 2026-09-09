@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Payroll.Application.Common.Interfaces;
+using Payroll.Application.Common;
 using Payroll.Application.Dashboard.DTOs;
 using Payroll.Domain.Employees.Enums;
 using Payroll.Domain.Leave.Enums;
@@ -10,10 +11,13 @@ namespace Payroll.Application.Dashboard.Queries;
 
 public record GetDashboardSummaryQuery(Guid CompanyId) : IRequest<Result<DashboardSummaryDto>>;
 
-public class GetDashboardSummaryHandler(IAppDbContext db) : IRequestHandler<GetDashboardSummaryQuery, Result<DashboardSummaryDto>>
+public class GetDashboardSummaryHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<GetDashboardSummaryQuery, Result<DashboardSummaryDto>>
 {
     public async Task<Result<DashboardSummaryDto>> Handle(GetDashboardSummaryQuery request, CancellationToken ct)
     {
+        if (!TenantAccess.CanAccessCompany(currentUser, request.CompanyId))
+            return Result<DashboardSummaryDto>.Fail("You are not authorized to view this company's dashboard.");
+
         var employees = db.Employees.Where(e => e.CompanyId == request.CompanyId && !e.IsDeleted);
 
         var totalEmployees = await employees.CountAsync(ct);

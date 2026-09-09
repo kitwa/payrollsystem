@@ -1,0 +1,37 @@
+2026-08-20 08:47:01.030 +02:00 [INF] 1 servers were removed due to timeout
+2026-08-20 08:47:02.888 +02:00 [WRN] Server pf66lh68:6616:f7510a57 was considered dead by other servers, restarting...
+2026-08-20 08:47:02.898 +02:00 [INF] Server pf66lh68:6616:f7510a57 caught restart signal...
+2026-08-20 08:47:02.932 +02:00 [WRN] Server pf66lh68:6616:f7510a57 stopped non-gracefully due to ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler. Outstanding work on those dispatchers could be aborted, and there can be delays in background processing. This server instance will be incorrectly shown as active for a while. To avoid non-graceful shutdowns, investigate what prevents from stopping gracefully and add CancellationToken support for those methods.
+2026-08-20 08:47:02.974 +02:00 [INF] Server pf66lh68:6616:f7510a57 successfully reported itself as stopped in 12.047 ms
+2026-08-20 08:47:02.975 +02:00 [INF] Server pf66lh68:6616:f7510a57 has been stopped in total 67.7007 ms
+2026-08-20 08:47:02.992 +02:00 [INF] Server pf66lh68:6616:91dc5d50 successfully announced in 3.3188 ms
+2026-08-20 08:47:03.009 +02:00 [INF] Server pf66lh68:6616:91dc5d50 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-08-20 08:47:03.050 +02:00 [INF] Server pf66lh68:6616:91dc5d50 all the dispatchers started
+2026-08-20 10:49:35.501 +02:00 [INF] HTTP OPTIONS /api/auth/register-company responded 204 in 14.5853 ms
+2026-08-20 10:49:36.203 +02:00 [INF] HTTP POST /api/auth/register-company responded 200 in 675.7898 ms
+2026-08-20 10:49:36.673 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 1.0850 ms
+2026-08-20 10:49:36.725 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 45.2380 ms
+2026-08-20 10:49:36.737 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 7.9577 ms
+2026-08-20 11:04:06.137 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.1277 ms
+2026-08-20 11:04:06.141 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 0.1121 ms
+2026-08-20 11:04:06.182 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 25.9087 ms
+2026-08-20 11:04:06.193 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 8.2274 ms
+2026-08-20 11:04:11.725 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 2.0631 ms
+2026-08-20 11:04:11.757 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 13.6262 ms
+2026-08-20 11:04:11.912 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 0.2168 ms
+2026-08-20 11:04:11.957 +02:00 [INF] HTTP GET /api/leave responded 200 in 22.5416 ms
+2026-08-20 11:04:19.191 +02:00 [INF] HTTP OPTIONS /api/tax/year responded 204 in 1.1771 ms
+2026-08-20 11:04:19.257 +02:00 [INF] HTTP GET /api/tax/year responded 200 in 45.2429 ms
+2026-08-20 12:33:36.799 +02:00 [INF] HTTP OPTIONS /api/tax/year responded 204 in 1.4460 ms
+2026-08-20 12:33:36.799 +02:00 [INF] HTTP OPTIONS /api/tax/year responded 204 in 0.1374 ms
+2026-08-20 12:33:36.837 +02:00 [INF] HTTP GET /api/tax/year responded 401 in 26.1179 ms
+2026-08-20 12:33:36.851 +02:00 [INF] HTTP GET /api/tax/year responded 401 in 2.3932 ms
+2026-08-20 16:25:42.938 +02:00 [INF] 1 servers were removed due to timeout
+2026-08-20 16:25:48.106 +02:00 [WRN] Server pf66lh68:6616:91dc5d50 was considered dead by other servers, restarting...
+2026-08-20 16:25:48.109 +02:00 [INF] Server pf66lh68:6616:91dc5d50 caught restart signal...
+2026-08-20 16:25:48.121 +02:00 [WRN] Server pf66lh68:6616:91dc5d50 stopped non-gracefully due to ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler. Outstanding work on those dispatchers could be aborted, and there can be delays in background processing. This server instance will be incorrectly shown as active for a while. To avoid non-graceful shutdowns, investigate what prevents from stopping gracefully and add CancellationToken support for those methods.
+2026-08-20 16:25:48.128 +02:00 [INF] Server pf66lh68:6616:91dc5d50 successfully reported itself as stopped in 3.4718 ms
+2026-08-20 16:25:48.129 +02:00 [INF] Server pf66lh68:6616:91dc5d50 has been stopped in total 15.8114 ms
+2026-08-20 16:25:48.141 +02:00 [INF] Server pf66lh68:6616:3a0f7f21 successfully announced in 4.4471 ms
+2026-08-20 16:25:48.150 +02:00 [INF] Server pf66lh68:6616:3a0f7f21 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-08-20 16:25:48.170 +02:00 [INF] Server pf66lh68:6616:3a0f7f21 all the dispatchers started

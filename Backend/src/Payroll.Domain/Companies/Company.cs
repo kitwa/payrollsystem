@@ -14,5 +14,9 @@ public class Company : BaseEntity
     public string? Phone { get; set; }
     public string? Email { get; set; }
     public bool IsActive { get; set; } = true;
+    public byte[]? LogoData { get; set; }
+    public string? LogoContentType { get; set; }
+    public bool IsUifEnabled { get; set; } = true;
+    public bool IsSdlEnabled { get; set; } = true;
     public List<Employees.Employee> Employees { get; set; } = [];
 }

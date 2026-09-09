@@ -50,3 +50,9 @@ export interface CreateEmployee {
   startDate: string;
   basicSalary: number;
 }
+
+export interface Department {
+  id: string;
+  companyId: string;
+  name: string;
+}

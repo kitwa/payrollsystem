@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\g990564\\source\\repos\\payrollsa\\payrollsa\\Backend\\src\\Payroll.Shared\\Payroll.Shared.csproj": {}
+    "D:\\repos\\payrollsa\\Backend\\src\\Payroll.Shared\\Payroll.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\g990564\\source\\repos\\payrollsa\\payrollsa\\Backend\\src\\Payroll.Shared\\Payroll.Shared.csproj": {
+    "D:\\repos\\payrollsa\\Backend\\src\\Payroll.Shared\\Payroll.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\g990564\\source\\repos\\payrollsa\\payrollsa\\Backend\\src\\Payroll.Shared\\Payroll.Shared.csproj",
+        "projectUniqueName": "D:\\repos\\payrollsa\\Backend\\src\\Payroll.Shared\\Payroll.Shared.csproj",
         "projectName": "Payroll.Shared",
-        "projectPath": "C:\\Users\\g990564\\source\\repos\\payrollsa\\payrollsa\\Backend\\src\\Payroll.Shared\\Payroll.Shared.csproj",
-        "packagesPath": "C:\\Users\\g990564\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\g990564\\source\\repos\\payrollsa\\payrollsa\\Backend\\src\\Payroll.Shared\\obj\\",
+        "projectPath": "D:\\repos\\payrollsa\\Backend\\src\\Payroll.Shared\\Payroll.Shared.csproj",
+        "packagesPath": "C:\\Users\\dom\\.nuget\\packages\\",
+        "outputPath": "D:\\repos\\payrollsa\\Backend\\src\\Payroll.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\g990564\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dom\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -30,7 +30,6 @@
         },
         "frameworks": {
           "net10.0": {
-            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {}
           }
@@ -45,11 +44,10 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.400"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net10.0": {
-          "framework": "net10.0",
           "targetAlias": "net10.0",
           "imports": [
             "net461",
@@ -67,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

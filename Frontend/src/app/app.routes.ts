@@ -41,6 +41,11 @@ export const routes: Routes = [
     loadChildren: () => import('./features/settings/settings.routes').then(m => m.settingsRoutes)
   },
   {
+    path: 'management',
+    canActivate: [authGuard, roleGuard(['SuperAdmin'])],
+    loadComponent: () => import('./features/management/pages/management.component').then(m => m.ManagementComponent)
+  },
+  {
     path: 'self-service',
     canActivate: [authGuard, roleGuard(['Employee'])],
     loadChildren: () => import('./features/self-service/self-service.routes').then(m => m.selfServiceRoutes)

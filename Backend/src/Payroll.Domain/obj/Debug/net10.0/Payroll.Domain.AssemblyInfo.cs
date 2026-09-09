@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Payroll.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53cb64c782d1f520c55286cb441a8b0b3f409b5c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Payroll.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Payroll.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

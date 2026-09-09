@@ -24,6 +24,9 @@ public class TokenService(IConfiguration config) : ITokenService
         if (user.CompanyId.HasValue)
             claims.Add(new Claim(Shared.Constants.ClaimTypes.CompanyId, user.CompanyId.Value.ToString()));
 
+        if (user.EmployeeId.HasValue)
+            claims.Add(new Claim(Shared.Constants.ClaimTypes.EmployeeId, user.EmployeeId.Value.ToString()));
+
         claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
 
         var secret = config["JwtSettings:Secret"] ?? throw new InvalidOperationException("JwtSettings:Secret not configured.");

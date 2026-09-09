@@ -42,6 +42,10 @@ import { DashboardSummary } from '../models/dashboard.models';
 						<i class="bi bi-person-plus"></i>
 						<span>Add Employee</span>
 					</a>
+					<a class="action-card" routerLink="/settings/departments">
+						<i class="bi bi-diagram-3"></i>
+						<span>Add Department</span>
+					</a>
 					<a class="action-card" routerLink="/leave/request">
 						<i class="bi bi-calendar-plus"></i>
 						<span>Capture Leave</span>
@@ -49,10 +53,6 @@ import { DashboardSummary } from '../models/dashboard.models';
 					<a class="action-card" routerLink="/reports">
 						<i class="bi bi-file-earmark-bar-graph"></i>
 						<span>Generate Reports</span>
-					</a>
-					<a class="action-card" routerLink="/settings/tax-tables">
-						<i class="bi bi-sliders"></i>
-						<span>Update Tax Tables</span>
 					</a>
 				</div>
 			</article>
@@ -83,6 +83,12 @@ import { DashboardSummary } from '../models/dashboard.models';
 				gap: 1rem;
 				flex-wrap: wrap;
 				margin-bottom: 1rem;
+			}
+
+			.page-head > a {
+				padding: 0.5rem 0.85rem;
+				font-size: 0.88rem;
+				white-space: nowrap;
 			}
 
 			.eyebrow {

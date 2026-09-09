@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Payroll.Application.Common.Interfaces;
+using Payroll.Application.Common;
 using Payroll.Application.Employees.DTOs;
 using Payroll.Shared;
 
@@ -8,10 +9,13 @@ namespace Payroll.Application.Employees.Queries;
 
 public record GetEmployeesQuery(Guid CompanyId, PaginationParams Params) : IRequest<Result<PagedList<EmployeeListDto>>>;
 
-public class GetEmployeesHandler(IAppDbContext db) : IRequestHandler<GetEmployeesQuery, Result<PagedList<EmployeeListDto>>>
+public class GetEmployeesHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<GetEmployeesQuery, Result<PagedList<EmployeeListDto>>>
 {
     public async Task<Result<PagedList<EmployeeListDto>>> Handle(GetEmployeesQuery request, CancellationToken ct)
     {
+        if (!TenantAccess.CanAccessCompany(currentUser, request.CompanyId))
+            return Result<PagedList<EmployeeListDto>>.Fail("You are not authorized to view this company's employees.");
+
         var employees = await db.Employees
             .Where(e => e.CompanyId == request.CompanyId && !e.IsDeleted)
             .OrderBy(e => e.LastName).ThenBy(e => e.FirstName)
@@ -26,7 +30,7 @@ public class GetEmployeesHandler(IAppDbContext db) : IRequestHandler<GetEmployee
 
 public record GetEmployeeByIdQuery(Guid Id) : IRequest<Result<EmployeeDto>>;
 
-public class GetEmployeeByIdHandler(IAppDbContext db) : IRequestHandler<GetEmployeeByIdQuery, Result<EmployeeDto>>
+public class GetEmployeeByIdHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<GetEmployeeByIdQuery, Result<EmployeeDto>>
 {
     public async Task<Result<EmployeeDto>> Handle(GetEmployeeByIdQuery request, CancellationToken ct)
     {
@@ -35,6 +39,8 @@ public class GetEmployeeByIdHandler(IAppDbContext db) : IRequestHandler<GetEmplo
             .FirstOrDefaultAsync(e => e.Id == request.Id && !e.IsDeleted, ct);
 
         if (e is null) return Result<EmployeeDto>.Fail("Employee not found.");
+        if (!TenantAccess.CanAccessEmployee(currentUser, e.CompanyId, e.Id))
+            return Result<EmployeeDto>.Fail("You are not authorized to view this employee.");
 
         var bd = e.BankDetails is null ? null
             : new BankDetailsDto(e.BankDetails.BankName, e.BankDetails.AccountNumber,

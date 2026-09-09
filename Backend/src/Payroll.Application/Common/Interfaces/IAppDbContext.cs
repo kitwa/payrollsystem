@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Payroll.Domain.Companies;
+using Payroll.Domain.Audit;
 using Payroll.Domain.Employees;
 using Payroll.Domain.Leave;
 using Payroll.Domain.PayrollRuns;
@@ -11,14 +12,18 @@ namespace Payroll.Application.Common.Interfaces;
 /// <summary>Abstraction over EF Core — allows handlers to be tested without a real database.</summary>
 public interface IAppDbContext
 {
+    DbSet<AuditLog> AuditLogs { get; }
     DbSet<Company> Companies { get; }
     DbSet<Employee> Employees { get; }
+    DbSet<Department> Departments { get; }
     DbSet<BankDetails> BankDetails { get; }
     DbSet<EmployeeDocument> EmployeeDocuments { get; }
     DbSet<PayrollPeriod> PayrollPeriods { get; }
     DbSet<PayrollLine> PayrollLines { get; }
     DbSet<Earning> Earnings { get; }
     DbSet<Deduction> Deductions { get; }
+    DbSet<EmployeeDeduction> EmployeeDeductions { get; }
+    DbSet<EmployeeBonus> EmployeeBonuses { get; }
     DbSet<LeaveRequest> LeaveRequests { get; }
     DbSet<LeaveBalance> LeaveBalances { get; }
     DbSet<LeaveType> LeaveTypes { get; }

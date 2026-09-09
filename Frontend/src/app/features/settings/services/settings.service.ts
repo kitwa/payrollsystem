@@ -56,4 +56,22 @@ export class SettingsService {
   updateCompany(id: string, dto: Partial<Company>) {
     return this.http.put(`${this.companiesUrl}/${id}`, dto);
   }
+
+  logoUrl(companyId: string): string {
+    return `${this.companiesUrl}/${companyId}/logo`;
+  }
+
+  uploadLogo(companyId: string, file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.companiesUrl}/${companyId}/logo`, formData);
+  }
+
+  removeLogo(companyId: string) {
+    return this.http.delete(`${this.companiesUrl}/${companyId}/logo`);
+  }
+
+  getCompanies() {
+    return this.http.get<Company[]>(this.companiesUrl);
+  }
 }

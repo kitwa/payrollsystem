@@ -28,7 +28,7 @@ public class LeaveController(IMediator mediator) : BaseApiController(mediator)
 
     /// <summary>Submit a leave request.</summary>
     [HttpPost("request")]
-    public async Task<IActionResult> Request([FromBody] CreateLeaveRequestDto dto, CancellationToken ct) =>
+    public async Task<IActionResult> SubmitRequest([FromBody] CreateLeaveRequestDto dto, CancellationToken ct) =>
         FromResult(await Mediator.Send(new RequestLeaveCommand(dto), ct));
 
     /// <summary>Approve a pending leave request.</summary>

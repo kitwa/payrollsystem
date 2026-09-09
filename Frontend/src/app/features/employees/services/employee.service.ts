@@ -1,7 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { CreateEmployee, Employee, EmployeeList } from '../models/employee.models';
+import { CreateEmployee, Department, Employee, EmployeeList } from '../models/employee.models';
+
+interface EmployeePage {
+  items: EmployeeList[];
+  totalCount: number;
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
+}
+
+@Injectable({ providedIn: 'root' })
+export class DepartmentService {
+  private url = `${environment.apiUrl}departments`;
+
+  constructor(private http: HttpClient) {}
+
+  getAll(companyId: string) {
+    return this.http.get<Department[]>(this.url, { params: new HttpParams().set('companyId', companyId) });
+  }
+
+  create(companyId: string, name: string) {
+    return this.http.post<string>(this.url, { companyId, name });
+  }
+
+  update(id: string, name: string) {
+    return this.http.put(`${this.url}/${id}`, { name });
+  }
+
+  delete(id: string) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
+}
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
@@ -11,7 +42,7 @@ export class EmployeeService {
 
   getAll(companyId: string, page = 1, pageSize = 20) {
     const params = new HttpParams().set('companyId', companyId).set('pageNumber', page).set('pageSize', pageSize);
-    return this.http.get<EmployeeList[]>(this.url, { params });
+    return this.http.get<EmployeePage>(this.url, { params });
   }
 
   getById(id: string) {

@@ -25,6 +25,7 @@ export class AppComponent {
   readonly currentPath = signal(this.normalizedPath(this.router.url));
   readonly mobileMenuOpen = signal(false);
   readonly settingsOpen = signal(false);
+  readonly accountOpen = signal(false);
 
   readonly user = this.auth.currentUser;
   readonly isLoggedIn = this.auth.isLoggedIn;
@@ -40,10 +41,16 @@ export class AppComponent {
   ];
 
   readonly settingsNav: NavItem[] = [
+    { label: 'Management', path: '/management', icon: 'bi-speedometer2', roles: ['SuperAdmin'] },
     { label: 'General', path: '/settings', icon: 'bi-sliders', roles: ['Admin', 'SuperAdmin'] },
+    { label: 'Users', path: '/settings/users', icon: 'bi-person-gear', roles: ['Admin', 'SuperAdmin'] },
+    { label: 'Employee Deductions', path: '/settings/employee-deductions', icon: 'bi-dash-circle', roles: ['Admin', 'SuperAdmin'] },
+    { label: 'Departments', path: '/settings/departments', icon: 'bi-diagram-3', roles: ['Admin', 'SuperAdmin'] },
     { label: 'Leave Types', path: '/settings/leave-types', icon: 'bi-list-check', roles: ['Admin', 'SuperAdmin'] },
     { label: 'Tax Tables', path: '/settings/tax-tables', icon: 'bi-calculator', roles: ['Admin', 'SuperAdmin'] }
   ];
+
+  readonly hasSettingsAccess = computed(() => this.settingsNav.some(item => this.isAllowed(item)));
 
   readonly showShell = computed(() => {
     const path = this.currentPath();
@@ -55,6 +62,7 @@ export class AppComponent {
       this.currentPath.set(this.normalizedPath(this.router.url));
       this.mobileMenuOpen.set(false);
       this.settingsOpen.set(false);
+      this.accountOpen.set(false);
     });
   }
 
@@ -77,6 +85,12 @@ export class AppComponent {
 
   toggleSettings(): void {
     this.settingsOpen.update(open => !open);
+    this.accountOpen.set(false);
+  }
+
+  toggleAccount(): void {
+    this.accountOpen.update(open => !open);
+    this.settingsOpen.set(false);
   }
 
   logout(): void {

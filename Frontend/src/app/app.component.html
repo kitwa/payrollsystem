@@ -36,7 +36,7 @@
 						}
 					</ul>
 
-					@if (isAllowed(settingsNav[0])) {
+					@if (hasSettingsAccess()) {
 						<div class="settings" [class.settings--open]="settingsOpen()">
 							<button type="button" class="settings__button" (click)="toggleSettings()" [attr.aria-expanded]="settingsOpen()">
 								<i class="bi bi-gear"></i>
@@ -45,10 +45,12 @@
 							</button>
 							<div class="settings__panel">
 								@for (item of settingsNav; track item.path) {
-									<a [routerLink]="item.path" [class.is-active]="isRouteActive(item.path)">
-										<i class="bi" [class]="item.icon"></i>
-										<span>{{ item.label }}</span>
-									</a>
+									@if (isAllowed(item)) {
+										<a [routerLink]="item.path" [class.is-active]="isRouteActive(item.path)">
+											<i class="bi" [class]="item.icon"></i>
+											<span>{{ item.label }}</span>
+										</a>
+									}
 								}
 							</div>
 						</div>
@@ -56,12 +58,22 @@
 				</nav>
 
 				@if (isLoggedIn()) {
-					<div class="account-chip">
-						<div>
-							<p class="account-chip__name">{{ user()?.firstName }} {{ user()?.lastName }}</p>
-							<p class="account-chip__meta">{{ user()?.roles?.[0] || 'User' }}</p>
+					<div class="account-menu" [class.account-menu--open]="accountOpen()">
+						<button type="button" class="account-chip" (click)="toggleAccount()" [attr.aria-expanded]="accountOpen()" aria-label="Open account menu">
+							<span class="account-chip__avatar">{{ user()?.firstName?.charAt(0) }}{{ user()?.lastName?.charAt(0) }}</span>
+							<span class="account-chip__details">
+								<span class="account-chip__name">{{ user()?.firstName }} {{ user()?.lastName }}</span>
+								<span class="account-chip__meta">{{ user()?.roles?.[0] || 'User' }}</span>
+							</span>
+							<i class="bi bi-chevron-down account-chip__chevron"></i>
+						</button>
+						<div class="account-menu__panel">
+							<p class="account-menu__email">{{ user()?.email }}</p>
+							<button type="button" class="account-menu__logout" (click)="logout()">
+								<i class="bi bi-box-arrow-right"></i>
+								<span>Log out</span>
+							</button>
 						</div>
-						<button type="button" class="btn btn-sm btn-outline-light" (click)="logout()">Log out</button>
 					</div>
 				}
 			</div>

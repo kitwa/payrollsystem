@@ -236,6 +236,50 @@ namespace Payroll.Infrastructure.Persistence.Migrations
                     b.ToTable("BankDetails");
                 });
 
+            modelBuilder.Entity("Payroll.Domain.Employees.Department", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId", "Name")
+                        .IsUnique()
+                        .HasFilter("IsDeleted = 0");
+
+                    b.ToTable("Departments");
+                });
+
             modelBuilder.Entity("Payroll.Domain.Employees.Employee", b =>
                 {
                     b.Property<Guid>("Id")
@@ -333,7 +377,9 @@ namespace Payroll.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
+                    b.HasIndex("CompanyId", "IdNumber")
+                        .IsUnique()
+                        .HasFilter("IsDeleted = 0");
 
                     b.ToTable("Employees");
                 });
@@ -795,6 +841,12 @@ namespace Payroll.Infrastructure.Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("PayrollPeriodId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("PayslipEmailedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PayslipEmailedTo")
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("TotalDeductions")
@@ -1280,6 +1332,17 @@ namespace Payroll.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Payroll.Domain.Employees.Department", b =>
+                {
+                    b.HasOne("Payroll.Domain.Companies.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Payroll.Domain.Employees.Employee", b =>

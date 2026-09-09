@@ -88,4 +88,5 @@ export interface Company {
   phone?: string;
   email?: string;
   isActive: boolean;
+  hasLogo: boolean;
 }

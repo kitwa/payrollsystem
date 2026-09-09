@@ -26,10 +26,12 @@ import { LeaveType } from '../../../settings/models/settings.models';
 					<div class="col-12 col-md-6">
 						<label class="form-label">Leave Type</label>
 						<select class="form-select" formControlName="leaveTypeId">
+							<option value="">{{ leaveTypes().length ? 'Select leave type' : 'No leave types available' }}</option>
 							@for (type of leaveTypes(); track type.id) {
 								<option [value]="type.id">{{ type.name }}</option>
 							}
 						</select>
+						@if (error()) { <small class="text-danger">{{ error() }}</small> }
 					</div>
 					<div class="col-12 col-md-6"></div>
 					<div class="col-12 col-md-6">
@@ -66,6 +68,7 @@ export class LeaveRequestComponent {
 	private readonly settingsService = inject(SettingsService);
 
 	readonly submitted = signal(false);
+	readonly error = signal('');
 	readonly leaveTypes = signal<LeaveType[]>([]);
 
 	readonly form = this.fb.group({
@@ -78,9 +81,12 @@ export class LeaveRequestComponent {
 	constructor() {
 		const companyId = this.auth.companyId();
 		if (companyId) {
-			this.settingsService.getLeaveTypes(companyId).subscribe(types => {
-				this.leaveTypes.set(types);
-				if (types.length) this.form.patchValue({ leaveTypeId: types[0].id });
+			this.settingsService.getLeaveTypes(companyId).subscribe({
+				next: types => {
+					this.leaveTypes.set(types);
+					if (types.length) this.form.patchValue({ leaveTypeId: types[0].id });
+				},
+				error: response => this.error.set(response.error?.errors?.[0] ?? 'Unable to load leave types.')
 			});
 		}
 	}

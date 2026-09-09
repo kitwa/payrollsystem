@@ -4,6 +4,7 @@ using Hangfire.InMemory;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -25,7 +26,8 @@ public static class DependencyInjection
     {
         // EF Core — SQLite by default, SQL Server in production
         services.AddDbContext<AppDbContext>(opt =>
-            opt.UseSqlite(config.GetConnectionString("DefaultConnection") ?? "Data Source=payroll.db"));
+            opt.UseSqlite(config.GetConnectionString("DefaultConnection") ?? "Data Source=payroll.db")
+                .ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.PendingModelChangesWarning)));
 
         services.AddScoped<IAppDbContext>(sp => sp.GetRequiredService<AppDbContext>());
 
@@ -66,12 +68,15 @@ public static class DependencyInjection
             .AddPolicy(Constants.Policies.RequireEmployeeRole, p => p.RequireRole(Constants.Roles.Employee, Constants.Roles.PayrollManager, Constants.Roles.Admin, Constants.Roles.SuperAdmin));
 
         // Application services
+        services.AddScoped<ICurrentUser, CurrentUserService>();
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IPayrollEngine, PayrollEngine.PayrollEngine>();
         services.AddScoped<IPdfService, PdfService>();
+        services.AddScoped<IEmailService, EmailService>();
 
         // Payroll calculators — registered in execution order
         services.AddScoped<IPayrollCalculator, BasicSalaryCalculator>();
+        services.AddScoped<IPayrollCalculator, UnpaidLeaveCalculator>();
         services.AddScoped<IPayrollCalculator, PAYECalculator>();
         services.AddScoped<IPayrollCalculator, UIFCalculator>();
         services.AddScoped<IPayrollCalculator, SDLCalculator>();

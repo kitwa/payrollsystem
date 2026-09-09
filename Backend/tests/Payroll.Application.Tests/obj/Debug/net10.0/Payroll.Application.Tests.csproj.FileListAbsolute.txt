@@ -278,3 +278,4 @@ C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\tests\Payroll.Applicat
 C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\tests\Payroll.Application.Tests\obj\Debug\net10.0\Payroll.Application.Tests.pdb
 C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\tests\Payroll.Application.Tests\obj\Debug\net10.0\Payroll.Application.Tests.genruntimeconfig.cache
 C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\tests\Payroll.Application.Tests\obj\Debug\net10.0\ref\Payroll.Application.Tests.dll
+C:\Users\g990564\source\repos\payrollsa\payrollsa\Backend\tests\Payroll.Application.Tests\obj\Debug\net10.0\Payroll.Application.Tests.sourcelink.json

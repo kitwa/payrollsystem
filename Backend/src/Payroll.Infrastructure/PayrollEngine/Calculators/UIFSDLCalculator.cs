@@ -11,6 +11,8 @@ public class UIFCalculator : IPayrollCalculator
 
     public Task CalculateAsync(PayrollContext context, CancellationToken ct = default)
     {
+        if (!context.IsUifEnabled) return Task.CompletedTask;
+
         var ceiling = context.TaxYear.UifMonthlyEarningsCeiling;
         var rate = context.TaxYear.UifContributionRate / 100m;
         var remuneration = Math.Min(context.TaxableIncome, ceiling);
@@ -35,6 +37,8 @@ public class SDLCalculator : IPayrollCalculator
 
     public Task CalculateAsync(PayrollContext context, CancellationToken ct = default)
     {
+        if (!context.IsSdlEnabled) return Task.CompletedTask;
+
         var rate = context.TaxYear.SdlRate / 100m;
         var sdl = Math.Round(context.TaxableIncome * rate, 2);
 

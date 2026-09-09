@@ -1,0 +1,13 @@
+using Payroll.Domain.Common;
+
+namespace Payroll.Domain.Employees;
+
+public class Department : BaseEntity
+{
+    public Guid CompanyId { get; set; }
+    public Companies.Company Company { get; set; } = null!;
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>Marks the company's protected default department — cannot be renamed or deleted.</summary>
+    public bool IsSystemDepartment { get; set; }
+}

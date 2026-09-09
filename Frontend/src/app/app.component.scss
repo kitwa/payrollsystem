@@ -138,19 +138,104 @@
 }
 
 .account-chip {
+	appearance: none;
+	cursor: pointer;
 	display: inline-flex;
 	align-items: center;
 	gap: 0.75rem;
+	min-width: 10.5rem;
 	border: 1px solid #d6d3d1;
 	border-radius: 999px;
-	padding: 0.3rem 0.35rem 0.3rem 0.8rem;
+	padding: 0.32rem 0.65rem 0.32rem 0.4rem;
 	background: rgba(255, 255, 255, 0.86);
+	text-align: left;
+}
+
+.account-chip:hover {
+	border-color: #0f172a;
+	background: #fff;
+}
+
+.account-chip__avatar {
+	width: 2rem;
+	height: 2rem;
+	display: grid;
+	place-items: center;
+	border-radius: 50%;
+	background: #0f172a;
+	color: #fff;
+	font-size: 0.72rem;
+	font-weight: 800;
+}
+
+.account-chip__details {
+	display: grid;
+	min-width: 0;
 }
 
 .account-chip__name,
 .account-chip__meta {
 	margin: 0;
 	line-height: 1.2;
+}
+
+.account-chip__chevron {
+	margin-left: auto;
+	font-size: 0.72rem;
+	transition: transform 160ms ease;
+}
+
+.account-menu {
+	position: relative;
+}
+
+.account-menu--open .account-chip__chevron {
+	transform: rotate(180deg);
+}
+
+.account-menu__panel {
+	position: absolute;
+	top: calc(100% + 0.55rem);
+	right: 0;
+	min-width: 13rem;
+	display: none;
+	padding: 0.75rem;
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 0.85rem;
+	box-shadow: 0 14px 26px rgba(15, 23, 42, 0.14);
+}
+
+.account-menu--open .account-menu__panel {
+	display: block;
+}
+
+.account-menu__email {
+	margin: 0 0 0.65rem;
+	padding-bottom: 0.65rem;
+	border-bottom: 1px solid #f1f5f9;
+	color: #64748b;
+	font-size: 0.78rem;
+	word-break: break-word;
+}
+
+.account-menu__logout {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	border: 0;
+	border-radius: 0.55rem;
+	padding: 0.55rem 0.6rem;
+	background: transparent;
+	color: #b91c1c;
+	font-weight: 700;
+	text-align: left;
+	cursor: pointer;
+}
+
+.account-menu__logout:hover {
+	background: #fef2f2;
 }
 
 .account-chip__name {
@@ -228,7 +313,23 @@
 		padding: 0.3rem 0 0;
 	}
 
+	.account-menu {
+		justify-self: end;
+	}
+
 	.account-chip {
+		min-width: 2.45rem;
+		width: 2.45rem;
+		padding: 0.2rem;
+		justify-content: center;
+	}
+
+	.account-chip__details,
+	.account-chip__chevron {
 		display: none;
+	}
+
+	.account-menu__panel {
+		right: 0;
 	}
 }

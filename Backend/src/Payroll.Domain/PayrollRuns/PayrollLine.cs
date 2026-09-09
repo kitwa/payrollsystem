@@ -11,6 +11,8 @@ public class PayrollLine : BaseEntity
     public decimal GrossEarnings { get; set; }
     public decimal TotalDeductions { get; set; }
     public decimal NetPay { get; set; }
+    public DateTime? PayslipEmailedAt { get; set; }
+    public string? PayslipEmailedTo { get; set; }
     public List<Earning> Earnings { get; set; } = [];
     public List<Deduction> Deductions { get; set; } = [];
 }

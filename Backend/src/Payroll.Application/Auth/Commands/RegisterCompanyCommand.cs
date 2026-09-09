@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Payroll.Application.Auth.DTOs;
 using Payroll.Application.Common.Interfaces;
 using Payroll.Domain.Companies;
+using Payroll.Domain.Employees;
 using Payroll.Domain.Identity;
 using Payroll.Shared;
 
@@ -49,6 +50,10 @@ public class RegisterCompanyHandler(
         };
 
         db.Companies.Add(company);
+        await db.SaveChangesAsync(ct);
+
+        // Every company gets a protected default department so employees always have one to select.
+        db.Departments.Add(new Department { CompanyId = company.Id, Name = "General", IsSystemDepartment = true });
         await db.SaveChangesAsync(ct);
 
         var user = new AppUser

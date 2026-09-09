@@ -37,4 +37,8 @@ export class PayrollService {
   markPaid(periodId: string) {
     return this.http.post(`${this.url}/${periodId}/mark-paid`, null);
   }
+
+  delete(periodId: string) {
+    return this.http.delete(`${this.url}/${periodId}`);
+  }
 }
