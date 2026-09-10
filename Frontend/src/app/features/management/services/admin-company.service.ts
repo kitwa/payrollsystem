@@ -24,4 +24,8 @@ export class AdminCompanyService {
   delete(companyId: string) {
     return this.http.delete<void>(`${this.url}/${companyId}`);
   }
+
+  setActivityHistory(companyId: string, enabled: boolean) {
+    return this.http.put<void>(`${this.url}/${companyId}/activity-history`, { enabled });
+  }
 }

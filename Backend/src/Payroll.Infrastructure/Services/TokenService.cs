@@ -1,7 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Payroll.Application.Common.Interfaces;
@@ -29,10 +28,9 @@ public class TokenService(IConfiguration config) : ITokenService
 
         claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
 
-        var secret = config["JwtSettings:Secret"] ?? throw new InvalidOperationException("JwtSettings:Secret not configured.");
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-        var expiry = DateTime.UtcNow.AddMinutes(double.Parse(config["JwtSettings:ExpiryMinutes"] ?? "60"));
+        var key = new SymmetricSecurityKey(JwtKeyConfiguration.GetKeyBytes(config));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
+        var expiry = DateTime.UtcNow.AddMinutes(double.Parse(config["Jwt:ExpiryMinutes"] ?? "60"));
 
         var token = new JwtSecurityToken(
             claims: claims,
@@ -51,7 +49,7 @@ public class TokenService(IConfiguration config) : ITokenService
         return new RefreshToken
         {
             Token = Convert.ToBase64String(randomBytes),
-            Expires = DateTime.UtcNow.AddDays(double.Parse(config["JwtSettings:RefreshTokenExpiryDays"] ?? "7"))
+            Expires = DateTime.UtcNow.AddDays(double.Parse(config["Jwt:RefreshTokenExpiryDays"] ?? "7"))
         };
     }
 }

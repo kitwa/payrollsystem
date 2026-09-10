@@ -24,34 +24,46 @@ public class AuditMiddleware(RequestDelegate next, ILogger<AuditMiddleware> logg
                     ? parsedCompanyId
                     : (Guid?)null;
                 var companyId = ResolveCompanyId(context, claimCompanyId);
-                var userId = Guid.TryParse(
-                    context.User.FindFirstValue(ClaimTypes.NameIdentifier) ?? context.User.FindFirstValue("sub"), out var parsedUserId)
-                    ? parsedUserId
-                    : (Guid?)null;
+                var historyEnabled = companyId is null || await IsActivityHistoryEnabledAsync(db, companyId.Value, context.RequestAborted);
+                if (historyEnabled)
+                {
+                    var userId = Guid.TryParse(
+                        context.User.FindFirstValue(ClaimTypes.NameIdentifier) ?? context.User.FindFirstValue("sub"), out var parsedUserId)
+                        ? parsedUserId
+                        : (Guid?)null;
 
-                db.AuditLogs.Add(new AuditLog
-                {
-                    CompanyId = companyId,
-                    UserId = userId,
-                    UserEmail = context.User.FindFirstValue(ClaimTypes.Email) ?? context.User.FindFirstValue("email"),
-                    IpAddress = context.Connection.RemoteIpAddress?.ToString(),
-                    HttpMethod = context.Request.Method,
-                    Path = context.Request.Path,
-                    StatusCode = context.Response.StatusCode,
-                    Action = $"{context.Request.Method} {context.Request.Path}",
-                    OccurredAt = startedAt
-                });
+                    db.AuditLogs.Add(new AuditLog
+                    {
+                        CompanyId = companyId,
+                        UserId = userId,
+                        UserEmail = context.User.FindFirstValue(ClaimTypes.Email) ?? context.User.FindFirstValue("email"),
+                        IpAddress = context.Connection.RemoteIpAddress?.ToString(),
+                        HttpMethod = context.Request.Method,
+                        Path = context.Request.Path,
+                        StatusCode = context.Response.StatusCode,
+                        Action = $"{context.Request.Method} {context.Request.Path}",
+                        OccurredAt = startedAt
+                    });
 
-                try
-                {
-                    await db.SaveChangesAsync();
-                }
-                catch (Exception ex)
-                {
-                    logger.LogError(ex, "Could not persist audit log for {Path}", context.Request.Path);
+                    try
+                    {
+                        await db.SaveChangesAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError(ex, "Could not persist audit log for {Path}", context.Request.Path);
+                    }
                 }
             }
         }
+    }
+
+    private static async Task<bool> IsActivityHistoryEnabledAsync(AppDbContext db, Guid companyId, CancellationToken ct)
+    {
+        return await db.Companies.Where(c => c.Id == companyId && !c.IsDeleted)
+            .Select(c => (bool?)c.IsActivityHistoryEnabled)
+            .FirstOrDefaultAsync(ct)
+            ?? true;
     }
 
     private static bool ShouldAudit(HttpContext context) =>

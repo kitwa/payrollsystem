@@ -1,16 +1,19 @@
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Payroll.Application.Common;
 using Payroll.Application.Common.Interfaces;
 using Payroll.Domain.Audit;
 using Payroll.Domain.Billing;
+using Payroll.Domain.Identity;
 using Payroll.Shared;
 
 namespace Payroll.Application.Admin;
 
 public record AdminCompanyDto(
     Guid Id, string Name, bool IsActive, string SubscriptionStatus, string PlanCode, string PlanName,
-    int EmployeeCount, int? MaxEmployees, DateTime? TrialEndDate, DateTime? CurrentPeriodEnd, DateTime CreatedAt);
+    int EmployeeCount, int? MaxEmployees, DateTime? TrialEndDate, DateTime? CurrentPeriodEnd, DateTime CreatedAt,
+    bool IsActivityHistoryEnabled);
 
 public record GetAdminCompaniesQuery : IRequest<Result<List<AdminCompanyDto>>>;
 
@@ -42,10 +45,42 @@ public class GetAdminCompaniesHandler(IAppDbContext db, ICurrentUser currentUser
 
             return new AdminCompanyDto(
                 company.Id, company.Name, company.IsActive, status.ToString(), plan.Code, plan.Name,
-                employeeCount, plan.MaxEmployees, subscription?.TrialEndDate, subscription?.CurrentPeriodEnd, company.CreatedAt);
+                employeeCount, plan.MaxEmployees, subscription?.TrialEndDate, subscription?.CurrentPeriodEnd, company.CreatedAt,
+                company.IsActivityHistoryEnabled);
         }).ToList();
 
         return Result<List<AdminCompanyDto>>.Ok(result);
+    }
+}
+
+public record SetActivityHistoryCommand(Guid CompanyId, bool Enabled) : IRequest<Result>;
+
+public class SetActivityHistoryHandler(IAppDbContext db, ICurrentUser currentUser)
+    : IRequestHandler<SetActivityHistoryCommand, Result>
+{
+    public async Task<Result> Handle(SetActivityHistoryCommand request, CancellationToken ct)
+    {
+        if (!currentUser.IsInRole(Constants.Roles.SuperAdmin))
+            return Result.Fail("Only Super Admin users can change activity history settings.");
+
+        var company = await db.Companies.FirstOrDefaultAsync(c => c.Id == request.CompanyId && !c.IsDeleted, ct);
+        if (company is null) return Result.Fail("Company not found.");
+
+        company.IsActivityHistoryEnabled = request.Enabled;
+        db.AuditLogs.Add(new AuditLog
+        {
+            CompanyId = company.Id,
+            UserId = currentUser.UserId,
+            UserEmail = currentUser.Email,
+            HttpMethod = "SYSTEM",
+            Path = $"/admin/companies/{company.Id}/activity-history",
+            StatusCode = 200,
+            Action = request.Enabled ? "ActivityHistoryEnabled" : "ActivityHistoryDisabled",
+            OccurredAt = DateTime.UtcNow
+        });
+
+        await db.SaveChangesAsync(ct);
+        return Result.Ok();
     }
 }
 
@@ -111,7 +146,10 @@ public class EnableCompanyHandler(IAppDbContext db, ICurrentUser currentUser) : 
 
 public record DeleteCompanyCommand(Guid CompanyId) : IRequest<Result>;
 
-public class DeleteCompanyHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<DeleteCompanyCommand, Result>
+public class DeleteCompanyHandler(
+    IAppDbContext db,
+    UserManager<AppUser> userManager,
+    ICurrentUser currentUser) : IRequestHandler<DeleteCompanyCommand, Result>
 {
     public async Task<Result> Handle(DeleteCompanyCommand request, CancellationToken ct)
     {
@@ -121,22 +159,26 @@ public class DeleteCompanyHandler(IAppDbContext db, ICurrentUser currentUser) : 
         var company = await db.Companies.FirstOrDefaultAsync(c => c.Id == request.CompanyId && !c.IsDeleted, ct);
         if (company is null) return Result.Fail("Company not found.");
 
-        company.IsDeleted = true;
-        company.IsActive = false;
-        company.DeletedAt = DateTime.UtcNow;
-        company.DeletedBy = currentUser.UserId.ToString();
-
-        var subscription = await db.CompanySubscriptions.FirstOrDefaultAsync(s => s.CompanyId == company.Id && !s.IsDeleted, ct);
-        if (subscription is not null)
+        var companyUsers = await userManager.Users
+            .Where(u => u.CompanyId == company.Id)
+            .ToListAsync(ct);
+        foreach (var user in companyUsers)
         {
-            subscription.IsDeleted = true;
-            subscription.DeletedAt = DateTime.UtcNow;
-            subscription.DeletedBy = currentUser.UserId.ToString();
+            var deleteUserResult = await userManager.DeleteAsync(user);
+            if (!deleteUserResult.Succeeded)
+                return Result.Fail(deleteUserResult.Errors.Select(e => e.Description));
         }
+
+        db.AuditLogs.RemoveRange(await db.AuditLogs
+            .Where(a => a.CompanyId == company.Id)
+            .ToListAsync(ct));
+        db.PaymentWebhookEvents.RemoveRange(await db.PaymentWebhookEvents
+            .Where(e => e.CompanyId == company.Id)
+            .ToListAsync(ct));
 
         db.AuditLogs.Add(new AuditLog
         {
-            CompanyId = company.Id,
+            CompanyId = null,
             UserId = currentUser.UserId,
             UserEmail = currentUser.Email,
             HttpMethod = "SYSTEM",
@@ -146,6 +188,7 @@ public class DeleteCompanyHandler(IAppDbContext db, ICurrentUser currentUser) : 
             OccurredAt = DateTime.UtcNow
         });
 
+        db.Companies.Remove(company);
         await db.SaveChangesAsync(ct);
         return Result.Ok();
     }

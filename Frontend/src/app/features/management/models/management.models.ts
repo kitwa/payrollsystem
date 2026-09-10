@@ -45,5 +45,6 @@ export interface AdminCompanyDto {
   trialEndDate?: string | null;
   currentPeriodEnd?: string | null;
   createdAt: string;
+  isActivityHistoryEnabled: boolean;
 }
 

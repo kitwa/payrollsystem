@@ -26,4 +26,10 @@ public class AdminCompaniesController(IMediator mediator) : BaseApiController(me
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id, CancellationToken ct) =>
         FromResult(await Mediator.Send(new DeleteCompanyCommand(id), ct));
+
+    [HttpPut("{id:guid}/activity-history")]
+    public async Task<IActionResult> SetActivityHistory(Guid id, [FromBody] SetActivityHistoryRequest request, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new SetActivityHistoryCommand(id, request.Enabled), ct));
 }
+
+public record SetActivityHistoryRequest(bool Enabled);

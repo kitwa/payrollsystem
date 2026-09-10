@@ -76,9 +76,7 @@ public static class DependencyInjection
         // JWT Authentication
         // ============================================================
 
-        var secret = config["JwtSettings:Secret"]
-            ?? throw new InvalidOperationException(
-                "JwtSettings:Secret is required.");
+        var jwtKey = JwtKeyConfiguration.GetKeyBytes(config);
 
         services.AddAuthentication(
             JwtBearerDefaults.AuthenticationScheme)
@@ -90,8 +88,7 @@ public static class DependencyInjection
                         ValidateIssuerSigningKey = true,
 
                         IssuerSigningKey =
-                            new SymmetricSecurityKey(
-                                Encoding.UTF8.GetBytes(secret)),
+                            new SymmetricSecurityKey(jwtKey),
 
                         ValidateIssuer = false,
                         ValidateAudience = false,

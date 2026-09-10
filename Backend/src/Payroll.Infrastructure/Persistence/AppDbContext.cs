@@ -54,6 +54,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
         builder.Entity<Department>()
             .HasIndex(d => new { d.CompanyId, d.Name, d.IsDeleted })
             .IsUnique();
+        builder.Entity<Company>()
+            .Property(c => c.IsActivityHistoryEnabled)
+            .HasDefaultValue(true);
 
         foreach (var entityType in builder.Model.GetEntityTypes())
         {

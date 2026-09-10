@@ -46,7 +46,7 @@ import { UserService } from '../../settings/services/user.service';
         </div>
         <div class="table-responsive">
           <table class="table align-middle mb-0">
-            <thead><tr><th>Company</th><th>Plan</th><th>Status</th><th>Employees</th><th>Account</th><th></th></tr></thead>
+            <thead><tr><th>Company</th><th>Plan</th><th>Status</th><th>Employees</th><th>Account</th><th>Activity History</th><th></th></tr></thead>
             <tbody>
               @for (item of adminCompanies(); track item.id) {
                 <tr>
@@ -55,6 +55,12 @@ import { UserService } from '../../settings/services/user.service';
                   <td><span class="badge" [class.bg-success]="item.subscriptionStatus === 'FreeTrial' || item.subscriptionStatus === 'Active'" [class.bg-danger]="item.subscriptionStatus === 'Expired' || item.subscriptionStatus === 'Cancelled' || item.subscriptionStatus === 'PastDue' || item.subscriptionStatus === 'Suspended'">{{ item.subscriptionStatus }}</span></td>
                   <td>{{ item.employeeCount }}{{ item.maxEmployees ? ' / ' + item.maxEmployees : '' }}</td>
                   <td><span class="badge" [class.bg-success]="item.isActive" [class.bg-secondary]="!item.isActive">{{ item.isActive ? 'Active' : 'Disabled' }}</span></td>
+                  <td>
+                    <select class="form-select form-select-sm" [value]="item.isActivityHistoryEnabled ? 'true' : 'false'" (change)="setActivityHistory(item, $event)">
+                      <option value="true">Enabled</option>
+                      <option value="false">Disabled</option>
+                    </select>
+                  </td>
                   <td class="text-end">
                     @if (item.isActive) {
                       <button class="btn btn-sm btn-outline-danger" type="button" (click)="disableCompany(item)">Disable</button>
@@ -65,7 +71,7 @@ import { UserService } from '../../settings/services/user.service';
                   </td>
                 </tr>
               } @empty {
-                <tr><td colspan="6" class="text-center text-muted py-4">No companies found.</td></tr>
+                <tr><td colspan="7" class="text-center text-muted py-4">No companies found.</td></tr>
               }
             </tbody>
           </table>
@@ -239,7 +245,7 @@ export class ManagementComponent {
   async deleteCompany(company: AdminCompanyDto): Promise<void> {
     const confirmed = await this.confirmDialog.show({
       title: 'Delete company',
-      message: `${company.name} and its active company access will be soft-deleted. This is a destructive platform action. Continue?`,
+      message: `${company.name}, its users and all company data will be permanently deleted. The company can then register again. Continue?`,
       confirmLabel: 'Delete Company',
       tone: 'danger'
     });
@@ -251,6 +257,18 @@ export class ManagementComponent {
         this.settingsService.getCompanies().subscribe(companies => this.companies.set(companies));
       },
       error: response => this.adminError.set(response.error?.errors?.[0] ?? 'Unable to delete company.')
+    });
+  }
+
+  setActivityHistory(company: AdminCompanyDto, event: Event): void {
+    const enabled = (event.target as HTMLSelectElement).value === 'true';
+    this.adminCompanyService.setActivityHistory(company.id, enabled).subscribe({
+      next: () => {
+        this.adminCompanies.update(companies => companies.map(item => item.id === company.id
+          ? { ...item, isActivityHistoryEnabled: enabled }
+          : item));
+      },
+      error: response => this.adminError.set(response.error?.errors?.[0] ?? 'Unable to update activity history setting.')
     });
   }
 

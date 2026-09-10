@@ -368,7 +368,7 @@ Payroll.Shared/
 |-------|-----------|
 | Token issuance | `TokenService` — HS512 signed JWT; claims: `sub` (userId), `email`, `role`, `companyId` |
 | Refresh tokens | Stored in DB (`RefreshToken` entity on `AppUser`); rotated on each use |
-| Token validation | `AddJwtBearer` in `IdentityServiceExtensions`; key from `JwtSettings:Secret` |
+| Token validation | `AddJwtBearer` in `DependencyInjection`; key from `Jwt:Key` |
 | Role seed | `Seed.cs` creates: `SuperAdmin`, `Admin`, `PayrollManager`, `Employee` |
 | Policies | `RequireAdminRole` · `RequirePayrollManagerRole` · `RequireEmployeeRole` |
 | Audit logging | `AuditBehaviour` in MediatR pipeline writes every command to `AuditLog` table |
@@ -541,9 +541,9 @@ Required keys:
 
 - `ConnectionStrings:DefaultConnection` — SQLite path or SQL Server connection string.
 - `ConnectionStrings:HangfireConnection` — separate DB for Hangfire (can share in dev).
-- `JwtSettings:Secret` — symmetric JWT signing secret.
-- `JwtSettings:ExpiryMinutes` — access token lifetime.
-- `JwtSettings:RefreshTokenExpiryDays` — refresh token lifetime.
+- `Jwt:Key` — base64-encoded symmetric JWT signing secret; must decode to at least 64 bytes.
+- `Jwt:ExpiryMinutes` — access token lifetime.
+- `Jwt:RefreshTokenExpiryDays` — refresh token lifetime.
 - `EmailSettings` — SMTP host, port, credentials.
 
 ---
