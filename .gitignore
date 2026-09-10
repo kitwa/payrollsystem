@@ -1,0 +1,10 @@
+Backend/src/Payroll.Api/bin/
+Backend/src/Payroll.Api/obj/
+Backend/src/Payroll.Api/Properties/launchSettings.json
+node_modules/
+.vscode
+PUBLISH.md
+Backend/src/Payroll.Api/appsettings.json
+Backend/src/Payroll.Api/appsettings.Development.json
+.env
+.vs
