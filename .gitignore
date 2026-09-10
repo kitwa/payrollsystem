@@ -1,6 +1,9 @@
 # .NET build output and local tooling
 **/bin/
 **/obj/
+**/*.dll
+**/*.pdb
+**/*.exe
 .vs/
 
 # Frontend dependencies and build output

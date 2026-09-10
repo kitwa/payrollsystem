@@ -7,13 +7,13 @@ interface BeforeInstallPromptEvent extends Event {
 
 @Injectable({ providedIn: 'root' })
 export class InstallPromptService {
-  private readonly dismissedKey = 'payrollsa_install_prompt_dismissed';
+  private readonly dismissedKey = 'payrollsa_install_prompt_dismissed_until';
   private deferredPrompt: BeforeInstallPromptEvent | null = null;
   readonly canInstall = signal(false);
   readonly installed = signal(this.isStandalone());
 
   constructor() {
-    if (this.installed() || localStorage.getItem(this.dismissedKey) === 'true') return;
+    if (this.installed() || this.isDismissed()) return;
     window.addEventListener('beforeinstallprompt', event => {
       event.preventDefault();
       this.deferredPrompt = event as BeforeInstallPromptEvent;
@@ -36,8 +36,17 @@ export class InstallPromptService {
   }
 
   dismiss(): void {
-    localStorage.setItem(this.dismissedKey, 'true');
+    const oneWeek = Date.now() + 7 * 24 * 60 * 60 * 1000;
+    localStorage.setItem(this.dismissedKey, String(oneWeek));
     this.canInstall.set(false);
+  }
+
+  private isDismissed(): boolean {
+    const dismissedUntil = Number(localStorage.getItem(this.dismissedKey) ?? 0);
+    if (dismissedUntil > Date.now()) return true;
+    localStorage.removeItem(this.dismissedKey);
+    localStorage.removeItem('payrollsa_install_prompt_dismissed');
+    return false;
   }
 
   private isStandalone(): boolean {

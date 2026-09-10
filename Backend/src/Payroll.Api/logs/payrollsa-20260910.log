@@ -2103,3 +2103,82 @@ Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operati
 2026-09-10 12:28:30.661 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 3.5238 ms
 2026-09-10 12:28:30.665 +02:00 [INF] HTTP GET /api/leave responded 200 in 4.1587 ms
 2026-09-10 12:28:30.669 +02:00 [INF] HTTP GET /api/leave responded 200 in 3.9260 ms
+2026-09-10 12:34:03.529 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 4.4862 ms
+2026-09-10 12:34:07.688 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 3.7673 ms
+2026-09-10 12:34:18.073 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 5.5867 ms
+2026-09-10 12:34:33.965 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 4.3491 ms
+2026-09-10 12:34:35.293 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 6.3972 ms
+2026-09-10 12:34:35.478 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 6.9752 ms
+2026-09-10 12:34:35.698 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 5.6485 ms
+2026-09-10 12:34:41.016 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 3.7347 ms
+2026-09-10 12:41:54.350 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 13.7066 ms
+2026-09-10 12:41:58.425 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 3.5687 ms
+2026-09-10 12:42:57.307 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 4.2688 ms
+2026-09-10 12:42:59.473 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 5.5313 ms
+2026-09-10 12:43:02.663 +02:00 [INF] Server desktop-3ro9ejj:38032:0dfea411 caught stopping signal...
+2026-09-10 12:43:02.675 +02:00 [INF] Server desktop-3ro9ejj:38032:0dfea411 All dispatchers stopped
+2026-09-10 12:43:02.681 +02:00 [INF] Server desktop-3ro9ejj:38032:0dfea411 successfully reported itself as stopped in 3,3208 ms
+2026-09-10 12:43:02.683 +02:00 [INF] Server desktop-3ro9ejj:38032:0dfea411 has been stopped in total 16,2636 ms
+2026-09-10 12:43:27.244 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 12:43:29.171 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 12:43:29.241 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 12:43:29.311 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-10 12:43:29.313 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-10 12:43:29.332 +02:00 [INF] Server desktop-3ro9ejj:36220:2ed1d58f successfully announced in 4,421 ms
+2026-09-10 12:43:29.336 +02:00 [INF] Server desktop-3ro9ejj:36220:2ed1d58f is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-10 12:43:29.342 +02:00 [INF] Server desktop-3ro9ejj:36220:2ed1d58f all the dispatchers started
+2026-09-10 12:43:35.103 +02:00 [INF] Server desktop-3ro9ejj:36220:2ed1d58f caught stopping signal...
+2026-09-10 12:43:35.108 +02:00 [INF] Server desktop-3ro9ejj:36220:2ed1d58f All dispatchers stopped
+2026-09-10 12:43:35.112 +02:00 [INF] Server desktop-3ro9ejj:36220:2ed1d58f successfully reported itself as stopped in 1,2443 ms
+2026-09-10 12:43:35.114 +02:00 [INF] Server desktop-3ro9ejj:36220:2ed1d58f has been stopped in total 8,4297 ms
+2026-09-10 12:43:43.641 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 12:43:44.742 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 12:43:44.798 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 12:43:44.856 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-10 12:43:44.857 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-10 12:43:44.875 +02:00 [INF] Server desktop-3ro9ejj:23012:8d20150f successfully announced in 3,7954 ms
+2026-09-10 12:43:44.878 +02:00 [INF] Server desktop-3ro9ejj:23012:8d20150f is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-10 12:43:44.892 +02:00 [INF] Server desktop-3ro9ejj:23012:8d20150f all the dispatchers started
+2026-09-10 12:43:45.069 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-09-10 12:43:45.261 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 197.3408 ms
+2026-09-10 12:43:45.359 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-09-10 12:43:45.897 +02:00 [ERR] Could not persist audit log for /api/auth/login
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 47
+2026-09-10 12:43:45.920 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 644.4491 ms
+2026-09-10 12:43:46.035 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 15.1580 ms
+2026-09-10 12:43:46.048 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 20.6034 ms
+2026-09-10 12:43:46.359 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 318.5960 ms
+2026-09-10 12:43:46.380 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 25.3258 ms
+2026-09-10 12:43:50.280 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 19.7638 ms
+2026-09-10 12:43:50.291 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 14.1333 ms
+2026-09-10 12:43:57.141 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 6.7052 ms
+2026-09-10 12:43:57.163 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 16.0639 ms
+2026-09-10 12:43:57.174 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 12.8586 ms
+2026-09-10 12:44:54.151 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 5.6461 ms
+2026-09-10 12:44:54.163 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 8.7772 ms
+2026-09-10 12:44:54.172 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 8.4136 ms
+2026-09-10 12:46:56.549 +02:00 [INF] Server desktop-3ro9ejj:23012:8d20150f caught stopping signal...
+2026-09-10 12:46:56.576 +02:00 [INF] Server desktop-3ro9ejj:23012:8d20150f All dispatchers stopped
+2026-09-10 12:46:56.580 +02:00 [INF] Server desktop-3ro9ejj:23012:8d20150f successfully reported itself as stopped in 0,6182 ms
+2026-09-10 12:46:56.580 +02:00 [INF] Server desktop-3ro9ejj:23012:8d20150f has been stopped in total 6,7458 ms

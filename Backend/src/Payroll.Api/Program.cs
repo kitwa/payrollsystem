@@ -24,7 +24,7 @@ try
 
     builder.Services.AddControllers();
     builder.Services.AddCors(opt => opt.AddPolicy("CorsPolicy", p =>
-        p.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "http://localhost:4201")));
+        p.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "https://localhost:4200")));
 
     builder.Services.AddSwaggerGen(c =>
     {
