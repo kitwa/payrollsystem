@@ -33,18 +33,20 @@ import { SettingsService } from '../../services/settings.service';
 											<label class="form-label mb-0">Apply UIF</label>
 											<div class="text-muted small">Enable or disable UIF contributions for this company.</div>
 										</div>
-										<div class="form-check form-switch">
-											<input class="form-check-input" type="checkbox" formControlName="isUifEnabled">
-										</div>
+										<select class="form-select form-select-sm w-auto" formControlName="isUifEnabled">
+											<option [ngValue]="true">Yes</option>
+											<option [ngValue]="false">No</option>
+										</select>
 									</div>
 									<div class="d-flex justify-content-between align-items-center gap-3">
 										<div>
 											<label class="form-label mb-0">Apply Skills Development Levy (SDL)</label>
 											<div class="text-muted small">Enable or disable SDL employer contributions for this company.</div>
 										</div>
-										<div class="form-check form-switch">
-											<input class="form-check-input" type="checkbox" formControlName="isSdlEnabled">
-										</div>
+										<select class="form-select form-select-sm w-auto" formControlName="isSdlEnabled">
+											<option [ngValue]="true">Yes</option>
+											<option [ngValue]="false">No</option>
+										</select>
 									</div>
 								</div>
 							</div>

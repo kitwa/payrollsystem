@@ -11,7 +11,7 @@ namespace Payroll.Application.Payroll.Commands;
 
 public record GeneratePayrollCommand(GeneratePayrollDto Dto) : IRequest<Result<Guid>>;
 
-public class GeneratePayrollHandler(IAppDbContext db, IPayrollEngine engine, ICurrentUser currentUser)
+public class GeneratePayrollHandler(IAppDbContext db, IPayrollEngine engine, ICurrentUser currentUser, ISubscriptionService subscriptionService)
     : IRequestHandler<GeneratePayrollCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(GeneratePayrollCommand request, CancellationToken ct)
@@ -19,6 +19,8 @@ public class GeneratePayrollHandler(IAppDbContext db, IPayrollEngine engine, ICu
         var d = request.Dto;
         if (!TenantAccess.CanManageCompany(currentUser, d.CompanyId))
             return Result<Guid>.Fail("You are not authorized to generate payroll for this company.");
+        if (!await subscriptionService.IsUsableAsync(d.CompanyId, ct))
+            return Result<Guid>.Fail("Your free month has ended or your subscription is inactive. Choose a plan to continue running payroll.");
         var selectedEmployeeIds = d.EmployeeIds.Distinct().ToList();
         if (selectedEmployeeIds.Count == 0)
             return Result<Guid>.Fail("Select at least one active employee for this payroll.");

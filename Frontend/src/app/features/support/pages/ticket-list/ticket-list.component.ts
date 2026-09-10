@@ -18,6 +18,9 @@ import { SupportTicket, SupportTicketStatus, SupportTicketType } from '../../mod
         <p class="text-muted mb-1">Support</p>
         <h1 class="h3 mb-1">Support Tickets</h1>
         <p class="text-muted mb-0">{{ isSuperAdmin() ? 'Manage support requests across all companies.' : 'Track support requests for your company.' }}</p>
+        @if (contactEmail()) {
+          <p class="text-muted small mb-0">Need immediate help? Email <a [href]="'mailto:' + contactEmail()">{{ contactEmail() }}</a>.</p>
+        }
       </div>
       @if (!isSuperAdmin()) { <a class="btn btn-dark" routerLink="/support/tickets/new"><i class="bi bi-plus-lg me-2"></i>New Ticket</a> }
     </section>
@@ -96,6 +99,7 @@ export class TicketListComponent {
   readonly totalCount = signal(0);
   readonly pageSize = 20;
   readonly error = signal('');
+  readonly contactEmail = signal('');
   readonly isSuperAdmin = computed(() => this.auth.isInRole('SuperAdmin'));
 
   readonly statuses = [
@@ -106,6 +110,7 @@ export class TicketListComponent {
   ];
 
   constructor() {
+    this.ticketService.getContact().subscribe({ next: contact => this.contactEmail.set(contact.email), error: () => {} });
     if (this.isSuperAdmin()) {
       this.settingsService.getCompanies().subscribe({ next: companies => this.companies.set(companies), error: response => this.showError(response, 'Unable to load companies.') });
     }

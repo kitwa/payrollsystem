@@ -1,15 +1,17 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, ViewChild, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/auth/auth.service';
 import { SettingsService } from '../../settings/services/settings.service';
 import { Company } from '../../settings/models/settings.models';
 import { ManagementService } from '../services/management.service';
-import { CompanyManagementSummary, ManagementAudit } from '../models/management.models';
+import { AdminCompanyService } from '../services/admin-company.service';
+import { CompanyManagementSummary, ManagementAudit, AdminCompanyDto } from '../models/management.models';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-management',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ConfirmDialogComponent],
   template: `
     <section class="mb-3">
       <p class="text-uppercase small fw-bold text-muted mb-1">Platform Management</p>
@@ -18,6 +20,41 @@ import { CompanyManagementSummary, ManagementAudit } from '../models/management.
     </section>
 
     @if (error()) { <div class="alert alert-danger">{{ error() }}</div> }
+    @if (adminError()) { <div class="alert alert-danger">{{ adminError() }}</div> }
+
+    <section class="card border-0 shadow-sm mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div><h2 class="h5 mb-1">Companies</h2><p class="text-muted small mb-0">Subscription status and account access for every tenant.</p></div>
+          <button class="btn btn-sm btn-outline-secondary" type="button" (click)="loadAdminCompanies()">Refresh</button>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead><tr><th>Company</th><th>Plan</th><th>Status</th><th>Employees</th><th>Account</th><th></th></tr></thead>
+            <tbody>
+              @for (item of adminCompanies(); track item.id) {
+                <tr>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.planName }}</td>
+                  <td><span class="badge" [class.bg-success]="item.subscriptionStatus === 'FreeTrial' || item.subscriptionStatus === 'Active'" [class.bg-danger]="item.subscriptionStatus === 'Expired' || item.subscriptionStatus === 'Cancelled' || item.subscriptionStatus === 'PastDue' || item.subscriptionStatus === 'Suspended'">{{ item.subscriptionStatus }}</span></td>
+                  <td>{{ item.employeeCount }}{{ item.maxEmployees ? ' / ' + item.maxEmployees : '' }}</td>
+                  <td><span class="badge" [class.bg-success]="item.isActive" [class.bg-secondary]="!item.isActive">{{ item.isActive ? 'Active' : 'Disabled' }}</span></td>
+                  <td class="text-end">
+                    @if (item.isActive) {
+                      <button class="btn btn-sm btn-outline-danger" type="button" (click)="disableCompany(item)">Disable</button>
+                    } @else {
+                      <button class="btn btn-sm btn-outline-success" type="button" (click)="enableCompany(item)">Enable</button>
+                    }
+                  </td>
+                </tr>
+              } @empty {
+                <tr><td colspan="6" class="text-center text-muted py-4">No companies found.</td></tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
 
     <section class="card border-0 shadow-sm mb-3">
       <div class="card-body">
@@ -30,6 +67,8 @@ import { CompanyManagementSummary, ManagementAudit } from '../models/management.
         </select>
       </div>
     </section>
+
+    <app-confirm-dialog #confirmDialog></app-confirm-dialog>
 
     @if (summary(); as data) {
       <section class="kpi-grid mb-3">
@@ -93,6 +132,12 @@ export class ManagementComponent {
   private readonly auth = inject(AuthService);
   private readonly settingsService = inject(SettingsService);
   private readonly managementService = inject(ManagementService);
+  private readonly adminCompanyService = inject(AdminCompanyService);
+
+  @ViewChild('confirmDialog') confirmDialog!: ConfirmDialogComponent;
+
+  readonly adminCompanies = signal<AdminCompanyDto[]>([]);
+  readonly adminError = signal('');
 
   readonly companies = signal<Company[]>([]);
   readonly selectedCompanyId = signal<string | null>(null);
@@ -108,6 +153,7 @@ export class ManagementComponent {
   readonly rangeEnd = computed(() => Math.min(this.pageNumber() * this.pageSize, this.totalCount()));
 
   constructor() {
+    this.loadAdminCompanies();
     this.settingsService.getCompanies().subscribe({
       next: companies => {
         this.companies.set(companies);
@@ -126,6 +172,43 @@ export class ManagementComponent {
     this.audit.set([]);
     this.pageNumber.set(1);
     this.load();
+  }
+
+  loadAdminCompanies(): void {
+    this.adminError.set('');
+    this.adminCompanyService.getAll().subscribe({
+      next: companies => this.adminCompanies.set(companies),
+      error: response => this.adminError.set(response.error?.errors?.[0] ?? 'Unable to load companies.')
+    });
+  }
+
+  async disableCompany(company: AdminCompanyDto): Promise<void> {
+    const confirmed = await this.confirmDialog.show({
+      title: 'Disable company',
+      message: `${company.name} will immediately lose access to Payroll SA. Continue?`,
+      confirmLabel: 'Disable',
+      tone: 'danger'
+    });
+    if (!confirmed) return;
+
+    this.adminCompanyService.disable(company.id).subscribe({
+      next: () => this.loadAdminCompanies(),
+      error: response => this.adminError.set(response.error?.errors?.[0] ?? 'Unable to disable company.')
+    });
+  }
+
+  async enableCompany(company: AdminCompanyDto): Promise<void> {
+    const confirmed = await this.confirmDialog.show({
+      title: 'Enable company',
+      message: `Restore access to Payroll SA for ${company.name}?`,
+      confirmLabel: 'Enable'
+    });
+    if (!confirmed) return;
+
+    this.adminCompanyService.enable(company.id).subscribe({
+      next: () => this.loadAdminCompanies(),
+      error: response => this.adminError.set(response.error?.errors?.[0] ?? 'Unable to enable company.')
+    });
   }
 
   reloadAudit(): void {

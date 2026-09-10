@@ -125,7 +125,12 @@ import { DepartmentService } from '../../services/employee.service';
 					}
 					@if (error()) {
 						<div class="col-12">
-							<div class="alert alert-danger mb-0">{{ error() }}</div>
+							<div class="alert alert-danger mb-0 d-flex justify-content-between align-items-center flex-wrap gap-2">
+								<span>{{ error() }}</span>
+								@if (showUpgradeCta()) {
+									<a routerLink="/billing" class="btn btn-sm btn-dark">Upgrade Plan</a>
+								}
+							</div>
 						</div>
 					}
 
@@ -149,6 +154,7 @@ export class EmployeeFormComponent {
 
 	readonly saved = signal(false);
 	readonly error = signal('');
+	readonly showUpgradeCta = signal(false);
 	readonly departments = signal<Department[]>([]);
 	readonly isEditMode = !!this.route.snapshot.paramMap.get('id');
 	readonly employeeId = this.route.snapshot.paramMap.get('id');
@@ -206,6 +212,7 @@ export class EmployeeFormComponent {
 			return;
 		}
 		this.error.set('');
+		this.showUpgradeCta.set(false);
 
 		const value = this.form.getRawValue();
 		if (this.isEditMode && this.employeeId && this.employee) {
@@ -241,6 +248,12 @@ export class EmployeeFormComponent {
 			department: value.department?.trim() || undefined,
 			startDate: value.startDate!,
 				basicSalary: value.basicSalary!
-			}).subscribe({ next: () => this.router.navigate(['/employees']), error: response => this.error.set(response.error?.errors?.[0] ?? 'Unable to create employee.') });
+			}).subscribe({ next: () => this.router.navigate(['/employees']), error: response => this.setError(response, 'Unable to create employee.') });
+	}
+
+	private setError(response: { error?: { errors?: string[] } }, fallback: string): void {
+		const message = response.error?.errors?.[0] ?? fallback;
+		this.error.set(message);
+		this.showUpgradeCta.set(message.toLowerCase().includes('upgrade') && (this.auth.isInRole('Admin') || this.auth.isInRole('SuperAdmin')));
 	}
 }

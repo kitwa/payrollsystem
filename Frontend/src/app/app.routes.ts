@@ -41,6 +41,11 @@ export const routes: Routes = [
     loadChildren: () => import('./features/settings/settings.routes').then(m => m.settingsRoutes)
   },
   {
+    path: 'billing',
+    canActivate: [authGuard, roleGuard(['Admin', 'SuperAdmin'])],
+    loadComponent: () => import('./features/billing/pages/billing/billing.component').then(m => m.BillingComponent)
+  },
+  {
     path: 'management',
     canActivate: [authGuard, roleGuard(['SuperAdmin'])],
     loadComponent: () => import('./features/management/pages/management.component').then(m => m.ManagementComponent)

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Payroll.Domain.Companies;
 using Payroll.Domain.Audit;
+using Payroll.Domain.Billing;
 using Payroll.Domain.Employees;
 using Payroll.Domain.Leave;
 using Payroll.Domain.PayrollRuns;
@@ -35,5 +36,8 @@ public interface IAppDbContext
     DbSet<TaxThreshold> TaxThresholds { get; }
     DbSet<TaxRebate> TaxRebates { get; }
     DbSet<SupportTicket> SupportTickets { get; }
+    DbSet<CompanySubscription> CompanySubscriptions { get; }
+    DbSet<CompanyPaymentProfile> CompanyPaymentProfiles { get; }
+    DbSet<PaymentWebhookEvent> PaymentWebhookEvents { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
 }

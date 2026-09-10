@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Payroll.Application.Auth.DTOs;
 using Payroll.Application.Common.Interfaces;
+using Payroll.Domain.Billing;
 using Payroll.Domain.Companies;
 using Payroll.Domain.Employees;
 using Payroll.Domain.Identity;
@@ -54,6 +55,19 @@ public class RegisterCompanyHandler(
 
         // Every company gets a protected default department so employees always have one to select.
         db.Departments.Add(new Department { CompanyId = company.Id, Name = "General", IsSystemDepartment = true });
+        await db.SaveChangesAsync(ct);
+
+        // First month free, all features included, capped at 5 employees until upgraded.
+        var trialStart = DateTime.UtcNow;
+        db.CompanySubscriptions.Add(new CompanySubscription
+        {
+            CompanyId = company.Id,
+            PlanCode = PlanCatalog.FreeTrialCode,
+            Status = SubscriptionStatus.FreeTrial,
+            TrialStartDate = trialStart,
+            TrialEndDate = trialStart.AddMonths(1),
+            Price = 0
+        });
         await db.SaveChangesAsync(ct);
 
         var user = new AppUser

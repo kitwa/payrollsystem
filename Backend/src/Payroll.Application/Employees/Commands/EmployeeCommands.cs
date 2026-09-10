@@ -10,13 +10,17 @@ namespace Payroll.Application.Employees.Commands;
 
 public record CreateEmployeeCommand(CreateEmployeeDto Dto) : IRequest<Result<Guid>>;
 
-public class CreateEmployeeHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<CreateEmployeeCommand, Result<Guid>>
+public class CreateEmployeeHandler(IAppDbContext db, ICurrentUser currentUser, ISubscriptionService subscriptionService) : IRequestHandler<CreateEmployeeCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateEmployeeCommand request, CancellationToken ct)
     {
         var d = request.Dto;
         if (!TenantAccess.CanManageCompany(currentUser, d.CompanyId))
             return Result<Guid>.Fail("You are not authorized to create an employee for this company.");
+
+        var limitCheck = await subscriptionService.CheckCanAddEmployeeAsync(d.CompanyId, ct);
+        if (!limitCheck.Allowed)
+            return Result<Guid>.Fail(limitCheck.Message!);
 
         var idNumber = d.IdNumber.Trim();
         var duplicateIdNumber = await db.Employees.AnyAsync(

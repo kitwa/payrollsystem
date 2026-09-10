@@ -39,6 +39,10 @@ export class SupportTicketService {
     return this.http.post<SupportTicketDetail>(`${this.url}/${id}/close`, null);
   }
 
+  getContact() {
+    return this.http.get<{ email: string }>(`${environment.apiUrl}support/contact`);
+  }
+
   updateStatus(id: string, status: SupportTicketStatus) {
     return this.http.put<SupportTicketDetail>(`${this.url}/${id}/status`, { status });
   }

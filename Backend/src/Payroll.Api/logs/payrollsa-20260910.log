@@ -2241,3 +2241,1305 @@ Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operati
 2026-09-10 14:02:38.000 +02:00 [INF] HTTP GET /api/employees responded 200 in 40.2728 ms
 2026-09-10 14:04:21.641 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 5.4154 ms
 2026-09-10 14:04:21.749 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 103.0161 ms
+2026-09-10 14:05:54.367 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 6.7913 ms
+2026-09-10 14:05:54.378 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 6.6212 ms
+2026-09-10 14:05:54.396 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 7.9325 ms
+2026-09-10 14:06:12.279 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 5.7155 ms
+2026-09-10 14:06:12.292 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 7.7766 ms
+2026-09-10 14:06:12.309 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 7.5150 ms
+2026-09-10 14:07:17.307 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 5.3636 ms
+2026-09-10 14:07:17.316 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 5.7984 ms
+2026-09-10 14:07:17.334 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 7.8727 ms
+2026-09-10 14:08:51.883 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 6.1745 ms
+2026-09-10 14:08:51.891 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 6.3754 ms
+2026-09-10 14:08:51.899 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 9.6883 ms
+2026-09-10 14:08:51.923 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 26.1325 ms
+2026-09-10 14:09:00.264 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 5.4193 ms
+2026-09-10 14:09:00.301 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 31.7661 ms
+2026-09-10 14:09:01.941 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 5.4669 ms
+2026-09-10 14:09:01.955 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 9.2121 ms
+2026-09-10 14:09:03.235 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 5.8937 ms
+2026-09-10 14:09:03.243 +02:00 [INF] HTTP GET /api/employees responded 200 in 5.7337 ms
+2026-09-10 14:14:02.401 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 10.7648 ms
+2026-09-10 14:14:02.411 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 6.0887 ms
+2026-09-10 14:14:02.429 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 5.9769 ms
+2026-09-10 14:15:56.866 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 6.9314 ms
+2026-09-10 14:15:56.883 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 6.2448 ms
+2026-09-10 14:16:53.662 +02:00 [INF] Server desktop-3ro9ejj:808:dee0392e caught stopping signal...
+2026-09-10 14:16:53.676 +02:00 [INF] Server desktop-3ro9ejj:808:dee0392e All dispatchers stopped
+2026-09-10 14:16:53.691 +02:00 [INF] Server desktop-3ro9ejj:808:dee0392e successfully reported itself as stopped in 4,3379 ms
+2026-09-10 14:16:53.693 +02:00 [INF] Server desktop-3ro9ejj:808:dee0392e has been stopped in total 24,9473 ms
+2026-09-10 14:49:49.515 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 14:49:50.479 +02:00 [FTL] Application startup failed.
+System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For .NET Core applications please call the `IServiceCollection.AddHangfire` extension method from Hangfire.NetCore or Hangfire.AspNetCore package depending on your application type when configuring the services and ensure service-based APIs are used instead of static ones, like `IBackgroundJobClient` instead of `BackgroundJob` and `IRecurringJobManager` instead of `RecurringJob`.
+   at Hangfire.JobStorage.get_Current() in C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs:line 42
+   at Hangfire.RecurringJobManager..ctor() in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJobManager.cs:line 42
+   at Hangfire.RecurringJob.<>c.<.cctor>b__66_0() in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 28
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 618
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, Func`1 cronExpression, RecurringJobOptions options) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 516
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, Func`1 cronExpression) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 506
+   at Program.<Main>$(String[] args) in D:\repos\payrollsa\Backend\src\Payroll.Api\Program.cs:line 78
+2026-09-10 15:01:37.241 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 15:01:37.932 +02:00 [FTL] Application startup failed.
+System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For .NET Core applications please call the `IServiceCollection.AddHangfire` extension method from Hangfire.NetCore or Hangfire.AspNetCore package depending on your application type when configuring the services and ensure service-based APIs are used instead of static ones, like `IBackgroundJobClient` instead of `BackgroundJob` and `IRecurringJobManager` instead of `RecurringJob`.
+   at Hangfire.JobStorage.get_Current() in C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs:line 42
+   at Hangfire.RecurringJobManager..ctor() in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJobManager.cs:line 42
+   at Hangfire.RecurringJob.<>c.<.cctor>b__66_0() in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 28
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 618
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, Func`1 cronExpression, RecurringJobOptions options) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 516
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, Func`1 cronExpression) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 506
+   at Program.<Main>$(String[] args) in D:\repos\payrollsa\Backend\src\Payroll.Api\Program.cs:line 78
+2026-09-10 15:02:26.818 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 15:02:27.483 +02:00 [FTL] Application startup failed.
+System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For .NET Core applications please call the `IServiceCollection.AddHangfire` extension method from Hangfire.NetCore or Hangfire.AspNetCore package depending on your application type when configuring the services and ensure service-based APIs are used instead of static ones, like `IBackgroundJobClient` instead of `BackgroundJob` and `IRecurringJobManager` instead of `RecurringJob`.
+   at Hangfire.JobStorage.get_Current() in C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs:line 42
+   at Hangfire.RecurringJobManager..ctor() in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJobManager.cs:line 42
+   at Hangfire.RecurringJob.<>c.<.cctor>b__66_0() in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 28
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 618
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, Func`1 cronExpression, RecurringJobOptions options) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 516
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, Func`1 cronExpression) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 506
+   at Program.<Main>$(String[] args) in D:\repos\payrollsa\Backend\src\Payroll.Api\Program.cs:line 78
+2026-09-10 15:02:51.782 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 15:02:52.511 +02:00 [FTL] Application startup failed.
+System.InvalidOperationException: Current JobStorage instance has not been initialized yet. You must set it before using Hangfire Client or Server API. For .NET Core applications please call the `IServiceCollection.AddHangfire` extension method from Hangfire.NetCore or Hangfire.AspNetCore package depending on your application type when configuring the services and ensure service-based APIs are used instead of static ones, like `IBackgroundJobClient` instead of `BackgroundJob` and `IRecurringJobManager` instead of `RecurringJob`.
+   at Hangfire.JobStorage.get_Current() in C:\projects\hangfire-525\src\Hangfire.Core\JobStorage.cs:line 42
+   at Hangfire.RecurringJobManager..ctor() in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJobManager.cs:line 42
+   at Hangfire.RecurringJob.<>c.<.cctor>b__66_0() in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 28
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 618
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, Func`1 cronExpression, RecurringJobOptions options) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 516
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, Func`1 cronExpression) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 506
+   at Program.<Main>$(String[] args) in D:\repos\payrollsa\Backend\src\Payroll.Api\Program.cs:line 78
+2026-09-10 15:04:07.882 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 15:04:09.379 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 15:04:09.645 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 15:04:09.705 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-10 15:04:09.706 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-10 15:04:09.720 +02:00 [INF] Server desktop-3ro9ejj:14624:cfe30bd9 successfully announced in 1,7436 ms
+2026-09-10 15:04:09.725 +02:00 [INF] Server desktop-3ro9ejj:14624:cfe30bd9 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-10 15:04:09.731 +02:00 [INF] Server desktop-3ro9ejj:14624:cfe30bd9 all the dispatchers started
+2026-09-10 15:04:16.923 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-09-10 15:04:17.398 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 485.1926 ms
+2026-09-10 15:04:17.398 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 488.0237 ms
+2026-09-10 15:04:17.772 +02:00 [INF] HTTP GET /api/payroll/periods responded 401 in 344.2566 ms
+2026-09-10 15:04:17.797 +02:00 [INF] HTTP GET /api/payroll/periods responded 401 in 15.3959 ms
+2026-09-10 15:04:19.206 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 11.1229 ms
+2026-09-10 15:04:19.292 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-09-10 15:04:19.878 +02:00 [ERR] Could not persist audit log for /api/auth/login
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 47
+2026-09-10 15:04:19.929 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 716.9044 ms
+2026-09-10 15:04:19.966 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 5.7881 ms
+2026-09-10 15:04:19.970 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 5.5402 ms
+2026-09-10 15:04:19.977 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 6.9950 ms
+2026-09-10 15:04:19.981 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 5.1290 ms
+2026-09-10 15:04:19.988 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 23.4937 ms
+2026-09-10 15:04:19.992 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 5.7888 ms
+2026-09-10 15:04:20.000 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 35.2554 ms
+2026-09-10 15:04:20.012 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 47.6199 ms
+2026-09-10 15:04:20.104 +02:00 [ERR] Failed executing DbCommand (4ms) [Parameters=[@companyId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "d"."Id", "d"."CompanyId", "d"."Name", "d"."IsSystemDepartment", "d"."IsDefault"
+FROM "Departments" AS "d"
+WHERE "d"."CompanyId" = @companyId AND NOT ("d"."IsDeleted")
+ORDER BY "d"."IsSystemDepartment" DESC, "d"."Name"
+2026-09-10 15:04:20.124 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 164.3595 ms
+2026-09-10 15:04:20.130 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-09-10 15:04:20.139 +02:00 [INF] HTTP GET /api/employees responded 200 in 143.1937 ms
+2026-09-10 15:04:20.154 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 172.1682 ms
+2026-09-10 15:04:20.159 +02:00 [ERR] Unhandled exception: SQLite Error 1: 'no such column: d.IsDefault'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Payroll.Application.Employees.GetDepartmentsHandler.Handle(GetDepartmentsQuery request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Employees\DepartmentOperations.cs:line 19
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.DepartmentsController.GetAll(Guid companyId, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\DepartmentsController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Payroll.Api.Middleware.CompanyStatusMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\CompanyStatusMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 15:04:20.167 +02:00 [INF] HTTP GET /api/employees responded 200 in 11.0836 ms
+2026-09-10 15:04:20.217 +02:00 [ERR] HTTP GET /api/departments responded 500 in 215.9555 ms
+2026-09-10 15:04:20.225 +02:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[@companyId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "d"."Id", "d"."CompanyId", "d"."Name", "d"."IsSystemDepartment", "d"."IsDefault"
+FROM "Departments" AS "d"
+WHERE "d"."CompanyId" = @companyId AND NOT ("d"."IsDeleted")
+ORDER BY "d"."IsSystemDepartment" DESC, "d"."Name"
+2026-09-10 15:04:20.235 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-09-10 15:04:20.252 +02:00 [ERR] Unhandled exception: SQLite Error 1: 'no such column: d.IsDefault'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Payroll.Application.Employees.GetDepartmentsHandler.Handle(GetDepartmentsQuery request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Employees\DepartmentOperations.cs:line 19
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.DepartmentsController.GetAll(Guid companyId, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\DepartmentsController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Payroll.Api.Middleware.CompanyStatusMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\CompanyStatusMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 15:04:20.283 +02:00 [ERR] HTTP GET /api/departments responded 500 in 64.2033 ms
+2026-09-10 15:04:20.285 +02:00 [INF] HTTP GET /api/subscription responded 200 in 266.7823 ms
+2026-09-10 15:04:20.346 +02:00 [INF] HTTP GET /api/users responded 200 in 61.4989 ms
+2026-09-10 15:04:20.391 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 254.8965 ms
+2026-09-10 15:04:20.402 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 15.1794 ms
+2026-09-10 15:04:20.449 +02:00 [INF] HTTP GET /api/subscription responded 200 in 210.6464 ms
+2026-09-10 15:04:20.514 +02:00 [INF] HTTP GET /api/users responded 200 in 506.8788 ms
+2026-09-10 15:04:31.000 +02:00 [INF] HTTP OPTIONS /api/subscription/plans responded 204 in 7.1724 ms
+2026-09-10 15:04:31.036 +02:00 [INF] HTTP GET /api/subscription/plans responded 200 in 27.9975 ms
+2026-09-10 15:04:31.157 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 163.7841 ms
+2026-09-10 15:04:31.186 +02:00 [INF] HTTP GET /api/subscription responded 200 in 18.5583 ms
+2026-09-10 15:04:57.032 +02:00 [INF] HTTP OPTIONS /api/subscription/upgrade responded 204 in 9.2381 ms
+2026-09-10 15:04:57.187 +02:00 [INF] HTTP POST /api/subscription/upgrade responded 200 in 143.9103 ms
+2026-09-10 15:05:02.110 +02:00 [INF] HTTP OPTIONS /api/subscription/cancel responded 204 in 9.4293 ms
+2026-09-10 15:05:02.142 +02:00 [INF] HTTP POST /api/subscription/cancel responded 200 in 24.2440 ms
+2026-09-10 15:05:02.160 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 5.3690 ms
+2026-09-10 15:05:02.181 +02:00 [INF] HTTP GET /api/subscription responded 200 in 13.1899 ms
+2026-09-10 15:05:02.327 +02:00 [INF] HTTP OPTIONS /api/subscription/plans responded 204 in 172.2986 ms
+2026-09-10 15:05:02.348 +02:00 [INF] HTTP GET /api/subscription/plans responded 200 in 9.9585 ms
+2026-09-10 15:05:04.712 +02:00 [INF] HTTP GET /api/subscription/plans responded 200 in 6.9897 ms
+2026-09-10 15:05:04.716 +02:00 [INF] HTTP GET /api/subscription responded 200 in 6.0840 ms
+2026-09-10 15:05:04.873 +02:00 [INF] HTTP GET /api/subscription responded 200 in 167.8171 ms
+2026-09-10 15:05:05.027 +02:00 [INF] HTTP GET /api/subscription/plans responded 200 in 318.9342 ms
+2026-09-10 15:05:07.477 +02:00 [INF] HTTP OPTIONS /api/subscription/upgrade responded 204 in 8.3785 ms
+2026-09-10 15:05:07.497 +02:00 [INF] HTTP POST /api/subscription/upgrade responded 200 in 14.7699 ms
+2026-09-10 15:05:18.572 +02:00 [INF] HTTP OPTIONS /api/subscription/upgrade responded 204 in 7.3364 ms
+2026-09-10 15:05:18.596 +02:00 [INF] HTTP POST /api/subscription/upgrade responded 200 in 16.4838 ms
+2026-09-10 15:05:52.974 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 5.9511 ms
+2026-09-10 15:05:53.026 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 46.0373 ms
+2026-09-10 15:05:55.335 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 4.8975 ms
+2026-09-10 15:05:55.349 +02:00 [INF] HTTP GET /api/employees responded 200 in 7.7263 ms
+2026-09-10 15:05:55.495 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 164.1225 ms
+2026-09-10 15:05:55.530 +02:00 [INF] HTTP GET /api/users responded 200 in 27.9999 ms
+2026-09-10 15:05:59.271 +02:00 [INF] HTTP OPTIONS /api/settings/deduction-types responded 204 in 7.0942 ms
+2026-09-10 15:05:59.325 +02:00 [INF] HTTP GET /api/settings/deduction-types responded 200 in 48.2489 ms
+2026-09-10 15:05:59.436 +02:00 [INF] HTTP GET /api/employees responded 200 in 172.2181 ms
+2026-09-10 15:06:07.627 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 6.1565 ms
+2026-09-10 15:06:07.646 +02:00 [INF] HTTP GET /api/employees responded 200 in 9.9809 ms
+2026-09-10 15:06:07.791 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 169.3800 ms
+2026-09-10 15:06:07.873 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 75.6523 ms
+2026-09-10 15:06:07.946 +02:00 [INF] HTTP OPTIONS /api/settings/earning-types responded 204 in 324.1021 ms
+2026-09-10 15:06:07.991 +02:00 [INF] HTTP GET /api/settings/earning-types responded 200 in 40.0802 ms
+2026-09-10 15:06:13.743 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 3.9126 ms
+2026-09-10 15:06:13.756 +02:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[@companyId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "d"."Id", "d"."CompanyId", "d"."Name", "d"."IsSystemDepartment", "d"."IsDefault"
+FROM "Departments" AS "d"
+WHERE "d"."CompanyId" = @companyId AND NOT ("d"."IsDeleted")
+ORDER BY "d"."IsSystemDepartment" DESC, "d"."Name"
+2026-09-10 15:06:13.763 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-09-10 15:06:13.781 +02:00 [ERR] Unhandled exception: SQLite Error 1: 'no such column: d.IsDefault'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Payroll.Application.Employees.GetDepartmentsHandler.Handle(GetDepartmentsQuery request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Employees\DepartmentOperations.cs:line 19
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.DepartmentsController.GetAll(Guid companyId, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\DepartmentsController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Payroll.Api.Middleware.CompanyStatusMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\CompanyStatusMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 15:06:13.803 +02:00 [ERR] HTTP GET /api/departments responded 500 in 51.8501 ms
+2026-09-10 15:06:14.666 +02:00 [INF] HTTP OPTIONS /api/settings/leave-types responded 204 in 5.7140 ms
+2026-09-10 15:06:14.716 +02:00 [INF] HTTP GET /api/settings/leave-types responded 200 in 43.9088 ms
+2026-09-10 15:07:06.014 +02:00 [INF] HTTP OPTIONS /api/settings/leave-types responded 204 in 7.1566 ms
+2026-09-10 15:07:06.135 +02:00 [INF] HTTP POST /api/settings/leave-types responded 200 in 71.5815 ms
+2026-09-10 15:07:06.143 +02:00 [INF] HTTP OPTIONS /api/settings/leave-types responded 204 in 3.4418 ms
+2026-09-10 15:07:06.153 +02:00 [INF] HTTP GET /api/settings/leave-types responded 200 in 7.4142 ms
+2026-09-10 15:07:08.135 +02:00 [INF] HTTP POST /api/settings/leave-types responded 200 in 11.7116 ms
+2026-09-10 15:07:08.144 +02:00 [INF] HTTP GET /api/settings/leave-types responded 200 in 5.5303 ms
+2026-09-10 15:07:10.493 +02:00 [INF] HTTP POST /api/settings/leave-types responded 200 in 26.3729 ms
+2026-09-10 15:07:10.502 +02:00 [INF] HTTP GET /api/settings/leave-types responded 200 in 4.3772 ms
+2026-09-10 15:08:18.590 +02:00 [INF] HTTP OPTIONS /api/tax/year responded 204 in 4.6880 ms
+2026-09-10 15:08:18.626 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-10 15:08:18.753 +02:00 [INF] HTTP GET /api/tax/year responded 200 in 158.1641 ms
+2026-09-10 15:08:20.613 +02:00 [INF] HTTP OPTIONS /api/support/tickets responded 204 in 3.7806 ms
+2026-09-10 15:08:20.682 +02:00 [INF] HTTP GET /api/support/tickets responded 200 in 63.3171 ms
+2026-09-10 15:08:33.858 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 5.9194 ms
+2026-09-10 15:08:33.864 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 5.2406 ms
+2026-09-10 15:08:33.879 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 13.5679 ms
+2026-09-10 15:08:34.025 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 163.7396 ms
+2026-09-10 15:08:34.032 +02:00 [INF] HTTP GET /api/subscription responded 200 in 4.7025 ms
+2026-09-10 15:08:34.038 +02:00 [INF] HTTP GET /api/users responded 200 in 166.0842 ms
+2026-09-10 15:08:34.180 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 321.3873 ms
+2026-09-10 15:08:34.184 +02:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[@companyId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "d"."Id", "d"."CompanyId", "d"."Name", "d"."IsSystemDepartment", "d"."IsDefault"
+FROM "Departments" AS "d"
+WHERE "d"."CompanyId" = @companyId AND NOT ("d"."IsDeleted")
+ORDER BY "d"."IsSystemDepartment" DESC, "d"."Name"
+2026-09-10 15:08:34.186 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-09-10 15:08:34.191 +02:00 [ERR] Unhandled exception: SQLite Error 1: 'no such column: d.IsDefault'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Payroll.Application.Employees.GetDepartmentsHandler.Handle(GetDepartmentsQuery request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Employees\DepartmentOperations.cs:line 19
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.DepartmentsController.GetAll(Guid companyId, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\DepartmentsController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Payroll.Api.Middleware.CompanyStatusMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\CompanyStatusMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 15:08:34.197 +02:00 [ERR] HTTP GET /api/departments responded 500 in 14.7473 ms
+2026-09-10 15:08:34.338 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 480.1948 ms
+2026-09-10 15:08:34.347 +02:00 [INF] HTTP GET /api/employees responded 200 in 5.2967 ms
+2026-09-10 15:08:38.551 +02:00 [INF] HTTP OPTIONS /api/support/tickets responded 204 in 3.5680 ms
+2026-09-10 15:08:38.563 +02:00 [INF] HTTP GET /api/support/tickets responded 200 in 6.9513 ms
+2026-09-10 15:09:11.472 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 6.1526 ms
+2026-09-10 15:09:11.482 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 7.0227 ms
+2026-09-10 15:09:11.904 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 6.0088 ms
+2026-09-10 15:09:11.916 +02:00 [INF] HTTP GET /api/subscription responded 200 in 6.7838 ms
+2026-09-10 15:09:12.065 +02:00 [INF] HTTP OPTIONS /api/subscription/plans responded 204 in 166.1658 ms
+2026-09-10 15:09:12.074 +02:00 [INF] HTTP GET /api/subscription/plans responded 200 in 4.5540 ms
+2026-09-10 15:09:30.876 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 4.6081 ms
+2026-09-10 15:09:30.882 +02:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[@companyId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "d"."Id", "d"."CompanyId", "d"."Name", "d"."IsSystemDepartment", "d"."IsDefault"
+FROM "Departments" AS "d"
+WHERE "d"."CompanyId" = @companyId AND NOT ("d"."IsDeleted")
+ORDER BY "d"."IsSystemDepartment" DESC, "d"."Name"
+2026-09-10 15:09:30.884 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-09-10 15:09:30.891 +02:00 [ERR] Unhandled exception: SQLite Error 1: 'no such column: d.IsDefault'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Payroll.Application.Employees.GetDepartmentsHandler.Handle(GetDepartmentsQuery request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Employees\DepartmentOperations.cs:line 19
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.DepartmentsController.GetAll(Guid companyId, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\DepartmentsController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Payroll.Api.Middleware.CompanyStatusMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\CompanyStatusMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 15:09:30.902 +02:00 [ERR] HTTP GET /api/departments responded 500 in 21.8133 ms
+2026-09-10 15:09:31.216 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 5.5291 ms
+2026-09-10 15:09:31.226 +02:00 [INF] HTTP GET /api/employees responded 200 in 6.0501 ms
+2026-09-10 15:09:31.370 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 158.5109 ms
+2026-09-10 15:09:31.382 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 7.7475 ms
+2026-09-10 15:09:31.524 +02:00 [INF] HTTP OPTIONS /api/settings/earning-types responded 204 in 312.5502 ms
+2026-09-10 15:09:31.533 +02:00 [INF] HTTP GET /api/settings/earning-types responded 200 in 5.5170 ms
+2026-09-10 15:10:02.818 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 3.9621 ms
+2026-09-10 15:10:02.828 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 6.0353 ms
+2026-09-10 15:10:03.600 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 4.5845 ms
+2026-09-10 15:10:03.657 +02:00 [INF] HTTP GET /api/leave responded 200 in 53.6180 ms
+2026-09-10 15:13:28.816 +02:00 [INF] Server desktop-3ro9ejj:14624:cfe30bd9 caught stopping signal...
+2026-09-10 15:13:28.824 +02:00 [INF] Server desktop-3ro9ejj:14624:cfe30bd9 All dispatchers stopped
+2026-09-10 15:13:28.831 +02:00 [INF] Server desktop-3ro9ejj:14624:cfe30bd9 successfully reported itself as stopped in 1,7175 ms
+2026-09-10 15:13:28.833 +02:00 [INF] Server desktop-3ro9ejj:14624:cfe30bd9 has been stopped in total 12,9751 ms
+2026-09-10 15:19:18.502 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 15:19:19.449 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 15:19:19.494 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 15:19:19.539 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-10 15:19:19.540 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-10 15:19:19.550 +02:00 [INF] Server desktop-3ro9ejj:36564:8dec4b3c successfully announced in 0,9602 ms
+2026-09-10 15:19:19.552 +02:00 [INF] Server desktop-3ro9ejj:36564:8dec4b3c is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-10 15:19:19.558 +02:00 [INF] Server desktop-3ro9ejj:36564:8dec4b3c all the dispatchers started
+2026-09-10 15:19:25.612 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-09-10 15:19:25.874 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 267.9955 ms
+2026-09-10 15:19:26.033 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-09-10 15:19:26.565 +02:00 [ERR] Could not persist audit log for /api/auth/login
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 47
+2026-09-10 15:19:26.587 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 702.7274 ms
+2026-09-10 15:19:26.629 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 13.0809 ms
+2026-09-10 15:19:26.643 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 7.6509 ms
+2026-09-10 15:19:26.647 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 24.3372 ms
+2026-09-10 15:19:26.652 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 4.9705 ms
+2026-09-10 15:19:26.657 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 4.8533 ms
+2026-09-10 15:19:26.665 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 9.4714 ms
+2026-09-10 15:19:26.679 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 56.6694 ms
+2026-09-10 15:19:26.761 +02:00 [INF] HTTP GET /api/employees responded 200 in 92.0537 ms
+2026-09-10 15:19:26.816 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 195.0538 ms
+2026-09-10 15:19:26.829 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 206.6619 ms
+2026-09-10 15:19:26.843 +02:00 [INF] HTTP GET /api/employees responded 200 in 10.2910 ms
+2026-09-10 15:19:26.861 +02:00 [ERR] Failed executing DbCommand (2ms) [Parameters=[@companyId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "d"."Id", "d"."CompanyId", "d"."Name", "d"."IsSystemDepartment", "d"."IsDefault"
+FROM "Departments" AS "d"
+WHERE "d"."CompanyId" = @companyId AND NOT ("d"."IsDeleted")
+ORDER BY "d"."IsSystemDepartment" DESC, "d"."Name"
+2026-09-10 15:19:26.872 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-09-10 15:19:26.880 +02:00 [INF] HTTP GET /api/subscription responded 200 in 33.5639 ms
+2026-09-10 15:19:26.886 +02:00 [ERR] Unhandled exception: SQLite Error 1: 'no such column: d.IsDefault'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Payroll.Application.Employees.GetDepartmentsHandler.Handle(GetDepartmentsQuery request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Employees\DepartmentOperations.cs:line 19
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.DepartmentsController.GetAll(Guid companyId, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\DepartmentsController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Payroll.Api.Middleware.CompanyStatusMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\CompanyStatusMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 15:19:26.902 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 241.6226 ms
+2026-09-10 15:19:26.909 +02:00 [ERR] HTTP GET /api/departments responded 500 in 88.0634 ms
+2026-09-10 15:19:26.915 +02:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[@companyId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "d"."Id", "d"."CompanyId", "d"."Name", "d"."IsSystemDepartment", "d"."IsDefault"
+FROM "Departments" AS "d"
+WHERE "d"."CompanyId" = @companyId AND NOT ("d"."IsDeleted")
+ORDER BY "d"."IsSystemDepartment" DESC, "d"."Name"
+2026-09-10 15:19:26.918 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-09-10 15:19:26.927 +02:00 [ERR] Unhandled exception: SQLite Error 1: 'no such column: d.IsDefault'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Payroll.Application.Employees.GetDepartmentsHandler.Handle(GetDepartmentsQuery request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Employees\DepartmentOperations.cs:line 19
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.DepartmentsController.GetAll(Guid companyId, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\DepartmentsController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Payroll.Api.Middleware.CompanyStatusMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\CompanyStatusMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 15:19:26.941 +02:00 [ERR] HTTP GET /api/departments responded 500 in 31.5072 ms
+2026-09-10 15:19:26.986 +02:00 [INF] HTTP GET /api/users responded 200 in 45.2124 ms
+2026-09-10 15:19:26.995 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 371.0327 ms
+2026-09-10 15:19:27.013 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 13.1649 ms
+2026-09-10 15:19:27.046 +02:00 [INF] HTTP GET /api/subscription responded 200 in 362.8418 ms
+2026-09-10 15:19:27.143 +02:00 [INF] HTTP GET /api/users responded 200 in 376.1794 ms
+2026-09-10 15:19:28.603 +02:00 [INF] HTTP OPTIONS /api/subscription/plans responded 204 in 5.9103 ms
+2026-09-10 15:19:28.609 +02:00 [INF] HTTP GET /api/subscription responded 200 in 11.6748 ms
+2026-09-10 15:19:28.625 +02:00 [INF] HTTP GET /api/subscription/plans responded 200 in 16.9394 ms
+2026-09-10 15:19:40.896 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 5.8678 ms
+2026-09-10 15:19:40.905 +02:00 [INF] HTTP GET /api/subscription responded 200 in 6.0367 ms
+2026-09-10 15:19:41.059 +02:00 [INF] HTTP OPTIONS /api/subscription/plans responded 204 in 167.6465 ms
+2026-09-10 15:19:41.068 +02:00 [INF] HTTP GET /api/subscription/plans responded 200 in 5.9127 ms
+2026-09-10 15:19:44.195 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 6.7163 ms
+2026-09-10 15:19:44.235 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 36.6664 ms
+2026-09-10 15:19:45.521 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 4.7643 ms
+2026-09-10 15:19:45.568 +02:00 [INF] HTTP GET /api/leave responded 200 in 43.2862 ms
+2026-09-10 15:19:46.930 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 5.2850 ms
+2026-09-10 15:19:46.960 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 24.5572 ms
+2026-09-10 15:19:48.813 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 7.7902 ms
+2026-09-10 15:19:48.826 +02:00 [INF] HTTP GET /api/employees responded 200 in 8.8324 ms
+2026-09-10 15:19:52.407 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 7.2702 ms
+2026-09-10 15:19:52.420 +02:00 [INF] HTTP GET /api/leave responded 200 in 8.6546 ms
+2026-09-10 15:19:53.440 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 8.0462 ms
+2026-09-10 15:19:53.452 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 5.7290 ms
+2026-09-10 15:19:54.286 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 5.2063 ms
+2026-09-10 15:19:54.301 +02:00 [INF] HTTP GET /api/employees responded 200 in 6.7720 ms
+2026-09-10 15:20:00.119 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 7.4509 ms
+2026-09-10 15:20:00.132 +02:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[@companyId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "d"."Id", "d"."CompanyId", "d"."Name", "d"."IsSystemDepartment", "d"."IsDefault"
+FROM "Departments" AS "d"
+WHERE "d"."CompanyId" = @companyId AND NOT ("d"."IsDeleted")
+ORDER BY "d"."IsSystemDepartment" DESC, "d"."Name"
+2026-09-10 15:20:00.141 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-09-10 15:20:00.151 +02:00 [ERR] Unhandled exception: SQLite Error 1: 'no such column: d.IsDefault'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Payroll.Application.Employees.GetDepartmentsHandler.Handle(GetDepartmentsQuery request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Employees\DepartmentOperations.cs:line 19
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.DepartmentsController.GetAll(Guid companyId, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\DepartmentsController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Payroll.Api.Middleware.CompanyStatusMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\CompanyStatusMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 15:20:00.163 +02:00 [ERR] HTTP GET /api/departments responded 500 in 36.1420 ms
+2026-09-10 15:20:05.320 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 4.4139 ms
+2026-09-10 15:20:05.327 +02:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[@companyId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "d"."Id", "d"."CompanyId", "d"."Name", "d"."IsSystemDepartment", "d"."IsDefault"
+FROM "Departments" AS "d"
+WHERE "d"."CompanyId" = @companyId AND NOT ("d"."IsDeleted")
+ORDER BY "d"."IsSystemDepartment" DESC, "d"."Name"
+2026-09-10 15:20:05.333 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-09-10 15:20:05.342 +02:00 [ERR] Unhandled exception: SQLite Error 1: 'no such column: d.IsDefault'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Payroll.Application.Employees.GetDepartmentsHandler.Handle(GetDepartmentsQuery request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Employees\DepartmentOperations.cs:line 19
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.DepartmentsController.GetAll(Guid companyId, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\DepartmentsController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Payroll.Api.Middleware.CompanyStatusMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\CompanyStatusMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 15:20:05.356 +02:00 [ERR] HTTP GET /api/departments responded 500 in 31.4999 ms
+2026-09-10 15:20:10.024 +02:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[@companyId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "d"."Id", "d"."CompanyId", "d"."Name", "d"."IsSystemDepartment", "d"."IsDefault"
+FROM "Departments" AS "d"
+WHERE "d"."CompanyId" = @companyId AND NOT ("d"."IsDeleted")
+ORDER BY "d"."IsSystemDepartment" DESC, "d"."Name"
+2026-09-10 15:20:10.030 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-09-10 15:20:10.046 +02:00 [ERR] Unhandled exception: SQLite Error 1: 'no such column: d.IsDefault'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Payroll.Application.Employees.GetDepartmentsHandler.Handle(GetDepartmentsQuery request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Employees\DepartmentOperations.cs:line 19
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.DepartmentsController.GetAll(Guid companyId, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\DepartmentsController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Payroll.Api.Middleware.CompanyStatusMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\CompanyStatusMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 15:20:10.057 +02:00 [ERR] HTTP GET /api/departments responded 500 in 36.3835 ms
+2026-09-10 15:20:14.714 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 7.5844 ms
+2026-09-10 15:20:14.728 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 8.5861 ms
+2026-09-10 15:20:15.537 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 7.8128 ms
+2026-09-10 15:20:15.552 +02:00 [INF] HTTP GET /api/leave responded 200 in 10.0477 ms
+2026-09-10 15:20:49.759 +02:00 [INF] HTTP OPTIONS /api/auth/register-company responded 204 in 6.2673 ms
+2026-09-10 15:20:49.875 +02:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime), @p10='?', @p11='?' (Size = 7)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Departments" ("Id", "CompanyId", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "IsDefault", "IsDeleted", "IsSystemDepartment", "ModifiedAt", "ModifiedBy", "Name")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2026-09-10 15:20:49.878 +02:00 [ERR] An exception occurred in the database while saving changes for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table Departments has no column named IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table Departments has no column named IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-09-10 15:20:49.883 +02:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime), @p10='?', @p11='?' (Size = 7)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Departments" ("Id", "CompanyId", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "IsDefault", "IsDeleted", "IsSystemDepartment", "ModifiedAt", "ModifiedBy", "Name")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2026-09-10 15:20:49.886 +02:00 [ERR] An exception occurred in the database while saving changes for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table Departments has no column named IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table Departments has no column named IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-09-10 15:20:49.890 +02:00 [ERR] Could not persist audit log for /api/auth/register-company
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table Departments has no column named IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 47
+2026-09-10 15:20:49.895 +02:00 [ERR] Unhandled exception: An error occurred while saving the entity changes. See the inner exception for details.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table Departments has no column named IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Application.Auth.Commands.RegisterCompanyHandler.Handle(RegisterCompanyCommand request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Auth\Commands\RegisterCompanyCommand.cs:line 58
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.AuthController.RegisterCompany(RegisterCompanyDto dto, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\AuthController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Payroll.Api.Middleware.CompanyStatusMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\CompanyStatusMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 15:20:49.900 +02:00 [ERR] HTTP POST /api/auth/register-company responded 500 in 138.9277 ms
+2026-09-10 15:20:56.716 +02:00 [INF] HTTP OPTIONS /api/auth/register-company responded 204 in 4.2404 ms
+2026-09-10 15:20:56.733 +02:00 [INF] HTTP POST /api/auth/register-company responded 400 in 10.9053 ms
+2026-09-10 15:21:12.079 +02:00 [INF] HTTP OPTIONS /api/auth/register-company responded 204 in 15.9643 ms
+2026-09-10 15:21:12.108 +02:00 [INF] HTTP POST /api/auth/register-company responded 400 in 22.7846 ms
+2026-09-10 15:21:32.715 +02:00 [INF] HTTP OPTIONS /api/auth/register-company responded 204 in 6.8831 ms
+2026-09-10 15:21:32.730 +02:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime), @p10='?', @p11='?' (Size = 7)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Departments" ("Id", "CompanyId", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "IsDefault", "IsDeleted", "IsSystemDepartment", "ModifiedAt", "ModifiedBy", "Name")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2026-09-10 15:21:32.735 +02:00 [ERR] An exception occurred in the database while saving changes for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table Departments has no column named IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table Departments has no column named IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-09-10 15:21:32.749 +02:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime), @p10='?', @p11='?' (Size = 7)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Departments" ("Id", "CompanyId", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "IsDefault", "IsDeleted", "IsSystemDepartment", "ModifiedAt", "ModifiedBy", "Name")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2026-09-10 15:21:32.755 +02:00 [ERR] An exception occurred in the database while saving changes for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table Departments has no column named IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table Departments has no column named IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-09-10 15:21:32.770 +02:00 [ERR] Could not persist audit log for /api/auth/register-company
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table Departments has no column named IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 47
+2026-09-10 15:21:32.783 +02:00 [ERR] Unhandled exception: An error occurred while saving the entity changes. See the inner exception for details.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table Departments has no column named IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Application.Auth.Commands.RegisterCompanyHandler.Handle(RegisterCompanyCommand request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Auth\Commands\RegisterCompanyCommand.cs:line 58
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.AuthController.RegisterCompany(RegisterCompanyDto dto, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\AuthController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Payroll.Api.Middleware.CompanyStatusMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\CompanyStatusMiddleware.cs:line 41
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 15:21:32.803 +02:00 [ERR] HTTP POST /api/auth/register-company responded 500 in 80.6629 ms
+2026-09-10 15:22:17.240 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 3.7529 ms
+2026-09-10 15:22:17.250 +02:00 [INF] HTTP POST /api/auth/login responded 400 in 6.2496 ms
+2026-09-10 15:24:46.128 +02:00 [INF] Server desktop-3ro9ejj:36564:8dec4b3c caught stopping signal...
+2026-09-10 15:24:46.155 +02:00 [INF] Server desktop-3ro9ejj:36564:8dec4b3c All dispatchers stopped
+2026-09-10 15:24:46.157 +02:00 [INF] Server desktop-3ro9ejj:36564:8dec4b3c successfully reported itself as stopped in 0,5465 ms
+2026-09-10 15:24:46.157 +02:00 [INF] Server desktop-3ro9ejj:36564:8dec4b3c has been stopped in total 6,5306 ms
+2026-09-10 15:24:50.511 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 15:24:51.075 +02:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@companyId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "d"."Id", "d"."CompanyId", "d"."CreatedAt", "d"."CreatedBy", "d"."DeletedAt", "d"."DeletedBy", "d"."IsDefault", "d"."IsDeleted", "d"."IsSystemDepartment", "d"."ModifiedAt", "d"."ModifiedBy", "d"."Name"
+FROM "Departments" AS "d"
+WHERE "d"."CompanyId" = @companyId AND NOT ("d"."IsDeleted") AND lower("d"."Name") = 'general'
+LIMIT 1
+2026-09-10 15:24:51.085 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-09-10 15:24:51.089 +02:00 [FTL] Application startup failed.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Program.<<Main>$>g__EnsureDefaultDepartmentsAsync|0_8(AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Program.cs:line 325
+   at Program.<Main>$(String[] args) in D:\repos\payrollsa\Backend\src\Payroll.Api\Program.cs:line 71
+2026-09-10 15:26:16.988 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 15:26:18.210 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 15:26:18.269 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 15:26:18.309 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-10 15:26:18.312 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-10 15:26:18.324 +02:00 [INF] Server desktop-3ro9ejj:17424:dff3aa94 successfully announced in 1,0175 ms
+2026-09-10 15:26:18.328 +02:00 [INF] Server desktop-3ro9ejj:17424:dff3aa94 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-10 15:26:18.337 +02:00 [INF] Server desktop-3ro9ejj:17424:dff3aa94 all the dispatchers started
+2026-09-10 15:26:18.914 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-09-10 15:26:19.176 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 270.7482 ms
+2026-09-10 15:26:19.326 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-09-10 15:26:19.575 +02:00 [INF] HTTP POST /api/auth/login responded 400 in 378.0959 ms
+2026-09-10 15:26:20.420 +02:00 [INF] HTTP POST /api/auth/login responded 400 in 21.1322 ms
+2026-09-10 15:26:21.078 +02:00 [INF] HTTP POST /api/auth/login responded 400 in 30.3893 ms

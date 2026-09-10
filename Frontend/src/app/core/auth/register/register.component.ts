@@ -21,7 +21,6 @@ export class RegisterComponent {
     this.form = this.fb.group({
       companyName: ['', [Validators.required, Validators.maxLength(200)]],
       registrationNumber: ['', [Validators.required, Validators.maxLength(100)]],
-      companyEmail: ['', [Validators.email]],
       phone: [''],
       taxNumber: [''],
       adminFirstName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -40,7 +39,6 @@ export class RegisterComponent {
     const payload = {
       companyName: this.form.value.companyName!.trim(),
       registrationNumber: this.form.value.registrationNumber!.trim(),
-      companyEmail: this.cleanOptional(this.form.value.companyEmail),
       phone: this.cleanOptional(this.form.value.phone),
       taxNumber: this.cleanOptional(this.form.value.taxNumber),
       adminFirstName: this.form.value.adminFirstName!.trim(),

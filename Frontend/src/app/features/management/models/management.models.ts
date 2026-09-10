@@ -32,3 +32,18 @@ export interface ManagementAuditPage {
   pageSize: number;
   totalPages: number;
 }
+
+export interface AdminCompanyDto {
+  id: string;
+  name: string;
+  isActive: boolean;
+  subscriptionStatus: string;
+  planCode: string;
+  planName: string;
+  employeeCount: number;
+  maxEmployees?: number | null;
+  trialEndDate?: string | null;
+  currentPeriodEnd?: string | null;
+  createdAt: string;
+}
+

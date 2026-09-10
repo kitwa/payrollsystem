@@ -74,6 +74,8 @@ public static class DependencyInjection
         services.AddScoped<IPdfService, PdfService>();
         services.AddScoped<IEmailService, EmailService>();
         services.AddSingleton<ISupportNotificationSettings, SupportNotificationSettings>();
+        services.AddScoped<ISubscriptionService, Payroll.Application.Billing.SubscriptionService>();
+        services.AddScoped<IPaymentGateway, MockPaymentGateway>();
 
         // Payroll calculators — registered in execution order
         services.AddScoped<IPayrollCalculator, BasicSalaryCalculator>();

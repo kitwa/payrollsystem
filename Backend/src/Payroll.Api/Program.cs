@@ -65,8 +65,21 @@ try
         await EnsureEmployeeBonusesTableAsync(db);
         await EnsureSupportTicketsTableAsync(db);
         await EnsurePayrollLineTaxableIncomeColumnAsync(db);
+        await EnsureCompanySubscriptionsTableAsync(db);
+        await EnsureCompanyPaymentProfilesTableAsync(db);
+        await EnsurePaymentWebhookEventsTableAsync(db);
         await EnsureDefaultDepartmentsAsync(db);
+        await EnsureDefaultSubscriptionsAsync(db);
         await Seed.SeedAsync(db, userManager, roleManager);
+    }
+
+    // First month free, all features included, capped at 5 employees — swept daily so the free
+    // trial expires even if nobody makes a request that day.
+    using (var scope = app.Services.CreateScope())
+    {
+        var recurringJobs = scope.ServiceProvider.GetRequiredService<IRecurringJobManager>();
+        recurringJobs.AddOrUpdate<Payroll.Application.Common.Interfaces.ISubscriptionService>(
+            "expire-overdue-trials", svc => svc.ExpireOverdueTrialsAsync(CancellationToken.None), Cron.Daily);
     }
 
     app.UseSerilogRequestLogging();
@@ -77,6 +90,7 @@ try
     app.UseCors("CorsPolicy");
     app.UseAuthentication();
     app.UseAuthorization();
+    app.UseMiddleware<Payroll.Api.Middleware.CompanyStatusMiddleware>();
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Payroll SA v1"));
     app.UseDefaultFiles();
@@ -323,6 +337,127 @@ static async Task EnsureDefaultDepartmentsAsync(AppDbContext db)
                 IsSystemDepartment = true
             });
         }
+    }
+
+    await db.SaveChangesAsync();
+}
+
+static async Task EnsureCompanySubscriptionsTableAsync(AppDbContext db)
+{
+    if (db.Database.ProviderName?.Contains("Sqlite", StringComparison.OrdinalIgnoreCase) != true)
+        return;
+
+    await db.Database.ExecuteSqlRawAsync("""
+        CREATE TABLE IF NOT EXISTS "CompanySubscriptions" (
+            "Id" TEXT NOT NULL CONSTRAINT "PK_CompanySubscriptions" PRIMARY KEY,
+            "CreatedAt" TEXT NOT NULL,
+            "CreatedBy" TEXT NOT NULL,
+            "ModifiedAt" TEXT NULL,
+            "ModifiedBy" TEXT NULL,
+            "IsDeleted" INTEGER NOT NULL,
+            "DeletedBy" TEXT NULL,
+            "DeletedAt" TEXT NULL,
+            "CompanyId" TEXT NOT NULL,
+            "PlanCode" TEXT NOT NULL,
+            "Status" INTEGER NOT NULL,
+            "TrialStartDate" TEXT NULL,
+            "TrialEndDate" TEXT NULL,
+            "CurrentPeriodStart" TEXT NULL,
+            "CurrentPeriodEnd" TEXT NULL,
+            "Price" TEXT NOT NULL,
+            "Currency" TEXT NOT NULL,
+            "PaymentProvider" TEXT NULL,
+            "PaymentCustomerReference" TEXT NULL,
+            "PaymentSubscriptionReference" TEXT NULL,
+            "PaymentMethodReference" TEXT NULL,
+            "CancelledAt" TEXT NULL,
+            CONSTRAINT "FK_CompanySubscriptions_Companies_CompanyId"
+                FOREIGN KEY ("CompanyId") REFERENCES "Companies" ("Id") ON DELETE CASCADE
+        );
+        CREATE UNIQUE INDEX IF NOT EXISTS "IX_CompanySubscriptions_CompanyId"
+            ON "CompanySubscriptions" ("CompanyId");
+        """);
+}
+
+static async Task EnsureCompanyPaymentProfilesTableAsync(AppDbContext db)
+{
+    if (db.Database.ProviderName?.Contains("Sqlite", StringComparison.OrdinalIgnoreCase) != true)
+        return;
+
+    await db.Database.ExecuteSqlRawAsync("""
+        CREATE TABLE IF NOT EXISTS "CompanyPaymentProfiles" (
+            "Id" TEXT NOT NULL CONSTRAINT "PK_CompanyPaymentProfiles" PRIMARY KEY,
+            "CreatedAt" TEXT NOT NULL,
+            "CreatedBy" TEXT NOT NULL,
+            "ModifiedAt" TEXT NULL,
+            "ModifiedBy" TEXT NULL,
+            "IsDeleted" INTEGER NOT NULL,
+            "DeletedBy" TEXT NULL,
+            "DeletedAt" TEXT NULL,
+            "CompanyId" TEXT NOT NULL,
+            "AccountHolderName" TEXT NULL,
+            "BankName" TEXT NULL,
+            "AccountType" TEXT NULL,
+            "AccountLast4" TEXT NULL,
+            "PaymentProvider" TEXT NULL,
+            "PaymentCustomerReference" TEXT NULL,
+            "PaymentMethodReference" TEXT NULL,
+            "MandateReference" TEXT NULL,
+            "CardBrand" TEXT NULL,
+            CONSTRAINT "FK_CompanyPaymentProfiles_Companies_CompanyId"
+                FOREIGN KEY ("CompanyId") REFERENCES "Companies" ("Id") ON DELETE CASCADE
+        );
+        CREATE UNIQUE INDEX IF NOT EXISTS "IX_CompanyPaymentProfiles_CompanyId"
+            ON "CompanyPaymentProfiles" ("CompanyId");
+        """);
+}
+
+static async Task EnsurePaymentWebhookEventsTableAsync(AppDbContext db)
+{
+    if (db.Database.ProviderName?.Contains("Sqlite", StringComparison.OrdinalIgnoreCase) != true)
+        return;
+
+    await db.Database.ExecuteSqlRawAsync("""
+        CREATE TABLE IF NOT EXISTS "PaymentWebhookEvents" (
+            "Id" TEXT NOT NULL CONSTRAINT "PK_PaymentWebhookEvents" PRIMARY KEY,
+            "CreatedAt" TEXT NOT NULL,
+            "CreatedBy" TEXT NOT NULL,
+            "ModifiedAt" TEXT NULL,
+            "ModifiedBy" TEXT NULL,
+            "IsDeleted" INTEGER NOT NULL,
+            "DeletedBy" TEXT NULL,
+            "DeletedAt" TEXT NULL,
+            "EventId" TEXT NOT NULL,
+            "EventType" TEXT NOT NULL,
+            "CompanyId" TEXT NULL,
+            "ProcessedAt" TEXT NOT NULL
+        );
+        CREATE UNIQUE INDEX IF NOT EXISTS "IX_PaymentWebhookEvents_EventId"
+            ON "PaymentWebhookEvents" ("EventId");
+        """);
+}
+
+static async Task EnsureDefaultSubscriptionsAsync(AppDbContext db)
+{
+    var companyIdsWithSubscription = await db.CompanySubscriptions.Select(s => s.CompanyId).ToListAsync();
+    var companiesNeedingSubscription = await db.Companies
+        .Where(c => !c.IsDeleted && !companyIdsWithSubscription.Contains(c.Id))
+        .ToListAsync();
+
+    if (companiesNeedingSubscription.Count == 0) return;
+
+    var now = DateTime.UtcNow;
+    foreach (var company in companiesNeedingSubscription)
+    {
+        db.CompanySubscriptions.Add(new Payroll.Domain.Billing.CompanySubscription
+        {
+            CompanyId = company.Id,
+            PlanCode = Payroll.Domain.Billing.PlanCatalog.FreeTrialCode,
+            Status = Payroll.Domain.Billing.SubscriptionStatus.FreeTrial,
+            TrialStartDate = now,
+            TrialEndDate = now.AddMonths(1),
+            Price = 0
+        });
     }
 
     await db.SaveChangesAsync();

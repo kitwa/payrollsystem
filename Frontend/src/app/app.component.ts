@@ -44,6 +44,7 @@ export class AppComponent {
 
   readonly settingsNav: NavItem[] = [
     { label: 'Management', path: '/management', icon: 'bi-speedometer2', roles: ['SuperAdmin'] },
+    { label: 'Billing', path: '/billing', icon: 'bi-credit-card', roles: ['Admin', 'SuperAdmin'] },
     { label: 'General', path: '/settings', icon: 'bi-sliders', roles: ['Admin', 'SuperAdmin'] },
     { label: 'Users', path: '/settings/users', icon: 'bi-person-gear', roles: ['Admin', 'SuperAdmin'] },
     { label: 'Payroll Items', path: '/settings/payroll-items', icon: 'bi-wallet2', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },

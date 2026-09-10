@@ -8,6 +8,8 @@ import { EmployeeService, DepartmentService } from '../../employees/services/emp
 import { UserService } from '../../settings/services/user.service';
 import { EmployeeList, Department } from '../../employees/models/employee.models';
 import { ManagedUser } from '../../settings/models/user.models';
+import { BillingService } from '../../billing/services/billing.service';
+import { SubscriptionSummaryDto } from '../../billing/models/billing.models';
 
 @Component({
 	selector: 'app-dashboard',
@@ -22,6 +24,15 @@ import { ManagedUser } from '../../settings/models/user.models';
 			</div>
 			<a class="btn btn-dark" routerLink="/payroll">Run Payroll</a>
 		</section>
+
+		@if (billingBanner(); as banner) {
+			<div class="alert" [class.alert-warning]="banner.tone === 'warning'" [class.alert-danger]="banner.tone === 'danger'">
+				{{ banner.message }}
+				@if (canManageBilling()) {
+					<a routerLink="/billing" class="alert-link ms-1">Manage billing</a>
+				}
+			</div>
+		}
 
 		<section class="kpi-grid">
 			@for (card of kpis(); track card.label) {
@@ -267,7 +278,9 @@ import { ManagedUser } from '../../settings/models/user.models';
 export class DashboardComponent {
 	private readonly auth = inject(AuthService);
 	private readonly dashboardService = inject(DashboardService);
+	private readonly billingService = inject(BillingService);
 
+	readonly subscription = signal<SubscriptionSummaryDto | null>(null);
 	readonly summary = signal<DashboardSummary | null>(null);
 	readonly employees = signal<EmployeeList[]>([]);
 	readonly employeeTotal = signal(0);
@@ -284,8 +297,35 @@ export class DashboardComponent {
 			this.employeeService.getAll(companyId, 1, 100).subscribe(page => { this.employees.set(page.items); this.employeeTotal.set(page.totalCount); });
 			this.userService.getAll(companyId).subscribe(users => this.users.set(users));
 			this.departmentService.getAll(companyId).subscribe(departments => this.departments.set(departments));
+			this.billingService.getMine().subscribe(sub => this.subscription.set(sub));
 		}
 	}
+
+	canManageBilling(): boolean {
+		return this.auth.isInRole('Admin') || this.auth.isInRole('SuperAdmin');
+	}
+
+	readonly billingBanner = computed(() => {
+		const sub = this.subscription();
+		if (!sub) return null;
+
+		if (!sub.canAddEmployee) {
+			return { tone: 'danger' as const, message: `You've reached your plan's employee limit (${sub.maxEmployees}).` };
+		}
+
+		if (sub.status === 'FreeTrial' && sub.trialEndDate) {
+			const daysLeft = Math.ceil((new Date(sub.trialEndDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+			if (daysLeft <= 7) {
+				return { tone: 'warning' as const, message: daysLeft <= 0 ? 'Your free month has ended.' : `Your free month ends in ${daysLeft} day${daysLeft === 1 ? '' : 's'}.` };
+			}
+		}
+
+		if (sub.status === 'PastDue' || sub.status === 'Expired' || sub.status === 'Suspended') {
+			return { tone: 'danger' as const, message: 'Your subscription is inactive.' };
+		}
+
+		return null;
+	});
 
 	readonly kpis = computed(() => {
 		const s = this.summary();
