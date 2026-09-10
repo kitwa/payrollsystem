@@ -15,6 +15,18 @@ import { Company } from '../../../settings/models/settings.models';
 	selector: 'app-payroll-list',
 	standalone: true,
 	imports: [CommonModule, RouterLink, ConfirmDialogComponent, PaginationComponent],
+	styles: [`
+		.employee-picker-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; }
+		.employee-picker-row { position: relative; display: flex; align-items: center; gap: .65rem; min-width: 0; padding: .75rem; border: 1px solid #dbe4ee; border-radius: .65rem; background: #fff; cursor: pointer; transition: border-color .15s ease, background .15s ease; }
+		.employee-picker-row:hover, .employee-picker-row--selected { border-color: #86b7fe; background: #f1f6fc; }
+		.employee-picker-row input { position: absolute; opacity: 0; pointer-events: none; }
+		.employee-picker-check { display: grid; place-items: center; flex: 0 0 1.25rem; width: 1.25rem; height: 1.25rem; border: 2px solid #9aaabd; border-radius: .35rem; color: transparent; }
+		.employee-picker-row--selected .employee-picker-check { border-color: #0d6efd; background: #0d6efd; color: #fff; }
+		.employee-picker-name { min-width: 0; }
+		.employee-picker-name strong, .employee-picker-name small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+		.employee-picker-name small { color: #6c757d; font-size: .78rem; }
+		@media (max-width: 575.98px) { .employee-picker-grid { grid-template-columns: 1fr; } }
+	`],
 	template: `
 		<section class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
 			<div>
@@ -38,7 +50,7 @@ import { Company } from '../../../settings/models/settings.models';
 			<section class="card border-0 shadow-sm mb-3"><div class="card-body">
 				<div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3"><div><h2 class="h5 mb-1">Select Employees</h2><p class="text-muted mb-0">{{ selectedEmployeeCount() }} of {{ employees().length }} employees selected</p></div><div class="d-flex gap-2"><button class="btn btn-sm btn-outline-secondary" type="button" (click)="selectAll()">Select All</button><button class="btn btn-sm btn-outline-secondary" type="button" (click)="deselectAll()">Deselect All</button></div></div>
 				<input class="form-control mb-3" placeholder="Search employees" [value]="employeeSearch()" (input)="setEmployeeSearch($event)">
-				<div class="row g-2 mb-3">@for (employee of filteredEmployees(); track employee.id) { <div class="col-12 col-md-6"><label class="form-check border rounded p-2"><input class="form-check-input" type="checkbox" [checked]="isSelected(employee.id)" (change)="toggleEmployee(employee.id)"><span class="form-check-label ms-2">{{ employee.firstName }} {{ employee.lastName }} <small class="text-muted">· {{ employee.employeeNumber }}</small></span></label></div> } @empty { <div class="col-12 text-muted">No active employees found.</div> }</div>
+				<div class="employee-picker-grid">@for (employee of filteredEmployees(); track employee.id) { <label class="employee-picker-row" [class.employee-picker-row--selected]="isSelected(employee.id)"><input class="form-check-input" type="checkbox" [checked]="isSelected(employee.id)" (change)="toggleEmployee(employee.id)"><span class="employee-picker-check"><i class="bi bi-check"></i></span><span class="employee-picker-name"><strong>{{ employee.firstName }} {{ employee.lastName }}</strong><small>{{ employee.employeeNumber }}{{ employee.department ? ' · ' + employee.department : '' }}</small></span></label> } @empty { <div class="col-12 text-muted">No active employees found.</div> }</div>
 				<div class="d-flex justify-content-end gap-2"><button class="btn btn-outline-secondary" type="button" (click)="cancelEmployeeSelection()">Cancel</button><button class="btn btn-dark" type="button" [disabled]="selectedEmployeeCount() === 0 || generating()" (click)="generatePayroll()">{{ generating() ? 'Processing…' : 'Create Payroll' }}</button></div>
 			</div></section>
 		}

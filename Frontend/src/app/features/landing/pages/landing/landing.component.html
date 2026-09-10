@@ -24,14 +24,15 @@
             <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
             Built for South African businesses
           </p>
-          <h1 id="hero-title" class="hero-title mb-3">Payroll that keeps your team moving.</h1>
+          <h1 id="hero-title" class="hero-title mb-3">Professional payroll. Without the big price tag.</h1>
           <p class="hero-subtitle mb-4">
-            Run South African payroll with clear calculations, selected employee runs, payslips,
-            leave, earnings, deductions, and support in one focused workspace.
+            Simple payroll for South African businesses. Manage employees, payroll, PAYE, UIF,
+            SDL, payslips and more in one place.
           </p>
+          <p class="hero-offer mb-4"><strong>First month FREE — all features included.</strong><br><span>Plans from R49/month.</span></p>
           <div class="d-flex flex-column flex-sm-row gap-3 mb-4">
             <a class="btn btn-cta btn-lg" routerLink="/register">Start Free for 1 Month</a>
-            <a class="btn btn-outline-quiet btn-lg" href="#how-it-works">See how it works</a>
+            <a class="btn btn-outline-quiet btn-lg" href="#pricing">View Pricing</a>
           </div>
           <ul class="trust-line list-unstyled d-flex flex-column flex-sm-row gap-2 gap-sm-4 mb-0">
             <li><i class="bi bi-check2" aria-hidden="true"></i> No credit card required</li>
@@ -235,27 +236,30 @@
   <section id="pricing" class="pricing py-5 py-lg-6" aria-labelledby="pricing-title">
     <div class="container">
       <div class="section-head text-center mb-5">
-        <h2 id="pricing-title">Simple, transparent pricing</h2>
-        <p class="text-muted mb-0">One plan. One price. No confusing packages.</p>
+        <p class="kicker justify-content-center mb-3"><i class="bi bi-tag-fill" aria-hidden="true"></i>Simple pricing for every team size</p>
+        <h2 id="pricing-title">Why pay more for payroll?</h2>
+        <p class="pricing-lead mb-3">Professional payroll doesn't have to come with a big monthly bill.</p>
+        <div class="pricing-free-banner mx-auto"><strong>FIRST MONTH FREE</strong><span>All features included.</span><small>Experience the full Payroll SA platform free for your first month. No feature restrictions.</small></div>
+        <p class="pricing-note mb-0">Prices are per company per month, based on the number of employees.</p>
       </div>
-      <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
-          <div class="pricing-card text-center">
-            <span class="pricing-card__badge">First month free</span>
-            <div class="pricing-card__price">
-              <span class="pricing-card__amount">{{ monthlyPrice }}</span>
-              <span class="pricing-card__period">/ month after your free month</span>
-            </div>
-            <ul class="pricing-card__list list-unstyled text-start mb-4">
-              <li><i class="bi bi-check2" aria-hidden="true"></i> PAYE, UIF &amp; SDL calculations</li>
-              <li><i class="bi bi-check2" aria-hidden="true"></i> Professional payslips for every employee</li>
-              <li><i class="bi bi-check2" aria-hidden="true"></i> Employee management</li>
-              <li><i class="bi bi-check2" aria-hidden="true"></i> Payroll reports</li>
-              <li><i class="bi bi-check2" aria-hidden="true"></i> Cancel anytime</li>
-            </ul>
-            <a class="btn btn-cta btn-lg w-100" routerLink="/register">Start Free</a>
+      <div class="row g-3 g-lg-4">
+        @for (plan of pricingPlans; track plan.range) {
+          <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <article class="pricing-card h-100" [class.pricing-card--entry]="$first" [class.pricing-card--contact]="plan.contact">
+              @if (plan.highlight) { <span class="pricing-card__badge">{{ plan.highlight }}</span> }
+              <p class="pricing-card__range">{{ plan.range }}</p>
+              <div class="pricing-card__price"><span class="pricing-card__amount">{{ plan.price }}</span>@if (!plan.contact) { <span class="pricing-card__period">/ month</span> }</div>
+              <p class="pricing-card__description">{{ plan.description }}</p><p class="pricing-card__free">First month FREE</p>
+              @if (plan.contact) { <a class="btn btn-outline-quiet w-100 mt-auto" routerLink="/register">Contact us</a> } @else { <a class="btn btn-cta w-100 mt-auto" routerLink="/register">Start Free for 1 Month</a> }
+            </article>
           </div>
-        </div>
+        }
+      </div>
+      <div class="pricing-transparency row g-3 mt-4" aria-label="Pricing promises">
+        <div class="col-12 col-sm-6 col-lg-3"><div class="transparency-item"><i class="bi bi-check-circle-fill" aria-hidden="true"></i><div><strong>First month FREE</strong><span>Get full access to every available feature.</span></div></div></div>
+        <div class="col-12 col-sm-6 col-lg-3"><div class="transparency-item"><i class="bi bi-list-check" aria-hidden="true"></i><div><strong>No complicated packages</strong><span>Choose your price based on employees.</span></div></div></div>
+        <div class="col-12 col-sm-6 col-lg-3"><div class="transparency-item"><i class="bi bi-receipt" aria-hidden="true"></i><div><strong>Transparent monthly pricing</strong><span>Know exactly what you will pay each month.</span></div></div></div>
+        <div class="col-12 col-sm-6 col-lg-3"><div class="transparency-item"><i class="bi bi-geo-alt-fill" aria-hidden="true"></i><div><strong>Built for South Africa</strong><span>Payroll designed for local businesses.</span></div></div></div>
       </div>
     </div>
   </section>
@@ -264,7 +268,7 @@
   <section class="final-cta py-5 py-lg-6" aria-labelledby="final-cta-title">
     <div class="container text-center">
       <h2 id="final-cta-title" class="mb-3">Ready to make payroll simpler?</h2>
-      <p class="mb-4">Start your first month free and see how easy payroll can be.</p>
+      <p class="mb-4">Start your first month free with full access to Payroll SA.</p>
       <a class="btn btn-cta btn-lg" routerLink="/register">Start Free for 1 Month</a>
     </div>
   </section>

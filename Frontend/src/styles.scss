@@ -28,6 +28,58 @@ main {
   -webkit-overflow-scrolling: touch;
 }
 
+/* Shared controls: keep native checkbox behavior while making the visual state clear. */
+.form-check-input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: .15rem;
+  border: 2px solid #9aaabd;
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.form-check-input:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 .2rem rgba(13, 110, 253, .2);
+}
+
+.form-switch .form-check-input {
+  width: 2.75rem;
+  height: 1.5rem;
+  margin-top: 0;
+  border: 1px solid #aebed0;
+  background-color: #dfe7f0;
+  background-image: none;
+  border-radius: 2rem;
+  position: relative;
+}
+
+.form-switch .form-check-input::after {
+  content: '';
+  position: absolute;
+  top: .2rem;
+  left: .2rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+  transition: transform .18s ease;
+}
+
+.form-switch .form-check-input:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.form-switch .form-check-input:checked::after {
+  transform: translateX(1.25rem);
+}
+
 button,
 .btn,
 input,

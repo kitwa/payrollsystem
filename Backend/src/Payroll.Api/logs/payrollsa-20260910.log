@@ -2211,3 +2211,33 @@ Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operati
 2026-09-10 13:21:40.721 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 570.9276 ms
 2026-09-10 13:21:41.019 +02:00 [INF] HTTP GET /api/leave responded 401 in 398.1968 ms
 2026-09-10 13:21:41.059 +02:00 [INF] HTTP GET /api/leave responded 401 in 31.5500 ms
+2026-09-10 14:01:41.900 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 87.5468 ms
+2026-09-10 14:01:42.080 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-09-10 14:01:42.675 +02:00 [ERR] Could not persist audit log for /api/auth/login
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 47
+2026-09-10 14:01:42.718 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 792.5411 ms
+2026-09-10 14:01:42.745 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 8.3138 ms
+2026-09-10 14:01:42.758 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 17.5858 ms
+2026-09-10 14:01:42.944 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 195.5347 ms
+2026-09-10 14:01:42.954 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 14.4682 ms
+2026-09-10 14:01:53.529 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 7.6891 ms
+2026-09-10 14:01:53.546 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 11.0060 ms
+2026-09-10 14:02:36.102 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 6.0387 ms
+2026-09-10 14:02:36.168 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 61.5337 ms
+2026-09-10 14:02:37.956 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 7.8529 ms
+2026-09-10 14:02:38.000 +02:00 [INF] HTTP GET /api/employees responded 200 in 40.2728 ms
+2026-09-10 14:04:21.641 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 5.4154 ms
+2026-09-10 14:04:21.749 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 103.0161 ms

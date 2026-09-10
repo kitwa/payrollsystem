@@ -161,6 +161,17 @@ a {
   max-width: 40ch;
 }
 
+.hero-offer {
+  display: inline-block;
+  padding: .75rem 1rem;
+  border-left: 4px solid var(--blue);
+  background: var(--blue-soft);
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.hero-offer strong { color: var(--blue-dark); }
+
 .trust-line {
   font-size: 0.95rem;
   color: var(--ink-soft);
@@ -349,11 +360,23 @@ a {
 }
 
 .pricing-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
   background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 2.5rem 2rem;
+  padding: 1.5rem;
   box-shadow: 0 20px 40px -28px rgba(22, 51, 46, 0.35);
+
+  &--entry { border-color: var(--blue); box-shadow: 0 16px 32px -22px rgba(13, 110, 253, .55); }
+  &--contact { background: var(--bg-warm); }
+
+  &__range { margin: .25rem 0 .9rem; color: var(--ink); font-size: .95rem; font-weight: 700; }
+
+  &__description { min-height: 3.2rem; margin-bottom: 1rem; font-size: .9rem; }
+
+  &__free { margin: 0 0 1rem; color: var(--blue-dark); font-size: .82rem; font-weight: 800; }
 
   &__badge {
     display: inline-block;
@@ -395,6 +418,31 @@ a {
     }
   }
 }
+
+.pricing-lead { font-size: 1.1rem; color: var(--ink-soft); }
+.pricing-note { color: var(--ink-soft); font-size: .9rem; }
+
+.pricing-free-banner {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 32rem);
+  padding: 1rem 1.25rem;
+  border: 1px solid #9ec5fe;
+  border-radius: var(--radius);
+  background: var(--blue-soft);
+  color: var(--ink);
+}
+
+.pricing-free-banner strong { color: var(--blue-dark); font-size: 1.35rem; letter-spacing: .04em; }
+.pricing-free-banner span { font-weight: 700; }
+.pricing-free-banner small { margin-top: .25rem; color: var(--ink-soft); }
+
+.pricing-transparency { border-top: 1px solid var(--border); padding-top: 1.5rem; }
+.transparency-item { display: flex; gap: .7rem; height: 100%; padding: .85rem; border: 1px solid var(--border); border-radius: .75rem; background: #fff; }
+.transparency-item i { color: var(--blue); font-size: 1.15rem; }
+.transparency-item strong, .transparency-item span { display: block; }
+.transparency-item strong { color: var(--ink); font-size: .9rem; }
+.transparency-item span { margin-top: .25rem; color: var(--ink-soft); font-size: .8rem; line-height: 1.4; }
 
 /* ---------- Final CTA ---------- */
 .final-cta {
