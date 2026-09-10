@@ -8,33 +8,8 @@ import { AuthService } from '../auth.service';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
-  template: `
-    <div class="min-vh-100 d-flex align-items-center justify-content-center bg-light">
-      <div class="card shadow-sm" style="width: 400px">
-        <div class="card-body p-4">
-          <h4 class="card-title text-center mb-4 fw-bold text-primary">Payroll SA</h4>
-          <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="mb-3">
-              <label class="form-label">Email</label>
-              <input formControlName="email" type="email" class="form-control" placeholder="admin@payrollsa.co.za">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Password</label>
-              <input formControlName="password" type="password" class="form-control">
-            </div>
-            @if (error()) {
-              <div class="alert alert-danger py-2">{{ error() }}</div>
-            }
-            <button type="submit" class="btn btn-primary w-100" [disabled]="loading()">
-              @if (loading()) { <span class="spinner-border spinner-border-sm me-2"></span> }
-              Sign In
-            </button>
-            <a routerLink="/register" class="btn btn-link w-100 mt-2">Register a new company</a>
-          </form>
-        </div>
-      </div>
-    </div>
-  `
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   loading = signal(false);

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -9,24 +9,13 @@ import { RouterLink } from '@angular/router';
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
 })
-export class LandingComponent implements AfterViewInit {
+export class LandingComponent {
+  /** Used in the footer copyright line. */
   currentYear = new Date().getFullYear();
 
-  @ViewChildren('reveal') revealBlocks!: QueryList<ElementRef<HTMLElement>>;
-
-  ngAfterViewInit(): void {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    this.revealBlocks.forEach(block => observer.observe(block.nativeElement));
-  }
+  /**
+   * Displayed monthly price on the pricing card, shown after the free month.
+   * TODO: replace with your actual monthly price, e.g. 'R149.00'.
+   */
+  monthlyPrice = 'RXX.XX';
 }

@@ -1,0 +1,55 @@
+<div class="auth-page auth-page--register">
+  <div class="auth-layout auth-layout--register">
+    <section class="auth-intro d-none d-lg-flex">
+      <a class="auth-brand" routerLink="/" aria-label="Payroll SA home">
+        <span class="auth-brand__mark">PS</span>
+        <span>Payroll SA</span>
+      </a>
+      <div class="auth-intro__content">
+        <p class="auth-eyebrow">A clear start for your payroll team</p>
+        <h1>Create your payroll workspace.</h1>
+        <p>Set up your company once, then manage employees, payroll runs, payslips, and support from one place.</p>
+      </div>
+      <small class="auth-intro__footer">Built for South African businesses.</small>
+    </section>
+
+    <section class="auth-panel auth-panel--register">
+      <div class="auth-panel__inner auth-panel__inner--wide">
+        <div class="d-flex justify-content-between align-items-start gap-3 mb-4">
+          <div>
+            <a class="auth-brand auth-brand--mobile d-lg-none" routerLink="/" aria-label="Payroll SA home"><span class="auth-brand__mark">PS</span><span>Payroll SA</span></a>
+            <p class="auth-eyebrow mb-2">Get started</p>
+            <h2 class="mb-1">Register your company</h2>
+            <p class="auth-muted mb-0">Create your Payroll SA workspace and admin account.</p>
+          </div>
+          <a routerLink="/login" class="btn btn-outline-secondary btn-sm flex-shrink-0">Sign In</a>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+          <h3 class="form-section-title">Company details</h3>
+          <div class="row g-3 mb-4">
+            <div class="col-12 col-md-6"><label class="form-label" for="company-name">Company Name</label><input id="company-name" formControlName="companyName" type="text" class="form-control" placeholder="Acme (Pty) Ltd"></div>
+            <div class="col-12 col-md-6"><label class="form-label" for="registration-number">Registration Number</label><input id="registration-number" formControlName="registrationNumber" type="text" class="form-control" placeholder="2024/123456/07"></div>
+            <div class="col-12 col-md-6"><label class="form-label" for="company-email">Company Email <span class="text-muted">(optional)</span></label><input id="company-email" formControlName="companyEmail" type="email" class="form-control" placeholder="payroll@acme.co.za"></div>
+            <div class="col-12 col-md-6"><label class="form-label" for="company-phone">Phone <span class="text-muted">(optional)</span></label><input id="company-phone" formControlName="phone" type="text" class="form-control" placeholder="+27 11 555 1234"></div>
+            <div class="col-12 col-md-6"><label class="form-label" for="tax-number">Tax Number <span class="text-muted">(optional)</span></label><input id="tax-number" formControlName="taxNumber" type="text" class="form-control" placeholder="9999/999/99/9"></div>
+          </div>
+
+          <h3 class="form-section-title">Admin account</h3>
+          <div class="row g-3">
+            <div class="col-12 col-md-6"><label class="form-label" for="admin-first-name">First Name</label><input id="admin-first-name" formControlName="adminFirstName" type="text" class="form-control"></div>
+            <div class="col-12 col-md-6"><label class="form-label" for="admin-last-name">Last Name</label><input id="admin-last-name" formControlName="adminLastName" type="text" class="form-control"></div>
+            <div class="col-12 col-md-6"><label class="form-label" for="admin-email">Admin Email</label><input id="admin-email" formControlName="adminEmail" type="email" class="form-control" placeholder="admin@acme.co.za"></div>
+            <div class="col-12 col-md-6"><label class="form-label" for="admin-password">Password</label><input id="admin-password" formControlName="password" type="password" class="form-control" placeholder="At least 8 chars, uppercase, number, symbol"></div>
+          </div>
+
+          @if (error()) { <div class="alert alert-danger py-2 mt-4 mb-0" role="alert">{{ error() }}</div> }
+          <button type="submit" class="btn btn-primary btn-lg w-100 mt-4" [disabled]="loading() || form.invalid">
+            @if (loading()) { <span class="spinner-border spinner-border-sm me-2"></span> }
+            Create Company and Continue
+          </button>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>

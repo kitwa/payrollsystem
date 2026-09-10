@@ -2182,3 +2182,32 @@ Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operati
 2026-09-10 12:46:56.576 +02:00 [INF] Server desktop-3ro9ejj:23012:8d20150f All dispatchers stopped
 2026-09-10 12:46:56.580 +02:00 [INF] Server desktop-3ro9ejj:23012:8d20150f successfully reported itself as stopped in 0,6182 ms
 2026-09-10 12:46:56.580 +02:00 [INF] Server desktop-3ro9ejj:23012:8d20150f has been stopped in total 6,7458 ms
+2026-09-10 13:02:52.834 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 13:02:54.666 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 13:02:54.742 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 13:02:54.853 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-10 13:02:54.856 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-10 13:02:54.885 +02:00 [INF] Server desktop-3ro9ejj:872:c9085387 successfully announced in 6,8128 ms
+2026-09-10 13:02:54.891 +02:00 [INF] Server desktop-3ro9ejj:872:c9085387 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-10 13:02:54.916 +02:00 [INF] Server desktop-3ro9ejj:872:c9085387 all the dispatchers started
+2026-09-10 13:04:17.963 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 13:04:19.508 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 13:04:19.550 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 13:04:19.605 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-10 13:04:19.607 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-10 13:04:19.628 +02:00 [INF] Server desktop-3ro9ejj:808:dee0392e successfully announced in 3,5481 ms
+2026-09-10 13:04:19.631 +02:00 [INF] Server desktop-3ro9ejj:808:dee0392e is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-10 13:04:19.640 +02:00 [INF] Server desktop-3ro9ejj:808:dee0392e all the dispatchers started
+2026-09-10 13:21:40.163 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-09-10 13:21:40.591 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 436.7530 ms
+2026-09-10 13:21:40.721 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 570.9276 ms
+2026-09-10 13:21:41.019 +02:00 [INF] HTTP GET /api/leave responded 401 in 398.1968 ms
+2026-09-10 13:21:41.059 +02:00 [INF] HTTP GET /api/leave responded 401 in 31.5500 ms

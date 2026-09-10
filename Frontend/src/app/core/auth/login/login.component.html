@@ -1,0 +1,47 @@
+<div class="auth-page">
+  <div class="auth-layout">
+    <section class="auth-intro d-none d-lg-flex">
+      <a class="auth-brand" routerLink="/" aria-label="Payroll SA home">
+        <span class="auth-brand__mark">PS</span>
+        <span>Payroll SA</span>
+      </a>
+      <div class="auth-intro__content">
+        <p class="auth-eyebrow">South African payroll, made clear</p>
+        <h1>Run payroll with confidence.</h1>
+        <p>Keep employees, statutory calculations, payslips, and payroll operations in one focused workspace.</p>
+      </div>
+      <small class="auth-intro__footer">Secure access for your payroll team.</small>
+    </section>
+
+    <section class="auth-panel">
+      <div class="auth-panel__inner">
+        <a class="auth-brand auth-brand--mobile d-lg-none" routerLink="/" aria-label="Payroll SA home">
+          <span class="auth-brand__mark">PS</span>
+          <span>Payroll SA</span>
+        </a>
+        <p class="auth-eyebrow">Welcome back</p>
+        <h2>Sign in to your workspace</h2>
+        <p class="auth-muted">Use your account details to continue.</p>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+          <div class="mb-3">
+            <label class="form-label" for="login-email">Email</label>
+            <input id="login-email" formControlName="email" type="email" class="form-control form-control-lg" placeholder="admin@payrollsa.co.za" autocomplete="email">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="login-password">Password</label>
+            <input id="login-password" formControlName="password" type="password" class="form-control form-control-lg" autocomplete="current-password">
+          </div>
+          @if (error()) {
+            <div class="alert alert-danger py-2" role="alert">{{ error() }}</div>
+          }
+          <button type="submit" class="btn btn-primary btn-lg w-100" [disabled]="loading()">
+            @if (loading()) { <span class="spinner-border spinner-border-sm me-2"></span> }
+            Sign In
+          </button>
+          <a routerLink="/register" class="btn btn-link w-100 mt-2">Register a new company</a>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,130 +1,296 @@
-<main class="landing">
-  <header class="topbar container" aria-label="Main navigation">
-    <a class="brand" routerLink="/">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="navbar-wrap border-bottom sticky-top">
+  <nav class="container d-flex align-items-center justify-content-between py-3" aria-label="Main navigation">
+    <a class="brand d-flex align-items-center gap-2 text-decoration-none" routerLink="/">
       <span class="brand-mark" aria-hidden="true">P</span>
       <span class="brand-text">Payroll SA</span>
     </a>
-    <nav class="topbar-actions" aria-label="Account actions">
-      <a class="btn btn-link top-link" routerLink="/login">Sign in</a>
-      <a class="btn btn-dark cta-btn" routerLink="/register">Request Demo</a>
-    </nav>
-  </header>
+    <div class="d-flex align-items-center gap-2 gap-sm-3">
+      <a class="btn btn-link nav-link-plain px-2 px-sm-3" routerLink="/login">Sign in</a>
+      <a class="btn btn-cta btn-sm btn-sm-normal" routerLink="/register">Start Free</a>
+    </div>
+  </nav>
+</header>
 
-  <section class="hero container" aria-labelledby="hero-title">
-    <div class="hero-copy">
-      <p class="eyebrow">Trusted South African Payroll Platform</p>
-      <h1 id="hero-title">Run accurate payroll in minutes, not days.</h1>
-      <p class="hero-subtitle">
-        Payroll SA gives finance teams total confidence with compliant PAYE, UIF, SDL calculations,
-        automated payslips, and executive-ready reporting in one secure workspace.
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-dark btn-lg" routerLink="/register">Start Free Trial</a>
-        <a class="btn btn-outline-dark btn-lg" href="#features">Explore Platform</a>
-      </div>
-      <ul class="trust-list" aria-label="Platform trust highlights">
-        <li><i class="bi bi-shield-check"></i> Bank-grade security</li>
-        <li><i class="bi bi-file-earmark-check"></i> SARS-ready exports</li>
-        <li><i class="bi bi-lightning-charge"></i> 10-minute monthly run</li>
-      </ul>
-    </div>
-    <aside class="hero-card" aria-label="Payroll performance snapshot">
-      <div class="metric-row">
-        <span class="metric-label">Monthly payroll run</span>
-        <strong class="metric-value">8m 41s</strong>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Payslips generated</span>
-        <strong class="metric-value">1,248</strong>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Accuracy rate</span>
-        <strong class="metric-value">99.98%</strong>
-      </div>
-      <div class="status-chip">
-        <i class="bi bi-check2-circle"></i>
-        <span>Submission package validated</span>
-      </div>
-    </aside>
-  </section>
+<main id="main-content" class="landing">
 
-  <section class="logo-strip container reveal" #reveal aria-label="Client confidence">
-    <p>Used by finance teams at high-growth companies</p>
-    <div class="logos" role="list" aria-label="Example client sectors">
-      <span role="listitem">Manufacturing</span>
-      <span role="listitem">Retail</span>
-      <span role="listitem">Logistics</span>
-      <span role="listitem">Professional Services</span>
-    </div>
-  </section>
-
-  <section id="features" class="features container reveal" #reveal aria-labelledby="features-title">
-    <div class="section-head">
-      <p class="eyebrow">Platform</p>
-      <h2 id="features-title">Everything payroll teams need to execute flawlessly</h2>
-    </div>
-    <div class="feature-grid">
-      <article class="feature-card">
-        <i class="bi bi-calculator"></i>
-        <h3>Automated payroll engine</h3>
-        <p>Rules-driven calculations for PAYE, UIF, SDL, overtime, and deductions with full audit trace.</p>
-      </article>
-      <article class="feature-card">
-        <i class="bi bi-file-earmark-pdf"></i>
-        <h3>Branded digital payslips</h3>
-        <p>Generate, protect, and distribute payslips instantly with secure employee self-service access.</p>
-      </article>
-      <article class="feature-card">
-        <i class="bi bi-graph-up-arrow"></i>
-        <h3>Executive reporting</h3>
-        <p>Live dashboards and export-ready reports for finance, HR, and compliance stakeholders.</p>
-      </article>
-      <article class="feature-card">
-        <i class="bi bi-cloud-check"></i>
-        <h3>SARS-ready submissions</h3>
-        <p>Prepare IRP5, IT3(a), EMP201 and EMP501 files with built-in validation before filing.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="workflow container reveal" #reveal aria-labelledby="workflow-title">
-    <div class="section-head">
-      <p class="eyebrow">Workflow</p>
-      <h2 id="workflow-title">From data capture to payout in three clear steps</h2>
-    </div>
-    <ol class="steps">
-      <li>
-        <span>1</span>
-        <div>
-          <h3>Capture</h3>
-          <p>Import employee data, earnings, and leave records from your current tools.</p>
+  <!-- HERO -->
+  <section class="hero py-5 py-lg-6" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <p class="kicker mb-3">
+            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+            Built for South African businesses
+          </p>
+          <h1 id="hero-title" class="hero-title mb-3">Payroll shouldn't cost a fortune.</h1>
+          <p class="hero-subtitle mb-4">
+            Run your South African payroll simply and confidently. Start free for one month,
+            then pay one simple, affordable monthly price — no long contracts, no surprises.
+          </p>
+          <div class="d-flex flex-column flex-sm-row gap-3 mb-4">
+            <a class="btn btn-cta btn-lg" routerLink="/register">Start Free for 1 Month</a>
+            <a class="btn btn-outline-quiet btn-lg" href="#how-it-works">See how it works</a>
+          </div>
+          <ul class="trust-line list-unstyled d-flex flex-column flex-sm-row gap-2 gap-sm-4 mb-0">
+            <li><i class="bi bi-check2" aria-hidden="true"></i> No credit card required</li>
+            <li><i class="bi bi-check2" aria-hidden="true"></i> Cancel anytime</li>
+          </ul>
         </div>
-      </li>
-      <li>
-        <span>2</span>
-        <div>
-          <h3>Review</h3>
-          <p>Validate results, exceptions, and tax obligations before locking the payroll period.</p>
+
+        <div class="col-lg-6">
+          <div class="payslip-card mx-auto" role="img" aria-label="Example payslip showing gross salary, PAYE, UIF and net pay">
+            <div class="payslip-card__header">
+              <span>Example payslip</span>
+              <span class="payslip-card__badge">Illustrative</span>
+            </div>
+            <dl class="payslip-card__rows mb-0">
+              <div class="payslip-card__row">
+                <dt>Gross salary</dt>
+                <dd>R 18,500.00</dd>
+              </div>
+              <div class="payslip-card__row">
+                <dt>PAYE</dt>
+                <dd>&minus; R 1,850.00</dd>
+              </div>
+              <div class="payslip-card__row">
+                <dt>UIF</dt>
+                <dd>&minus; R 148.00</dd>
+              </div>
+              <div class="payslip-card__row payslip-card__row--total">
+                <dt>Net pay</dt>
+                <dd>R 16,502.00</dd>
+              </div>
+            </dl>
+          </div>
         </div>
-      </li>
-      <li>
-        <span>3</span>
-        <div>
-          <h3>Submit</h3>
-          <p>Distribute payslips, run payments, and export compliant SARS submission files.</p>
-        </div>
-      </li>
-    </ol>
+      </div>
+    </div>
   </section>
 
-  <section class="cta container reveal" #reveal aria-labelledby="cta-title">
-    <h2 id="cta-title">Modern payroll infrastructure for serious businesses.</h2>
-    <p>See how Payroll SA can cut payroll processing time while increasing compliance confidence.</p>
-    <a class="btn btn-dark btn-lg" routerLink="/register">Book Your Guided Demo</a>
+  <!-- VALUE / PRICE MESSAGE -->
+  <section class="value-section py-5" aria-labelledby="value-title">
+    <div class="container">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-8">
+          <h2 id="value-title" class="mb-3">Why pay more for payroll?</h2>
+          <p class="value-text mb-0">
+            You shouldn't need an expensive subscription just to pay your employees accurately.
+            Payroll SA focuses on the payroll essentials South African businesses actually use —
+            affordable payroll without the unnecessary complexity.
+          </p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <footer class="container footer" aria-label="Site footer">
-    <p>© {{ currentYear }} Payroll SA. Built for South African businesses.</p>
-    <a routerLink="/login">Sign in</a>
-  </footer>
+  <!-- BENEFITS -->
+  <section id="benefits" class="benefits py-5 py-lg-6" aria-labelledby="benefits-title">
+    <div class="container">
+      <div class="section-head mb-5">
+        <h2 id="benefits-title">What you get</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-4">
+          <article class="benefit-card h-100">
+            <i class="bi bi-lightning-charge" aria-hidden="true"></i>
+            <h3>Simple payroll</h3>
+            <p>Run your monthly payroll without complicated workflows.</p>
+          </article>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <article class="benefit-card h-100">
+            <i class="bi bi-geo-alt" aria-hidden="true"></i>
+            <h3>South African payroll</h3>
+            <p>Designed around the payroll needs of South African businesses.</p>
+          </article>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <article class="benefit-card h-100">
+            <i class="bi bi-calculator" aria-hidden="true"></i>
+            <h3>PAYE, UIF &amp; SDL</h3>
+            <p>Calculate the key statutory payroll deductions you need.</p>
+          </article>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <article class="benefit-card h-100">
+            <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
+            <h3>Payslips</h3>
+            <p>Generate professional payslips for your employees.</p>
+          </article>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <article class="benefit-card h-100">
+            <i class="bi bi-bar-chart-line" aria-hidden="true"></i>
+            <h3>Reports &amp; compliance</h3>
+            <p>Keep your payroll records organised and ready for reporting.</p>
+          </article>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <article class="benefit-card h-100">
+            <i class="bi bi-people" aria-hidden="true"></i>
+            <h3>Employee management</h3>
+            <p>Manage employee information, earnings and deductions in one place.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works" class="how-it-works py-5 py-lg-6" aria-labelledby="how-title">
+    <div class="container">
+      <div class="section-head mb-5">
+        <h2 id="how-title">Get started in three steps</h2>
+      </div>
+      <ol class="steps row g-4 list-unstyled">
+        <li class="col-md-4">
+          <div class="step-card h-100">
+            <span class="step-number" aria-hidden="true">1</span>
+            <h3>Create your account</h3>
+            <p>Sign up in a few minutes — no credit card required.</p>
+          </div>
+        </li>
+        <li class="col-md-4">
+          <div class="step-card h-100">
+            <span class="step-number" aria-hidden="true">2</span>
+            <h3>Add your employees</h3>
+            <p>Capture employee details, earnings and deductions.</p>
+          </div>
+        </li>
+        <li class="col-md-4">
+          <div class="step-card h-100">
+            <span class="step-number" aria-hidden="true">3</span>
+            <h3>Run your payroll</h3>
+            <p>Calculate payroll and generate payslips with confidence.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- TRUST / PRIVACY / POPIA -->
+  <section class="trust-section py-5 py-lg-6" aria-labelledby="trust-title">
+    <div class="container">
+      <div class="row g-5 align-items-start">
+        <div class="col-lg-5">
+          <h2 id="trust-title" class="mb-3">Built with privacy in mind</h2>
+          <p class="mb-0">
+            Your employees' personal information deserves responsible handling. Payroll SA is
+            designed with privacy and responsible data handling in mind, with secure access to
+            your account and clear, transparent pricing and terms.
+          </p>
+        </div>
+        <div class="col-lg-7">
+          <div class="row g-4">
+            <div class="col-sm-6">
+              <div class="trust-item">
+                <i class="bi bi-shield-lock" aria-hidden="true"></i>
+                <div>
+                  <h3>Secure access</h3>
+                  <p>Your account is protected behind secure sign-in.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="trust-item">
+                <i class="bi bi-file-earmark-lock" aria-hidden="true"></i>
+                <div>
+                  <h3>Responsible data handling</h3>
+                  <p>We take care of how your payroll data is stored and used.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="trust-item">
+                <i class="bi bi-receipt" aria-hidden="true"></i>
+                <div>
+                  <h3>Transparent pricing</h3>
+                  <p>One simple monthly price. No hidden fees.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="trust-item">
+                <i class="bi bi-headset" aria-hidden="true"></i>
+                <div>
+                  <h3>Real support</h3>
+                  <p>Questions get answered by a person, not a bot.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="trust-links mt-4">
+            <a routerLink="/privacy-policy">Privacy Policy</a>
+            <a routerLink="/terms">Terms &amp; Conditions</a>
+            <a routerLink="/contact">Contact / Support</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="pricing py-5 py-lg-6" aria-labelledby="pricing-title">
+    <div class="container">
+      <div class="section-head text-center mb-5">
+        <h2 id="pricing-title">Simple, transparent pricing</h2>
+        <p class="text-muted mb-0">One plan. One price. No confusing packages.</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+          <div class="pricing-card text-center">
+            <span class="pricing-card__badge">First month free</span>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">{{ monthlyPrice }}</span>
+              <span class="pricing-card__period">/ month after your free month</span>
+            </div>
+            <ul class="pricing-card__list list-unstyled text-start mb-4">
+              <li><i class="bi bi-check2" aria-hidden="true"></i> PAYE, UIF &amp; SDL calculations</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i> Professional payslips for every employee</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i> Employee management</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i> Payroll reports</li>
+              <li><i class="bi bi-check2" aria-hidden="true"></i> Cancel anytime</li>
+            </ul>
+            <a class="btn btn-cta btn-lg w-100" routerLink="/register">Start Free</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta py-5 py-lg-6" aria-labelledby="final-cta-title">
+    <div class="container text-center">
+      <h2 id="final-cta-title" class="mb-3">Ready to make payroll simpler?</h2>
+      <p class="mb-4">Start your first month free and see how easy payroll can be.</p>
+      <a class="btn btn-cta btn-lg" routerLink="/register">Start Free for 1 Month</a>
+    </div>
+  </section>
+
 </main>
+
+<footer class="site-footer py-5" aria-label="Site footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="brand d-flex align-items-center gap-2 mb-2">
+          <span class="brand-mark" aria-hidden="true">P</span>
+          <span class="brand-text">Payroll SA</span>
+        </div>
+        <p class="footer-tagline mb-0">Simple, affordable payroll for South African businesses.</p>
+      </div>
+      <div class="col-md-6">
+        <nav class="footer-links d-flex flex-wrap gap-3 gap-md-4" aria-label="Footer links">
+          <a routerLink="/privacy-policy">Privacy Policy</a>
+          <a routerLink="/terms">Terms &amp; Conditions</a>
+          <a routerLink="/contact">Contact</a>
+          <a routerLink="/login">Sign in</a>
+        </nav>
+      </div>
+    </div>
+    <hr class="footer-rule">
+    <p class="footer-copyright mb-0">© {{ currentYear }} Payroll SA. All rights reserved.</p>
+  </div>
+</footer>
