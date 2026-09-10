@@ -29,4 +29,4 @@ public record PayrollLineDto(
 public record EarningDto(EarningCategory Category, string Description, decimal Amount);
 public record DeductionDto(DeductionCategory Category, string Description, decimal EmployeeAmount, decimal EmployerAmount);
 
-public record GeneratePayrollDto(Guid CompanyId, int Year, int Month);
+public record GeneratePayrollDto(Guid CompanyId, int Year, int Month, IReadOnlyCollection<Guid> EmployeeIds);

@@ -37,6 +37,7 @@ export class AppComponent {
     { label: 'Leave', path: '/leave', icon: 'bi-calendar2-week' },
     { label: 'Payslips', path: '/payslips', icon: 'bi-receipt' },
     { label: 'Reports', path: '/reports', icon: 'bi-bar-chart', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },
+    { label: 'Support', path: '/support/tickets', icon: 'bi-life-preserver', roles: ['Admin', 'SuperAdmin'] },
     { label: 'Self Service', path: '/self-service', icon: 'bi-person-bounding-box', roles: ['Employee'] }
   ];
 
@@ -44,7 +45,9 @@ export class AppComponent {
     { label: 'Management', path: '/management', icon: 'bi-speedometer2', roles: ['SuperAdmin'] },
     { label: 'General', path: '/settings', icon: 'bi-sliders', roles: ['Admin', 'SuperAdmin'] },
     { label: 'Users', path: '/settings/users', icon: 'bi-person-gear', roles: ['Admin', 'SuperAdmin'] },
-    { label: 'Employee Deductions', path: '/settings/employee-deductions', icon: 'bi-dash-circle', roles: ['Admin', 'SuperAdmin'] },
+    { label: 'Payroll Items', path: '/settings/payroll-items', icon: 'bi-wallet2', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },
+    { label: 'Employee Deductions', path: '/settings/employee-deductions', icon: 'bi-dash-circle', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },
+    { label: 'Employee Bonuses', path: '/settings/employee-bonuses', icon: 'bi-plus-circle', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },
     { label: 'Departments', path: '/settings/departments', icon: 'bi-diagram-3', roles: ['Admin', 'SuperAdmin'] },
     { label: 'Leave Types', path: '/settings/leave-types', icon: 'bi-list-check', roles: ['Admin', 'SuperAdmin'] },
     { label: 'Tax Tables', path: '/settings/tax-tables', icon: 'bi-calculator', roles: ['Admin', 'SuperAdmin'] }

@@ -89,4 +89,6 @@ export interface Company {
   email?: string;
   isActive: boolean;
   hasLogo: boolean;
+  isUifEnabled?: boolean;
+  isSdlEnabled?: boolean;
 }

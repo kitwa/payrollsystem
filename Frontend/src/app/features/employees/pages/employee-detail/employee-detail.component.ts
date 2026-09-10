@@ -1,6 +1,8 @@
-﻿import { Component, inject } from '@angular/core';
+﻿import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { EmployeeService } from '../../services/employee.service';
+import { Employee } from '../../models/employee.models';
 
 @Component({
 	selector: 'app-employee-detail',
@@ -10,13 +12,25 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 		<section class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
 			<div>
 				<p class="text-muted mb-1">Employee Profile</p>
-				<h1 class="h3 mb-0">{{ employee.firstName }} {{ employee.lastName }}</h1>
+				<h1 class="h3 mb-0">{{ employee()?.firstName ?? 'Employee' }} {{ employee()?.lastName ?? '' }}</h1>
 			</div>
 			<div class="d-flex gap-2">
 				<a class="btn btn-outline-secondary" routerLink="/employees">Back</a>
-				<a class="btn btn-dark" [routerLink]="['/employees', employee.id, 'edit']">Edit Employee</a>
+				@if (employee(); as employee) {
+					<a class="btn btn-dark" [routerLink]="['/employees', employee.id, 'edit']">Edit Employee</a>
+				}
 			</div>
 		</section>
+
+		@if (error()) {
+			<div class="alert alert-danger">{{ error() }}</div>
+		}
+
+		@if (!employee() && !error()) {
+			<div class="alert alert-light border">Loading employee profile…</div>
+		}
+
+		@if (employee(); as employee) {
 
 		<section class="row g-3">
 			<div class="col-12 col-lg-8">
@@ -25,11 +39,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 						<h2 class="h5 mb-3">Personal Information</h2>
 						<div class="info-grid">
 							<div><span>ID Number</span><strong>{{ employee.idNumber }}</strong></div>
-							<div><span>Email</span><strong>{{ employee.email }}</strong></div>
-							<div><span>Phone</span><strong>{{ employee.phone }}</strong></div>
-							<div><span>Department</span><strong>{{ employee.department }}</strong></div>
-							<div><span>Job Title</span><strong>{{ employee.jobTitle }}</strong></div>
-							<div><span>Employment Type</span><strong>{{ employee.employmentType }}</strong></div>
+							<div><span>Email</span><strong>{{ employee.email ?? 'Not provided' }}</strong></div>
+							<div><span>Phone</span><strong>{{ employee.phone ?? 'Not provided' }}</strong></div>
+							<div><span>Department</span><strong>{{ employee.department ?? 'Unassigned' }}</strong></div>
+							<div><span>Job Title</span><strong>{{ employee.jobTitle ?? 'Not provided' }}</strong></div>
+							<div><span>Employment Type</span><strong>{{ employmentTypeLabel(employee.employmentType) }}</strong></div>
 						</div>
 					</div>
 				</article>
@@ -40,22 +54,23 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 					<div class="card-body">
 						<h2 class="h6 text-muted">Compensation</h2>
 						<p class="salary">R {{ employee.basicSalary | number:'1.0-0' }}</p>
-						<p class="mb-0 text-muted">{{ employee.payFrequency }}</p>
+						<p class="mb-0 text-muted">{{ payFrequencyLabel(employee.payFrequency) }}</p>
 					</div>
 				</article>
 				<article class="card border-0 shadow-sm">
 					<div class="card-body">
 						<h2 class="h6 text-muted">Status</h2>
-						<span class="badge bg-success mb-3">{{ employee.status }}</span>
+						<span class="badge bg-success mb-3">{{ statusLabel(employee.status) }}</span>
 						<ul class="list-unstyled mb-0 text-muted small">
-							<li>Start date: {{ employee.startDate }}</li>
-							<li>Tax number: {{ employee.taxNumber }}</li>
-							<li>UIF number: {{ employee.uifNumber }}</li>
+							<li>Start date: {{ employee.startDate | date:'yyyy-MM-dd' }}</li>
+							<li>Tax number: {{ employee.taxNumber ?? 'Not provided' }}</li>
+							<li>UIF number: {{ employee.uifNumber ?? 'Not provided' }}</li>
 						</ul>
 					</div>
 				</article>
 			</div>
 		</section>
+		}
 	`,
 	styles: [
 		`
@@ -91,23 +106,34 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export class EmployeeDetailComponent {
 	private readonly route = inject(ActivatedRoute);
+	private readonly employeeService = inject(EmployeeService);
 
-	readonly employee = {
-		id: this.route.snapshot.paramMap.get('id') ?? 'emp-001',
-		firstName: 'Anele',
-		lastName: 'Mokoena',
-		idNumber: '9101025800081',
-		email: 'anele@company.co.za',
-		phone: '+27 82 441 2201',
-		department: 'Finance',
-		jobTitle: 'Senior Accountant',
-		employmentType: 'Permanent',
-		basicSalary: 72500,
-		payFrequency: 'Monthly',
-		status: 'Active',
-		startDate: '2022-04-01',
-		taxNumber: '9512/335/22/1',
-		uifNumber: 'UIF-773311'
-	};
+	readonly employee = signal<Employee | null>(null);
+	readonly error = signal('');
+
+	constructor() {
+		const id = this.route.snapshot.paramMap.get('id');
+		if (!id) {
+			this.error.set('Employee id is missing.');
+			return;
+		}
+
+		this.employeeService.getById(id).subscribe({
+			next: employee => this.employee.set(employee),
+			error: response => this.error.set(response.error?.errors?.[0] ?? 'Unable to load employee profile.')
+		});
+	}
+
+	statusLabel(status: number): string {
+		return ['Active', 'Terminated', 'Suspended', 'On Leave'][status] ?? 'Unknown';
+	}
+
+	payFrequencyLabel(value: number): string {
+		return ['Monthly', 'Weekly', 'Fortnightly'][value] ?? 'Unknown';
+	}
+
+	employmentTypeLabel(value: number): string {
+		return ['Permanent', 'Contract', 'Part time', 'Casual', 'Intern'][value] ?? 'Unknown';
+	}
 
 }

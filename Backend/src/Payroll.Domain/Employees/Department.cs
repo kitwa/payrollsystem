@@ -10,4 +10,11 @@ public class Department : BaseEntity
 
     /// <summary>Marks the company's protected default department — cannot be renamed or deleted.</summary>
     public bool IsSystemDepartment { get; set; }
+
+    /// <summary>Alias used by the business rules and UI to identify the protected company default.</summary>
+    public bool IsDefault
+    {
+        get => IsSystemDepartment;
+        set => IsSystemDepartment = value;
+    }
 }

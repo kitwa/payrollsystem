@@ -8,6 +8,8 @@ public class EmployeeBonus : BaseEntity
     public Guid CompanyId { get; set; }
     public Guid EmployeeId { get; set; }
     public Employees.Employee Employee { get; set; } = null!;
+    public Guid? EarningTypeId { get; set; }
+    public Settings.EarningType? EarningType { get; set; }
     public Guid PayrollPeriodId { get; set; }
     public PayrollPeriod PayrollPeriod { get; set; } = null!;
     public string Description { get; set; } = string.Empty;

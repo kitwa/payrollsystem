@@ -6,6 +6,7 @@ using Payroll.Domain.Leave;
 using Payroll.Domain.PayrollRuns;
 using Payroll.Domain.Settings;
 using Payroll.Domain.Tax;
+using Payroll.Domain.Support;
 
 namespace Payroll.Application.Common.Interfaces;
 
@@ -33,5 +34,6 @@ public interface IAppDbContext
     DbSet<TaxTable> TaxTables { get; }
     DbSet<TaxThreshold> TaxThresholds { get; }
     DbSet<TaxRebate> TaxRebates { get; }
+    DbSet<SupportTicket> SupportTickets { get; }
     Task<int> SaveChangesAsync(CancellationToken ct = default);
 }

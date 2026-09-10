@@ -4,11 +4,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PayrollService } from '../../services/payroll.service';
 import { PayrollLine, PayrollPeriod, PayrollStatus } from '../../models/payroll.models';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 
 @Component({
 	selector: 'app-payroll-detail',
 	standalone: true,
-	imports: [CommonModule, RouterLink, ConfirmDialogComponent],
+	imports: [CommonModule, RouterLink, ConfirmDialogComponent, PaginationComponent],
 	template: `
 		<section class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
 			<div>
@@ -33,7 +34,7 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
 							<table class="table">
 								<thead><tr><th>Employee</th><th class="text-end">Gross</th><th class="text-end">Deductions</th><th class="text-end">Net Pay</th></tr></thead>
 								<tbody>
-									@for (line of lines(); track line.id) {
+									@for (line of pagedLines(); track line.id) {
 										<tr>
 											<td>{{ line.employeeName }} <small class="text-muted">({{ line.employeeNumber }})</small></td>
 											<td class="text-end">R {{ line.grossEarnings | number:'1.0-0' }}</td>
@@ -46,6 +47,7 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
 								</tbody>
 							</table>
 						</div>
+						<app-pagination [page]="pageNumber()" [pageSize]="pageSize" [total]="lines().length" (pageChange)="pageNumber.set($event)"></app-pagination>
 					</div>
 				</article>
 			</div>
@@ -107,6 +109,9 @@ export class PayrollDetailComponent {
 	readonly lines = signal<PayrollLine[]>([]);
 	readonly message = signal('');
 	readonly messageTone = signal<'success' | 'error'>('success');
+	readonly pageNumber = signal(1);
+	readonly pageSize = 20;
+	readonly pagedLines = computed(() => this.lines().slice((this.pageNumber() - 1) * this.pageSize, this.pageNumber() * this.pageSize));
 
 	readonly canApprove = computed(() => this.period()?.status === PayrollStatus.Draft);
 	readonly canLock = computed(() => this.period()?.status === PayrollStatus.Approved);

@@ -29,7 +29,7 @@ public class GetPayslipsForEmployeeHandler(IAppDbContext db, ICurrentUser curren
                 l.Id, l.PayrollPeriodId, l.EmployeeId,
                 l.Employee.FirstName + " " + l.Employee.LastName, l.Employee.EmployeeNumber, l.Employee.Email,
                 l.PayrollPeriod.Year, l.PayrollPeriod.Month, l.PayrollPeriod.Status,
-                l.GrossEarnings, l.TotalDeductions, l.NetPay, l.PayslipEmailedAt))
+                l.GrossEarnings, l.TaxableIncome, l.TotalDeductions, l.NetPay, l.PayslipEmailedAt))
             .ToListAsync(ct);
 
         return Result<List<PayslipListItemDto>>.Ok(result);
@@ -55,7 +55,7 @@ public class GetMyPayslipsHandler(IAppDbContext db, ICurrentUser currentUser)
                 l.Id, l.PayrollPeriodId, l.EmployeeId,
                 l.Employee.FirstName + " " + l.Employee.LastName, l.Employee.EmployeeNumber, l.Employee.Email,
                 l.PayrollPeriod.Year, l.PayrollPeriod.Month, l.PayrollPeriod.Status,
-                l.GrossEarnings, l.TotalDeductions, l.NetPay, l.PayslipEmailedAt))
+                l.GrossEarnings, l.TaxableIncome, l.TotalDeductions, l.NetPay, l.PayslipEmailedAt))
             .ToListAsync(ct);
 
         return Result<List<PayslipListItemDto>>.Ok(result);
@@ -109,7 +109,7 @@ public class GetPayslipsForPeriodHandler(IAppDbContext db, ICurrentUser currentU
                 l.Id, l.PayrollPeriodId, l.EmployeeId,
                 l.Employee.FirstName + " " + l.Employee.LastName, l.Employee.EmployeeNumber, l.Employee.Email,
                 l.PayrollPeriod.Year, l.PayrollPeriod.Month, l.PayrollPeriod.Status,
-                l.GrossEarnings, l.TotalDeductions, l.NetPay, l.PayslipEmailedAt))
+                l.GrossEarnings, l.TaxableIncome, l.TotalDeductions, l.NetPay, l.PayslipEmailedAt))
             .ToListAsync(ct);
 
         return Result<List<PayslipListItemDto>>.Ok(result);
@@ -142,9 +142,11 @@ public class GetPayslipDetailHandler(IAppDbContext db, ICurrentUser currentUser)
             $"{e.FirstName} {e.LastName}", e.EmployeeNumber, e.Email, e.JobTitle, e.Department,
             e.TaxNumber, e.UifNumber,
             p.Year, p.Month, p.PeriodStart, p.PeriodEnd, p.Status,
-            line.GrossEarnings, line.TotalDeductions, line.NetPay, line.PayslipEmailedAt,
+            line.GrossEarnings, line.TaxableIncome, line.TotalDeductions, line.NetPay, line.PayslipEmailedAt,
             [.. line.Earnings.Select(x => new PayslipLineItemDto(x.Category.ToString(), x.Description, x.Amount))],
-            [.. line.Deductions.Select(x => new PayslipLineItemDto(x.Category.ToString(), x.Description, x.EmployeeAmount))]));
+            [.. line.Deductions
+                .Where(x => x.EmployeeAmount > 0)
+                .Select(x => new PayslipLineItemDto(x.Category.ToString(), x.Description, x.EmployeeAmount))]));
     }
 }
 

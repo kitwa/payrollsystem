@@ -1,4 +1,5 @@
 Backend/src/Payroll.Api/bin/
+Backend/src/Payroll.Api/bin/Debug/
 Backend/src/Payroll.Api/obj/
 Backend/src/Payroll.Api/Properties/launchSettings.json
 node_modules/

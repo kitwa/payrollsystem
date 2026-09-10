@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Payroll.Domain.Identity;
 using Payroll.Domain.Tax;
 using Payroll.Domain.Settings;
@@ -44,37 +45,41 @@ public static class Seed
 
     private static async Task SeedTaxYearAsync(AppDbContext db)
     {
-        if (db.TaxYears.Any()) return;
+        var existingTaxYear = await db.TaxYears.FirstOrDefaultAsync(t => t.Year == 2026);
+        if (existingTaxYear is not null) return;
 
-        // 2025/2026 tax year — rates from SARS
+        await db.TaxYears.Where(t => t.IsActive).ExecuteUpdateAsync(setters => setters
+            .SetProperty(t => t.IsActive, false));
+
+        // 2026/2027 tax year — rates from SARS
         var taxYear = new TaxYear
         {
-            Year = 2025,
-            StartDate = new DateTime(2025, 3, 1),
-            EndDate = new DateTime(2026, 2, 28),
+            Year = 2026,
+            StartDate = new DateTime(2026, 3, 1),
+            EndDate = new DateTime(2027, 2, 28),
             UifMonthlyEarningsCeiling = 17712,
             UifContributionRate = 1,
             SdlRate = 1,
             IsActive = true,
             TaxTables =
             [
-                new TaxTable { IncomeFrom = 1, IncomeTo = 237100, BaseTax = 0, MarginalRate = 18 },
-                new TaxTable { IncomeFrom = 237101, IncomeTo = 370500, BaseTax = 42678, MarginalRate = 26 },
-                new TaxTable { IncomeFrom = 370501, IncomeTo = 512800, BaseTax = 77362, MarginalRate = 31 },
-                new TaxTable { IncomeFrom = 512801, IncomeTo = 673000, BaseTax = 121475, MarginalRate = 36 },
-                new TaxTable { IncomeFrom = 673001, IncomeTo = 857900, BaseTax = 179147, MarginalRate = 39 },
-                new TaxTable { IncomeFrom = 857901, IncomeTo = 1817000, BaseTax = 251258, MarginalRate = 41 },
-                new TaxTable { IncomeFrom = 1817001, IncomeTo = decimal.MaxValue, BaseTax = 644489, MarginalRate = 45 }
+                new TaxTable { IncomeFrom = 0, IncomeTo = 245100, BaseTax = 0, MarginalRate = 18 },
+                new TaxTable { IncomeFrom = 245100, IncomeTo = 383100, BaseTax = 44118, MarginalRate = 26 },
+                new TaxTable { IncomeFrom = 383100, IncomeTo = 530200, BaseTax = 79998, MarginalRate = 31 },
+                new TaxTable { IncomeFrom = 530200, IncomeTo = 695800, BaseTax = 125599, MarginalRate = 36 },
+                new TaxTable { IncomeFrom = 695800, IncomeTo = 887000, BaseTax = 185215, MarginalRate = 39 },
+                new TaxTable { IncomeFrom = 887000, IncomeTo = 1878600, BaseTax = 259783, MarginalRate = 41 },
+                new TaxTable { IncomeFrom = 1878600, IncomeTo = decimal.MaxValue, BaseTax = 666339, MarginalRate = 45 }
             ],
             TaxThresholds =
             [
-                new TaxThreshold { AgeGroup = "Under65", ThresholdAmount = 95750 },
+                new TaxThreshold { AgeGroup = "Under65", ThresholdAmount = 99000 },
                 new TaxThreshold { AgeGroup = "65to74", ThresholdAmount = 148217 },
                 new TaxThreshold { AgeGroup = "75AndOver", ThresholdAmount = 165689 }
             ],
             TaxRebates =
             [
-                new TaxRebate { RebateType = "Primary", Amount = 17235 },
+                new TaxRebate { RebateType = "Primary", Amount = 17820 },
                 new TaxRebate { RebateType = "Secondary", Amount = 9444 },
                 new TaxRebate { RebateType = "Tertiary", Amount = 3145 }
             ]

@@ -37,13 +37,18 @@ export const routes: Routes = [
   },
   {
     path: 'settings',
-    canActivate: [authGuard, roleGuard(['Admin', 'SuperAdmin'])],
+    canActivate: [authGuard, roleGuard(['PayrollManager', 'Admin', 'SuperAdmin'])],
     loadChildren: () => import('./features/settings/settings.routes').then(m => m.settingsRoutes)
   },
   {
     path: 'management',
     canActivate: [authGuard, roleGuard(['SuperAdmin'])],
     loadComponent: () => import('./features/management/pages/management.component').then(m => m.ManagementComponent)
+  },
+  {
+    path: 'support/tickets',
+    canActivate: [authGuard, roleGuard(['Admin', 'SuperAdmin'])],
+    loadChildren: () => import('./features/support/support.routes').then(m => m.supportRoutes)
   },
   {
     path: 'self-service',

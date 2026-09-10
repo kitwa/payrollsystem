@@ -9,6 +9,7 @@ public class PayrollLine : BaseEntity
     public Guid EmployeeId { get; set; }
     public Employees.Employee Employee { get; set; } = null!;
     public decimal GrossEarnings { get; set; }
+    public decimal TaxableIncome { get; set; }
     public decimal TotalDeductions { get; set; }
     public decimal NetPay { get; set; }
     public DateTime? PayslipEmailedAt { get; set; }

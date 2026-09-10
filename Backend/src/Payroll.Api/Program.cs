@@ -63,6 +63,8 @@ try
         await EnsureDepartmentSystemFlagColumnAsync(db);
         await EnsureCompanyPayrollSettingsColumnsAsync(db);
         await EnsureEmployeeBonusesTableAsync(db);
+        await EnsureSupportTicketsTableAsync(db);
+        await EnsurePayrollLineTaxableIncomeColumnAsync(db);
         await EnsureDefaultDepartmentsAsync(db);
         await Seed.SeedAsync(db, userManager, roleManager);
     }
@@ -160,6 +162,11 @@ static async Task EnsureEmployeeDeductionsTableAsync(AppDbContext db)
         CREATE INDEX IF NOT EXISTS "IX_EmployeeDeductions_CompanyId_EmployeeId"
             ON "EmployeeDeductions" ("CompanyId", "EmployeeId");
         """);
+
+    var columns = await db.Database.SqlQueryRaw<string>("SELECT name FROM pragma_table_info('EmployeeDeductions')").ToListAsync();
+    if (!columns.Contains("DeductionTypeId"))
+        await db.Database.ExecuteSqlRawAsync("""ALTER TABLE "EmployeeDeductions" ADD COLUMN "DeductionTypeId" TEXT NULL;""");
+    await db.Database.ExecuteSqlRawAsync("""CREATE INDEX IF NOT EXISTS "IX_EmployeeDeductions_DeductionTypeId" ON "EmployeeDeductions" ("DeductionTypeId");""");
 }
 
 static async Task EnsureCompanyLogoColumnsAsync(AppDbContext db)
@@ -228,6 +235,57 @@ static async Task EnsureEmployeeBonusesTableAsync(AppDbContext db)
             ON "EmployeeBonuses" ("PayrollPeriodId");
         CREATE INDEX IF NOT EXISTS "IX_EmployeeBonuses_CompanyId_EmployeeId_PayrollPeriodId"
             ON "EmployeeBonuses" ("CompanyId", "EmployeeId", "PayrollPeriodId");
+        """);
+
+    var columns = await db.Database.SqlQueryRaw<string>("SELECT name FROM pragma_table_info('EmployeeBonuses')").ToListAsync();
+    if (!columns.Contains("EarningTypeId"))
+        await db.Database.ExecuteSqlRawAsync("""ALTER TABLE "EmployeeBonuses" ADD COLUMN "EarningTypeId" TEXT NULL;""");
+    await db.Database.ExecuteSqlRawAsync("""CREATE INDEX IF NOT EXISTS "IX_EmployeeBonuses_EarningTypeId" ON "EmployeeBonuses" ("EarningTypeId");""");
+}
+
+static async Task EnsurePayrollLineTaxableIncomeColumnAsync(AppDbContext db)
+{
+    if (db.Database.ProviderName?.Contains("Sqlite", StringComparison.OrdinalIgnoreCase) != true)
+        return;
+
+    var columns = await db.Database.SqlQueryRaw<string>("SELECT name FROM pragma_table_info('PayrollLines')").ToListAsync();
+    if (!columns.Contains("TaxableIncome"))
+        await db.Database.ExecuteSqlRawAsync("""ALTER TABLE "PayrollLines" ADD COLUMN "TaxableIncome" TEXT NOT NULL DEFAULT 0;""");
+}
+
+static async Task EnsureSupportTicketsTableAsync(AppDbContext db)
+{
+    if (db.Database.ProviderName?.Contains("Sqlite", StringComparison.OrdinalIgnoreCase) != true)
+        return;
+
+    await db.Database.ExecuteSqlRawAsync("""
+        CREATE TABLE IF NOT EXISTS "SupportTickets" (
+            "Id" TEXT NOT NULL CONSTRAINT "PK_SupportTickets" PRIMARY KEY,
+            "TicketNumber" TEXT NOT NULL,
+            "CompanyId" TEXT NOT NULL,
+            "CreatedByUserId" TEXT NOT NULL,
+            "Subject" TEXT NOT NULL,
+            "Description" TEXT NOT NULL,
+            "Type" INTEGER NOT NULL,
+            "Status" INTEGER NOT NULL,
+            "ClosedAt" TEXT NULL,
+            "ClosedByUserId" TEXT NULL,
+            "CreatedAt" TEXT NOT NULL,
+            "CreatedBy" TEXT NOT NULL,
+            "ModifiedAt" TEXT NULL,
+            "ModifiedBy" TEXT NULL,
+            "IsDeleted" INTEGER NOT NULL,
+            "DeletedBy" TEXT NULL,
+            "DeletedAt" TEXT NULL,
+            CONSTRAINT "FK_SupportTickets_Companies_CompanyId"
+                FOREIGN KEY ("CompanyId") REFERENCES "Companies" ("Id") ON DELETE CASCADE
+        );
+        CREATE UNIQUE INDEX IF NOT EXISTS "IX_SupportTickets_TicketNumber"
+            ON "SupportTickets" ("TicketNumber");
+        CREATE INDEX IF NOT EXISTS "IX_SupportTickets_CompanyId_CreatedAt"
+            ON "SupportTickets" ("CompanyId", "CreatedAt");
+        CREATE INDEX IF NOT EXISTS "IX_SupportTickets_CreatedByUserId"
+            ON "SupportTickets" ("CreatedByUserId");
         """);
 }
 

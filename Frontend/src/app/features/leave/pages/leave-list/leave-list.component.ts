@@ -5,11 +5,12 @@ import { AuthService } from '../../../../core/auth/auth.service';
 import { LeaveService } from '../../services/leave.service';
 import { LeaveRequest, LeaveStatus } from '../../models/leave.models';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 
 @Component({
 	selector: 'app-leave-list',
 	standalone: true,
-	imports: [CommonModule, RouterLink, ConfirmDialogComponent],
+	imports: [CommonModule, RouterLink, ConfirmDialogComponent, PaginationComponent],
 	template: `
 		<section class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
 			<div>
@@ -51,7 +52,7 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
 							</tr>
 						</thead>
 						<tbody>
-							@for (leave of filteredLeaves(); track leave.id) {
+							@for (leave of pagedLeaves(); track leave.id) {
 								<tr>
 									<td>{{ leave.employeeName }}</td>
 									<td>{{ leave.leaveTypeName }}</td>
@@ -75,6 +76,7 @@ import { ConfirmDialogComponent } from '../../../../shared/components/confirm-di
 						</tbody>
 					</table>
 				</div>
+				<app-pagination [page]="pageNumber()" [pageSize]="pageSize" [total]="filteredLeaves().length" (pageChange)="pageNumber.set($event)"></app-pagination>
 			</div>
 		</section>
 
@@ -92,6 +94,8 @@ export class LeaveListComponent {
 	readonly leaveRequests = signal<LeaveRequest[]>([]);
 	readonly message = signal('');
 	readonly messageTone = signal<'success' | 'error'>('success');
+	readonly pageNumber = signal(1);
+	readonly pageSize = 20;
 
 	readonly isManager = computed(() =>
 		['PayrollManager', 'Admin', 'SuperAdmin'].some(role => this.auth.isInRole(role)));
@@ -114,12 +118,18 @@ export class LeaveListComponent {
 		return this.leaveRequests().filter(item => item.status === statusIndex);
 	});
 
+	readonly pagedLeaves = computed(() => {
+		const start = (this.pageNumber() - 1) * this.pageSize;
+		return this.filteredLeaves().slice(start, start + this.pageSize);
+	});
+
 	statusName(status: LeaveStatus): string {
 		return LeaveStatus[status];
 	}
 
 	setStatus(event: Event): void {
 		this.selectedStatus.set((event.target as HTMLSelectElement).value);
+		this.pageNumber.set(1);
 	}
 
 	async approve(leave: LeaveRequest): Promise<void> {

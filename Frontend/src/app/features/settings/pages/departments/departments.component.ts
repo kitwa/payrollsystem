@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/auth/auth.service';
@@ -6,11 +6,12 @@ import { DepartmentService } from '../../../employees/services/employee.service'
 import { Department } from '../../../employees/models/employee.models';
 import { SettingsService } from '../../services/settings.service';
 import { Company } from '../../models/settings.models';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-departments',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, PaginationComponent],
   template: `
     <section class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
       <div>
@@ -53,12 +54,21 @@ import { Company } from '../../models/settings.models';
           <table class="table align-middle mb-0">
             <thead><tr><th>Department</th><th class="text-end">Actions</th></tr></thead>
             <tbody>
-              @for (department of departments(); track department.id) {
+              @for (department of pagedDepartments(); track department.id) {
                 <tr>
-                  <td>{{ department.name }}</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span>{{ department.name }}</span>
+                      @if (department.isSystemDepartment) {
+                        <span class="badge bg-dark">Default</span>
+                      }
+                    </div>
+                  </td>
                   <td class="text-end">
-                    <button class="btn btn-sm btn-outline-dark me-2" type="button" (click)="edit(department)">Edit</button>
-                    <button class="btn btn-sm btn-outline-danger" type="button" (click)="remove(department)">Delete</button>
+                    <button class="btn btn-sm btn-outline-dark me-2" type="button" (click)="edit(department)" [disabled]="department.isSystemDepartment">Edit</button>
+                    <button class="btn btn-sm btn-outline-danger" type="button" (click)="remove(department)" [disabled]="department.isSystemDepartment" [attr.aria-label]="department.isSystemDepartment ? 'Default department cannot be deleted' : 'Delete department'">
+                      Delete
+                    </button>
                   </td>
                 </tr>
               } @empty {
@@ -67,6 +77,7 @@ import { Company } from '../../models/settings.models';
             </tbody>
           </table>
         </div>
+        <app-pagination [page]="pageNumber()" [pageSize]="pageSize" [total]="departments().length" (pageChange)="pageNumber.set($event)"></app-pagination>
       </div>
     </section>
   `
@@ -83,6 +94,9 @@ export class DepartmentsComponent {
   readonly editingId = signal<string | null>(null);
   readonly error = signal('');
   readonly form = this.fb.group({ name: ['', Validators.required] });
+  readonly pageNumber = signal(1);
+  readonly pageSize = 20;
+  readonly pagedDepartments = computed(() => this.departments().slice((this.pageNumber() - 1) * this.pageSize, this.pageNumber() * this.pageSize));
 
   readonly canSelectCompany = () => !this.auth.companyId() && this.auth.isInRole('SuperAdmin');
 
@@ -112,6 +126,7 @@ export class DepartmentsComponent {
     const companyId = (event.target as HTMLSelectElement).value || null;
     this.selectedCompanyId.set(companyId);
     this.departments.set([]);
+    this.pageNumber.set(1);
     this.cancelEdit();
     if (companyId) this.load();
   }

@@ -9,6 +9,7 @@ export interface Payslip {
   month: number;
   status: number;
   grossEarnings: number;
+  taxableIncome: number;
   totalDeductions: number;
   netPay: number;
   emailedAt?: string | null;
@@ -49,6 +50,7 @@ export interface PayslipDetail {
   periodEnd: string;
   status: number;
   grossEarnings: number;
+  taxableIncome: number;
   totalDeductions: number;
   netPay: number;
   emailedAt?: string | null;

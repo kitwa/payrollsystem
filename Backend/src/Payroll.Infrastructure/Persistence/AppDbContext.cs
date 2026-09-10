@@ -9,6 +9,7 @@ using Payroll.Domain.Leave;
 using Payroll.Domain.PayrollRuns;
 using Payroll.Domain.Settings;
 using Payroll.Domain.Tax;
+using Payroll.Domain.Support;
 
 namespace Payroll.Infrastructure.Persistence;
 
@@ -36,6 +37,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
     public DbSet<TaxTable> TaxTables => Set<TaxTable>();
     public DbSet<TaxThreshold> TaxThresholds => Set<TaxThreshold>();
     public DbSet<TaxRebate> TaxRebates => Set<TaxRebate>();
+    public DbSet<SupportTicket> SupportTickets => Set<SupportTicket>();
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 
     protected override void OnModelCreating(ModelBuilder builder)

@@ -49,7 +49,7 @@ public class PayrollController(IMediator mediator) : BaseApiController(mediator)
     public async Task<IActionResult> MarkPaid(Guid periodId, CancellationToken ct) =>
         FromResult(await Mediator.Send(new MarkPaidCommand(periodId), ct));
 
-    /// <summary>Delete a draft payroll period. Approved, locked, or paid periods cannot be deleted.</summary>
+    /// <summary>Delete a selected payroll period for Super Admin support operations.</summary>
     [HttpDelete("{periodId:guid}")]
     public async Task<IActionResult> Delete(Guid periodId, CancellationToken ct) =>
         FromResult(await Mediator.Send(new DeletePayrollCommand(periodId), ct));

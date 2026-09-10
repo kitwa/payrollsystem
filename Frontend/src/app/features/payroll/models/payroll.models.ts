@@ -48,4 +48,5 @@ export interface GeneratePayroll {
   companyId: string;
   year: number;
   month: number;
+  employeeIds: string[];
 }

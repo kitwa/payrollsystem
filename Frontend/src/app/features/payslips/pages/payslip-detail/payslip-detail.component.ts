@@ -66,6 +66,7 @@ import { PayslipDetail } from '../../models/payslip.models';
 									}
 								</tbody>
 								<tfoot>
+									<tr><td>Taxable Income</td><td class="text-end">R {{ slip.taxableIncome | number:'1.2-2' }}</td></tr>
 									<tr class="fw-semibold"><td>Gross Earnings</td><td class="text-end">R {{ slip.grossEarnings | number:'1.2-2' }}</td></tr>
 								</tfoot>
 							</table>

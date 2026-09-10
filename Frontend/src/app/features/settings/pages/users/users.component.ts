@@ -8,11 +8,12 @@ import { SettingsService } from '../../services/settings.service';
 import { Company } from '../../models/settings.models';
 import { ManagedUser, CreateUserRequest } from '../../models/user.models';
 import { UserService } from '../../services/user.service';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, PaginationComponent],
   template: `
     <section class="mb-3">
       <h1 class="h3 mb-1">User Accounts</h1>
@@ -73,12 +74,18 @@ import { UserService } from '../../services/user.service';
           <table class="table align-middle mb-0">
             <thead><tr><th>User</th><th>Employee</th><th>Roles</th><th>Status</th><th class="text-end">Actions</th></tr></thead>
             <tbody>
-              @for (user of users(); track user.userId) {
+              @for (user of pagedUsers(); track user.userId) {
                 <tr>
                   <td><p class="mb-0 fw-semibold">{{ user.firstName }} {{ user.lastName }}</p><small class="text-muted">{{ user.email }}</small></td>
                   <td>{{ user.employeeName || 'Not linked' }}</td>
                   <td>
-                    <select class="form-select form-select-sm" [value]="primaryRole(user)" (change)="changeRole(user, $event)">
+                    <select
+                      class="form-select form-select-sm"
+                      [value]="primaryRole(user)"
+                      [disabled]="isCurrentUser(user)"
+                      [title]="isCurrentUser(user) ? 'You cannot change your own role.' : 'Change user role'"
+                      (change)="changeRole(user, $event)"
+                    >
                       <option value="Employee">Employee</option>
                       <option value="PayrollManager">Payroll Manager</option>
                       @if (isSuperAdmin()) { <option value="Admin">Admin</option> }
@@ -93,6 +100,7 @@ import { UserService } from '../../services/user.service';
             </tbody>
           </table>
         </div>
+        <app-pagination [page]="pageNumber()" [pageSize]="pageSize" [total]="users().length" (pageChange)="pageNumber.set($event)"></app-pagination>
       </div>
     </section>
   `
@@ -110,6 +118,9 @@ export class UsersComponent {
   readonly selectedCompanyId = signal<string | null>(this.auth.companyId());
   readonly error = signal('');
   readonly message = signal('');
+  readonly pageNumber = signal(1);
+  readonly pageSize = 20;
+  readonly pagedUsers = computed(() => this.users().slice((this.pageNumber() - 1) * this.pageSize, this.pageNumber() * this.pageSize));
 
   readonly form = this.fb.group({
     employeeId: ['', Validators.required],
@@ -157,6 +168,7 @@ export class UsersComponent {
   selectCompany(event: Event): void {
     this.selectedCompanyId.set((event.target as HTMLSelectElement).value || null);
     this.users.set([]);
+    this.pageNumber.set(1);
     this.employees.set([]);
     this.form.controls.employeeId.reset('');
     this.load();
@@ -182,6 +194,10 @@ export class UsersComponent {
 
   primaryRole(user: ManagedUser): string {
     return user.roles.includes('Admin') ? 'Admin' : user.roles.includes('PayrollManager') ? 'PayrollManager' : 'Employee';
+  }
+
+  isCurrentUser(user: ManagedUser): boolean {
+    return user.userId === this.auth.currentUser()?.userId;
   }
 
   changeRole(user: ManagedUser, event: Event): void {

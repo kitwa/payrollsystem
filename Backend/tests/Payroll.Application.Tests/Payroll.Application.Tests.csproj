@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Payroll.Application\Payroll.Application.csproj" />
     <ProjectReference Include="..\..\src\Payroll.Domain\Payroll.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Payroll.Infrastructure\Payroll.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

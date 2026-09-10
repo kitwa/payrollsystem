@@ -33,6 +33,22 @@ export class SettingsService {
     return this.http.get<DeductionType[]>(`${this.settingsUrl}/deduction-types`, { params: new HttpParams().set('companyId', companyId) });
   }
 
+  createEarningType(dto: { companyId: string; name: string; code: string; isTaxable: boolean }) {
+    return this.http.post<string>(`${this.settingsUrl}/earning-types`, dto);
+  }
+
+  updateEarningType(id: string, dto: Partial<EarningType>) {
+    return this.http.put(`${this.settingsUrl}/earning-types/${id}`, dto);
+  }
+
+  createDeductionType(dto: { companyId: string; name: string; code: string; isEmployerContribution: boolean }) {
+    return this.http.post<string>(`${this.settingsUrl}/deduction-types`, dto);
+  }
+
+  updateDeductionType(id: string, dto: Partial<DeductionType>) {
+    return this.http.put(`${this.settingsUrl}/deduction-types/${id}`, dto);
+  }
+
   getActiveTaxYear() {
     return this.http.get<TaxYearDetail>(`${this.taxUrl}/year`);
   }

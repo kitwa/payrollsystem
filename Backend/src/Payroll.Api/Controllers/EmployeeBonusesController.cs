@@ -6,7 +6,7 @@ using Payroll.Shared;
 
 namespace Payroll.Api.Controllers;
 
-[Authorize(Policy = Constants.Policies.RequireAdminRole)]
+[Authorize(Policy = Constants.Policies.RequirePayrollManagerRole)]
 [Route("api/employee-bonuses")]
 public class EmployeeBonusesController(IMediator mediator) : BaseApiController(mediator)
 {

@@ -24,6 +24,31 @@ import { SettingsService } from '../../services/settings.service';
 							<div class="col-12 col-md-6"><label class="form-label">Registration Number</label><input class="form-control" formControlName="registrationNumber"></div>
 							<div class="col-12 col-md-6"><label class="form-label">Tax Number</label><input class="form-control" formControlName="taxNumber"></div>
 							<div class="col-12 col-md-6"><label class="form-label">Contact Email</label><input class="form-control" formControlName="email"></div>
+
+							<div class="col-12 mt-3">
+								<h3 class="h6 mb-2">Payroll Settings</h3>
+								<div class="border rounded p-3 bg-light-subtle">
+									<div class="d-flex justify-content-between align-items-center mb-2 gap-3">
+										<div>
+											<label class="form-label mb-0">Apply UIF</label>
+											<div class="text-muted small">Enable or disable UIF contributions for this company.</div>
+										</div>
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" formControlName="isUifEnabled">
+										</div>
+									</div>
+									<div class="d-flex justify-content-between align-items-center gap-3">
+										<div>
+											<label class="form-label mb-0">Apply Skills Development Levy (SDL)</label>
+											<div class="text-muted small">Enable or disable SDL employer contributions for this company.</div>
+										</div>
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" formControlName="isSdlEnabled">
+										</div>
+									</div>
+								</div>
+							</div>
+
 							<div class="col-12"><button class="btn btn-dark" type="submit" [disabled]="companyForm.invalid">Save Settings</button></div>
 						</form>
 						@if (saved()) {
@@ -102,7 +127,9 @@ export class GeneralSettingsComponent {
 		name: ['', Validators.required],
 		registrationNumber: ['', Validators.required],
 		taxNumber: [''],
-		email: ['', Validators.email]
+		email: ['', Validators.email],
+		isUifEnabled: [true],
+		isSdlEnabled: [true]
 	});
 
 	constructor() {
@@ -113,7 +140,9 @@ export class GeneralSettingsComponent {
 					name: company.name,
 					registrationNumber: company.registrationNumber,
 					taxNumber: company.taxNumber,
-					email: company.email
+					email: company.email,
+					isUifEnabled: company.isUifEnabled ?? true,
+					isSdlEnabled: company.isSdlEnabled ?? true
 				});
 				this.hasLogo.set(company.hasLogo);
 			});
@@ -173,7 +202,9 @@ export class GeneralSettingsComponent {
 			name: value.name!,
 			registrationNumber: value.registrationNumber!,
 			taxNumber: value.taxNumber ?? undefined,
-			email: value.email ?? undefined
+			email: value.email ?? undefined,
+			isUifEnabled: value.isUifEnabled ?? true,
+			isSdlEnabled: value.isSdlEnabled ?? true
 		}).subscribe(() => this.saved.set(true));
 	}
 }

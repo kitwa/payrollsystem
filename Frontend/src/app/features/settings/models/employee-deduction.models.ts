@@ -14,6 +14,7 @@ export enum DeductionCategory {
 export interface EmployeeDeduction {
   id: string;
   employeeId: string;
+  deductionTypeId?: string;
   description: string;
   category: DeductionCategory;
   employeeAmount: number;

@@ -19,6 +19,18 @@ public class GeneratePayrollHandler(IAppDbContext db, IPayrollEngine engine, ICu
         var d = request.Dto;
         if (!TenantAccess.CanManageCompany(currentUser, d.CompanyId))
             return Result<Guid>.Fail("You are not authorized to generate payroll for this company.");
+        var selectedEmployeeIds = d.EmployeeIds.Distinct().ToList();
+        if (selectedEmployeeIds.Count == 0)
+            return Result<Guid>.Fail("Select at least one active employee for this payroll.");
+
+        var validEmployeeIds = await db.Employees
+            .Where(e => e.CompanyId == d.CompanyId && !e.IsDeleted
+                && e.Status == Domain.Employees.Enums.EmploymentStatus.Active
+                && selectedEmployeeIds.Contains(e.Id))
+            .Select(e => e.Id)
+            .ToListAsync(ct);
+        if (validEmployeeIds.Count != selectedEmployeeIds.Count)
+            return Result<Guid>.Fail("One or more selected employees are invalid for this company.");
 
         var exists = await db.PayrollPeriods.AnyAsync(
             p => p.CompanyId == d.CompanyId && p.Year == d.Year && p.Month == d.Month && !p.IsDeleted, ct);
@@ -41,7 +53,7 @@ public class GeneratePayrollHandler(IAppDbContext db, IPayrollEngine engine, ICu
         db.PayrollPeriods.Add(period);
         await db.SaveChangesAsync(ct);
 
-        await engine.ProcessPeriodAsync(period.Id, ct);
+        await engine.ProcessPeriodAsync(period.Id, validEmployeeIds, ct);
         return Result<Guid>.Ok(period.Id);
     }
 }
@@ -135,19 +147,16 @@ public class DeletePayrollHandler(IAppDbContext db, ICurrentUser currentUser) : 
             .Include(p => p.Lines)
             .FirstOrDefaultAsync(p => p.Id == request.PeriodId && !p.IsDeleted, ct);
         if (period is null) return Result.Fail("Payroll period not found.");
-        if (!TenantAccess.CanManageCompany(currentUser, period.CompanyId))
-            return Result.Fail("You are not authorized to delete this payroll period.");
-        if (period.Status != PayrollStatus.Draft)
-            return Result.Fail("Only a draft payroll period can be deleted. Approved, locked, or paid periods must be kept for audit purposes.");
+        if (!currentUser.IsInRole(Constants.Roles.SuperAdmin))
+            return Result.Fail("Only Super Admin users can delete payroll periods.");
 
-        var now = DateTime.UtcNow;
-        foreach (var line in period.Lines)
-        {
-            line.IsDeleted = true;
-            line.DeletedAt = now;
-        }
-        period.IsDeleted = true;
-        period.DeletedAt = now;
+        var lineIds = period.Lines.Select(line => line.Id).ToList();
+        var earnings = await db.Earnings.Where(earning => lineIds.Contains(earning.PayrollLineId)).ToListAsync(ct);
+        var deductions = await db.Deductions.Where(deduction => lineIds.Contains(deduction.PayrollLineId)).ToListAsync(ct);
+        db.Earnings.RemoveRange(earnings);
+        db.Deductions.RemoveRange(deductions);
+        db.PayrollLines.RemoveRange(period.Lines);
+        db.PayrollPeriods.Remove(period);
         await db.SaveChangesAsync(ct);
         return Result.Ok();
     }

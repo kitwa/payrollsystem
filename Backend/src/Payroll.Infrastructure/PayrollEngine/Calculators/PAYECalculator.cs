@@ -4,26 +4,25 @@ using Payroll.Infrastructure.PayrollEngine.Interfaces;
 
 namespace Payroll.Infrastructure.PayrollEngine.Calculators;
 
-/// <summary>Calculates PAYE using progressive tax tables loaded from TaxYear — never hardcoded.</summary>
+/// <summary>Calculates monthly PAYE from annual progressive tax tables loaded from TaxYear.</summary>
 public class PAYECalculator : IPayrollCalculator
 {
     public int Order => 100;
 
     public Task CalculateAsync(PayrollContext context, CancellationToken ct = default)
     {
-        var annualIncome = context.TaxableIncome * 12;
         var taxYear = context.TaxYear;
+        var annualIncome = Math.Max(0, context.TaxableIncome * 12);
+        var age = CalculateAge(context.DateOfBirth, taxYear.EndDate);
+        var ageGroup = age >= 75 ? "75AndOver" : age >= 65 ? "65to74" : "Under65";
+        var threshold = taxYear.TaxThresholds
+            .FirstOrDefault(t => t.AgeGroup == ageGroup)?.ThresholdAmount ?? 0;
 
-        var bracket = taxYear.TaxTables
-            .OrderBy(t => t.IncomeFrom)
-            .LastOrDefault(t => annualIncome >= t.IncomeFrom);
-
-        if (bracket is null) return Task.CompletedTask;
-
-        var annualTax = bracket.BaseTax + (annualIncome - bracket.IncomeFrom) * (bracket.MarginalRate / 100m);
+        var annualTax = annualIncome <= threshold
+            ? 0
+            : CalculateTaxFromBrackets(annualIncome, taxYear);
 
         // Apply primary rebate (age determines which rebates apply)
-        var age = CalculateAge(context.DateOfBirth);
         var primaryRebate = taxYear.TaxRebates.FirstOrDefault(r => r.RebateType == "Primary")?.Amount ?? 0;
         var secondaryRebate = age >= 65 ? (taxYear.TaxRebates.FirstOrDefault(r => r.RebateType == "Secondary")?.Amount ?? 0) : 0;
         var tertiaryRebate = age >= 75 ? (taxYear.TaxRebates.FirstOrDefault(r => r.RebateType == "Tertiary")?.Amount ?? 0) : 0;
@@ -44,11 +43,21 @@ public class PAYECalculator : IPayrollCalculator
         return Task.CompletedTask;
     }
 
-    private static int CalculateAge(DateTime dateOfBirth)
+    internal static decimal CalculateTaxFromBrackets(decimal annualIncome, Domain.Tax.TaxYear taxYear)
     {
-        var today = DateTime.Today;
-        var age = today.Year - dateOfBirth.Year;
-        if (dateOfBirth.Date > today.AddYears(-age)) age--;
+        var bracket = taxYear.TaxTables
+            .OrderBy(t => t.IncomeFrom)
+            .LastOrDefault(t => annualIncome >= t.IncomeFrom);
+
+        if (bracket is null) return 0;
+
+        return bracket.BaseTax + (annualIncome - bracket.IncomeFrom) * (bracket.MarginalRate / 100m);
+    }
+
+    private static int CalculateAge(DateTime dateOfBirth, DateTime asOf)
+    {
+        var age = asOf.Year - dateOfBirth.Year;
+        if (dateOfBirth.Date > asOf.AddYears(-age)) age--;
         return age;
     }
 }

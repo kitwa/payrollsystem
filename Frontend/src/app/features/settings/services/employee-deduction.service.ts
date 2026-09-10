@@ -14,7 +14,7 @@ export class EmployeeDeductionService {
     return this.http.get<EmployeeDeduction[]>(this.url, { params });
   }
 
-  create(dto: { companyId: string; employeeId: string; description: string; category: number; employeeAmount: number; employerAmount: number }) {
+  create(dto: { companyId: string; employeeId: string; description: string; category: number; employeeAmount: number; employerAmount: number; deductionTypeId: string }) {
     return this.http.post<string>(this.url, dto);
   }
 

@@ -13,6 +13,7 @@ public record PayslipListItemDto(
     int Month,
     PayrollStatus Status,
     decimal GrossEarnings,
+    decimal TaxableIncome,
     decimal TotalDeductions,
     decimal NetPay,
     DateTime? EmailedAt);
@@ -47,6 +48,7 @@ public record PayslipDetailDto(
     DateTime PeriodEnd,
     PayrollStatus Status,
     decimal GrossEarnings,
+    decimal TaxableIncome,
     decimal TotalDeductions,
     decimal NetPay,
     DateTime? EmailedAt,

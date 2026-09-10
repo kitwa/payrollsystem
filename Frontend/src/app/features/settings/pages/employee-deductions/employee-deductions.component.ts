@@ -6,11 +6,14 @@ import { EmployeeService } from '../../../employees/services/employee.service';
 import { EmployeeList } from '../../../employees/models/employee.models';
 import { EmployeeDeductionService } from '../../services/employee-deduction.service';
 import { DeductionCategory, EmployeeDeduction } from '../../models/employee-deduction.models';
+import { SettingsService } from '../../services/settings.service';
+import { DeductionType } from '../../models/settings.models';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-employee-deductions',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, PaginationComponent],
   template: `
     <section class="mb-3">
       <h1 class="h3 mb-1">Employee Deductions</h1>
@@ -33,6 +36,15 @@ import { DeductionCategory, EmployeeDeduction } from '../../models/employee-dedu
             </select>
           </div>
           <div class="col-12 col-md-6 col-lg-3">
+            <label class="form-label">Payroll item</label>
+            <select class="form-select" formControlName="deductionTypeId">
+              <option value="">Select deduction type</option>
+              @for (item of deductionTypes(); track item.id) {
+                <option [value]="item.id">{{ item.name }} ({{ item.code }})</option>
+              }
+            </select>
+          </div>
+          <div class="col-12 col-md-6 col-lg-2">
             <label class="form-label">Description</label>
             <input class="form-control" formControlName="description" placeholder="e.g. Staff loan">
           </div>
@@ -66,7 +78,7 @@ import { DeductionCategory, EmployeeDeduction } from '../../models/employee-dedu
           <table class="table align-middle mb-0">
             <thead><tr><th>Description</th><th>Category</th><th class="text-end">Employee</th><th class="text-end">Employer</th><th>Status</th><th class="text-end">Action</th></tr></thead>
             <tbody>
-              @for (deduction of deductions(); track deduction.id) {
+              @for (deduction of pagedDeductions(); track deduction.id) {
                 <tr>
                   <td>{{ deduction.description }}</td>
                   <td>{{ categoryName(deduction.category) }}</td>
@@ -81,6 +93,7 @@ import { DeductionCategory, EmployeeDeduction } from '../../models/employee-dedu
             </tbody>
           </table>
         </div>
+        <app-pagination [page]="pageNumber()" [pageSize]="pageSize" [total]="deductions().length" (pageChange)="pageNumber.set($event)"></app-pagination>
       </div>
     </section>
   `
@@ -90,12 +103,17 @@ export class EmployeeDeductionsComponent {
   private readonly auth = inject(AuthService);
   private readonly employeeService = inject(EmployeeService);
   private readonly deductionService = inject(EmployeeDeductionService);
+  private readonly settingsService = inject(SettingsService);
 
   readonly employees = signal<EmployeeList[]>([]);
   readonly deductions = signal<EmployeeDeduction[]>([]);
   readonly error = signal('');
   readonly message = signal('');
   readonly selectedEmployeeId = signal('');
+  readonly deductionTypes = signal<DeductionType[]>([]);
+  readonly pageNumber = signal(1);
+  readonly pageSize = 20;
+  readonly pagedDeductions = computed(() => this.deductions().slice((this.pageNumber() - 1) * this.pageSize, this.pageNumber() * this.pageSize));
 
   readonly categories = [
     { value: DeductionCategory.Other, label: 'Other' },
@@ -108,6 +126,7 @@ export class EmployeeDeductionsComponent {
 
   readonly form = this.fb.group({
     employeeId: ['', Validators.required],
+    deductionTypeId: ['', Validators.required],
     description: ['', Validators.required],
     category: [DeductionCategory.Other, Validators.required],
     employeeAmount: [0, [Validators.required, Validators.min(0)]],
@@ -121,12 +140,17 @@ export class EmployeeDeductionsComponent {
         next: page => this.employees.set(page.items),
         error: response => this.showError(response, 'Unable to load employees.')
       });
+      this.settingsService.getDeductionTypes(companyId).subscribe({
+        next: types => this.deductionTypes.set(types.filter(type => type.isActive)),
+        error: response => this.showError(response, 'Unable to load deduction types.')
+      });
     }
   }
 
   loadDeductions(): void {
     const employeeId = this.form.controls.employeeId.value ?? '';
     this.selectedEmployeeId.set(employeeId);
+    this.pageNumber.set(1);
     const companyId = this.auth.companyId();
     if (companyId && employeeId) {
       this.deductionService.getAll(companyId, employeeId).subscribe({
@@ -146,6 +170,7 @@ export class EmployeeDeductionsComponent {
     this.deductionService.create({
       companyId,
       employeeId: value.employeeId!,
+      deductionTypeId: value.deductionTypeId!,
       description: value.description!,
       category: value.category!,
       employeeAmount: value.employeeAmount!,

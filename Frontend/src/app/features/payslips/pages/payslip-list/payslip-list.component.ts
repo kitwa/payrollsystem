@@ -6,11 +6,12 @@ import { PayslipService } from '../../services/payslip.service';
 import { Payslip, PayslipPeriodSummary } from '../../models/payslip.models';
 import { SettingsService } from '../../../settings/services/settings.service';
 import { Company } from '../../../settings/models/settings.models';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 
 @Component({
 	selector: 'app-payslip-list',
 	standalone: true,
-	imports: [CommonModule, RouterLink],
+	imports: [CommonModule, RouterLink, PaginationComponent],
 	template: `
 		<section class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
 			<div>
@@ -43,7 +44,7 @@ import { Company } from '../../../settings/models/settings.models';
 				</div>
 			}
 			<section class="row g-3">
-				@for (period of periods(); track period.payrollPeriodId) {
+				@for (period of pagedPeriods(); track period.payrollPeriodId) {
 					<div class="col-12 col-md-6 col-xl-4">
 						<article class="card border-0 shadow-sm h-100">
 							<div class="card-body">
@@ -67,9 +68,10 @@ import { Company } from '../../../settings/models/settings.models';
 					<div class="col-12 text-center text-muted py-4">No payroll periods with payslips yet.</div>
 				}
 			</section>
+			<app-pagination [page]="periodPage()" [pageSize]="pageSize" [total]="periods().length" (pageChange)="periodPage.set($event)"></app-pagination>
 		} @else {
 			<section class="row g-3">
-				@for (payslip of payslips(); track payslip.payrollLineId) {
+				@for (payslip of pagedPayslips(); track payslip.payrollLineId) {
 					<div class="col-12 col-md-6 col-xl-4">
 						<article class="card border-0 shadow-sm h-100">
 							<div class="card-body">
@@ -90,6 +92,7 @@ import { Company } from '../../../settings/models/settings.models';
 					<div class="col-12 text-center text-muted py-4">No payslips available yet.</div>
 				}
 			</section>
+			<app-pagination [page]="payslipPage()" [pageSize]="pageSize" [total]="payslips().length" (pageChange)="payslipPage.set($event)"></app-pagination>
 		}
 	`
 })
@@ -105,6 +108,11 @@ export class PayslipListComponent {
 	readonly error = signal('');
 	readonly message = signal('');
 	readonly busy = signal(false);
+	readonly pageSize = 20;
+	readonly periodPage = signal(1);
+	readonly payslipPage = signal(1);
+	readonly pagedPeriods = computed(() => this.periods().slice((this.periodPage() - 1) * this.pageSize, this.periodPage() * this.pageSize));
+	readonly pagedPayslips = computed(() => this.payslips().slice((this.payslipPage() - 1) * this.pageSize, this.payslipPage() * this.pageSize));
 
 	readonly isManager = computed(() =>
 		['PayrollManager', 'Admin', 'SuperAdmin'].some(role => this.auth.isInRole(role)));
@@ -151,6 +159,7 @@ export class PayslipListComponent {
 		const companyId = (event.target as HTMLSelectElement).value || null;
 		this.selectedCompanyId.set(companyId);
 		this.periods.set([]);
+		this.periodPage.set(1);
 		this.reset();
 		if (companyId) this.loadPeriods();
 	}

@@ -9,7 +9,7 @@ using Payroll.Shared;
 namespace Payroll.Application.Payroll;
 
 public record EmployeeBonusDto(
-    Guid Id, Guid EmployeeId, Guid PayrollPeriodId, string Description, decimal Amount, string? Notes);
+    Guid Id, Guid EmployeeId, Guid PayrollPeriodId, string Description, decimal Amount, string? Notes, Guid? EarningTypeId);
 
 public record GetEmployeeBonusesQuery(Guid CompanyId, Guid PayrollPeriodId, Guid? EmployeeId)
     : IRequest<Result<List<EmployeeBonusDto>>>;
@@ -30,7 +30,7 @@ public class GetEmployeeBonusesHandler(IAppDbContext db, ICurrentUser currentUse
 
         var result = await query
             .OrderBy(b => b.Description)
-            .Select(b => new EmployeeBonusDto(b.Id, b.EmployeeId, b.PayrollPeriodId, b.Description, b.Amount, b.Notes))
+            .Select(b => new EmployeeBonusDto(b.Id, b.EmployeeId, b.PayrollPeriodId, b.Description, b.Amount, b.Notes, b.EarningTypeId))
             .ToListAsync(ct);
 
         return Result<List<EmployeeBonusDto>>.Ok(result);
@@ -38,7 +38,7 @@ public class GetEmployeeBonusesHandler(IAppDbContext db, ICurrentUser currentUse
 }
 
 public record CreateEmployeeBonusDto(
-    Guid CompanyId, Guid EmployeeId, Guid PayrollPeriodId, string Description, decimal Amount, string? Notes);
+    Guid CompanyId, Guid EmployeeId, Guid PayrollPeriodId, string Description, decimal Amount, string? Notes, Guid? EarningTypeId = null);
 
 public record CreateEmployeeBonusCommand(CreateEmployeeBonusDto Dto) : IRequest<Result<Guid>>;
 
@@ -59,6 +59,10 @@ public class CreateEmployeeBonusHandler(IAppDbContext db, ICurrentUser currentUs
             e => e.Id == d.EmployeeId && e.CompanyId == d.CompanyId && !e.IsDeleted, ct);
         if (!employeeExists) return Result<Guid>.Fail("Employee not found in this company.");
 
+        if (d.EarningTypeId is not null && !await db.EarningTypes.AnyAsync(
+                t => t.Id == d.EarningTypeId && t.CompanyId == d.CompanyId && t.IsActive && !t.IsDeleted, ct))
+            return Result<Guid>.Fail("The selected earning type is not active for this company.");
+
         var period = await db.PayrollPeriods.FirstOrDefaultAsync(
             p => p.Id == d.PayrollPeriodId && p.CompanyId == d.CompanyId && !p.IsDeleted, ct);
         if (period is null) return Result<Guid>.Fail("Payroll period not found.");
@@ -69,6 +73,7 @@ public class CreateEmployeeBonusHandler(IAppDbContext db, ICurrentUser currentUs
         {
             CompanyId = d.CompanyId,
             EmployeeId = d.EmployeeId,
+            EarningTypeId = d.EarningTypeId,
             PayrollPeriodId = d.PayrollPeriodId,
             Description = d.Description.Trim(),
             Amount = d.Amount,
@@ -83,7 +88,7 @@ public class CreateEmployeeBonusHandler(IAppDbContext db, ICurrentUser currentUs
     }
 }
 
-public record UpdateEmployeeBonusDto(string Description, decimal Amount, string? Notes);
+public record UpdateEmployeeBonusDto(string Description, decimal Amount, string? Notes, Guid? EarningTypeId = null);
 
 public record UpdateEmployeeBonusCommand(Guid Id, UpdateEmployeeBonusDto Dto) : IRequest<Result>;
 
@@ -100,6 +105,9 @@ public class UpdateEmployeeBonusHandler(IAppDbContext db, ICurrentUser currentUs
             return Result.Fail("Bonus description is required.");
         if (request.Dto.Amount <= 0)
             return Result.Fail("Bonus amount must be greater than zero.");
+        if (request.Dto.EarningTypeId is not null && !await db.EarningTypes.AnyAsync(
+                t => t.Id == request.Dto.EarningTypeId && t.CompanyId == bonus.CompanyId && t.IsActive && !t.IsDeleted, ct))
+            return Result.Fail("The selected earning type is not active for this company.");
 
         var period = await db.PayrollPeriods.FirstOrDefaultAsync(p => p.Id == bonus.PayrollPeriodId, ct);
         if (period is null) return Result.Fail("Payroll period not found.");
@@ -107,6 +115,7 @@ public class UpdateEmployeeBonusHandler(IAppDbContext db, ICurrentUser currentUs
             return Result.Fail("Bonuses cannot be changed once the payroll period is locked or paid.");
 
         bonus.Description = request.Dto.Description.Trim();
+        bonus.EarningTypeId = request.Dto.EarningTypeId;
         bonus.Amount = request.Dto.Amount;
         bonus.Notes = string.IsNullOrWhiteSpace(request.Dto.Notes) ? null : request.Dto.Notes.Trim();
         await db.SaveChangesAsync(ct);

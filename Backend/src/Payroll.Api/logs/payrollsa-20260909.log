@@ -741,3 +741,42 @@ Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operati
 2026-09-09 18:46:23.706 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 7.9181 ms
 2026-09-09 18:46:23.737 +02:00 [INF] HTTP GET /api/dashboard/summary responded 401 in 34.8605 ms
 2026-09-09 18:46:23.767 +02:00 [INF] HTTP GET /api/dashboard/summary responded 401 in 9.9551 ms
+2026-09-09 19:57:14.652 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-09 19:57:18.108 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-09 19:57:18.343 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-09 19:57:18.487 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-09 19:57:18.491 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-09 19:57:18.538 +02:00 [INF] Server desktop-3ro9ejj:12308:5328803f successfully announced in 7,9879 ms
+2026-09-09 19:57:18.548 +02:00 [INF] Server desktop-3ro9ejj:12308:5328803f is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-09 19:57:18.570 +02:00 [INF] Server desktop-3ro9ejj:12308:5328803f all the dispatchers started
+2026-09-09 20:36:00.195 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-09-09 20:36:00.670 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 488.5324 ms
+2026-09-09 20:36:03.148 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-09-09 20:36:04.076 +02:00 [ERR] Could not persist audit log for /api/auth/login
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 47
+2026-09-09 20:36:04.108 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 3408.4155 ms
+2026-09-09 20:36:04.165 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 20.4842 ms
+2026-09-09 20:36:04.187 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 36.6887 ms
+2026-09-09 20:36:04.867 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 696.2112 ms
+2026-09-09 20:36:05.025 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 237.3354 ms
+2026-09-09 21:55:44.925 +02:00 [INF] Server desktop-3ro9ejj:12308:5328803f caught stopping signal...
+2026-09-09 21:55:44.983 +02:00 [INF] Server desktop-3ro9ejj:12308:5328803f All dispatchers stopped
+2026-09-09 21:55:44.995 +02:00 [INF] Server desktop-3ro9ejj:12308:5328803f successfully reported itself as stopped in 3,572 ms
+2026-09-09 21:55:44.998 +02:00 [INF] Server desktop-3ro9ejj:12308:5328803f has been stopped in total 25,1337 ms

@@ -4,11 +4,12 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../../core/auth/auth.service';
 import { EmployeeService } from '../../services/employee.service';
 import { EmployeeList } from '../../models/employee.models';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 
 @Component({
 	selector: 'app-employee-list',
 	standalone: true,
-	imports: [CommonModule, RouterLink],
+	imports: [CommonModule, RouterLink, PaginationComponent],
 	template: `
 		<section class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
 			<div>
@@ -88,6 +89,7 @@ import { EmployeeList } from '../../models/employee.models';
 						</tbody>
 					</table>
 				</div>
+				<app-pagination [page]="pageNumber()" [pageSize]="pageSize" [total]="totalCount()" (pageChange)="loadPage($event)"></app-pagination>
 			</div>
 		</section>
 	`,
@@ -139,12 +141,25 @@ export class EmployeeListComponent {
 	readonly query = signal('');
 	readonly department = signal('All departments');
 	readonly employees = signal<EmployeeList[]>([]);
+	readonly pageNumber = signal(1);
+	readonly pageSize = 20;
+	readonly totalCount = signal(0);
 
 	constructor() {
 		const companyId = this.auth.companyId();
 		if (companyId) {
-			this.employeeService.getAll(companyId).subscribe(page => this.employees.set(page.items));
+			this.loadPage(1);
 		}
+	}
+
+	loadPage(page: number): void {
+		const companyId = this.auth.companyId();
+		if (!companyId || page < 1) return;
+		this.employeeService.getAll(companyId, page, this.pageSize).subscribe(result => {
+			this.pageNumber.set(result.pageNumber);
+			this.totalCount.set(result.totalCount);
+			this.employees.set(result.items);
+		});
 	}
 
 	readonly departments = computed(() => [
@@ -180,9 +195,11 @@ export class EmployeeListComponent {
 
 	setQuery(event: Event): void {
 		this.query.set((event.target as HTMLInputElement).value);
+		this.pageNumber.set(1);
 	}
 
 	setDepartment(event: Event): void {
 		this.department.set((event.target as HTMLSelectElement).value);
+		this.pageNumber.set(1);
 	}
 }

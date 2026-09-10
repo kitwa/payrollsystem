@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PayslipService } from '../../services/payslip.service';
 import { Payslip } from '../../models/payslip.models';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 
 @Component({
 	selector: 'app-payslip-period',
 	standalone: true,
-	imports: [CommonModule, RouterLink],
+	imports: [CommonModule, RouterLink, PaginationComponent],
 	template: `
 		<section class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
 			<div>
@@ -66,7 +67,7 @@ import { Payslip } from '../../models/payslip.models';
 							</tr>
 						</thead>
 						<tbody>
-							@for (payslip of payslips(); track payslip.payrollLineId) {
+							@for (payslip of pagedPayslips(); track payslip.payrollLineId) {
 								<tr>
 									<td>
 										<p class="mb-0 fw-semibold">{{ payslip.employeeName }}</p>
@@ -94,6 +95,7 @@ import { Payslip } from '../../models/payslip.models';
 						</tbody>
 					</table>
 				</div>
+				<app-pagination [page]="pageNumber()" [pageSize]="pageSize" [total]="payslips().length" (pageChange)="pageNumber.set($event)"></app-pagination>
 			</div>
 		</section>
 	`
@@ -107,6 +109,9 @@ export class PayslipPeriodComponent {
 	readonly error = signal('');
 	readonly message = signal('');
 	readonly busy = signal(false);
+	readonly pageNumber = signal(1);
+	readonly pageSize = 20;
+	readonly pagedPayslips = computed(() => this.payslips().slice((this.pageNumber() - 1) * this.pageSize, this.pageNumber() * this.pageSize));
 
 	readonly emailedCount = computed(() => this.payslips().filter(p => !!p.emailedAt).length);
 	readonly totalGross = computed(() => this.payslips().reduce((sum, p) => sum + p.grossEarnings, 0));

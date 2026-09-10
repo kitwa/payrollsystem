@@ -6,7 +6,7 @@ using Payroll.Shared;
 
 namespace Payroll.Api.Controllers;
 
-[Authorize(Policy = Constants.Policies.RequireAdminRole)]
+[Authorize(Policy = Constants.Policies.RequirePayrollManagerRole)]
 [Route("api/employee-deductions")]
 public class EmployeeDeductionsController(IMediator mediator) : BaseApiController(mediator)
 {

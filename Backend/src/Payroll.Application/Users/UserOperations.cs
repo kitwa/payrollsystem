@@ -126,6 +126,8 @@ public class UpdateUserRolesHandler(
         if (user is null) return Result.Fail("User not found.");
         if (user.CompanyId is null || !TenantAccess.CanAccessCompany(currentUser, user.CompanyId.Value))
             return Result.Fail("You are not authorized to manage this user.");
+        if (currentUser.UserId == user.Id)
+            return Result.Fail("You cannot change your own role.");
 
         var requestedRoles = request.Roles
             .Select(role => role.Trim())

@@ -84,7 +84,7 @@ public class PdfService(IAppDbContext db) : IPdfService
                             h.Cell().Text("Description").Bold();
                             h.Cell().AlignRight().Text("Amount").Bold();
                         });
-                        foreach (var d in line.Deductions)
+                        foreach (var d in line.Deductions.Where(d => d.EmployeeAmount > 0))
                         {
                             table.Cell().Text(d.Description);
                             table.Cell().AlignRight().Text($"R {d.EmployeeAmount:N2}");
@@ -92,6 +92,11 @@ public class PdfService(IAppDbContext db) : IPdfService
                     });
 
                     col.Item().PaddingTop(15).LineHorizontal(1);
+                    col.Item().PaddingTop(5).Row(row =>
+                    {
+                        row.RelativeItem().Text("Taxable Income");
+                        row.RelativeItem().AlignRight().Text($"R {line.TaxableIncome:N2}");
+                    });
                     col.Item().PaddingTop(5).Row(row =>
                     {
                         row.RelativeItem().Text("Gross Earnings").Bold();

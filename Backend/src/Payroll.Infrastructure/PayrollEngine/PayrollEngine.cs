@@ -13,7 +13,7 @@ public class PayrollEngine(AppDbContext db, IEnumerable<IPayrollCalculator> calc
 {
     private readonly IReadOnlyList<IPayrollCalculator> _calculators = calculators.OrderBy(c => c.Order).ToList();
 
-    public async Task ProcessPeriodAsync(Guid periodId, CancellationToken ct = default)
+    public async Task ProcessPeriodAsync(Guid periodId, IReadOnlyCollection<Guid> employeeIds, CancellationToken ct = default)
     {
         var period = await db.PayrollPeriods
             .Include(p => p.Lines)
@@ -22,7 +22,8 @@ public class PayrollEngine(AppDbContext db, IEnumerable<IPayrollCalculator> calc
 
         var employees = await db.Employees
             .Where(e => e.CompanyId == period.CompanyId && !e.IsDeleted
-                && e.Status == Domain.Employees.Enums.EmploymentStatus.Active)
+            && e.Status == Domain.Employees.Enums.EmploymentStatus.Active
+            && employeeIds.Contains(e.Id))
             .ToListAsync(ct);
 
         foreach (var employee in employees)
@@ -68,10 +69,12 @@ public class PayrollEngine(AppDbContext db, IEnumerable<IPayrollCalculator> calc
         };
 
         var customDeductions = await db.EmployeeDeductions
+            .Include(d => d.DeductionType)
             .Where(d => d.EmployeeId == employeeId && d.CompanyId == period.CompanyId && d.IsActive && !d.IsDeleted)
             .ToListAsync(ct);
 
         var bonuses = await db.EmployeeBonuses
+            .Include(b => b.EarningType)
             .Where(b => b.EmployeeId == employeeId && b.PayrollPeriodId == periodId && !b.IsDeleted)
             .ToListAsync(ct);
 
@@ -83,9 +86,10 @@ public class PayrollEngine(AppDbContext db, IEnumerable<IPayrollCalculator> calc
                 Category = EarningCategory.Bonus,
                 Description = $"Bonus: {bonus.Description}",
                 Amount = bonus.Amount,
-                IsTaxable = true
+                IsTaxable = bonus.EarningType?.IsTaxable ?? true
             });
-            context.TaxableIncome += bonus.Amount;
+            if (bonus.EarningType?.IsTaxable ?? true)
+                context.TaxableIncome += bonus.Amount;
         }
 
         foreach (var calculator in _calculators)
@@ -96,7 +100,9 @@ public class PayrollEngine(AppDbContext db, IEnumerable<IPayrollCalculator> calc
             context.Deductions.Add(new Deduction
             {
                 Category = deduction.Category,
-                Description = deduction.Description,
+                Description = deduction.DeductionType is null
+                    ? deduction.Description
+                    : $"{deduction.DeductionType.Name}: {deduction.Description}",
                 EmployeeAmount = deduction.EmployeeAmount,
                 EmployerAmount = deduction.EmployerAmount
             });
@@ -111,6 +117,7 @@ public class PayrollEngine(AppDbContext db, IEnumerable<IPayrollCalculator> calc
             PayrollPeriodId = periodId,
             EmployeeId = employeeId,
             GrossEarnings = context.Earnings.Sum(e => e.Amount),
+            TaxableIncome = Math.Round(context.TaxableIncome, 2),
             TotalDeductions = context.Deductions.Sum(d => d.EmployeeAmount),
             Earnings = context.Earnings,
             Deductions = context.Deductions

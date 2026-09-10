@@ -19,7 +19,7 @@ public class GetDepartmentsHandler(IAppDbContext db, ICurrentUser currentUser) :
         var departments = await db.Departments
             .Where(d => d.CompanyId == companyId && !d.IsDeleted)
             .OrderByDescending(d => d.IsSystemDepartment).ThenBy(d => d.Name)
-            .Select(d => new DepartmentDto(d.Id, d.CompanyId, d.Name, d.IsSystemDepartment))
+            .Select(d => new DepartmentDto(d.Id, d.CompanyId, d.Name, d.IsSystemDepartment, d.IsDefault))
             .ToListAsync(ct);
 
         return Result<List<DepartmentDto>>.Ok(departments);

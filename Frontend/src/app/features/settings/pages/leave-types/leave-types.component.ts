@@ -1,13 +1,14 @@
-﻿import { Component, inject, signal } from '@angular/core';
+﻿import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/auth/auth.service';
 import { SettingsService } from '../../services/settings.service';
 import { LeaveType } from '../../models/settings.models';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 
 @Component({
 	selector: 'app-leave-types',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, PaginationComponent],
 	template: `
 		<section class="mb-3 d-flex justify-content-between align-items-start flex-wrap gap-2">
 			<div>
@@ -31,7 +32,7 @@ import { LeaveType } from '../../models/settings.models';
 							</tr>
 						</thead>
 						<tbody>
-							@for (item of leaveTypes(); track item.id) {
+							@for (item of pagedLeaveTypes(); track item.id) {
 								<tr>
 									<td>{{ item.name }}</td>
 									<td>{{ item.defaultEntitlementDays }}</td>
@@ -45,6 +46,7 @@ import { LeaveType } from '../../models/settings.models';
 						</tbody>
 					</table>
 				</div>
+				<app-pagination [page]="pageNumber()" [pageSize]="pageSize" [total]="leaveTypes().length" (pageChange)="pageNumber.set($event)"></app-pagination>
 			</div>
 		</section>
 	`
@@ -54,6 +56,9 @@ export class LeaveTypesComponent {
 	private readonly settingsService = inject(SettingsService);
 
 	readonly leaveTypes = signal<LeaveType[]>([]);
+	readonly pageNumber = signal(1);
+	readonly pageSize = 20;
+	readonly pagedLeaveTypes = computed(() => this.leaveTypes().slice((this.pageNumber() - 1) * this.pageSize, this.pageNumber() * this.pageSize));
 
 	constructor() {
 		this.load();
