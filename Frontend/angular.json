@@ -15,11 +15,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
             "outputPath": "dist/client",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -34,6 +34,8 @@
             "styles": [
               "src/styles.scss"
             ],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json",
             "scripts": []
           },
           "configurations": {

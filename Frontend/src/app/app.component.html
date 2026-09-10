@@ -1,87 +1,57 @@
 ﻿@if (showShell()) {
-	<div class="shell-bg">
-		<header class="shell-header" aria-label="Primary navigation">
-			<div class="shell-header__inner">
-				<a class="brand" routerLink="/dashboard" aria-label="Payroll SA home">
-					<span class="brand__mark">PS</span>
-					<span class="brand__text">{{ appName }}</span>
-				</a>
-
-				<button
-					type="button"
-					class="mobile-toggle"
-					(click)="toggleMobileMenu()"
-					[attr.aria-expanded]="mobileMenuOpen()"
-					aria-label="Toggle navigation menu"
-				>
-					<i class="bi" [class.bi-list]="!mobileMenuOpen()" [class.bi-x-lg]="mobileMenuOpen()"></i>
+	<div class="dashboard-shell">
+		<header class="topbar navbar navbar-expand-lg bg-white border-bottom sticky-top">
+			<div class="container-fluid px-3 px-lg-4">
+				<button class="btn btn-outline-secondary d-lg-none me-2" type="button" (click)="toggleMobileMenu()" [attr.aria-expanded]="mobileMenuOpen()" aria-label="Open navigation menu">
+					<i class="bi bi-list fs-5"></i>
 				</button>
-
-				<nav class="menu" [class.menu--open]="mobileMenuOpen()" aria-label="Main menu">
-					<ul class="menu__links">
-						@for (item of mainNav; track item.path) {
-							@if (isAllowed(item)) {
-								<li>
-									<a
-										[routerLink]="item.path"
-										routerLinkActive="is-active"
-										[routerLinkActiveOptions]="{ exact: item.path === '/dashboard' }"
-										[class.is-active]="isRouteActive(item.path)"
-									>
-										<i class="bi" [class]="item.icon"></i>
-										<span>{{ item.label }}</span>
-									</a>
-								</li>
-							}
-						}
-					</ul>
-
-					@if (hasSettingsAccess()) {
-						<div class="settings" [class.settings--open]="settingsOpen()">
-							<button type="button" class="settings__button" (click)="toggleSettings()" [attr.aria-expanded]="settingsOpen()">
-								<i class="bi bi-gear"></i>
-								<span>Settings</span>
-								<i class="bi bi-chevron-down settings__chevron"></i>
-							</button>
-							<div class="settings__panel">
-								@for (item of settingsNav; track item.path) {
-									@if (isAllowed(item)) {
-										<a [routerLink]="item.path" [class.is-active]="isRouteActive(item.path)">
-											<i class="bi" [class]="item.icon"></i>
-											<span>{{ item.label }}</span>
-										</a>
-									}
-								}
-							</div>
-						</div>
-					}
-				</nav>
-
+				<a class="navbar-brand d-flex align-items-center gap-2 me-auto" routerLink="/dashboard">
+					<span class="brand-mark">PS</span><span class="fw-bold">{{ appName }}</span>
+				</a>
 				@if (isLoggedIn()) {
-					<div class="account-menu" [class.account-menu--open]="accountOpen()">
-						<button type="button" class="account-chip" (click)="toggleAccount()" [attr.aria-expanded]="accountOpen()" aria-label="Open account menu">
-							<span class="account-chip__avatar">{{ user()?.firstName?.charAt(0) }}{{ user()?.lastName?.charAt(0) }}</span>
-							<span class="account-chip__details">
-								<span class="account-chip__name">{{ user()?.firstName }} {{ user()?.lastName }}</span>
-								<span class="account-chip__meta">{{ user()?.roles?.[0] || 'User' }}</span>
-							</span>
-							<i class="bi bi-chevron-down account-chip__chevron"></i>
+					<div class="dropdown" [class.show]="accountOpen()">
+						<button class="btn user-menu d-flex align-items-center gap-2" type="button" (click)="toggleAccount()" [attr.aria-expanded]="accountOpen()">
+							<span class="user-avatar">{{ user()?.firstName?.charAt(0) }}{{ user()?.lastName?.charAt(0) }}</span>
+							<span class="d-none d-sm-block text-start"><strong class="d-block small">{{ user()?.firstName }} {{ user()?.lastName }}</strong><small class="text-muted">{{ user()?.roles?.[0] || 'User' }}</small></span>
+							<i class="bi bi-chevron-down small"></i>
 						</button>
-						<div class="account-menu__panel">
-							<p class="account-menu__email">{{ user()?.email }}</p>
-							<button type="button" class="account-menu__logout" (click)="logout()">
-								<i class="bi bi-box-arrow-right"></i>
-								<span>Log out</span>
-							</button>
+						<div class="dropdown-menu dropdown-menu-end p-2" [class.show]="accountOpen()">
+							<div class="px-2 py-1 small text-muted text-break">{{ user()?.email }}</div>
+							<hr class="dropdown-divider">
+							<button class="dropdown-item text-danger" type="button" (click)="logout()"><i class="bi bi-box-arrow-right me-2"></i>Log out</button>
 						</div>
 					</div>
 				}
 			</div>
 		</header>
 
-		<main class="shell-main">
-			<router-outlet></router-outlet>
-		</main>
+		<div class="dashboard-body">
+			<aside class="sidebar border-end bg-white" [class.sidebar--open]="mobileMenuOpen()" aria-label="Application navigation">
+				<div class="sidebar__inner">
+					<div class="sidebar-label">Workspace</div>
+					<nav class="nav flex-column gap-1">
+						@for (item of mainNav; track item.path) {
+							@if (isAllowed(item)) {
+								<a class="nav-link sidebar-link" [routerLink]="item.path" [class.active]="isRouteActive(item.path)" (click)="closeMobileMenu()"><i class="bi me-2" [class]="item.icon"></i>{{ item.label }}</a>
+							}
+						}
+					</nav>
+					@if (hasSettingsAccess()) {
+						<div class="sidebar-label mt-4">Administration</div>
+						<nav class="nav flex-column gap-1">
+							@for (item of settingsNav; track item.path) {
+								@if (isAllowed(item)) {
+									<a class="nav-link sidebar-link" [routerLink]="item.path" [class.active]="isRouteActive(item.path)" (click)="closeMobileMenu()"><i class="bi me-2" [class]="item.icon"></i>{{ item.label }}</a>
+								}
+							}
+						</nav>
+					}
+				</div>
+			</aside>
+			@if (mobileMenuOpen()) { <button class="sidebar-backdrop d-lg-none" type="button" (click)="closeMobileMenu()" aria-label="Close navigation menu"></button> }
+			<main class="dashboard-main flex-grow-1"><div class="container-fluid px-3 px-lg-4 py-4"><router-outlet></router-outlet></div></main>
+		</div>
+		<app-install-prompt></app-install-prompt>
 	</div>
 } @else {
 	<router-outlet></router-outlet>

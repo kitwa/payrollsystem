@@ -1859,3 +1859,247 @@ Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operati
 2026-09-10 11:24:34.243 +02:00 [INF] Server desktop-3ro9ejj:12664:424fa053 All dispatchers stopped
 2026-09-10 11:24:34.253 +02:00 [INF] Server desktop-3ro9ejj:12664:424fa053 successfully reported itself as stopped in 3,2196 ms
 2026-09-10 11:24:34.257 +02:00 [INF] Server desktop-3ro9ejj:12664:424fa053 has been stopped in total 18,7087 ms
+2026-09-10 11:37:11.571 +02:00 [WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while scanning assembly 'Payroll.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+2026-09-10 11:37:12.821 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 11:37:12.892 +02:00 [WRN] The WebRootPath was not found: D:\repos\payrollsa\Backend\src\Payroll.Api\wwwroot. Static files may be unavailable.
+2026-09-10 11:37:12.969 +02:00 [INF] Starting Hangfire Server using job storage: 'In-Memory Storage'
+2026-09-10 11:37:12.971 +02:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2026-09-10 11:37:12.992 +02:00 [INF] Server desktop-3ro9ejj:38032:0dfea411 successfully announced in 5,1984 ms
+2026-09-10 11:37:12.997 +02:00 [INF] Server desktop-3ro9ejj:38032:0dfea411 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2026-09-10 11:37:13.006 +02:00 [INF] Server desktop-3ro9ejj:38032:0dfea411 all the dispatchers started
+2026-09-10 11:37:57.384 +02:00 [WRN] Failed to determine the https port for redirect.
+2026-09-10 11:37:57.584 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 204.5830 ms
+2026-09-10 11:37:57.773 +02:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-09-10 11:37:58.112 +02:00 [ERR] Could not persist audit log for /api/auth/login
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 47
+2026-09-10 11:37:58.142 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 546.0447 ms
+2026-09-10 11:37:58.177 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 12.0733 ms
+2026-09-10 11:37:58.187 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 17.5696 ms
+2026-09-10 11:37:58.367 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 184.6156 ms
+2026-09-10 11:37:58.373 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 12.3163 ms
+2026-09-10 11:38:11.869 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 15.1352 ms
+2026-09-10 11:38:11.996 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 114.6193 ms
+2026-09-10 11:38:22.043 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 7.3769 ms
+2026-09-10 11:38:22.064 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 17.4827 ms
+2026-09-10 11:38:22.918 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 5.5849 ms
+2026-09-10 11:38:22.968 +02:00 [INF] HTTP GET /api/employees responded 200 in 45.4674 ms
+2026-09-10 11:38:24.277 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 6.7840 ms
+2026-09-10 11:38:24.304 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 23.0347 ms
+2026-09-10 11:38:28.008 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 5.3981 ms
+2026-09-10 11:38:28.049 +02:00 [INF] HTTP GET /api/leave responded 200 in 35.7693 ms
+2026-09-10 11:38:32.015 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 4.7826 ms
+2026-09-10 11:38:32.029 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 9.6626 ms
+2026-09-10 11:38:34.857 +02:00 [INF] HTTP OPTIONS /api/support/tickets responded 204 in 5.5886 ms
+2026-09-10 11:38:34.925 +02:00 [INF] HTTP GET /api/support/tickets responded 200 in 61.3281 ms
+2026-09-10 11:38:40.623 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 4.8274 ms
+2026-09-10 11:38:40.718 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 89.2136 ms
+2026-09-10 11:38:49.055 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 7.4476 ms
+2026-09-10 11:38:49.070 +02:00 [INF] HTTP GET /api/employees responded 200 in 8.6850 ms
+2026-09-10 11:38:49.221 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 170.8864 ms
+2026-09-10 11:38:49.341 +02:00 [INF] HTTP GET /api/users responded 200 in 116.0118 ms
+2026-09-10 11:38:51.322 +02:00 [INF] HTTP OPTIONS /api/settings/deduction-types responded 204 in 6.0756 ms
+2026-09-10 11:38:51.361 +02:00 [INF] HTTP GET /api/settings/deduction-types responded 200 in 32.8721 ms
+2026-09-10 11:38:51.488 +02:00 [INF] HTTP OPTIONS /api/settings/earning-types responded 204 in 172.1308 ms
+2026-09-10 11:38:51.514 +02:00 [INF] HTTP GET /api/settings/earning-types responded 200 in 22.7414 ms
+2026-09-10 11:39:00.870 +02:00 [INF] HTTP OPTIONS /api/settings/deduction-types responded 204 in 5.7114 ms
+2026-09-10 11:39:00.887 +02:00 [INF] HTTP GET /api/settings/deduction-types responded 200 in 8.7578 ms
+2026-09-10 11:39:01.026 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 163.2730 ms
+2026-09-10 11:39:01.036 +02:00 [INF] HTTP GET /api/employees responded 200 in 6.0449 ms
+2026-09-10 11:39:08.796 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 8.2657 ms
+2026-09-10 11:39:08.815 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 11.6214 ms
+2026-09-10 11:39:08.821 +02:00 [INF] HTTP OPTIONS /api/settings/earning-types responded 204 in 31.4264 ms
+2026-09-10 11:39:08.838 +02:00 [INF] HTTP GET /api/settings/earning-types responded 200 in 7.9411 ms
+2026-09-10 11:39:08.960 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 172.7871 ms
+2026-09-10 11:39:08.969 +02:00 [INF] HTTP GET /api/employees responded 200 in 4.5031 ms
+2026-09-10 11:39:12.144 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 5.7080 ms
+2026-09-10 11:39:12.179 +02:00 [ERR] Failed executing DbCommand (4ms) [Parameters=[@companyId='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "d"."Id", "d"."CompanyId", "d"."Name", "d"."IsSystemDepartment", "d"."IsDefault"
+FROM "Departments" AS "d"
+WHERE "d"."CompanyId" = @companyId AND NOT ("d"."IsDeleted")
+ORDER BY "d"."IsSystemDepartment" DESC, "d"."Name"
+2026-09-10 11:39:12.187 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Payroll.Infrastructure.Persistence.AppDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-09-10 11:39:12.200 +02:00 [ERR] Unhandled exception: SQLite Error 1: 'no such column: d.IsDefault'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such column: d.IsDefault'.
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Payroll.Application.Employees.GetDepartmentsHandler.Handle(GetDepartmentsQuery request, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Employees\DepartmentOperations.cs:line 19
+   at Payroll.Application.Common.Behaviours.LoggingBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\LoggingBehaviour.cs:line 14
+   at Payroll.Application.Common.Behaviours.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Application\Common\Behaviours\ValidationBehaviour.cs:line 15
+   at Payroll.Api.Controllers.DepartmentsController.GetAll(Guid companyId, CancellationToken ct) in D:\repos\payrollsa\Backend\src\Payroll.Api\Controllers\DepartmentsController.cs:line 15
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 16
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 54
+   at Payroll.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\ExceptionMiddleware.cs:line 14
+2026-09-10 11:39:12.224 +02:00 [ERR] HTTP GET /api/departments responded 500 in 75.3633 ms
+2026-09-10 11:39:18.386 +02:00 [INF] HTTP OPTIONS /api/settings/leave-types responded 204 in 3.9136 ms
+2026-09-10 11:39:18.419 +02:00 [INF] HTTP GET /api/settings/leave-types responded 200 in 27.7014 ms
+2026-09-10 11:39:20.246 +02:00 [INF] HTTP OPTIONS /api/tax/year responded 204 in 3.6962 ms
+2026-09-10 11:39:20.273 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-10 11:39:20.401 +02:00 [INF] HTTP GET /api/tax/year responded 200 in 150.5257 ms
+2026-09-10 11:39:21.349 +02:00 [INF] HTTP GET /api/settings/leave-types responded 200 in 12.2036 ms
+2026-09-10 11:50:03.182 +02:00 [INF] HTTP OPTIONS /api/tax/year responded 204 in 11.6375 ms
+2026-09-10 11:50:03.194 +02:00 [INF] HTTP GET /api/tax/year responded 200 in 8.4650 ms
+2026-09-10 11:50:04.789 +02:00 [INF] HTTP OPTIONS /api/support/tickets responded 204 in 7.1036 ms
+2026-09-10 11:50:04.798 +02:00 [INF] HTTP GET /api/support/tickets responded 200 in 6.3422 ms
+2026-09-10 11:50:06.392 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 5.7903 ms
+2026-09-10 11:50:06.400 +02:00 [INF] HTTP GET /api/leave responded 200 in 6.1651 ms
+2026-09-10 11:50:06.800 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 6.7087 ms
+2026-09-10 11:50:06.810 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 6.7323 ms
+2026-09-10 11:50:08.696 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 4.8710 ms
+2026-09-10 11:50:08.712 +02:00 [INF] HTTP GET /api/employees responded 200 in 8.8362 ms
+2026-09-10 11:50:08.719 +02:00 [INF] HTTP OPTIONS /api/settings/deduction-types responded 204 in 25.6767 ms
+2026-09-10 11:50:08.731 +02:00 [INF] HTTP GET /api/settings/deduction-types responded 200 in 6.9973 ms
+2026-09-10 11:50:10.988 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 4.1465 ms
+2026-09-10 11:50:10.999 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 6.3564 ms
+2026-09-10 11:50:27.685 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 5.2747 ms
+2026-09-10 11:50:27.697 +02:00 [INF] HTTP GET /api/leave responded 200 in 7.2232 ms
+2026-09-10 11:50:28.359 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 7.4978 ms
+2026-09-10 11:50:28.372 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 7.5954 ms
+2026-09-10 11:50:29.747 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 6.8097 ms
+2026-09-10 11:50:29.756 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 6.3467 ms
+2026-09-10 11:50:30.234 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 4.7543 ms
+2026-09-10 11:50:30.243 +02:00 [INF] HTTP GET /api/employees responded 200 in 4.7975 ms
+2026-09-10 11:54:58.680 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 5.4662 ms
+2026-09-10 11:54:58.689 +02:00 [INF] HTTP GET /api/employees responded 200 in 4.9281 ms
+2026-09-10 11:54:58.715 +02:00 [INF] HTTP GET /api/employees responded 200 in 6.4704 ms
+2026-09-10 12:08:16.044 +02:00 [INF] HTTP OPTIONS /api/companies responded 204 in 13.4250 ms
+2026-09-10 12:08:16.059 +02:00 [INF] HTTP GET /api/companies responded 401 in 11.1119 ms
+2026-09-10 12:08:16.221 +02:00 [INF] HTTP OPTIONS /api/companies responded 204 in 179.0156 ms
+2026-09-10 12:08:16.230 +02:00 [INF] HTTP GET /api/companies responded 401 in 3.9954 ms
+2026-09-10 12:08:26.554 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 5.6960 ms
+2026-09-10 12:08:26.618 +02:00 [ERR] Could not persist audit log for /api/auth/login
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 47
+2026-09-10 12:08:26.621 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 64.1499 ms
+2026-09-10 12:08:44.571 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 4.1013 ms
+2026-09-10 12:08:44.576 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 3.7998 ms
+2026-09-10 12:08:44.583 +02:00 [INF] HTTP GET /api/employees responded 200 in 6.9559 ms
+2026-09-10 12:08:44.590 +02:00 [INF] HTTP GET /api/employees responded 200 in 6.1087 ms
+2026-09-10 12:08:54.470 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 5.1398 ms
+2026-09-10 12:08:54.479 +02:00 [INF] HTTP GET /api/leave responded 200 in 4.9668 ms
+2026-09-10 12:08:55.036 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 4.1688 ms
+2026-09-10 12:08:55.044 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 5.3759 ms
+2026-09-10 12:08:56.006 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 3.8406 ms
+2026-09-10 12:08:56.014 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 4.5269 ms
+2026-09-10 12:08:57.679 +02:00 [INF] HTTP OPTIONS /api/support/tickets responded 204 in 4.3411 ms
+2026-09-10 12:08:57.698 +02:00 [INF] HTTP GET /api/support/tickets responded 200 in 13.3453 ms
+2026-09-10 12:09:00.444 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 8.1838 ms
+2026-09-10 12:09:00.447 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 9.7380 ms
+2026-09-10 12:09:00.457 +02:00 [INF] HTTP GET /api/employees responded 200 in 5.8798 ms
+2026-09-10 12:09:00.470 +02:00 [INF] HTTP GET /api/users responded 200 in 13.0739 ms
+2026-09-10 12:09:02.289 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 6.7710 ms
+2026-09-10 12:09:02.296 +02:00 [INF] HTTP GET /api/leave responded 200 in 4.6566 ms
+2026-09-10 12:09:03.646 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 6.1997 ms
+2026-09-10 12:09:03.656 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 5.1134 ms
+2026-09-10 12:09:04.976 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 4.3518 ms
+2026-09-10 12:09:04.989 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 7.6889 ms
+2026-09-10 12:09:06.327 +02:00 [INF] HTTP OPTIONS /api/settings/earning-types responded 204 in 3.1682 ms
+2026-09-10 12:09:06.337 +02:00 [INF] HTTP GET /api/settings/earning-types responded 200 in 5.6518 ms
+2026-09-10 12:09:06.494 +02:00 [INF] HTTP OPTIONS /api/settings/deduction-types responded 204 in 169.3812 ms
+2026-09-10 12:09:06.501 +02:00 [INF] HTTP GET /api/settings/deduction-types responded 200 in 4.0229 ms
+2026-09-10 12:10:18.614 +02:00 [INF] HTTP OPTIONS /api/settings/deduction-types responded 204 in 3.6763 ms
+2026-09-10 12:10:18.628 +02:00 [INF] HTTP OPTIONS /api/settings/deduction-types responded 204 in 4.1722 ms
+2026-09-10 12:10:18.640 +02:00 [INF] HTTP GET /api/settings/deduction-types responded 200 in 3.8193 ms
+2026-09-10 12:10:18.644 +02:00 [INF] HTTP GET /api/settings/deduction-types responded 200 in 4.6536 ms
+2026-09-10 12:10:18.658 +02:00 [INF] HTTP OPTIONS /api/settings/earning-types responded 204 in 15.2481 ms
+2026-09-10 12:10:18.666 +02:00 [INF] HTTP GET /api/settings/earning-types responded 200 in 4.4229 ms
+2026-09-10 12:10:18.776 +02:00 [INF] HTTP OPTIONS /api/settings/earning-types responded 204 in 165.2587 ms
+2026-09-10 12:10:18.785 +02:00 [INF] HTTP GET /api/settings/earning-types responded 200 in 3.7537 ms
+2026-09-10 12:10:32.568 +02:00 [INF] HTTP GET /index.html responded 404 in 8.8522 ms
+2026-09-10 12:10:46.169 +02:00 [INF] HTTP OPTIONS /api/settings/deduction-types responded 204 in 3.4015 ms
+2026-09-10 12:10:46.175 +02:00 [INF] HTTP OPTIONS /api/settings/deduction-types responded 204 in 3.2177 ms
+2026-09-10 12:10:46.181 +02:00 [INF] HTTP GET /api/settings/deduction-types responded 200 in 5.1860 ms
+2026-09-10 12:10:46.196 +02:00 [INF] HTTP GET /api/settings/deduction-types responded 200 in 16.3042 ms
+2026-09-10 12:10:46.332 +02:00 [INF] HTTP OPTIONS /api/settings/earning-types responded 204 in 166.6342 ms
+2026-09-10 12:10:46.339 +02:00 [INF] HTTP GET /api/settings/earning-types responded 200 in 4.0258 ms
+2026-09-10 12:10:46.496 +02:00 [INF] HTTP OPTIONS /api/settings/earning-types responded 204 in 323.8581 ms
+2026-09-10 12:10:46.504 +02:00 [INF] HTTP GET /api/settings/earning-types responded 200 in 4.8685 ms
+2026-09-10 12:10:46.972 +02:00 [INF] HTTP OPTIONS /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 204 in 4.7290 ms
+2026-09-10 12:10:46.981 +02:00 [INF] HTTP GET /api/companies/6266b913-2edc-4388-9585-0fd6464bf4eb responded 200 in 5.4342 ms
+2026-09-10 12:10:47.551 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 3.8970 ms
+2026-09-10 12:10:47.560 +02:00 [INF] HTTP GET /api/employees responded 200 in 5.3070 ms
+2026-09-10 12:10:47.707 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 159.9197 ms
+2026-09-10 12:10:47.720 +02:00 [INF] HTTP GET /api/users responded 200 in 6.5593 ms
+2026-09-10 12:10:48.269 +02:00 [INF] HTTP GET /api/settings/earning-types responded 200 in 4.8311 ms
+2026-09-10 12:10:48.429 +02:00 [INF] HTTP GET /api/settings/deduction-types responded 200 in 161.5213 ms
+2026-09-10 12:10:49.211 +02:00 [INF] HTTP GET /api/employees responded 200 in 8.8779 ms
+2026-09-10 12:10:49.377 +02:00 [INF] HTTP GET /api/settings/deduction-types responded 200 in 174.6704 ms
+2026-09-10 12:10:49.882 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 4.0115 ms
+2026-09-10 12:10:49.890 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 4.1632 ms
+2026-09-10 12:10:50.349 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 4.5061 ms
+2026-09-10 12:10:50.359 +02:00 [INF] HTTP GET /api/leave responded 200 in 5.2994 ms
+2026-09-10 12:28:30.637 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 10.2611 ms
+2026-09-10 12:28:30.661 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 3.5238 ms
+2026-09-10 12:28:30.665 +02:00 [INF] HTTP GET /api/leave responded 200 in 4.1587 ms
+2026-09-10 12:28:30.669 +02:00 [INF] HTTP GET /api/leave responded 200 in 3.9260 ms

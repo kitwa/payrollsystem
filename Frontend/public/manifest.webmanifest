@@ -1,0 +1,12 @@
+{
+  "name": "Payroll SA",
+  "short_name": "Payroll SA",
+  "description": "Payroll administration and employee self-service.",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "theme_color": "#0d6efd",
+  "background_color": "#f8f9fa",
+  "icons": [
+    { "src": "favicon.ico", "sizes": "any", "type": "image/x-icon", "purpose": "any maskable" }
+  ]
+}

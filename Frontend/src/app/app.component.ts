@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from './core/auth/auth.service';
+import { InstallPromptComponent } from './shared/components/install-prompt/install-prompt.component';
 
 type NavItem = {
   label: string;
@@ -13,7 +14,7 @@ type NavItem = {
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterOutlet, RouterLink, InstallPromptComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -79,11 +80,18 @@ export class AppComponent {
 
   isRouteActive(path: string): boolean {
     const current = this.currentPath();
+    if (path === '/settings') {
+      return current === path;
+    }
     return current === path || current.startsWith(`${path}/`);
   }
 
   toggleMobileMenu(): void {
     this.mobileMenuOpen.update(open => !open);
+  }
+
+  closeMobileMenu(): void {
+    this.mobileMenuOpen.set(false);
   }
 
   toggleSettings(): void {
