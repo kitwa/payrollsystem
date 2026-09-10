@@ -1,5 +1,6 @@
 import { Component, ViewChild, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/auth/auth.service';
 import { SettingsService } from '../../settings/services/settings.service';
 import { Company } from '../../settings/models/settings.models';
@@ -7,11 +8,12 @@ import { ManagementService } from '../services/management.service';
 import { AdminCompanyService } from '../services/admin-company.service';
 import { CompanyManagementSummary, ManagementAudit, AdminCompanyDto } from '../models/management.models';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { UserService } from '../../settings/services/user.service';
 
 @Component({
   selector: 'app-management',
   standalone: true,
-  imports: [CommonModule, ConfirmDialogComponent],
+  imports: [CommonModule, ReactiveFormsModule, ConfirmDialogComponent],
   template: `
     <section class="mb-3">
       <p class="text-uppercase small fw-bold text-muted mb-1">Platform Management</p>
@@ -21,6 +23,20 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
 
     @if (error()) { <div class="alert alert-danger">{{ error() }}</div> }
     @if (adminError()) { <div class="alert alert-danger">{{ adminError() }}</div> }
+
+    <section class="card border-0 shadow-sm mb-3">
+      <div class="card-body">
+        <h2 class="h5 mb-1">Create Super Admin</h2>
+        <p class="text-muted small mb-3">Create a platform-level account that is not linked to a company or employee.</p>
+        <form class="row g-2" [formGroup]="superAdminForm" (ngSubmit)="createSuperAdmin()">
+          <div class="col-12 col-md-3"><label class="form-label">First Name</label><input class="form-control" formControlName="firstName"></div>
+          <div class="col-12 col-md-3"><label class="form-label">Last Name</label><input class="form-control" formControlName="lastName"></div>
+          <div class="col-12 col-md-3"><label class="form-label">Email</label><input class="form-control" type="email" formControlName="email"></div>
+          <div class="col-12 col-md-2"><label class="form-label">Temporary Password</label><input class="form-control" type="password" formControlName="password" autocomplete="new-password"></div>
+          <div class="col-12 col-md-1 d-flex align-items-end"><button class="btn btn-dark w-100" type="submit" [disabled]="superAdminForm.invalid">Add</button></div>
+        </form>
+      </div>
+    </section>
 
     <section class="card border-0 shadow-sm mb-3">
       <div class="card-body">
@@ -45,6 +61,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
                     } @else {
                       <button class="btn btn-sm btn-outline-success" type="button" (click)="enableCompany(item)">Enable</button>
                     }
+                    <button class="btn btn-sm btn-danger" type="button" (click)="deleteCompany(item)">Delete</button>
                   </td>
                 </tr>
               } @empty {
@@ -133,11 +150,19 @@ export class ManagementComponent {
   private readonly settingsService = inject(SettingsService);
   private readonly managementService = inject(ManagementService);
   private readonly adminCompanyService = inject(AdminCompanyService);
+  private readonly userService = inject(UserService);
+  private readonly fb = inject(FormBuilder);
 
   @ViewChild('confirmDialog') confirmDialog!: ConfirmDialogComponent;
 
   readonly adminCompanies = signal<AdminCompanyDto[]>([]);
   readonly adminError = signal('');
+  readonly superAdminForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]]
+  });
 
   readonly companies = signal<Company[]>([]);
   readonly selectedCompanyId = signal<string | null>(null);
@@ -208,6 +233,42 @@ export class ManagementComponent {
     this.adminCompanyService.enable(company.id).subscribe({
       next: () => this.loadAdminCompanies(),
       error: response => this.adminError.set(response.error?.errors?.[0] ?? 'Unable to enable company.')
+    });
+  }
+
+  async deleteCompany(company: AdminCompanyDto): Promise<void> {
+    const confirmed = await this.confirmDialog.show({
+      title: 'Delete company',
+      message: `${company.name} and its active company access will be soft-deleted. This is a destructive platform action. Continue?`,
+      confirmLabel: 'Delete Company',
+      tone: 'danger'
+    });
+    if (!confirmed) return;
+
+    this.adminCompanyService.delete(company.id).subscribe({
+      next: () => {
+        this.loadAdminCompanies();
+        this.settingsService.getCompanies().subscribe(companies => this.companies.set(companies));
+      },
+      error: response => this.adminError.set(response.error?.errors?.[0] ?? 'Unable to delete company.')
+    });
+  }
+
+  createSuperAdmin(): void {
+    if (this.superAdminForm.invalid) return;
+    const value = this.superAdminForm.getRawValue();
+    this.adminError.set('');
+    this.userService.createSuperAdmin({
+      firstName: value.firstName!,
+      lastName: value.lastName!,
+      email: value.email!,
+      password: value.password!
+    }).subscribe({
+      next: () => {
+        this.adminError.set('Super Admin account created successfully.');
+        this.superAdminForm.reset();
+      },
+      error: response => this.adminError.set(response.error?.errors?.[0] ?? 'Unable to create Super Admin account.')
     });
   }
 

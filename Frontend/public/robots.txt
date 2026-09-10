@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /account
+Disallow: /employees
+Disallow: /payroll/run
+Disallow: /settings
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+Disallow: /billing
+Disallow: /management
+Disallow: /support/tickets
+Disallow: /self-service
+
+Sitemap: https://payrollsa.co.za/sitemap.xml

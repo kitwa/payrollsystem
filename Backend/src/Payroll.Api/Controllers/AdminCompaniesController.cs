@@ -22,4 +22,8 @@ public class AdminCompaniesController(IMediator mediator) : BaseApiController(me
     [HttpPost("{id:guid}/enable")]
     public async Task<IActionResult> Enable(Guid id, CancellationToken ct) =>
         FromResult(await Mediator.Send(new EnableCompanyCommand(id), ct));
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new DeleteCompanyCommand(id), ct));
 }

@@ -20,4 +20,8 @@ export class AdminCompanyService {
   enable(companyId: string) {
     return this.http.post<void>(`${this.url}/${companyId}/enable`, {});
   }
+
+  delete(companyId: string) {
+    return this.http.delete<void>(`${this.url}/${companyId}`);
+  }
 }

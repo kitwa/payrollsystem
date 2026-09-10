@@ -20,6 +20,11 @@ public class UsersController(IMediator mediator) : BaseApiController(mediator)
     public async Task<IActionResult> Create([FromBody] CreateUserDto dto, CancellationToken ct) =>
         FromResult(await Mediator.Send(new CreateUserCommand(dto), ct));
 
+    [HttpPost("super-admin")]
+    [Authorize(Roles = Constants.Roles.SuperAdmin)]
+    public async Task<IActionResult> CreateSuperAdmin([FromBody] CreateSuperAdminUserDto dto, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new CreateSuperAdminUserCommand(dto), ct));
+
     /// <summary>Replace a user's company roles. SuperAdmin cannot be granted through this endpoint.</summary>
     [HttpPut("{id:guid}/roles")]
     public async Task<IActionResult> UpdateRoles(Guid id, [FromBody] UpdateUserRolesDto dto, CancellationToken ct) =>

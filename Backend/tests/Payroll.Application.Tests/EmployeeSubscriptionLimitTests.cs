@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Payroll.Application.Billing;
 using Payroll.Application.Common.Interfaces;
@@ -15,28 +14,18 @@ using SharedConstants = Payroll.Shared.Constants;
 namespace Payroll.Application.Tests;
 
 /// <summary>Confirms the plan employee-limit is actually enforced when creating employees, end to end.</summary>
-public class EmployeeSubscriptionLimitTests : IDisposable
+public class EmployeeSubscriptionLimitTests
 {
-    private readonly SqliteConnection _connection;
     private readonly AppDbContext _db;
 
     public EmployeeSubscriptionLimitTests()
     {
-        _connection = new SqliteConnection("DataSource=:memory:");
-        _connection.Open();
-
         var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseSqlite(_connection)
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
         _db = new AppDbContext(options);
         _db.Database.EnsureCreated();
-    }
-
-    public void Dispose()
-    {
-        _db.Dispose();
-        _connection.Dispose();
     }
 
     private async Task<Guid> SeedCompanyOnPlanAsync(string planCode, int? maxEmployees)

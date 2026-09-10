@@ -49,12 +49,24 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
         builder.Entity<Employee>()
-            .HasIndex(e => new { e.CompanyId, e.IdNumber })
-            .IsUnique()
-            .HasFilter("IsDeleted = 0");
+            .HasIndex(e => new { e.CompanyId, e.IdNumber, e.IsDeleted })
+            .IsUnique();
         builder.Entity<Department>()
-            .HasIndex(d => new { d.CompanyId, d.Name })
-            .IsUnique()
-            .HasFilter("IsDeleted = 0");
+            .HasIndex(d => new { d.CompanyId, d.Name, d.IsDeleted })
+            .IsUnique();
+
+        foreach (var entityType in builder.Model.GetEntityTypes())
+        {
+            foreach (var property in entityType.GetProperties().Where(p => p.ClrType == typeof(decimal)))
+            {
+                property.SetPrecision(18);
+                property.SetScale(2);
+            }
+        }
+
+        builder.Entity<Payroll.Domain.Tax.TaxTable>().Property(x => x.IncomeTo).HasPrecision(31, 2);
+        builder.Entity<Payroll.Domain.Tax.TaxTable>().Property(x => x.MarginalRate).HasPrecision(18, 6);
+        builder.Entity<Payroll.Domain.Tax.TaxYear>().Property(x => x.UifContributionRate).HasPrecision(18, 6);
+        builder.Entity<Payroll.Domain.Tax.TaxYear>().Property(x => x.SdlRate).HasPrecision(18, 6);
     }
 }

@@ -108,3 +108,45 @@ public class EnableCompanyHandler(IAppDbContext db, ICurrentUser currentUser) : 
         return Result.Ok();
     }
 }
+
+public record DeleteCompanyCommand(Guid CompanyId) : IRequest<Result>;
+
+public class DeleteCompanyHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<DeleteCompanyCommand, Result>
+{
+    public async Task<Result> Handle(DeleteCompanyCommand request, CancellationToken ct)
+    {
+        if (!currentUser.IsInRole(Constants.Roles.SuperAdmin))
+            return Result.Fail("Only Super Admin users can delete a company.");
+
+        var company = await db.Companies.FirstOrDefaultAsync(c => c.Id == request.CompanyId && !c.IsDeleted, ct);
+        if (company is null) return Result.Fail("Company not found.");
+
+        company.IsDeleted = true;
+        company.IsActive = false;
+        company.DeletedAt = DateTime.UtcNow;
+        company.DeletedBy = currentUser.UserId.ToString();
+
+        var subscription = await db.CompanySubscriptions.FirstOrDefaultAsync(s => s.CompanyId == company.Id && !s.IsDeleted, ct);
+        if (subscription is not null)
+        {
+            subscription.IsDeleted = true;
+            subscription.DeletedAt = DateTime.UtcNow;
+            subscription.DeletedBy = currentUser.UserId.ToString();
+        }
+
+        db.AuditLogs.Add(new AuditLog
+        {
+            CompanyId = company.Id,
+            UserId = currentUser.UserId,
+            UserEmail = currentUser.Email,
+            HttpMethod = "SYSTEM",
+            Path = $"/admin/companies/{company.Id}/delete",
+            StatusCode = 200,
+            Action = "CompanyDeleted",
+            OccurredAt = DateTime.UtcNow
+        });
+
+        await db.SaveChangesAsync(ct);
+        return Result.Ok();
+    }
+}

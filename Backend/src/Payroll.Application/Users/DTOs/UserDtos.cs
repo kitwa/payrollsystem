@@ -17,6 +17,12 @@ public record CreateUserDto(
     string Password,
     string Role);
 
+public record CreateSuperAdminUserDto(
+    string Email,
+    string FirstName,
+    string LastName,
+    string Password);
+
 public record UpdateUserRolesDto(IList<string> Roles);
 
 public record UpdateUserStatusDto(bool IsActive);

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { SeoService } from '../../../../core/seo/seo.service';
 
 @Component({
   selector: 'app-landing',
@@ -11,6 +12,15 @@ import { RouterLink } from '@angular/router';
 })
 export class LandingComponent {
   currentYear = new Date().getFullYear();
+
+  constructor(seo: SeoService) {
+    seo.update({
+      title: 'Payroll Software South Africa | Payroll SA',
+      description: 'Simple online payroll software for South African businesses. Manage PAYE, UIF, SDL, payslips, leave and employees in one payroll system.',
+      path: '/',
+      breadcrumbs: [{ name: 'Home', path: '/' }]
+    });
+  }
 
   pricingPlans = [
     { range: '1–5 employees', price: 'R49', description: 'A simple starting point for small teams.', highlight: 'Best entry price' },

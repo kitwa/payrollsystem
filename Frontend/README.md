@@ -57,3 +57,8 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Docker
+docker run --detach --name payrollsa --env "MARIADB_ROOT_PASSWORD=V9!kR7@qL2#xN8$pT4^mW6&zH1*eY3" -p 3306:3306 mariadb:latest
+
+docker run --detach --name payrollsa --env 'MARIADB_ROOT_PASSWORD=HippoFixer1502@' --env 'MARIADB_DATABASE=root' --env 'MARIADB_USER=payrollsa' --env 'MARIADB_PASSWORD=V9!kR7@qL2#xN8$pT4^mW6&zH1*eY3' -p 3306:3306 mariadb:latest

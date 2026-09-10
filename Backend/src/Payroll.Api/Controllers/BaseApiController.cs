@@ -1,11 +1,13 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Payroll.Shared;
 
 namespace Payroll.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[EnableRateLimiting("api")]
 public abstract class BaseApiController(IMediator mediator) : ControllerBase
 {
     protected IMediator Mediator { get; } = mediator;

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Payroll.Application.Common;
 using Payroll.Application.Common.Interfaces;
 using Payroll.Application.Users.DTOs;
+using Payroll.Domain.Audit;
 using Payroll.Domain.Identity;
 using Payroll.Shared;
 
@@ -112,6 +113,51 @@ public class CreateUserHandler(
             ? role is Constants.Roles.Admin or Constants.Roles.PayrollManager or Constants.Roles.Employee
             : user.IsInRole(Constants.Roles.Admin)
                 && role is Constants.Roles.PayrollManager or Constants.Roles.Employee;
+}
+
+public record CreateSuperAdminUserCommand(CreateSuperAdminUserDto Dto) : IRequest<Result<Guid>>;
+
+public class CreateSuperAdminUserHandler(
+    UserManager<AppUser> userManager,
+    ICurrentUser currentUser) : IRequestHandler<CreateSuperAdminUserCommand, Result<Guid>>
+{
+    public async Task<Result<Guid>> Handle(CreateSuperAdminUserCommand request, CancellationToken ct)
+    {
+        if (!currentUser.IsInRole(Constants.Roles.SuperAdmin))
+            return Result<Guid>.Fail("Only Super Admin users can create Super Admin accounts.");
+
+        var dto = request.Dto;
+        var email = dto.Email.Trim().ToLowerInvariant();
+        if (string.IsNullOrWhiteSpace(email))
+            return Result<Guid>.Fail("Email is required.");
+        if (await userManager.FindByEmailAsync(email) is not null)
+            return Result<Guid>.Fail("A user with this email address already exists.");
+
+        var user = new AppUser
+        {
+            UserName = email,
+            Email = email,
+            FirstName = dto.FirstName.Trim(),
+            LastName = dto.LastName.Trim(),
+            CompanyId = null,
+            EmployeeId = null,
+            EmailConfirmed = false,
+            IsActive = true
+        };
+
+        var createResult = await userManager.CreateAsync(user, dto.Password);
+        if (!createResult.Succeeded)
+            return Result<Guid>.Fail(createResult.Errors.Select(e => e.Description));
+
+        var roleResult = await userManager.AddToRoleAsync(user, Constants.Roles.SuperAdmin);
+        if (!roleResult.Succeeded)
+        {
+            await userManager.DeleteAsync(user);
+            return Result<Guid>.Fail(roleResult.Errors.Select(e => e.Description));
+        }
+
+        return Result<Guid>.Ok(user.Id);
+    }
 }
 
 public record UpdateUserRolesCommand(Guid UserId, IList<string> Roles) : IRequest<Result>;

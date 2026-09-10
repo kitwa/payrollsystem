@@ -3,6 +3,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from './core/auth/auth.service';
+import { SeoService } from './core/seo/seo.service';
 import { InstallPromptComponent } from './shared/components/install-prompt/install-prompt.component';
 
 type NavItem = {
@@ -21,6 +22,7 @@ type NavItem = {
 export class AppComponent {
   private readonly router = inject(Router);
   private readonly auth = inject(AuthService);
+  private readonly seo = inject(SeoService);
 
   readonly appName = 'Payroll SA';
   readonly currentPath = signal(this.normalizedPath(this.router.url));
@@ -68,7 +70,16 @@ export class AppComponent {
       this.mobileMenuOpen.set(false);
       this.settingsOpen.set(false);
       this.accountOpen.set(false);
+      if (!this.isPublicPath(this.currentPath())) {
+        this.seo.noIndex();
+      }
     });
+  }
+
+  private isPublicPath(path: string): boolean {
+    return path === '/' || path === '/features' || path === '/pricing' || path === '/payroll-software-south-africa'
+      || ['/payroll/paye', '/payroll/uif', '/payroll/sdl'].includes(path) || path.startsWith('/features/') || path === '/blog' || path.startsWith('/blog/')
+      || path.startsWith('/legal/') || path === '/privacy-policy' || path === '/terms' || path === '/contact';
   }
 
   isAllowed(item: NavItem): boolean {

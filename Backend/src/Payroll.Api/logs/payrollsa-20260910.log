@@ -3543,3 +3543,134 @@ Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such col
 2026-09-10 15:26:19.575 +02:00 [INF] HTTP POST /api/auth/login responded 400 in 378.0959 ms
 2026-09-10 15:26:20.420 +02:00 [INF] HTTP POST /api/auth/login responded 400 in 21.1322 ms
 2026-09-10 15:26:21.078 +02:00 [INF] HTTP POST /api/auth/login responded 400 in 30.3893 ms
+2026-09-10 15:26:46.230 +02:00 [INF] HTTP OPTIONS /api/auth/register-company responded 204 in 8.2845 ms
+2026-09-10 15:26:46.871 +02:00 [ERR] Could not persist audit log for /api/auth/register-company
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 47
+2026-09-10 15:26:46.914 +02:00 [INF] HTTP POST /api/auth/register-company responded 200 in 675.0453 ms
+2026-09-10 15:26:46.950 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 7.3424 ms
+2026-09-10 15:26:46.968 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 7.2585 ms
+2026-09-10 15:26:46.977 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 4.9518 ms
+2026-09-10 15:26:46.988 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 5.8621 ms
+2026-09-10 15:26:46.998 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 5.4810 ms
+2026-09-10 15:26:47.127 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 186.2364 ms
+2026-09-10 15:26:47.211 +02:00 [INF] HTTP GET /api/subscription responded 200 in 207.8326 ms
+2026-09-10 15:26:47.231 +02:00 [INF] HTTP GET /api/employees responded 200 in 89.3493 ms
+2026-09-10 15:26:47.280 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 343.3022 ms
+2026-09-10 15:26:47.285 +02:00 [INF] HTTP GET /api/departments responded 200 in 49.7082 ms
+2026-09-10 15:26:47.288 +02:00 [INF] HTTP GET /api/users responded 200 in 70.9070 ms
+2026-09-10 15:26:47.294 +02:00 [INF] HTTP GET /api/subscription responded 200 in 9.5571 ms
+2026-09-10 15:26:47.303 +02:00 [INF] HTTP GET /api/users responded 200 in 10.5375 ms
+2026-09-10 15:26:47.436 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 494.8745 ms
+2026-09-10 15:26:47.464 +02:00 [INF] HTTP GET /api/departments responded 200 in 17.4830 ms
+2026-09-10 15:26:47.508 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 218.5649 ms
+2026-09-10 15:26:47.596 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 654.6411 ms
+2026-09-10 15:26:47.632 +02:00 [INF] HTTP GET /api/employees responded 200 in 20.2148 ms
+2026-09-10 15:26:47.750 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 805.0628 ms
+2026-09-10 15:26:47.786 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 17.8677 ms
+2026-09-10 15:26:56.869 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 7.4038 ms
+2026-09-10 15:26:56.891 +02:00 [INF] HTTP GET /api/employees responded 200 in 15.6795 ms
+2026-09-10 15:26:57.031 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 169.5510 ms
+2026-09-10 15:26:57.057 +02:00 [INF] HTTP GET /api/users responded 200 in 14.3033 ms
+2026-09-10 15:27:00.374 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 7.0651 ms
+2026-09-10 15:27:00.380 +02:00 [INF] HTTP GET /api/users responded 200 in 11.9399 ms
+2026-09-10 15:27:00.391 +02:00 [INF] HTTP GET /api/employees responded 200 in 9.0456 ms
+2026-09-10 15:27:00.527 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 160.1310 ms
+2026-09-10 15:27:00.546 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 12.3956 ms
+2026-09-10 15:27:00.686 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 317.4571 ms
+2026-09-10 15:27:00.705 +02:00 [INF] HTTP GET /api/subscription responded 200 in 11.6704 ms
+2026-09-10 15:27:00.840 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 472.7976 ms
+2026-09-10 15:27:00.856 +02:00 [INF] HTTP GET /api/departments responded 200 in 9.4837 ms
+2026-09-10 15:27:08.403 +02:00 [INF] HTTP OPTIONS /api/companies/0dfcb6b5-35a6-4065-b2cd-15606ce46db9 responded 204 in 6.5143 ms
+2026-09-10 15:27:08.468 +02:00 [INF] HTTP GET /api/companies/0dfcb6b5-35a6-4065-b2cd-15606ce46db9 responded 200 in 55.7734 ms
+2026-09-10 15:27:23.872 +02:00 [INF] HTTP OPTIONS /api/support/contact responded 204 in 5.4181 ms
+2026-09-10 15:27:23.891 +02:00 [INF] HTTP GET /api/support/contact responded 200 in 12.5279 ms
+2026-09-10 15:27:24.035 +02:00 [INF] HTTP OPTIONS /api/support/tickets responded 204 in 166.9479 ms
+2026-09-10 15:27:24.136 +02:00 [INF] HTTP GET /api/support/tickets responded 200 in 94.7423 ms
+2026-09-10 15:27:24.761 +02:00 [INF] HTTP OPTIONS /api/payslips/periods responded 204 in 7.3430 ms
+2026-09-10 15:27:24.830 +02:00 [INF] HTTP GET /api/payslips/periods responded 200 in 64.8658 ms
+2026-09-10 15:27:26.251 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 5.1531 ms
+2026-09-10 15:27:26.263 +02:00 [INF] HTTP GET /api/subscription responded 200 in 6.3449 ms
+2026-09-10 15:27:26.412 +02:00 [INF] HTTP OPTIONS /api/subscription/plans responded 204 in 166.6530 ms
+2026-09-10 15:27:26.444 +02:00 [INF] HTTP GET /api/subscription/plans responded 200 in 26.3320 ms
+2026-09-10 15:27:31.230 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 5.0273 ms
+2026-09-10 15:27:31.234 +02:00 [INF] HTTP GET /api/subscription responded 200 in 8.3841 ms
+2026-09-10 15:27:31.249 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 10.7975 ms
+2026-09-10 15:27:31.392 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 166.3389 ms
+2026-09-10 15:27:31.410 +02:00 [INF] HTTP GET /api/departments responded 200 in 6.6202 ms
+2026-09-10 15:27:31.548 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 323.2315 ms
+2026-09-10 15:27:31.566 +02:00 [INF] HTTP GET /api/employees responded 200 in 9.0079 ms
+2026-09-10 15:27:31.704 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 478.6079 ms
+2026-09-10 15:27:31.725 +02:00 [INF] HTTP GET /api/users responded 200 in 10.2947 ms
+2026-09-10 15:27:32.470 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 5.4279 ms
+2026-09-10 15:27:32.478 +02:00 [INF] HTTP GET /api/employees responded 200 in 5.3776 ms
+2026-09-10 15:27:33.051 +02:00 [INF] HTTP OPTIONS /api/payroll/periods responded 204 in 6.8829 ms
+2026-09-10 15:27:33.097 +02:00 [INF] HTTP GET /api/payroll/periods responded 200 in 41.7521 ms
+2026-09-10 15:27:33.659 +02:00 [INF] HTTP OPTIONS /api/leave responded 204 in 6.9086 ms
+2026-09-10 15:27:33.715 +02:00 [INF] HTTP GET /api/leave responded 200 in 52.7677 ms
+2026-09-10 15:27:36.118 +02:00 [INF] HTTP OPTIONS /api/companies/0dfcb6b5-35a6-4065-b2cd-15606ce46db9 responded 204 in 6.4894 ms
+2026-09-10 15:27:36.129 +02:00 [INF] HTTP GET /api/companies/0dfcb6b5-35a6-4065-b2cd-15606ce46db9 responded 200 in 8.1805 ms
+2026-09-10 15:27:36.987 +02:00 [INF] HTTP OPTIONS /api/tax/year responded 204 in 4.0321 ms
+2026-09-10 15:27:37.035 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-09-10 15:27:37.311 +02:00 [INF] HTTP GET /api/tax/year responded 200 in 319.8510 ms
+2026-09-10 15:27:40.191 +02:00 [INF] HTTP OPTIONS /api/settings/leave-types responded 204 in 4.6647 ms
+2026-09-10 15:27:40.230 +02:00 [INF] HTTP GET /api/settings/leave-types responded 200 in 33.9423 ms
+2026-09-10 15:27:59.591 +02:00 [INF] HTTP OPTIONS /api/settings/leave-types responded 204 in 8.3574 ms
+2026-09-10 15:27:59.696 +02:00 [INF] HTTP POST /api/settings/leave-types responded 200 in 100.2371 ms
+2026-09-10 15:27:59.713 +02:00 [INF] HTTP OPTIONS /api/settings/leave-types responded 204 in 6.0290 ms
+2026-09-10 15:27:59.731 +02:00 [INF] HTTP GET /api/settings/leave-types responded 200 in 8.2056 ms
+2026-09-10 15:28:14.622 +02:00 [INF] HTTP OPTIONS /api/auth/login responded 204 in 6.7734 ms
+2026-09-10 15:28:14.759 +02:00 [ERR] Could not persist audit log for /api/auth/login
+Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See https://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ThrowAggregateUpdateConcurrencyExceptionAsync(RelationalDataReader reader, Int32 commandIndex, Int32 expectedRowsAffected, Int32 rowsAffected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetWithRowsAffectedOnlyAsync(Int32 commandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Payroll.Api.Middleware.AuditMiddleware.InvokeAsync(HttpContext context, AppDbContext db) in D:\repos\payrollsa\Backend\src\Payroll.Api\Middleware\AuditMiddleware.cs:line 47
+2026-09-10 15:28:14.774 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 147.2572 ms
+2026-09-10 15:28:14.801 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 7.0002 ms
+2026-09-10 15:28:14.812 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 5.8636 ms
+2026-09-10 15:28:14.819 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 3.8045 ms
+2026-09-10 15:28:14.825 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 3.3791 ms
+2026-09-10 15:28:14.841 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 4.3617 ms
+2026-09-10 15:28:14.892 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 11.5642 ms
+2026-09-10 15:28:14.938 +02:00 [INF] HTTP GET /api/employees responded 200 in 17.5260 ms
+2026-09-10 15:28:14.965 +02:00 [INF] HTTP OPTIONS /api/dashboard/summary responded 204 in 167.4327 ms
+2026-09-10 15:28:15.007 +02:00 [INF] HTTP GET /api/departments responded 200 in 6.8527 ms
+2026-09-10 15:28:15.022 +02:00 [INF] HTTP GET /api/subscription responded 200 in 10.9948 ms
+2026-09-10 15:28:15.049 +02:00 [INF] HTTP GET /api/dashboard/summary responded 200 in 8.7998 ms
+2026-09-10 15:28:15.122 +02:00 [INF] HTTP OPTIONS /api/departments responded 204 in 326.2189 ms
+2026-09-10 15:28:15.139 +02:00 [INF] HTTP GET /api/departments responded 200 in 8.9216 ms
+2026-09-10 15:28:15.174 +02:00 [INF] HTTP GET /api/users responded 200 in 197.1831 ms
+2026-09-10 15:28:15.275 +02:00 [INF] HTTP OPTIONS /api/subscription responded 204 in 478.5919 ms
+2026-09-10 15:28:15.287 +02:00 [INF] HTTP GET /api/subscription responded 200 in 5.9859 ms
+2026-09-10 15:28:15.431 +02:00 [INF] HTTP OPTIONS /api/employees responded 204 in 636.5266 ms
+2026-09-10 15:28:15.445 +02:00 [INF] HTTP GET /api/employees responded 200 in 7.0667 ms
+2026-09-10 15:28:15.586 +02:00 [INF] HTTP OPTIONS /api/users responded 204 in 790.8756 ms
+2026-09-10 15:28:15.611 +02:00 [INF] HTTP GET /api/users responded 200 in 10.7503 ms
+2026-09-10 15:28:17.044 +02:00 [INF] HTTP OPTIONS /api/settings/leave-types responded 204 in 3.8769 ms
+2026-09-10 15:28:17.055 +02:00 [INF] HTTP GET /api/settings/leave-types responded 200 in 5.5491 ms
+2026-09-10 16:49:58.392 +02:00 [INF] Server desktop-3ro9ejj:17424:dff3aa94 caught stopping signal...
+2026-09-10 16:49:58.448 +02:00 [INF] Server desktop-3ro9ejj:17424:dff3aa94 All dispatchers stopped
+2026-09-10 16:49:58.461 +02:00 [INF] Server desktop-3ro9ejj:17424:dff3aa94 successfully reported itself as stopped in 6,0333 ms
+2026-09-10 16:49:58.462 +02:00 [INF] Server desktop-3ro9ejj:17424:dff3aa94 has been stopped in total 31,7375 ms

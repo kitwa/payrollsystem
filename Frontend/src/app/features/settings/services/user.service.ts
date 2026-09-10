@@ -17,6 +17,10 @@ export class UserService {
     return this.http.post<string>(this.url, request);
   }
 
+  createSuperAdmin(request: { email: string; firstName: string; lastName: string; password: string }) {
+    return this.http.post<string>(`${this.url}/super-admin`, request);
+  }
+
   updateRoles(userId: string, roles: string[]) {
     return this.http.put(`${this.url}/${userId}/roles`, { roles });
   }
