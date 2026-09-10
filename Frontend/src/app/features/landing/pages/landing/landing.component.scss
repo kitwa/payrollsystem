@@ -12,14 +12,14 @@
 // @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap');
 
 :host {
-  --ink: #16332E;
-  --ink-soft: #3F5852;
+  --ink: #0b2e4f;
+  --ink-soft: #526579;
   --bg: #FFFFFF;
-  --bg-warm: #F7F5F0;
-  --gold: #DDA23A;
-  --gold-dark: #C48B27;
-  --sage: #4B7A6F;
-  --border: #E4DFD5;
+  --bg-warm: #f1f6fc;
+  --blue: #0d6efd;
+  --blue-dark: #0a58ca;
+  --blue-soft: #dbeafe;
+  --border: #dbe4ee;
   --radius: 14px;
 
   display: block;
@@ -71,17 +71,17 @@ a {
 
 /* ---------- Buttons ---------- */
 .btn-cta {
-  background-color: var(--gold);
-  border-color: var(--gold);
-  color: var(--ink);
+  background-color: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
   font-weight: 700;
   border-radius: 999px;
   padding-inline: 1.5rem;
 
   &:hover, &:focus {
-    background-color: var(--gold-dark);
-    border-color: var(--gold-dark);
-    color: var(--ink);
+    background-color: var(--blue-dark);
+    border-color: var(--blue-dark);
+    color: #fff;
   }
 
   &:focus-visible {
@@ -92,13 +92,13 @@ a {
 
 .btn-outline-quiet {
   background: transparent;
-  border: 1px solid var(--border);
+  border: 1px solid #aebed0;
   color: var(--ink);
   border-radius: 999px;
   padding-inline: 1.5rem;
 
   &:hover, &:focus {
-    background: var(--bg-warm);
+    background: var(--blue-soft);
     color: var(--ink);
     border-color: var(--border);
   }
@@ -127,7 +127,7 @@ a {
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: var(--ink);
+  background: var(--blue);
   color: #fff;
   font-family: 'Manrope', sans-serif;
   font-weight: 800;
@@ -148,7 +148,7 @@ a {
   gap: 0.4rem;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--sage);
+  color: var(--blue-dark);
 }
 
 .hero-title {
@@ -166,7 +166,7 @@ a {
   color: var(--ink-soft);
 
   i {
-    color: var(--sage);
+    color: var(--blue);
     margin-right: 0.25rem;
   }
 }
@@ -190,8 +190,8 @@ a {
   &__badge {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--sage);
-    background: rgba(75, 122, 111, 0.12);
+    color: var(--blue-dark);
+    background: var(--blue-soft);
     padding: 0.2rem 0.6rem;
     border-radius: 999px;
   }
@@ -258,7 +258,7 @@ a {
 
   i {
     font-size: 1.5rem;
-    color: var(--sage);
+    color: var(--blue);
     margin-bottom: 0.75rem;
     display: block;
   }
@@ -292,7 +292,7 @@ a {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--blue);
   color: #fff;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -310,7 +310,7 @@ a {
 
   i {
     font-size: 1.3rem;
-    color: var(--sage);
+    color: var(--blue);
     margin-top: 0.15rem;
   }
 
@@ -357,8 +357,8 @@ a {
 
   &__badge {
     display: inline-block;
-    background: var(--gold);
-    color: var(--ink);
+    background: var(--blue-soft);
+    color: var(--blue-dark);
     font-weight: 700;
     font-size: 0.85rem;
     padding: 0.35rem 0.9rem;
@@ -390,7 +390,7 @@ a {
     font-size: 0.98rem;
 
     i {
-      color: var(--sage);
+      color: var(--blue);
       margin-right: 0.5rem;
     }
   }
