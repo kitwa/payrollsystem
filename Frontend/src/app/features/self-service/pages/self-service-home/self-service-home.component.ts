@@ -1,6 +1,9 @@
 ﻿import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { inject, signal } from '@angular/core';
+import { EmployeeService } from '../../../employees/services/employee.service';
+import { Employee } from '../../../employees/models/employee.models';
 
 @Component({
 	selector: 'app-self-service-home',
@@ -33,7 +36,12 @@ import { RouterLink } from '@angular/router';
 						<div class="d-grid gap-2">
 							<a class="btn btn-outline-dark" routerLink="/payslips">View Payslips</a>
 							<a class="btn btn-outline-dark" routerLink="/leave/request">Request Leave</a>
-							<button class="btn btn-outline-secondary" type="button">Update Banking Details</button>
+							<h3 class="h6 mt-4">Banking Details</h3>
+							@if (employee(); as profile) {
+								@if (profile.bankDetails; as bank) {
+									<dl class="row small mb-0"><dt class="col-5">Bank</dt><dd class="col-7">{{ bank.bankName }}</dd><dt class="col-5">Account</dt><dd class="col-7">{{ bank.accountNumber }}</dd><dt class="col-5">Branch</dt><dd class="col-7">{{ bank.branchCode }}</dd><dt class="col-5">Type</dt><dd class="col-7">{{ bank.accountType }}</dd></dl>
+								} @else { <p class="text-muted small mb-0">No bank details have been captured.</p> }
+							} @else { <p class="text-muted small mb-0">Loading bank details...</p> }
 						</div>
 					</div>
 				</article>
@@ -55,9 +63,15 @@ import { RouterLink } from '@angular/router';
 	`
 })
 export class SelfServiceHomeComponent {
+	private readonly employeeService = inject(EmployeeService);
+	readonly employee = signal<Employee | null>(null);
 	readonly summaryCards = [
 		{ label: 'Leave Balance', value: '8.5 days' },
 		{ label: 'Next Payday', value: '29 Aug 2026' },
 		{ label: 'Latest Net Pay', value: 'R 41,520' }
 	];
+
+	constructor() {
+		this.employeeService.getMine().subscribe({ next: employee => this.employee.set(employee) });
+	}
 }

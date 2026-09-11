@@ -136,6 +136,7 @@ public static class DependencyInjection
             PayrollEngine.PayrollEngine>();
 
         services.AddScoped<IPdfService, PdfService>();
+        services.AddScoped<ITaxCertificatePdfService, TaxCertificatePdfService>();
 
         services.AddScoped<IEmailService, EmailService>();
 

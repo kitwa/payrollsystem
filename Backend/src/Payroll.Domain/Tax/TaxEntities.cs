@@ -31,6 +31,7 @@ public class TaxRebate : BaseEntity
 
 public class TaxYear : BaseEntity
 {
+    public string Name { get; set; } = string.Empty;
     public int Year { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
@@ -38,7 +39,11 @@ public class TaxYear : BaseEntity
     public decimal UifContributionRate { get; set; } // % e.g. 1 = 1%
     public decimal SdlRate { get; set; } // % e.g. 1 = 1%
     public bool IsActive { get; set; }
+    public bool IsClosed { get; set; }
     public List<TaxTable> TaxTables { get; set; } = [];
     public List<TaxThreshold> TaxThresholds { get; set; } = [];
     public List<TaxRebate> TaxRebates { get; set; } = [];
+
+    public bool ContainsPayrollPeriod(DateTime periodStart, DateTime periodEnd) =>
+        periodStart >= StartDate && periodEnd <= EndDate;
 }

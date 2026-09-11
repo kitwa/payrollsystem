@@ -35,6 +35,8 @@ public interface IAppDbContext
     DbSet<TaxTable> TaxTables { get; }
     DbSet<TaxThreshold> TaxThresholds { get; }
     DbSet<TaxRebate> TaxRebates { get; }
+    DbSet<EmployeeTaxCertificate> EmployeeTaxCertificates { get; }
+    DbSet<TaxCertificateLine> TaxCertificateLines { get; }
     DbSet<SupportTicket> SupportTickets { get; }
     DbSet<CompanySubscription> CompanySubscriptions { get; }
     DbSet<CompanyPaymentProfile> CompanyPaymentProfiles { get; }

@@ -95,6 +95,43 @@ public class UpdateEmployeeHandler(IAppDbContext db, ICurrentUser currentUser) :
     }
 }
 
+public record UpdateBankDetailsCommand(Guid EmployeeId, BankDetailsDto Dto) : IRequest<Result>;
+
+public class UpdateBankDetailsHandler(IAppDbContext db, ICurrentUser currentUser)
+    : IRequestHandler<UpdateBankDetailsCommand, Result>
+{
+    public async Task<Result> Handle(UpdateBankDetailsCommand request, CancellationToken ct)
+    {
+        var employee = await db.Employees
+            .FirstOrDefaultAsync(e => e.Id == request.EmployeeId && !e.IsDeleted, ct);
+        if (employee is null) return Result.Fail("Employee not found.");
+        if (!currentUser.IsInRole(Constants.Roles.Admin)
+            && !currentUser.IsInRole(Constants.Roles.SuperAdmin))
+            return Result.Fail("You are not authorized to update these bank details.");
+        if (!TenantAccess.CanAccessCompany(currentUser, employee.CompanyId))
+            return Result.Fail("You are not authorized to update these bank details.");
+
+        var dto = request.Dto;
+        if (string.IsNullOrWhiteSpace(dto.BankName) || string.IsNullOrWhiteSpace(dto.AccountNumber)
+            || string.IsNullOrWhiteSpace(dto.BranchCode) || string.IsNullOrWhiteSpace(dto.AccountType))
+            return Result.Fail("Bank name, account number, branch code and account type are required.");
+
+        var bankDetails = await db.BankDetails
+            .FirstOrDefaultAsync(b => b.EmployeeId == employee.Id, ct);
+        if (bankDetails is null)
+        {
+            bankDetails = new BankDetails { EmployeeId = employee.Id };
+            db.BankDetails.Add(bankDetails);
+        }
+        bankDetails.BankName = dto.BankName.Trim();
+        bankDetails.AccountNumber = dto.AccountNumber.Trim();
+        bankDetails.BranchCode = dto.BranchCode.Trim();
+        bankDetails.AccountType = dto.AccountType.Trim();
+        await db.SaveChangesAsync(ct);
+        return Result.Ok();
+    }
+}
+
 public record TerminateEmployeeCommand(Guid Id, DateTime TerminationDate) : IRequest<Result>;
 
 public class TerminateEmployeeHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<TerminateEmployeeCommand, Result>

@@ -17,7 +17,14 @@ public class GetLeaveTypesHandler(IAppDbContext db, ICurrentUser currentUser) : 
             return Result<List<LeaveTypeDto>>.Fail("You are not authorized to view these leave types.");
 
         var types = await db.LeaveTypes
-            .Where(t => !t.IsDeleted && (t.CompanyId == request.CompanyId || t.CompanyId == Guid.Empty) && t.IsActive)
+            .Where(t => !t.IsDeleted
+                && t.IsActive
+                && (t.CompanyId == request.CompanyId
+                    || (t.CompanyId == Guid.Empty
+                        && !db.LeaveTypes.Any(overrideType =>
+                            !overrideType.IsDeleted
+                            && overrideType.CompanyId == request.CompanyId
+                            && overrideType.Name == t.Name))))
             .OrderBy(t => t.Name)
             .Select(t => new LeaveTypeDto(t.Id, t.CompanyId, t.Name, t.DefaultEntitlementDays, t.IsPaid, t.RequiresApproval, t.IsActive))
             .ToListAsync(ct);

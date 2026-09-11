@@ -30,6 +30,19 @@ public class GetEmployeesHandler(IAppDbContext db, ICurrentUser currentUser) : I
 
 public record GetEmployeeByIdQuery(Guid Id) : IRequest<Result<EmployeeDto>>;
 
+public record GetMyEmployeeQuery : IRequest<Result<EmployeeDto>>;
+
+public class GetMyEmployeeHandler(ICurrentUser currentUser, ISender sender)
+    : IRequestHandler<GetMyEmployeeQuery, Result<EmployeeDto>>
+{
+    public async Task<Result<EmployeeDto>> Handle(GetMyEmployeeQuery request, CancellationToken ct)
+    {
+        if (currentUser.EmployeeId is null)
+            return Result<EmployeeDto>.Fail("Your account is not linked to an employee record.");
+        return await sender.Send(new GetEmployeeByIdQuery(currentUser.EmployeeId.Value), ct);
+    }
+}
+
 public class GetEmployeeByIdHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<GetEmployeeByIdQuery, Result<EmployeeDto>>
 {
     public async Task<Result<EmployeeDto>> Handle(GetEmployeeByIdQuery request, CancellationToken ct)

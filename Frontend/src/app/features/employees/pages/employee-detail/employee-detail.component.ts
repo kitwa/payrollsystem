@@ -52,6 +52,16 @@ import { Employee } from '../../models/employee.models';
 			<div class="col-12 col-lg-4">
 				<article class="card border-0 shadow-sm mb-3">
 					<div class="card-body">
+						<h2 class="h6 text-muted">Bank Account</h2>
+						@if (employee.bankDetails; as bank) {
+							<ul class="list-unstyled mb-0 small"><li><strong>Bank:</strong> {{ bank.bankName }}</li><li><strong>Account:</strong> {{ bank.accountNumber }}</li><li><strong>Branch:</strong> {{ bank.branchCode }}</li><li><strong>Type:</strong> {{ bank.accountType }}</li></ul>
+						} @else {
+							<p class="text-muted small mb-0">No bank details captured.</p>
+						}
+					</div>
+				</article>
+				<article class="card border-0 shadow-sm mb-3">
+					<div class="card-body">
 						<h2 class="h6 text-muted">Compensation</h2>
 						<p class="salary">R {{ employee.basicSalary | number:'1.0-0' }}</p>
 						<p class="mb-0 text-muted">{{ payFrequencyLabel(employee.payFrequency) }}</p>

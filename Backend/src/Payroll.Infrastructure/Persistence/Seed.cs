@@ -54,6 +54,7 @@ public static class Seed
         // 2026/2027 tax year — rates from SARS
         var taxYear = new TaxYear
         {
+            Name = "2026/2027",
             Year = 2026,
             StartDate = new DateTime(2026, 3, 1),
             EndDate = new DateTime(2027, 2, 28),

@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Payroll.Application.Common.Interfaces;
 using Payroll.Application.Common;
 using Payroll.Application.Settings.DTOs;
@@ -39,10 +40,41 @@ public class UpdateLeaveTypeHandler(IAppDbContext db, ICurrentUser currentUser) 
     {
         var type = await db.LeaveTypes.FindAsync([request.Id], ct);
         if (type is null) return Result.Fail("Leave type not found.");
-        if (!TenantAccess.CanManageCompany(currentUser, type.CompanyId))
+        var companyId = type.CompanyId == Guid.Empty ? currentUser.CompanyId : type.CompanyId;
+        if (companyId is null || !TenantAccess.CanManageCompany(currentUser, companyId.Value))
             return Result.Fail("You are not authorized to update this leave type.");
 
         var d = request.Dto;
+        if (type.CompanyId == Guid.Empty)
+        {
+            var companyOverride = await db.LeaveTypes.FirstOrDefaultAsync(t =>
+                !t.IsDeleted && t.CompanyId == companyId.Value && t.Name == type.Name, ct);
+            if (companyOverride is null)
+            {
+                companyOverride = new LeaveType
+                {
+                    CompanyId = companyId.Value,
+                    Name = d.Name,
+                    DefaultEntitlementDays = d.DefaultEntitlementDays,
+                    IsPaid = d.IsPaid,
+                    RequiresApproval = d.RequiresApproval,
+                    IsActive = d.IsActive
+                };
+                db.LeaveTypes.Add(companyOverride);
+            }
+            else
+            {
+                companyOverride.Name = d.Name;
+                companyOverride.DefaultEntitlementDays = d.DefaultEntitlementDays;
+                companyOverride.IsPaid = d.IsPaid;
+                companyOverride.RequiresApproval = d.RequiresApproval;
+                companyOverride.IsActive = d.IsActive;
+            }
+
+            await db.SaveChangesAsync(ct);
+            return Result.Ok();
+        }
+
         type.Name = d.Name;
         type.DefaultEntitlementDays = d.DefaultEntitlementDays;
         type.IsPaid = d.IsPaid;

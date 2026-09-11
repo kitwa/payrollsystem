@@ -38,6 +38,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
     public DbSet<TaxTable> TaxTables => Set<TaxTable>();
     public DbSet<TaxThreshold> TaxThresholds => Set<TaxThreshold>();
     public DbSet<TaxRebate> TaxRebates => Set<TaxRebate>();
+    public DbSet<EmployeeTaxCertificate> EmployeeTaxCertificates => Set<EmployeeTaxCertificate>();
+    public DbSet<TaxCertificateLine> TaxCertificateLines => Set<TaxCertificateLine>();
     public DbSet<SupportTicket> SupportTickets => Set<SupportTicket>();
     public DbSet<CompanySubscription> CompanySubscriptions => Set<CompanySubscription>();
     public DbSet<CompanyPaymentProfile> CompanyPaymentProfiles => Set<CompanyPaymentProfile>();

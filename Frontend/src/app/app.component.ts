@@ -40,6 +40,7 @@ export class AppComponent {
     { label: 'Leave', path: '/leave', icon: 'bi-calendar2-week' },
     { label: 'Payslips', path: '/payslips', icon: 'bi-receipt' },
     { label: 'Reports', path: '/reports', icon: 'bi-bar-chart', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },
+    { label: 'Tax Certificates', path: '/tax-certificates', icon: 'bi-file-earmark-text', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },
     { label: 'Support', path: '/support/tickets', icon: 'bi-life-preserver', roles: ['Admin', 'SuperAdmin'] },
     { label: 'Self Service', path: '/self-service', icon: 'bi-person-bounding-box', roles: ['Employee'] }
   ];

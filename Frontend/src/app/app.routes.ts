@@ -28,7 +28,7 @@ export const routes: Routes = [
 
   {
     path: 'dashboard',
-    canActivate: [authGuard],
+    canActivate: [authGuard, roleGuard(['PayrollManager', 'Admin', 'SuperAdmin'])],
     loadComponent: () => import('./features/dashboard/pages/dashboard.component').then(m => m.DashboardComponent)
   },
   {
@@ -54,6 +54,11 @@ export const routes: Routes = [
     path: 'reports',
     canActivate: [authGuard, roleGuard(['PayrollManager', 'Admin', 'SuperAdmin'])],
     loadChildren: () => import('./features/reports/reports.routes').then(m => m.reportRoutes)
+  },
+  {
+    path: 'tax-certificates',
+    canActivate: [authGuard, roleGuard(['PayrollManager', 'Admin', 'SuperAdmin'])],
+    loadComponent: () => import('./features/tax-certificates/pages/tax-certificates.component').then(m => m.TaxCertificatesComponent)
   },
   {
     path: 'settings',

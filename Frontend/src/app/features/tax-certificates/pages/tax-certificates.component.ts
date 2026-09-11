@@ -1,0 +1,38 @@
+import { Component, computed, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../core/auth/auth.service';
+import { EmployeeService } from '../../employees/services/employee.service';
+import { EmployeeList } from '../../employees/models/employee.models';
+import { TaxCertificateService } from '../services/tax-certificate.service';
+import { TaxCertificate, TaxYearSummary } from '../models/tax-certificate.models';
+
+@Component({ selector: 'app-tax-certificates', standalone: true, imports: [CommonModule, FormsModule], template: `
+<section class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+  <div><p class="text-muted mb-1">Payroll compliance records</p><h1 class="h3 mb-1">Tax Certificates</h1><p class="text-muted mb-0">Generate review copies from existing payroll records. Not currently claimed to be SARS-compliant.</p></div>
+  <div class="d-flex gap-2"><button class="btn btn-outline-dark" type="button" (click)="generateAll()" [disabled]="!taxYearId() || loading()">Generate All</button></div>
+</section>
+@if (error()) { <div class="alert alert-danger">{{ error() }}</div> }
+@if (message()) { <div class="alert alert-success">{{ message() }}</div> }
+<section class="card border-0 shadow-sm mb-3"><div class="card-body row g-2 align-items-end">
+  <div class="col-12 col-md-3"><label class="form-label">Tax year</label><select class="form-select" [ngModel]="taxYearId()" (ngModelChange)="taxYearId.set($event); load()"><option value="">Select tax year</option>@for (year of years(); track year.id) { <option [value]="year.id">{{ year.year }} ({{ year.startDate | date:'yyyy-MM-dd' }} to {{ year.endDate | date:'yyyy-MM-dd' }})</option> }</select></div>
+  <div class="col-12 col-md-3"><label class="form-label">Search employee</label><input class="form-control" [ngModel]="search()" (ngModelChange)="search.set($event); load()" placeholder="Name or employee number"></div>
+  <div class="col-12 col-md-2"><label class="form-label">Status</label><select class="form-select" [ngModel]="status()" (ngModelChange)="status.set($event); load()"><option value="">All</option><option value="1">Generated</option><option value="2">Finalized</option></select></div>
+  <div class="col-12 col-md-2"><label class="form-label">Type</label><select class="form-select" [ngModel]="type()" (ngModelChange)="type.set($event); load()"><option value="">All</option><option value="0">IRP5</option><option value="1">IT3(a)</option></select></div>
+</div></section>
+<section class="card border-0 shadow-sm"><div class="card-body"><div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>Employee</th><th>Type</th><th>Certificate</th><th class="text-end">Gross</th><th class="text-end">PAYE</th><th>Status</th><th class="text-end">Actions</th></tr></thead><tbody>
+@for (certificate of certificates(); track certificate.id) { <tr><td>{{ certificate.employeeName }}</td><td>{{ certificate.certificateType }}</td><td><small>{{ certificate.certificateNumber }}</small></td><td class="text-end">R {{ certificate.grossRemuneration | number:'1.2-2' }}</td><td class="text-end">R {{ certificate.paye | number:'1.2-2' }}</td><td><span class="badge" [class.bg-success]="certificate.isFinal" [class.bg-secondary]="!certificate.isFinal">{{ certificate.status }}</span></td><td class="text-end"><button class="btn btn-sm btn-outline-secondary me-1" type="button" (click)="view(certificate)">View</button><button class="btn btn-sm btn-outline-secondary me-1" type="button" (click)="download(certificate)">Download</button>@if (!certificate.isFinal) { <button class="btn btn-sm btn-outline-dark" type="button" (click)="finalize(certificate)">Finalize</button> }</td></tr> } @empty { <tr><td colspan="7" class="text-center text-muted py-4">Select a tax year to view certificates.</td></tr> }
+</tbody></table></div></div></section>
+@if (selected(); as certificate) { <section class="card border-0 shadow-sm mt-3"><div class="card-body"><div class="d-flex justify-content-between"><h2 class="h5">Certificate Details</h2><button class="btn btn-sm btn-outline-secondary" type="button" (click)="selected.set(null)">Close</button></div><div class="row g-2 small"><div class="col-md-3"><strong>Employee</strong><br>{{ certificate.employeeName }}</div><div class="col-md-3"><strong>Certificate</strong><br>{{ certificate.certificateNumber }}</div><div class="col-md-3"><strong>Gross remuneration</strong><br>R {{ certificate.grossRemuneration | number:'1.2-2' }}</div><div class="col-md-3"><strong>Taxable income</strong><br>R {{ certificate.taxableIncome | number:'1.2-2' }}</div><div class="col-md-3"><strong>PAYE</strong><br>R {{ certificate.paye | number:'1.2-2' }}</div><div class="col-md-3"><strong>UIF</strong><br>R {{ certificate.uif | number:'1.2-2' }}</div><div class="col-md-3"><strong>SDL</strong><br>R {{ certificate.sdl | number:'1.2-2' }}</div></div></div></section> }` })
+export class TaxCertificatesComponent {
+  private readonly auth = inject(AuthService); private readonly service = inject(TaxCertificateService);
+  readonly years = signal<TaxYearSummary[]>([]); readonly certificates = signal<TaxCertificate[]>([]); readonly taxYearId = signal(''); readonly search = signal(''); readonly status = signal(''); readonly type = signal(''); readonly error = signal(''); readonly message = signal(''); readonly loading = signal(false);
+  readonly selected = signal<TaxCertificate | null>(null);
+  constructor() { this.service.getYears().subscribe({ next: years => { this.years.set(years); if (years.length) this.taxYearId.set(years.find(y => y.isActive)?.id ?? years[0].id); this.load(); }, error: r => this.showError(r, 'Unable to load tax years.') }); }
+  load(): void { const companyId = this.auth.companyId(); if (!companyId || !this.taxYearId()) return; this.service.getAll(companyId, this.taxYearId(), this.search(), this.status(), this.type()).subscribe({ next: x => this.certificates.set(x), error: r => this.showError(r, 'Unable to load certificates.') }); }
+  generateAll(): void { const companyId = this.auth.companyId(); if (!companyId || !this.taxYearId()) return; this.loading.set(true); this.service.generateAll(companyId, this.taxYearId()).subscribe({ next: n => { this.message.set(`${n} certificate(s) generated.`); this.loading.set(false); this.load(); }, error: r => { this.showError(r, 'Unable to generate certificates.'); this.loading.set(false); } }); }
+  finalize(certificate: TaxCertificate): void { this.service.finalize(certificate.id).subscribe({ next: () => { this.message.set('Certificate finalized.'); this.load(); }, error: r => this.showError(r, 'Unable to finalize certificate.') }); }
+  view(certificate: TaxCertificate): void { this.service.getById(certificate.id).subscribe({ next: detail => this.selected.set(detail.certificate), error: r => this.showError(r, 'Unable to view certificate.') }); }
+  download(certificate: TaxCertificate): void { this.service.download(certificate.id).subscribe({ next: blob => { const url = URL.createObjectURL(blob); const anchor = document.createElement('a'); anchor.href = url; anchor.download = `tax-certificate-${certificate.employeeName}.pdf`; anchor.click(); URL.revokeObjectURL(url); }, error: r => this.showError(r, 'Unable to download certificate.') }); }
+  private showError(r: { error?: { errors?: string[] } }, fallback: string): void { this.error.set(r.error?.errors?.[0] ?? fallback); }
+}

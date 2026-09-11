@@ -117,6 +117,13 @@ import { DepartmentService } from '../../services/employee.service';
 							<option [ngValue]="1">Terminated</option>
 						</select>
 					</div>
+					@if (isEditMode) {
+						<div class="col-12"><hr><h2 class="h5 mb-2">Bank Account</h2></div>
+						<div class="col-12 col-md-3"><label class="form-label">Bank Name</label><input class="form-control" formControlName="bankName"></div>
+						<div class="col-12 col-md-3"><label class="form-label">Account Number</label><input class="form-control" formControlName="accountNumber"></div>
+						<div class="col-12 col-md-3"><label class="form-label">Branch Code</label><input class="form-control" formControlName="branchCode"></div>
+						<div class="col-12 col-md-3"><label class="form-label">Account Type</label><input class="form-control" formControlName="accountType"></div>
+					}
 
 					@if (saved()) {
 						<div class="col-12">
@@ -174,7 +181,11 @@ export class EmployeeFormComponent {
 		payFrequency: [0, Validators.required],
 		employmentType: [0, Validators.required],
 		basicSalary: [0, [Validators.required, Validators.min(1)]],
-		status: [0, Validators.required]
+		status: [0, Validators.required],
+		bankName: [''],
+		accountNumber: [''],
+		branchCode: [''],
+		accountType: ['']
 	});
 
 	constructor() {
@@ -200,7 +211,11 @@ export class EmployeeFormComponent {
 						payFrequency: employee.payFrequency,
 						employmentType: employee.employmentType,
 						basicSalary: employee.basicSalary,
-						status: employee.status
+						status: employee.status,
+						bankName: employee.bankDetails?.bankName ?? '',
+						accountNumber: employee.bankDetails?.accountNumber ?? '',
+						branchCode: employee.bankDetails?.branchCode ?? '',
+						accountType: employee.bankDetails?.accountType ?? ''
 					});
 				});
 			}
@@ -227,7 +242,10 @@ export class EmployeeFormComponent {
 				department: value.department ?? undefined,
 				basicSalary: value.basicSalary!,
 				status: this.employee.status
-			}).subscribe({ next: () => this.router.navigate(['/employees']), error: response => this.error.set(response.error?.errors?.[0] ?? 'Unable to save employee.') });
+			}).subscribe({
+				next: () => this.saveBankDetailsAndNavigate(value),
+				error: response => this.error.set(response.error?.errors?.[0] ?? 'Unable to save employee.')
+			});
 			return;
 		}
 
@@ -255,5 +273,22 @@ export class EmployeeFormComponent {
 		const message = response.error?.errors?.[0] ?? fallback;
 		this.error.set(message);
 		this.showUpgradeCta.set(message.toLowerCase().includes('upgrade') && (this.auth.isInRole('Admin') || this.auth.isInRole('SuperAdmin')));
+	}
+
+	private saveBankDetailsAndNavigate(value: ReturnType<typeof this.form.getRawValue>): void {
+		const details = {
+			bankName: value.bankName?.trim() ?? '',
+			accountNumber: value.accountNumber?.trim() ?? '',
+			branchCode: value.branchCode?.trim() ?? '',
+			accountType: value.accountType?.trim() ?? ''
+		};
+		if (!details.bankName && !details.accountNumber && !details.branchCode && !details.accountType) {
+			this.router.navigate(['/employees']);
+			return;
+		}
+		this.employeeService.updateBankDetails(this.employeeId!, details).subscribe({
+			next: () => this.router.navigate(['/employees']),
+			error: response => this.setError(response, 'Unable to save bank details.')
+		});
 	}
 }

@@ -49,12 +49,20 @@ export class EmployeeService {
     return this.http.get<Employee>(`${this.url}/${id}`);
   }
 
+  getMine() {
+    return this.http.get<Employee>(`${this.url}/me`);
+  }
+
   create(dto: CreateEmployee) {
     return this.http.post<string>(this.url, dto);
   }
 
   update(id: string, dto: Partial<Employee>) {
     return this.http.put(`${this.url}/${id}`, dto);
+  }
+
+  updateBankDetails(id: string, bankDetails: Employee['bankDetails']) {
+    return this.http.put(`${this.url}/${id}/bank-details`, bankDetails);
   }
 
   terminate(id: string, terminationDate: string) {
