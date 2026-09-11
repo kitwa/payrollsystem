@@ -7,6 +7,7 @@ using Payroll.Domain.Billing;
 using Payroll.Domain.Companies;
 using Payroll.Domain.Employees;
 using Payroll.Domain.Identity;
+using Payroll.Domain.Settings;
 using Payroll.Shared;
 
 namespace Payroll.Application.Auth.Commands;
@@ -55,6 +56,15 @@ public class RegisterCompanyHandler(
 
         // Every company gets a protected default department so employees always have one to select.
         db.Departments.Add(new Department { CompanyId = company.Id, Name = "General", IsSystemDepartment = true });
+        db.EarningTypes.AddRange(
+            new EarningType { CompanyId = company.Id, Name = "Bonus", Code = "BONUS", IsTaxable = true },
+            new EarningType { CompanyId = company.Id, Name = "Overtime", Code = "OVERTIME", IsTaxable = true },
+            new EarningType { CompanyId = company.Id, Name = "Commission", Code = "COMMISSION", IsTaxable = true });
+        db.DeductionTypes.AddRange(
+            new DeductionType { CompanyId = company.Id, Name = "Staff Loan", Code = "LOAN", IsEmployerContribution = false },
+            new DeductionType { CompanyId = company.Id, Name = "Medical Aid", Code = "MEDICAL_AID", IsEmployerContribution = true },
+            new DeductionType { CompanyId = company.Id, Name = "Pension", Code = "PENSION", IsEmployerContribution = true },
+            new DeductionType { CompanyId = company.Id, Name = "Salary Advance", Code = "ADVANCE", IsEmployerContribution = false });
         await db.SaveChangesAsync(ct);
 
         // First month free, all features included, capped at 5 employees until upgraded.

@@ -182,6 +182,9 @@ try
             // Create default "General" departments where required.
             await EnsureDefaultDepartmentsAsync(db);
 
+            // Create default payroll items for existing companies.
+            await EnsureDefaultPayrollItemsAsync(db);
+
             // Create default Free Trial subscriptions
             // for companies that don't have one.
             await EnsureDefaultSubscriptionsAsync(db);
@@ -393,6 +396,58 @@ static async Task EnsureDefaultDepartmentsAsync(
                     IsSystemDepartment = true
                 });
         }
+    }
+
+    await db.SaveChangesAsync();
+}
+
+
+// ================================================================
+// Default Payroll Items
+// ================================================================
+
+static async Task EnsureDefaultPayrollItemsAsync(AppDbContext db)
+{
+    var companies = await db.Companies
+        .Where(c => !c.IsDeleted)
+        .Select(c => c.Id)
+        .ToListAsync();
+    var defaultEarnings = new[]
+    {
+        (Name: "Bonus", Code: "BONUS", IsTaxable: true),
+        (Name: "Overtime", Code: "OVERTIME", IsTaxable: true),
+        (Name: "Commission", Code: "COMMISSION", IsTaxable: true)
+    };
+    var defaultDeductions = new[]
+    {
+        (Name: "Staff Loan", Code: "LOAN", IsEmployerContribution: false),
+        (Name: "Medical Aid", Code: "MEDICAL_AID", IsEmployerContribution: true),
+        (Name: "Pension", Code: "PENSION", IsEmployerContribution: true),
+        (Name: "Salary Advance", Code: "ADVANCE", IsEmployerContribution: false)
+    };
+
+    foreach (var companyId in companies)
+    {
+        var earningCodes = await db.EarningTypes
+            .Where(t => t.CompanyId == companyId && !t.IsDeleted)
+            .Select(t => t.Code)
+            .ToListAsync();
+        foreach (var item in defaultEarnings.Where(item => !earningCodes.Contains(item.Code)))
+            db.EarningTypes.Add(new Payroll.Domain.Settings.EarningType
+            {
+                CompanyId = companyId, Name = item.Name, Code = item.Code, IsTaxable = item.IsTaxable
+            });
+
+        var deductionCodes = await db.DeductionTypes
+            .Where(t => t.CompanyId == companyId && !t.IsDeleted)
+            .Select(t => t.Code)
+            .ToListAsync();
+        foreach (var item in defaultDeductions.Where(item => !deductionCodes.Contains(item.Code)))
+            db.DeductionTypes.Add(new Payroll.Domain.Settings.DeductionType
+            {
+                CompanyId = companyId, Name = item.Name, Code = item.Code,
+                IsEmployerContribution = item.IsEmployerContribution
+            });
     }
 
     await db.SaveChangesAsync();

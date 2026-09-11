@@ -20,4 +20,5 @@ export interface EmployeeDeduction {
   employeeAmount: number;
   employerAmount: number;
   isActive: boolean;
+  payrollPeriodId?: string | null;
 }

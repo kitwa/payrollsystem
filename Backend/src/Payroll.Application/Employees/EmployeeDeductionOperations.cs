@@ -10,7 +10,7 @@ namespace Payroll.Application.Employees;
 
 public record EmployeeDeductionDto(
     Guid Id, Guid EmployeeId, string Description, DeductionCategory Category,
-    decimal EmployeeAmount, decimal EmployerAmount, bool IsActive, Guid? DeductionTypeId);
+    decimal EmployeeAmount, decimal EmployerAmount, bool IsActive, Guid? DeductionTypeId, Guid? PayrollPeriodId);
 
 public record GetEmployeeDeductionsQuery(Guid CompanyId, Guid EmployeeId)
     : IRequest<Result<List<EmployeeDeductionDto>>>;
@@ -27,7 +27,7 @@ public class GetEmployeeDeductionsHandler(IAppDbContext db, ICurrentUser current
             .Where(d => d.CompanyId == request.CompanyId && d.EmployeeId == request.EmployeeId && !d.IsDeleted)
             .OrderBy(d => d.Description)
             .Select(d => new EmployeeDeductionDto(d.Id, d.EmployeeId, d.Description, d.Category,
-                d.EmployeeAmount, d.EmployerAmount, d.IsActive, d.DeductionTypeId))
+                d.EmployeeAmount, d.EmployerAmount, d.IsActive, d.DeductionTypeId, d.PayrollPeriodId))
             .ToListAsync(ct);
 
         return Result<List<EmployeeDeductionDto>>.Ok(result);
@@ -36,7 +36,7 @@ public class GetEmployeeDeductionsHandler(IAppDbContext db, ICurrentUser current
 
 public record CreateEmployeeDeductionDto(
     Guid CompanyId, Guid EmployeeId, string Description, DeductionCategory Category,
-    decimal EmployeeAmount, decimal EmployerAmount, Guid? DeductionTypeId = null);
+    decimal EmployeeAmount, decimal EmployerAmount, Guid? DeductionTypeId = null, Guid? PayrollPeriodId = null);
 
 public record CreateEmployeeDeductionCommand(CreateEmployeeDeductionDto Dto) : IRequest<Result<Guid>>;
 
@@ -57,6 +57,12 @@ public class CreateEmployeeDeductionHandler(IAppDbContext db, ICurrentUser curre
             e => e.Id == d.EmployeeId && e.CompanyId == d.CompanyId && !e.IsDeleted, ct);
         if (!employeeExists) return Result<Guid>.Fail("Employee not found in this company.");
 
+        if (d.PayrollPeriodId is null)
+            return Result<Guid>.Fail("A payroll period is required for a new deduction.");
+        var periodExists = await db.PayrollPeriods.AnyAsync(
+            p => p.Id == d.PayrollPeriodId && p.CompanyId == d.CompanyId && !p.IsDeleted, ct);
+        if (!periodExists) return Result<Guid>.Fail("Payroll period not found in this company.");
+
         if (d.DeductionTypeId is not null && !await db.DeductionTypes.AnyAsync(
                 t => t.Id == d.DeductionTypeId && t.CompanyId == d.CompanyId && t.IsActive && !t.IsDeleted, ct))
             return Result<Guid>.Fail("The selected deduction type is not active for this company.");
@@ -65,6 +71,7 @@ public class CreateEmployeeDeductionHandler(IAppDbContext db, ICurrentUser curre
         {
             CompanyId = d.CompanyId,
             EmployeeId = d.EmployeeId,
+            PayrollPeriodId = d.PayrollPeriodId,
             DeductionTypeId = d.DeductionTypeId,
             Description = d.Description.Trim(),
             Category = d.Category,
@@ -75,14 +82,14 @@ public class CreateEmployeeDeductionHandler(IAppDbContext db, ICurrentUser curre
         db.EmployeeDeductions.Add(deduction);
         await db.SaveChangesAsync(ct);
 
-        await EmployeeDeductionRecalculation.ReprocessOpenPeriodsAsync(d.CompanyId, d.EmployeeId, db, engine, ct);
+        await EmployeeDeductionRecalculation.ReprocessOpenPeriodsAsync(d.CompanyId, d.EmployeeId, d.PayrollPeriodId, db, engine, ct);
         return Result<Guid>.Ok(deduction.Id);
     }
 }
 
 public record UpdateEmployeeDeductionDto(
     string Description, DeductionCategory Category, decimal EmployeeAmount,
-    decimal EmployerAmount, bool IsActive, Guid? DeductionTypeId = null);
+    decimal EmployerAmount, bool IsActive, Guid? DeductionTypeId = null, Guid? PayrollPeriodId = null);
 
 public record UpdateEmployeeDeductionCommand(Guid Id, UpdateEmployeeDeductionDto Dto) : IRequest<Result>;
 
@@ -105,6 +112,13 @@ public class UpdateEmployeeDeductionHandler(IAppDbContext db, ICurrentUser curre
             return Result.Fail("The selected deduction type is not active for this company.");
 
         deduction.Description = request.Dto.Description.Trim();
+        if (request.Dto.PayrollPeriodId is not null)
+        {
+            var periodExists = await db.PayrollPeriods.AnyAsync(
+                p => p.Id == request.Dto.PayrollPeriodId && p.CompanyId == deduction.CompanyId && !p.IsDeleted, ct);
+            if (!periodExists) return Result.Fail("Payroll period not found in this company.");
+            deduction.PayrollPeriodId = request.Dto.PayrollPeriodId;
+        }
         deduction.DeductionTypeId = request.Dto.DeductionTypeId;
         deduction.Category = request.Dto.Category;
         deduction.EmployeeAmount = request.Dto.EmployeeAmount;
@@ -112,7 +126,7 @@ public class UpdateEmployeeDeductionHandler(IAppDbContext db, ICurrentUser curre
         deduction.IsActive = request.Dto.IsActive;
         await db.SaveChangesAsync(ct);
 
-        await EmployeeDeductionRecalculation.ReprocessOpenPeriodsAsync(deduction.CompanyId, deduction.EmployeeId, db, engine, ct);
+        await EmployeeDeductionRecalculation.ReprocessOpenPeriodsAsync(deduction.CompanyId, deduction.EmployeeId, deduction.PayrollPeriodId, db, engine, ct);
         return Result.Ok();
     }
 }
@@ -120,10 +134,11 @@ public class UpdateEmployeeDeductionHandler(IAppDbContext db, ICurrentUser curre
 internal static class EmployeeDeductionRecalculation
 {
     public static async Task ReprocessOpenPeriodsAsync(
-        Guid companyId, Guid employeeId, IAppDbContext db, IPayrollEngine engine, CancellationToken ct)
+        Guid companyId, Guid employeeId, Guid? payrollPeriodId, IAppDbContext db, IPayrollEngine engine, CancellationToken ct)
     {
         var periods = await db.PayrollPeriods
             .Where(p => p.CompanyId == companyId
+                && (payrollPeriodId == null || p.Id == payrollPeriodId)
                 && (p.Status == PayrollStatus.Draft || p.Status == PayrollStatus.Approved)
                 && !p.IsDeleted)
             .Select(p => p.Id)

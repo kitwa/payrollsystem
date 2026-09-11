@@ -8,6 +8,8 @@ public class EmployeeDeduction : BaseEntity
     public Guid CompanyId { get; set; }
     public Guid EmployeeId { get; set; }
     public Employees.Employee Employee { get; set; } = null!;
+    public Guid? PayrollPeriodId { get; set; }
+    public PayrollPeriod? PayrollPeriod { get; set; }
     public Guid? DeductionTypeId { get; set; }
     public Settings.DeductionType? DeductionType { get; set; }
     public DeductionCategory Category { get; set; } = DeductionCategory.Other;

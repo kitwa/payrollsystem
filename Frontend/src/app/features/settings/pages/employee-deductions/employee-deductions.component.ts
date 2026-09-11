@@ -9,6 +9,8 @@ import { DeductionCategory, EmployeeDeduction } from '../../models/employee-dedu
 import { SettingsService } from '../../services/settings.service';
 import { DeductionType } from '../../models/settings.models';
 import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
+import { PayrollService } from '../../../payroll/services/payroll.service';
+import { PayrollPeriod } from '../../../payroll/models/payroll.models';
 
 @Component({
   selector: 'app-employee-deductions',
@@ -32,6 +34,15 @@ import { PaginationComponent } from '../../../../shared/components/pagination/pa
               <option value="">Select employee</option>
               @for (employee of employees(); track employee.id) {
                 <option [value]="employee.id">{{ employee.firstName }} {{ employee.lastName }} · {{ employee.employeeNumber }}</option>
+              }
+            </select>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <label class="form-label">Payroll period</label>
+            <select class="form-select" formControlName="payrollPeriodId">
+              <option value="">Select payroll period</option>
+              @for (period of periods(); track period.id) {
+                <option [value]="period.id">{{ period.year }}-{{ period.month.toString().padStart(2, '0') }} ({{ statusName(period.status) }})</option>
               }
             </select>
           </div>
@@ -104,6 +115,7 @@ export class EmployeeDeductionsComponent {
   private readonly employeeService = inject(EmployeeService);
   private readonly deductionService = inject(EmployeeDeductionService);
   private readonly settingsService = inject(SettingsService);
+  private readonly payrollService = inject(PayrollService);
 
   readonly employees = signal<EmployeeList[]>([]);
   readonly deductions = signal<EmployeeDeduction[]>([]);
@@ -111,6 +123,7 @@ export class EmployeeDeductionsComponent {
   readonly message = signal('');
   readonly selectedEmployeeId = signal('');
   readonly deductionTypes = signal<DeductionType[]>([]);
+  readonly periods = signal<PayrollPeriod[]>([]);
   readonly pageNumber = signal(1);
   readonly pageSize = 20;
   readonly pagedDeductions = computed(() => this.deductions().slice((this.pageNumber() - 1) * this.pageSize, this.pageNumber() * this.pageSize));
@@ -130,7 +143,8 @@ export class EmployeeDeductionsComponent {
     description: ['', Validators.required],
     category: [DeductionCategory.Other, Validators.required],
     employeeAmount: [0, [Validators.required, Validators.min(0)]],
-    employerAmount: [0, [Validators.required, Validators.min(0)]]
+    employerAmount: [0, [Validators.required, Validators.min(0)]],
+    payrollPeriodId: ['', Validators.required]
   });
 
   constructor() {
@@ -143,6 +157,10 @@ export class EmployeeDeductionsComponent {
       this.settingsService.getDeductionTypes(companyId).subscribe({
         next: types => this.deductionTypes.set(types.filter(type => type.isActive)),
         error: response => this.showError(response, 'Unable to load deduction types.')
+      });
+      this.payrollService.getPeriods(companyId).subscribe({
+        next: periods => this.periods.set(periods.filter(period => period.status === 0 || period.status === 1)),
+        error: response => this.showError(response, 'Unable to load payroll periods.')
       });
     }
   }
@@ -175,6 +193,7 @@ export class EmployeeDeductionsComponent {
       category: value.category!,
       employeeAmount: value.employeeAmount!,
       employerAmount: value.employerAmount!
+      ,payrollPeriodId: value.payrollPeriodId!
     }).subscribe({
       next: () => { this.message.set('Employee deduction added.'); this.form.patchValue({ description: '', employeeAmount: 0, employerAmount: 0 }); this.loadDeductions(); },
       error: response => this.showError(response, 'Unable to add deduction.')
@@ -190,6 +209,10 @@ export class EmployeeDeductionsComponent {
 
   categoryName(category: DeductionCategory): string {
     return DeductionCategory[category] ?? 'Other';
+  }
+
+  statusName(status: number): string {
+    return ['Draft', 'Approved', 'Locked', 'Paid'][status] ?? 'Unknown';
   }
 
   private clearFeedback(): void { this.error.set(''); this.message.set(''); }
