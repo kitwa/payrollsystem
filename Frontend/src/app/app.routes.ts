@@ -4,6 +4,9 @@ import { authGuard, roleGuard } from './core/guards/auth.guard';
 export const routes: Routes = [
   { path: '', loadComponent: () => import('./features/landing/pages/landing/landing.component').then(m => m.LandingComponent) },
   { path: 'login', loadComponent: () => import('./core/auth/login/login.component').then(m => m.LoginComponent) },
+  { path: 'forgot-password', loadComponent: () => import('./core/auth/password/forgot-password.component').then(m => m.ForgotPasswordComponent) },
+  { path: 'reset-password', loadComponent: () => import('./core/auth/password/reset-password.component').then(m => m.ResetPasswordComponent) },
+  { path: 'change-password', canActivate: [authGuard], loadComponent: () => import('./core/auth/password/change-password.component').then(m => m.ChangePasswordComponent) },
   { path: 'register', loadComponent: () => import('./core/auth/register/register.component').then(m => m.RegisterComponent) },
   { path: 'features', loadComponent: () => import('./features/public-seo/pages/public-seo-page.component').then(m => m.PublicSeoPageComponent), data: { seoKey: 'features' } },
   { path: 'pricing', loadComponent: () => import('./features/public-seo/pages/public-seo-page.component').then(m => m.PublicSeoPageComponent), data: { seoKey: 'pricing' } },

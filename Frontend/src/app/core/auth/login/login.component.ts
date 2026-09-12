@@ -29,7 +29,7 @@ export class LoginComponent {
     this.error.set('');
     const { email, password } = this.form.value;
     this.auth.login(email!, password!).subscribe({
-      next: () => this.router.navigateByUrl('/dashboard'),
+      next: response => this.router.navigateByUrl(this.auth.getDefaultRoute(response.roles)),
       error: () => { this.error.set('Invalid email or password.'); this.loading.set(false); }
     });
   }

@@ -23,6 +23,23 @@ public class AuthController(IMediator mediator) : BaseApiController(mediator)
     public async Task<IActionResult> Login([FromBody] LoginDto dto, CancellationToken ct) =>
         FromResult(await Mediator.Send(new LoginCommand(dto), ct));
 
+    [HttpPost("forgot-password")]
+    [AllowAnonymous]
+    [EnableRateLimiting("auth")]
+    public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto dto, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new ForgotPasswordCommand(dto), ct));
+
+    [HttpPost("reset-password")]
+    [AllowAnonymous]
+    [EnableRateLimiting("auth")]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto dto, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new ResetPasswordCommand(dto), ct));
+
+    [HttpPost("change-password")]
+    [Authorize]
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto dto, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new ChangePasswordCommand(dto), ct));
+
     /// <summary>Exchange a valid refresh token for a new token pair.</summary>
     [HttpPost("refresh-token")]
     public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenDto dto, CancellationToken ct) =>

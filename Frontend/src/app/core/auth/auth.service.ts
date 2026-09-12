@@ -23,6 +23,18 @@ export class AuthService {
     );
   }
 
+  forgotPassword(email: string) {
+    return this.http.post<void>(`${environment.apiUrl}auth/forgot-password`, { email });
+  }
+
+  resetPassword(email: string, token: string, newPassword: string) {
+    return this.http.post<void>(`${environment.apiUrl}auth/reset-password`, { email, token, newPassword });
+  }
+
+  changePassword(currentPassword: string, newPassword: string) {
+    return this.http.post<void>(`${environment.apiUrl}auth/change-password`, { currentPassword, newPassword });
+  }
+
   registerCompany(request: RegisterCompanyRequest) {
     return this.http.post<AuthResponse>(`${environment.apiUrl}auth/register-company`, request).pipe(
       tap(response => this.setCurrentUser(response))
@@ -45,6 +57,12 @@ export class AuthService {
 
   isInRole(role: string): boolean {
     return this.roles().includes(role);
+  }
+
+  getDefaultRoute(roles?: string[]): string {
+    const activeRoles = roles ?? this.roles();
+    const isEmployeeOnly = activeRoles.includes('Employee') && !activeRoles.some(r => ['PayrollManager', 'Admin', 'SuperAdmin'].includes(r));
+    return isEmployeeOnly ? '/self-service' : '/dashboard';
   }
 
   private setCurrentUser(response: AuthResponse) {

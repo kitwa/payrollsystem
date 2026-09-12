@@ -30,3 +30,4 @@ public record RefreshTokenDto(string RefreshToken);
 public record ForgotPasswordDto(string Email);
 
 public record ResetPasswordDto(string Email, string Token, string NewPassword);
+public record ChangePasswordDto(string CurrentPassword, string NewPassword);

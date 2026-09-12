@@ -13,7 +13,11 @@ export const authGuard: CanActivateFn = () => {
 export const roleGuard = (roles: string[]): CanActivateFn => () => {
   const auth = inject(AuthService);
   const router = inject(Router);
+  if (!auth.isLoggedIn()) {
+    router.navigateByUrl('/login');
+    return false;
+  }
   if (roles.some(r => auth.isInRole(r))) return true;
-  router.navigateByUrl('/dashboard');
+  router.navigateByUrl(auth.getDefaultRoute());
   return false;
 };

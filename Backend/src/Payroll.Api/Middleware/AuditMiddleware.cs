@@ -6,9 +6,9 @@ using Payroll.Shared;
 
 namespace Payroll.Api.Middleware;
 
-public class AuditMiddleware(RequestDelegate next, ILogger<AuditMiddleware> logger)
+public class AuditMiddleware(RequestDelegate next, ILogger<AuditMiddleware> logger, IServiceScopeFactory scopeFactory)
 {
-    public async Task InvokeAsync(HttpContext context, AppDbContext db)
+    public async Task InvokeAsync(HttpContext context)
     {
         var startedAt = DateTime.UtcNow;
         try
@@ -19,6 +19,8 @@ public class AuditMiddleware(RequestDelegate next, ILogger<AuditMiddleware> logg
         {
             if (ShouldAudit(context))
             {
+                using var auditScope = scopeFactory.CreateScope();
+                var db = auditScope.ServiceProvider.GetRequiredService<AppDbContext>();
                 var claimCompanyId = Guid.TryParse(
                     context.User.FindFirstValue(Constants.ClaimTypes.CompanyId), out var parsedCompanyId)
                     ? parsedCompanyId
