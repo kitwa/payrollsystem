@@ -24,6 +24,9 @@ import { SettingsService } from '../../services/settings.service';
 							<div class="col-12 col-md-6"><label class="form-label">Registration Number</label><input class="form-control" formControlName="registrationNumber"></div>
 							<div class="col-12 col-md-6"><label class="form-label">Tax Number</label><input class="form-control" formControlName="taxNumber"></div>
 							<div class="col-12 col-md-6"><label class="form-label">Contact Email</label><input class="form-control" formControlName="email"></div>
+							<div class="col-12 col-md-6"><label class="form-label">Phone Number</label><input class="form-control" formControlName="phone"></div>
+							<div class="col-12 col-md-6"><label class="form-label">Physical Address</label><input class="form-control" formControlName="physicalAddress"></div>
+							<div class="col-12 col-md-6"><label class="form-label">Postal Address</label><input class="form-control" formControlName="postalAddress"></div>
 
 							<div class="col-12 mt-3">
 								<h3 class="h6 mb-2">Payroll Settings</h3>
@@ -130,6 +133,9 @@ export class GeneralSettingsComponent {
 		registrationNumber: ['', Validators.required],
 		taxNumber: [''],
 		email: ['', Validators.email],
+		phone: [''],
+		physicalAddress: [''],
+		postalAddress: [''],
 		isUifEnabled: [true],
 		isSdlEnabled: [true]
 	});
@@ -143,6 +149,9 @@ export class GeneralSettingsComponent {
 					registrationNumber: company.registrationNumber,
 					taxNumber: company.taxNumber,
 					email: company.email,
+					phone: company.phone,
+					physicalAddress: company.physicalAddress,
+					postalAddress: company.postalAddress,
 					isUifEnabled: company.isUifEnabled ?? true,
 					isSdlEnabled: company.isSdlEnabled ?? true
 				});
@@ -205,6 +214,9 @@ export class GeneralSettingsComponent {
 			registrationNumber: value.registrationNumber!,
 			taxNumber: value.taxNumber ?? undefined,
 			email: value.email ?? undefined,
+			phone: value.phone ?? undefined,
+			physicalAddress: value.physicalAddress ?? undefined,
+			postalAddress: value.postalAddress ?? undefined,
 			isUifEnabled: value.isUifEnabled ?? true,
 			isSdlEnabled: value.isSdlEnabled ?? true
 		}).subscribe(() => this.saved.set(true));

@@ -18,6 +18,7 @@
 						<div class="dropdown-menu dropdown-menu-end p-2" [class.show]="accountOpen()">
 							<div class="px-2 py-1 small text-muted text-break">{{ user()?.email }}</div>
 							<hr class="dropdown-divider">
+							<a class="dropdown-item" routerLink="/profile" (click)="closeAccount()"><i class="bi bi-person me-2"></i>My Profile</a>
 							<button class="dropdown-item text-danger" type="button" (click)="logout()"><i class="bi bi-box-arrow-right me-2"></i>Log out</button>
 						</div>
 					</div>

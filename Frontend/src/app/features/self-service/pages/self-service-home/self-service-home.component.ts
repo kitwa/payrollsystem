@@ -1,9 +1,11 @@
 ﻿import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { inject, signal } from '@angular/core';
+import { computed, inject, signal } from '@angular/core';
 import { EmployeeService } from '../../../employees/services/employee.service';
 import { Employee } from '../../../employees/models/employee.models';
+import { LeaveService } from '../../../leave/services/leave.service';
+import { LeaveBalance } from '../../../leave/models/leave.models';
 
 @Component({
 	selector: 'app-self-service-home',
@@ -16,7 +18,7 @@ import { Employee } from '../../../employees/models/employee.models';
 		</section>
 
 		<section class="row g-3 mb-3">
-			@for (card of summaryCards; track card.label) {
+			@for (card of summaryCards(); track card.label) {
 				<div class="col-12 col-md-4">
 					<article class="card border-0 shadow-sm h-100">
 						<div class="card-body">
@@ -50,6 +52,28 @@ import { Employee } from '../../../employees/models/employee.models';
 			<div class="col-12 col-lg-6">
 				<article class="card border-0 shadow-sm h-100">
 					<div class="card-body">
+						<h2 class="h5 mb-3">Leave Balances ({{ currentYear }})</h2>
+						@if (leaveBalances().length) {
+							<ul class="list-group list-group-flush">
+								@for (balance of leaveBalances(); track balance.leaveTypeId) {
+									<li class="list-group-item px-0 d-flex justify-content-between">
+										<span>{{ balance.leaveTypeName }}</span>
+										<span>{{ balance.balanceDays }} / {{ balance.entitlementDays }} days</span>
+									</li>
+								}
+							</ul>
+						} @else {
+							<p class="text-muted small mb-0">No leave balances found for this year.</p>
+						}
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section class="row g-3 mt-1">
+			<div class="col-12">
+				<article class="card border-0 shadow-sm h-100">
+					<div class="card-body">
 						<h2 class="h5 mb-3">Latest Notifications</h2>
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item px-0">August payslip is now available.</li>
@@ -64,14 +88,22 @@ import { Employee } from '../../../employees/models/employee.models';
 })
 export class SelfServiceHomeComponent {
 	private readonly employeeService = inject(EmployeeService);
+	private readonly leaveService = inject(LeaveService);
 	readonly employee = signal<Employee | null>(null);
-	readonly summaryCards = [
-		{ label: 'Leave Balance', value: '8.5 days' },
+	readonly leaveBalances = signal<LeaveBalance[]>([]);
+	readonly currentYear = new Date().getFullYear();
+
+	readonly totalLeaveBalance = computed(() =>
+		this.leaveBalances().reduce((sum, balance) => sum + balance.balanceDays, 0));
+
+	readonly summaryCards = computed(() => [
+		{ label: 'Leave Balance', value: `${this.totalLeaveBalance()} days` },
 		{ label: 'Next Payday', value: '29 Aug 2026' },
 		{ label: 'Latest Net Pay', value: 'R 41,520' }
-	];
+	]);
 
 	constructor() {
 		this.employeeService.getMine().subscribe({ next: employee => this.employee.set(employee) });
+		this.leaveService.getMyBalances().subscribe({ next: balances => this.leaveBalances.set(balances) });
 	}
 }

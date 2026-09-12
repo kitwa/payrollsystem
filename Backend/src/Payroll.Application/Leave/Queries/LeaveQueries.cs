@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Payroll.Application.Common.Interfaces;
 using Payroll.Application.Common;
+using Payroll.Application.Leave;
 using Payroll.Application.Leave.DTOs;
 using Payroll.Shared;
 
@@ -56,7 +57,7 @@ public class GetLeaveRequestByIdHandler(IAppDbContext db, ICurrentUser currentUs
     }
 }
 
-public record GetLeaveBalancesQuery(Guid EmployeeId) : IRequest<Result<List<LeaveBalanceDto>>>;
+public record GetLeaveBalancesQuery(Guid EmployeeId, int? Year = null) : IRequest<Result<List<LeaveBalanceDto>>>;
 
 public class GetLeaveBalancesHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<GetLeaveBalancesQuery, Result<List<LeaveBalanceDto>>>
 {
@@ -67,13 +68,69 @@ public class GetLeaveBalancesHandler(IAppDbContext db, ICurrentUser currentUser)
         if (!TenantAccess.CanAccessEmployee(currentUser, employee.CompanyId, employee.Id))
             return Result<List<LeaveBalanceDto>>.Fail("You are not authorized to view these leave balances.");
 
-        var year = DateTime.UtcNow.Year;
+        var year = request.Year ?? DateTime.UtcNow.Year;
+        await LeaveBalanceMaintenance.EnsureForEmployeeAsync(db, employee.CompanyId, employee.Id, year, ct);
+
         var result = await db.LeaveBalances
             .Include(b => b.LeaveType)
             .Where(b => b.EmployeeId == request.EmployeeId && b.Year == year && !b.IsDeleted)
+            .OrderBy(b => b.LeaveType.Name)
             .Select(b => new LeaveBalanceDto(b.LeaveTypeId, b.LeaveType.Name, b.EntitlementDays, b.UsedDays, b.BalanceDays))
             .ToListAsync(ct);
 
         return Result<List<LeaveBalanceDto>>.Ok(result);
+    }
+}
+
+public record GetMyLeaveBalancesQuery(int? Year = null) : IRequest<Result<List<LeaveBalanceDto>>>;
+
+public class GetMyLeaveBalancesHandler(ICurrentUser currentUser, ISender sender)
+    : IRequestHandler<GetMyLeaveBalancesQuery, Result<List<LeaveBalanceDto>>>
+{
+    public async Task<Result<List<LeaveBalanceDto>>> Handle(GetMyLeaveBalancesQuery request, CancellationToken ct)
+    {
+        if (currentUser.EmployeeId is null)
+            return Result<List<LeaveBalanceDto>>.Fail("Your account is not linked to an employee record.");
+        return await sender.Send(new GetLeaveBalancesQuery(currentUser.EmployeeId.Value, request.Year), ct);
+    }
+}
+
+public record GetCompanyLeaveBalancesQuery(Guid CompanyId, int? Year = null) : IRequest<Result<List<EmployeeLeaveBalanceDto>>>;
+
+public class GetCompanyLeaveBalancesHandler(IAppDbContext db, ICurrentUser currentUser)
+    : IRequestHandler<GetCompanyLeaveBalancesQuery, Result<List<EmployeeLeaveBalanceDto>>>
+{
+    public async Task<Result<List<EmployeeLeaveBalanceDto>>> Handle(GetCompanyLeaveBalancesQuery request, CancellationToken ct)
+    {
+        if (!TenantAccess.CanManageCompany(currentUser, request.CompanyId))
+            return Result<List<EmployeeLeaveBalanceDto>>.Fail("You are not authorized to view leave balances for this company.");
+
+        var year = request.Year ?? DateTime.UtcNow.Year;
+        await LeaveBalanceMaintenance.EnsureForCompanyAsync(db, request.CompanyId, year, ct);
+
+        var employees = await db.Employees
+            .Where(e => e.CompanyId == request.CompanyId && !e.IsDeleted)
+            .OrderBy(e => e.LastName).ThenBy(e => e.FirstName)
+            .Select(e => new { e.Id, e.EmployeeNumber, e.FirstName, e.LastName })
+            .ToListAsync(ct);
+
+        var balances = await db.LeaveBalances
+            .Include(b => b.LeaveType)
+            .Where(b => !b.IsDeleted && b.Year == year && b.Employee.CompanyId == request.CompanyId)
+            .OrderBy(b => b.LeaveType.Name)
+            .Select(b => new { b.EmployeeId, Balance = new LeaveBalanceDto(b.LeaveTypeId, b.LeaveType.Name, b.EntitlementDays, b.UsedDays, b.BalanceDays) })
+            .ToListAsync(ct);
+
+        var balancesByEmployee = balances
+            .GroupBy(b => b.EmployeeId)
+            .ToDictionary(g => g.Key, g => g.Select(x => x.Balance).ToList());
+
+        var result = employees
+            .Select(e => new EmployeeLeaveBalanceDto(
+                e.Id, e.EmployeeNumber, $"{e.FirstName} {e.LastName}",
+                balancesByEmployee.TryGetValue(e.Id, out var value) ? value : []))
+            .ToList();
+
+        return Result<List<EmployeeLeaveBalanceDto>>.Ok(result);
     }
 }

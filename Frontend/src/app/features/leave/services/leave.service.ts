@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { CreateLeaveRequest, LeaveBalance, LeaveRequest } from '../models/leave.models';
+import { CreateLeaveRequest, EmployeeLeaveBalance, LeaveBalance, LeaveRequest } from '../models/leave.models';
 
 @Injectable({ providedIn: 'root' })
 export class LeaveService {
@@ -19,8 +19,22 @@ export class LeaveService {
     return this.http.get<LeaveRequest>(`${this.url}/${id}`);
   }
 
-  getBalances(employeeId: string) {
-    return this.http.get<LeaveBalance[]>(`${this.url}/balances/${employeeId}`);
+  getBalances(employeeId: string, year?: number) {
+    let params = new HttpParams();
+    if (year) params = params.set('year', year);
+    return this.http.get<LeaveBalance[]>(`${this.url}/balances/${employeeId}`, { params });
+  }
+
+  getMyBalances(year?: number) {
+    let params = new HttpParams();
+    if (year) params = params.set('year', year);
+    return this.http.get<LeaveBalance[]>(`${this.url}/balances/me`, { params });
+  }
+
+  getCompanyBalances(companyId: string, year?: number) {
+    let params = new HttpParams().set('companyId', companyId);
+    if (year) params = params.set('year', year);
+    return this.http.get<EmployeeLeaveBalance[]>(`${this.url}/balances/company`, { params });
   }
 
   request(dto: CreateLeaveRequest) {

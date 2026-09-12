@@ -28,3 +28,9 @@ public record LeaveBalanceDto(
     decimal EntitlementDays,
     decimal UsedDays,
     decimal BalanceDays);
+
+public record EmployeeLeaveBalanceDto(
+    Guid EmployeeId,
+    string EmployeeNumber,
+    string EmployeeName,
+    List<LeaveBalanceDto> Balances);

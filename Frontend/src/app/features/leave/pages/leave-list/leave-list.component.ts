@@ -18,6 +18,9 @@ import { PaginationComponent } from '../../../../shared/components/pagination/pa
 				<p class="text-muted mb-0">Review employee leave, balances, and manager approvals.</p>
 			</div>
 			<a class="btn btn-dark" routerLink="/leave/request">New Leave Request</a>
+			@if (isManager()) {
+				<a class="btn btn-outline-dark" routerLink="/leave/balances">Leave Balances</a>
+			}
 		</section>
 
 		@if (message()) {

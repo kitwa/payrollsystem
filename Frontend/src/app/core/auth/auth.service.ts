@@ -59,6 +59,13 @@ export class AuthService {
     return this.roles().includes(role);
   }
 
+  getDefaultRoute(roles?: string[]): string {
+    const activeRoles = roles ?? this.roles();
+    if (activeRoles.some(r => ['PayrollManager', 'Admin', 'SuperAdmin'].includes(r))) return '/dashboard';
+    if (activeRoles.includes('Employee')) return '/self-service';
+    return '/dashboard';
+  }
+
   private setCurrentUser(response: AuthResponse) {
     const user: CurrentUser = {
       email: response.email,

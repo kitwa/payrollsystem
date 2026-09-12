@@ -35,6 +35,13 @@ export interface LeaveBalance {
   balanceDays: number;
 }
 
+export interface EmployeeLeaveBalance {
+  employeeId: string;
+  employeeNumber: string;
+  employeeName: string;
+  balances: LeaveBalance[];
+}
+
 export interface LeaveType {
   id: string;
   companyId: string;

@@ -21,10 +21,21 @@ public class LeaveController(IMediator mediator) : BaseApiController(mediator)
     public async Task<IActionResult> GetById(Guid id, CancellationToken ct) =>
         FromResult(await Mediator.Send(new GetLeaveRequestByIdQuery(id), ct));
 
-    /// <summary>Get leave balances for an employee for the current year.</summary>
+    /// <summary>Get leave balances for an employee for a given year (defaults to the current year).</summary>
     [HttpGet("balances/{employeeId:guid}")]
-    public async Task<IActionResult> GetBalances(Guid employeeId, CancellationToken ct) =>
-        FromResult(await Mediator.Send(new GetLeaveBalancesQuery(employeeId), ct));
+    public async Task<IActionResult> GetBalances(Guid employeeId, [FromQuery] int? year, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new GetLeaveBalancesQuery(employeeId, year), ct));
+
+    /// <summary>Get the signed-in employee's own leave balances.</summary>
+    [HttpGet("balances/me")]
+    public async Task<IActionResult> GetMyBalances([FromQuery] int? year, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new GetMyLeaveBalancesQuery(year), ct));
+
+    /// <summary>Get leave balances for every employee in a company. Managers and admins only.</summary>
+    [HttpGet("balances/company")]
+    [Authorize(Policy = Constants.Policies.RequirePayrollManagerRole)]
+    public async Task<IActionResult> GetCompanyBalances([FromQuery] Guid companyId, [FromQuery] int? year, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new GetCompanyLeaveBalancesQuery(companyId, year), ct));
 
     /// <summary>Submit a leave request.</summary>
     [HttpPost("request")]

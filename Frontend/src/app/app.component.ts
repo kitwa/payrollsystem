@@ -32,6 +32,7 @@ export class AppComponent {
 
   readonly user = this.auth.currentUser;
   readonly isLoggedIn = this.auth.isLoggedIn;
+  readonly homeRoute = computed(() => (this.isLoggedIn() ? this.auth.getDefaultRoute() : '/'));
 
   readonly mainNav: NavItem[] = [
     { label: 'Dashboard', path: '/dashboard', icon: 'bi-grid-1x2' },
@@ -116,6 +117,10 @@ export class AppComponent {
   toggleAccount(): void {
     this.accountOpen.update(open => !open);
     this.settingsOpen.set(false);
+  }
+
+  closeAccount(): void {
+    this.accountOpen.set(false);
   }
 
   logout(): void {
