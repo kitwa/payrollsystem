@@ -32,10 +32,9 @@ export class AppComponent {
 
   readonly user = this.auth.currentUser;
   readonly isLoggedIn = this.auth.isLoggedIn;
-  readonly homeRoute = computed(() => this.auth.getDefaultRoute());
 
   readonly mainNav: NavItem[] = [
-    { label: 'Dashboard', path: '/dashboard', icon: 'bi-grid-1x2', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },
+    { label: 'Dashboard', path: '/dashboard', icon: 'bi-grid-1x2' },
     { label: 'Employees', path: '/employees', icon: 'bi-people', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },
     { label: 'Payroll', path: '/payroll', icon: 'bi-cash-stack', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },
     { label: 'Leave', path: '/leave', icon: 'bi-calendar2-week' },

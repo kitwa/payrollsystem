@@ -41,6 +41,11 @@ import { LeaveType } from '../../../settings/models/settings.models';
 					<div class="col-12 col-md-6">
 						<label class="form-label">End Date</label>
 						<input type="date" class="form-control" formControlName="endDate">
+						@if (totalDays() !== null) {
+							<small class="text-muted d-block mt-1">
+								Duration: <strong>{{ totalDays() }} {{ totalDays() === 1 ? 'day' : 'days' }}</strong>
+							</small>
+						}
 					</div>
 					<div class="col-12">
 						<label class="form-label">Reason / Notes</label>
@@ -70,6 +75,7 @@ export class LeaveRequestComponent {
 	readonly submitted = signal(false);
 	readonly error = signal('');
 	readonly leaveTypes = signal<LeaveType[]>([]);
+	readonly totalDays = signal<number | null>(null);
 
 	readonly form = this.fb.group({
 		leaveTypeId: ['', Validators.required],
@@ -79,6 +85,10 @@ export class LeaveRequestComponent {
 	});
 
 	constructor() {
+		this.form.valueChanges.subscribe(val => {
+			this.updateTotalDays(val.startDate, val.endDate);
+		});
+
 		const companyId = this.auth.companyId();
 		if (companyId) {
 			this.settingsService.getLeaveTypes(companyId).subscribe({
@@ -89,6 +99,22 @@ export class LeaveRequestComponent {
 				error: response => this.error.set(response.error?.errors?.[0] ?? 'Unable to load leave types.')
 			});
 		}
+	}
+
+	private updateTotalDays(startDate?: string | null, endDate?: string | null): void {
+		if (!startDate || !endDate) {
+			this.totalDays.set(null);
+			return;
+		}
+		const start = new Date(startDate);
+		const end = new Date(endDate);
+		if (isNaN(start.getTime()) || isNaN(end.getTime()) || end < start) {
+			this.totalDays.set(null);
+			return;
+		}
+		const diffTime = end.getTime() - start.getTime();
+		const days = Math.round(diffTime / (1000 * 60 * 60 * 24)) + 1;
+		this.totalDays.set(days);
 	}
 
 	onSubmit(): void {
