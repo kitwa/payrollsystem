@@ -34,9 +34,16 @@ public class PdfService(IAppDbContext db) : IPdfService
                 {
                     if (company.LogoData is { Length: > 0 } && company.LogoContentType != "image/svg+xml")
                     {
-                        col.Item().Height(45).AlignLeft().Image(company.LogoData).FitHeight();
+                        col.Item().Height(45).AlignCenter().Image(company.LogoData).FitHeight();
                     }
-                    col.Item().Text(company.Name).FontSize(16).Bold();
+                    col.Item().PaddingTop(5).Row(row =>
+                    {
+                        row.RelativeItem().Text(company.Name).FontSize(16).Bold();
+                        if (!string.IsNullOrWhiteSpace(company.PhysicalAddress))
+                        {
+                            row.RelativeItem().AlignRight().Text(company.PhysicalAddress).FontSize(9);
+                        }
+                    });
                     col.Item().Text($"Payslip for {period.Year}/{period.Month:00}").FontSize(12);
                     col.Item().PaddingTop(5).LineHorizontal(1);
                 });
