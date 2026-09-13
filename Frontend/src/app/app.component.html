@@ -9,13 +9,13 @@
 					<span class="brand-mark">PS</span><span class="fw-bold">{{ appName }}</span>
 				</a>
 				@if (isLoggedIn()) {
-					<div class="dropdown" [class.show]="accountOpen()">
+					<div class="dropdown user-menu-wrapper" [class.show]="accountOpen()">
 						<button class="btn user-menu d-flex align-items-center gap-2" type="button" (click)="toggleAccount()" [attr.aria-expanded]="accountOpen()">
 							<span class="user-avatar">{{ user()?.firstName?.charAt(0) }}{{ user()?.lastName?.charAt(0) }}</span>
 							<span class="d-none d-sm-block text-start"><strong class="d-block small">{{ user()?.firstName }} {{ user()?.lastName }}</strong><small class="text-muted">{{ user()?.roles?.[0] || 'User' }}</small></span>
 							<i class="bi bi-chevron-down small"></i>
 						</button>
-						<div class="dropdown-menu dropdown-menu-end p-2" [class.show]="accountOpen()">
+						<div class="dropdown-menu dropdown-menu-end user-menu-dropdown p-2" [class.show]="accountOpen()">
 							<div class="px-2 py-1 small text-muted text-break">{{ user()?.email }}</div>
 							<hr class="dropdown-divider">
 							<a class="dropdown-item" routerLink="/profile" (click)="closeAccount()"><i class="bi bi-person me-2"></i>My Profile</a>
@@ -57,3 +57,4 @@
 } @else {
 	<router-outlet></router-outlet>
 }
+<app-support-chatbot></app-support-chatbot>

@@ -198,33 +198,8 @@ public class CreateSupportTicketHandler(
         return Result<SupportTicketDetailDto>.Ok(detail);
     }
 
-    private async Task SendNotificationsAsync(SupportTicketDetailDto ticket, CancellationToken ct)
-    {
-        var link = $"{notificationSettings.FrontendBaseUrl.TrimEnd('/')}/support/tickets/{ticket.Id}";
-        var type = ticket.Type.ToString();
-        var body = $"""
-            <p>A new support ticket has been submitted.</p>
-            <p><strong>Ticket:</strong> #{WebUtility.HtmlEncode(ticket.TicketNumber)}<br/>
-            <strong>Company:</strong> {WebUtility.HtmlEncode(ticket.CompanyName)}<br/>
-            <strong>Submitted by:</strong> {WebUtility.HtmlEncode(ticket.CreatedByName)}<br/>
-            <strong>Type:</strong> {WebUtility.HtmlEncode(type)}<br/>
-            <strong>Subject:</strong> {WebUtility.HtmlEncode(ticket.Subject)}</p>
-            <p>{WebUtility.HtmlEncode(ticket.Description).Replace("\n", "<br/>")}</p>
-            <p><a href="{WebUtility.HtmlEncode(link)}">View ticket</a></p>
-            """;
-
-        try
-        {
-            if (!string.IsNullOrWhiteSpace(notificationSettings.SupportEmail))
-                await emailService.SendAsync(notificationSettings.SupportEmail, $"New Support Ticket #{ticket.TicketNumber}", body, ct);
-            if (!string.IsNullOrWhiteSpace(ticket.CreatedByEmail))
-                await emailService.SendAsync(ticket.CreatedByEmail, $"Support Ticket #{ticket.TicketNumber} Received", $"<p>Your support ticket has been received and is currently being reviewed.</p>{body}", ct);
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Support ticket {TicketNumber} notification email failed.", ticket.TicketNumber);
-        }
-    }
+    private async Task SendNotificationsAsync(SupportTicketDetailDto ticket, CancellationToken ct) =>
+        await SupportTicketNotifier.NotifyCreatedAsync(emailService, userManager, notificationSettings, logger, ticket, ct);
 }
 
 public record CloseSupportTicketCommand(Guid Id) : IRequest<Result<SupportTicketDetailDto>>;
@@ -258,20 +233,8 @@ public class CloseSupportTicketHandler(
         var detail = new SupportTicketDetailDto(ticket.Id, ticket.TicketNumber, ticket.CompanyId, company?.Name ?? "Unknown company",
             ticket.CreatedByUserId, user is null ? "Unknown user" : $"{user.FirstName} {user.LastName}".Trim(), user?.Email ?? string.Empty,
             ticket.Subject, ticket.Type, ticket.Description, ticket.Status, ticket.CreatedAt, ticket.ModifiedAt, ticket.ClosedAt, ticket.ClosedByUserId);
-        await SendClosedNotificationAsync(detail, ct);
+        await SupportTicketNotifier.NotifyStatusChangedAsync(emailService, userManager, notificationSettings, logger, detail, ct);
         return Result<SupportTicketDetailDto>.Ok(detail);
-    }
-
-    private async Task SendClosedNotificationAsync(SupportTicketDetailDto ticket, CancellationToken ct)
-    {
-        if (string.IsNullOrWhiteSpace(ticket.CreatedByEmail)) return;
-        try
-        {
-            var link = $"{notificationSettings.FrontendBaseUrl.TrimEnd('/')}/support/tickets/{ticket.Id}";
-            await emailService.SendAsync(ticket.CreatedByEmail, $"Your ticket #{ticket.TicketNumber} has been closed.",
-                $"<p>Your ticket <strong>#{WebUtility.HtmlEncode(ticket.TicketNumber)}</strong> has been closed.</p><p><strong>Subject:</strong> {WebUtility.HtmlEncode(ticket.Subject)}</p><p><a href=\"{WebUtility.HtmlEncode(link)}\">View ticket</a></p>", ct);
-        }
-        catch (Exception ex) { logger.LogError(ex, "Support ticket {TicketNumber} close email failed.", ticket.TicketNumber); }
     }
 }
 
@@ -313,26 +276,98 @@ public class UpdateSupportTicketStatusHandler(
         var detail = new SupportTicketDetailDto(ticket.Id, ticket.TicketNumber, ticket.CompanyId, company?.Name ?? "Unknown company",
             ticket.CreatedByUserId, user is null ? "Unknown user" : $"{user.FirstName} {user.LastName}".Trim(), user?.Email ?? string.Empty,
             ticket.Subject, ticket.Type, ticket.Description, ticket.Status, ticket.CreatedAt, ticket.ModifiedAt, ticket.ClosedAt, ticket.ClosedByUserId);
-        if (previousStatus != request.Status) await SendStatusNotificationAsync(detail, ct);
+        if (previousStatus != request.Status) await SupportTicketNotifier.NotifyStatusChangedAsync(emailService, userManager, notificationSettings, logger, detail, ct);
         return Result<SupportTicketDetailDto>.Ok(detail);
     }
+}
 
-    private async Task SendStatusNotificationAsync(SupportTicketDetailDto ticket, CancellationToken ct)
+/// <summary>Shared support-ticket notification emails, used by create/close/status-change flows alike.</summary>
+file static class SupportTicketNotifier
+{
+    public static async Task NotifyCreatedAsync(
+        IEmailService emailService, UserManager<AppUser> userManager, ISupportNotificationSettings notificationSettings,
+        ILogger logger, SupportTicketDetailDto ticket, CancellationToken ct)
     {
-        if (string.IsNullOrWhiteSpace(ticket.CreatedByEmail)) return;
         try
         {
-            var link = $"{notificationSettings.FrontendBaseUrl.TrimEnd('/')}/support/tickets/{ticket.Id}";
-            var isClosed = ticket.Status == SupportTicketStatus.Closed;
-            var subject = isClosed
-                ? $"Your ticket #{ticket.TicketNumber} has been closed."
-                : $"Your ticket #{ticket.TicketNumber} has been updated.";
-            var message = isClosed
-                ? $"<p>Your ticket <strong>#{WebUtility.HtmlEncode(ticket.TicketNumber)}</strong> has been closed.</p>"
-                : $"<p>Your ticket <strong>#{WebUtility.HtmlEncode(ticket.TicketNumber)}</strong> has been updated.</p><p><strong>New status:</strong> {WebUtility.HtmlEncode(ticket.Status.ToString())}</p>";
-            await emailService.SendAsync(ticket.CreatedByEmail, subject,
-                $"{message}<p><strong>Subject:</strong> {WebUtility.HtmlEncode(ticket.Subject)}</p><p><a href=\"{WebUtility.HtmlEncode(link)}\">View ticket</a></p>", ct);
+            var link = BuildLink(notificationSettings, ticket.Id);
+            var body = $"""
+                <p>A new support ticket has been submitted.</p>
+                <p><strong>Ticket:</strong> #{WebUtility.HtmlEncode(ticket.TicketNumber)}<br/>
+                <strong>Company:</strong> {WebUtility.HtmlEncode(ticket.CompanyName)}<br/>
+                <strong>Submitted by:</strong> {WebUtility.HtmlEncode(ticket.CreatedByName)}<br/>
+                <strong>Type:</strong> {WebUtility.HtmlEncode(ticket.Type.ToString())}<br/>
+                <strong>Subject:</strong> {WebUtility.HtmlEncode(ticket.Subject)}</p>
+                <p>{WebUtility.HtmlEncode(ticket.Description).Replace("\n", "<br/>")}</p>
+                <p><a href="{WebUtility.HtmlEncode(link)}">View ticket</a></p>
+                """;
+
+            if (!string.IsNullOrWhiteSpace(ticket.CreatedByEmail))
+                await emailService.SendAsync(ticket.CreatedByEmail, $"Support Ticket #{ticket.TicketNumber} Received",
+                    $"<p>Your support ticket has been received and is currently being reviewed.</p>{body}", ct);
+
+            await NotifySuperAdminsAsync(emailService, userManager, notificationSettings, $"New Support Ticket #{ticket.TicketNumber}", body, ct);
         }
-        catch (Exception ex) { logger.LogError(ex, "Support ticket {TicketNumber} status email failed.", ticket.TicketNumber); }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Support ticket {TicketNumber} creation notification failed.", ticket.TicketNumber);
+        }
     }
+
+    public static async Task NotifyStatusChangedAsync(
+        IEmailService emailService, UserManager<AppUser> userManager, ISupportNotificationSettings notificationSettings,
+        ILogger logger, SupportTicketDetailDto ticket, CancellationToken ct)
+    {
+        try
+        {
+            var link = BuildLink(notificationSettings, ticket.Id);
+            var subject = $"Support Ticket #{ticket.TicketNumber}: {ticket.Status}";
+            var body = $"""
+                <p>{StatusMessage(ticket.Status)}</p>
+                <p><strong>Ticket:</strong> #{WebUtility.HtmlEncode(ticket.TicketNumber)}<br/>
+                <strong>Subject:</strong> {WebUtility.HtmlEncode(ticket.Subject)}<br/>
+                <strong>Status:</strong> {WebUtility.HtmlEncode(ticket.Status.ToString())}</p>
+                <p><a href="{WebUtility.HtmlEncode(link)}">View ticket</a></p>
+                """;
+
+            if (!string.IsNullOrWhiteSpace(ticket.CreatedByEmail))
+                await emailService.SendAsync(ticket.CreatedByEmail, subject, body, ct);
+
+            await NotifySuperAdminsAsync(emailService, userManager, notificationSettings, subject, body, ct);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Support ticket {TicketNumber} status notification failed.", ticket.TicketNumber);
+        }
+    }
+
+    private static async Task NotifySuperAdminsAsync(
+        IEmailService emailService, UserManager<AppUser> userManager, ISupportNotificationSettings notificationSettings,
+        string subject, string body, CancellationToken ct)
+    {
+        var superAdmins = await userManager.GetUsersInRoleAsync(Constants.Roles.SuperAdmin);
+        var notified = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var admin in superAdmins.Where(a => a.IsActive && !string.IsNullOrWhiteSpace(a.Email)))
+        {
+            await emailService.SendAsync(admin.Email!, subject, body, ct);
+            notified.Add(admin.Email!);
+        }
+
+        if (!string.IsNullOrWhiteSpace(notificationSettings.SupportEmail) && !notified.Contains(notificationSettings.SupportEmail))
+            await emailService.SendAsync(notificationSettings.SupportEmail, subject, body, ct);
+    }
+
+    private static string BuildLink(ISupportNotificationSettings notificationSettings, Guid ticketId) =>
+        $"{notificationSettings.FrontendBaseUrl.TrimEnd('/')}/support/tickets/{ticketId}";
+
+    private static string StatusMessage(SupportTicketStatus status) => status switch
+    {
+        SupportTicketStatus.Open => "Your support ticket is open and will be reviewed by our team shortly.",
+        SupportTicketStatus.InReview => "Your support ticket is currently being reviewed by our support team.",
+        SupportTicketStatus.InProgress => "Our team is actively working on your support ticket.",
+        SupportTicketStatus.Resolved => "Your support ticket has been marked as resolved. Please let us know if you need further help.",
+        SupportTicketStatus.Closed => "Your support ticket has been closed.",
+        _ => "Your support ticket status has been updated."
+    };
 }

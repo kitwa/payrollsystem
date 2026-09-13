@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, computed, inject, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from './core/auth/auth.service';
 import { SeoService } from './core/seo/seo.service';
 import { InstallPromptComponent } from './shared/components/install-prompt/install-prompt.component';
+import { SupportChatbotComponent } from './shared/components/support-chatbot/support-chatbot.component';
 
 type NavItem = {
   label: string;
@@ -15,7 +16,7 @@ type NavItem = {
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, RouterLink, InstallPromptComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, InstallPromptComponent, SupportChatbotComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -23,6 +24,7 @@ export class AppComponent {
   private readonly router = inject(Router);
   private readonly auth = inject(AuthService);
   private readonly seo = inject(SeoService);
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly appName = 'Payroll SA';
   readonly currentPath = signal(this.normalizedPath(this.router.url));
@@ -102,6 +104,7 @@ export class AppComponent {
 
   toggleMobileMenu(): void {
     this.mobileMenuOpen.update(open => !open);
+    this.accountOpen.set(false);
   }
 
   closeMobileMenu(): void {
@@ -120,6 +123,13 @@ export class AppComponent {
 
   closeAccount(): void {
     this.accountOpen.set(false);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (this.accountOpen() && !this.elementRef.nativeElement.querySelector('.user-menu-wrapper')?.contains(event.target as Node)) {
+      this.accountOpen.set(false);
+    }
   }
 
   logout(): void {

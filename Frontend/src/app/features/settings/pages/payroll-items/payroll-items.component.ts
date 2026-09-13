@@ -12,7 +12,7 @@ import { PaginationComponent } from '../../../../shared/components/pagination/pa
   imports: [CommonModule, ReactiveFormsModule, PaginationComponent],
   template: `
     <section class="mb-3">
-      <h1 class="h3 mb-1">Payroll Items</h1>
+      <h1 class="h3 mb-1">Add Bonus / Deduction Types</h1>
       <p class="text-muted mb-0">Configure earning and deduction types used in payroll runs and payslips.</p>
     </section>
 
@@ -25,7 +25,7 @@ import { PaginationComponent } from '../../../../shared/components/pagination/pa
         <section class="card border-0 shadow-sm h-100">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h2 class="h5 mb-0">Earnings / Bonuses</h2>
+              <h2 class="h5 mb-0">Bonuses</h2>
             </div>
 
             <form class="row g-2 mb-3" [formGroup]="earningForm" (ngSubmit)="addEarningType()">
@@ -44,7 +44,7 @@ import { PaginationComponent } from '../../../../shared/components/pagination/pa
                 </div>
               </div>
               <div class="col-12 d-flex justify-content-end">
-                <button class="btn btn-dark" type="submit" [disabled]="earningForm.invalid">Add Earning</button>
+                <button class="btn btn-dark" type="submit" [disabled]="earningForm.invalid">Add Bonus</button>
               </div>
             </form>
 

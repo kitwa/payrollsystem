@@ -6,6 +6,11 @@
 .user-menu { border: 0; color: #212529; }
 .user-menu:hover { background: #f1f3f5; }
 .user-avatar { width: 2.15rem; height: 2.15rem; display: inline-grid; place-items: center; border-radius: 50%; background: #212529; color: #fff; font-size: .72rem; font-weight: 700; }
+.user-menu-wrapper { position: relative; }
+// .dropdown-menu-end only right-aligns via Bootstrap's Popper [data-bs-popper] attribute, which this
+// manually-toggled dropdown never gets — so force right alignment ourselves instead.
+.user-menu-dropdown { position: absolute; top: 100%; right: 0; left: auto; min-width: 14rem; max-width: calc(100vw - 1.5rem); }
+.user-menu-dropdown .dropdown-item { padding: .6rem .75rem; border-radius: .35rem; }
 .dashboard-body { display: flex; min-height: calc(100vh - 4.25rem); }
 .sidebar { width: 260px; flex: 0 0 260px; }
 .sidebar__inner { position: sticky; top: 4.25rem; height: calc(100vh - 4.25rem); overflow-y: auto; padding: 1.25rem .9rem; }

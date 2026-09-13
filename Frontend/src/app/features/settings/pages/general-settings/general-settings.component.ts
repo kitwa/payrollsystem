@@ -33,23 +33,21 @@ import { SettingsService } from '../../services/settings.service';
 								<div class="border rounded p-3 bg-light-subtle">
 									<div class="d-flex justify-content-between align-items-center mb-2 gap-3">
 										<div>
-											<label class="form-label mb-0">Apply UIF</label>
+											<label class="form-label mb-0" for="uif-switch">Apply UIF</label>
 											<div class="text-muted small">Enable or disable UIF contributions for this company.</div>
 										</div>
-										<select class="form-select form-select-sm w-auto" formControlName="isUifEnabled">
-											<option [ngValue]="true">Yes</option>
-											<option [ngValue]="false">No</option>
-										</select>
+										<div class="form-check form-switch mb-0">
+											<input class="form-check-input" type="checkbox" role="switch" id="uif-switch" formControlName="isUifEnabled">
+										</div>
 									</div>
 									<div class="d-flex justify-content-between align-items-center gap-3">
 										<div>
-											<label class="form-label mb-0">Apply Skills Development Levy (SDL)</label>
+											<label class="form-label mb-0" for="sdl-switch">Apply Skills Development Levy (SDL)</label>
 											<div class="text-muted small">Enable or disable SDL employer contributions for this company.</div>
 										</div>
-										<select class="form-select form-select-sm w-auto" formControlName="isSdlEnabled">
-											<option [ngValue]="true">Yes</option>
-											<option [ngValue]="false">No</option>
-										</select>
+										<div class="form-check form-switch mb-0">
+											<input class="form-check-input" type="checkbox" role="switch" id="sdl-switch" formControlName="isSdlEnabled">
+										</div>
 									</div>
 								</div>
 							</div>
