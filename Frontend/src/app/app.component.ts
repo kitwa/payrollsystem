@@ -51,7 +51,6 @@ export class AppComponent {
     { label: 'Billing', path: '/billing', icon: 'bi-credit-card', roles: ['Admin', 'SuperAdmin'] },
     { label: 'General', path: '/settings', icon: 'bi-sliders', roles: ['Admin', 'SuperAdmin'] },
     { label: 'Users', path: '/settings/users', icon: 'bi-person-gear', roles: ['Admin', 'SuperAdmin'] },
-    { label: 'Change Password', path: '/change-password', icon: 'bi-key', roles: ['Employee', 'PayrollManager', 'Admin', 'SuperAdmin'] },
     { label: 'Payroll Items', path: '/settings/payroll-items', icon: 'bi-wallet2', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },
     { label: 'Employee Deductions', path: '/settings/employee-deductions', icon: 'bi-dash-circle', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },
     { label: 'Employee Bonuses', path: '/settings/employee-bonuses', icon: 'bi-plus-circle', roles: ['PayrollManager', 'Admin', 'SuperAdmin'] },
@@ -64,7 +63,7 @@ export class AppComponent {
 
   readonly showShell = computed(() => {
     const path = this.currentPath();
-    return !['/', '/login', '/register'].includes(path);
+    return !['/', '/login', '/register', '/reset-password'].includes(path);
   });
 
   constructor() {

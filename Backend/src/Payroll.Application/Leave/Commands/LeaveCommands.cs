@@ -1,8 +1,12 @@
+using System.Net;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Payroll.Application.Common.Interfaces;
 using Payroll.Application.Common;
 using Payroll.Application.Leave.DTOs;
+using Payroll.Domain.Identity;
 using Payroll.Domain.Leave;
 using Payroll.Domain.Leave.Enums;
 using Payroll.Shared;
@@ -11,7 +15,12 @@ namespace Payroll.Application.Leave.Commands;
 
 public record RequestLeaveCommand(CreateLeaveRequestDto Dto) : IRequest<Result<Guid>>;
 
-public class RequestLeaveHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<RequestLeaveCommand, Result<Guid>>
+public class RequestLeaveHandler(
+    IAppDbContext db,
+    ICurrentUser currentUser,
+    UserManager<AppUser> userManager,
+    IEmailService emailService,
+    ILogger<RequestLeaveHandler> logger) : IRequestHandler<RequestLeaveCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(RequestLeaveCommand request, CancellationToken ct)
     {
@@ -45,13 +54,46 @@ public class RequestLeaveHandler(IAppDbContext db, ICurrentUser currentUser) : I
 
         db.LeaveRequests.Add(leave);
         await db.SaveChangesAsync(ct);
+
+        await NotifyManagersAsync(employee, leave, ct);
         return Result<Guid>.Ok(leave.Id);
+    }
+
+    private async Task NotifyManagersAsync(Domain.Employees.Employee employee, LeaveRequest leave, CancellationToken ct)
+    {
+        try
+        {
+            var leaveType = await db.LeaveTypes.FirstOrDefaultAsync(t => t.Id == leave.LeaveTypeId, ct);
+            var admins = await userManager.GetUsersInRoleAsync(Constants.Roles.Admin);
+            var payrollManagers = await userManager.GetUsersInRoleAsync(Constants.Roles.PayrollManager);
+            var recipients = admins.Concat(payrollManagers)
+                .Where(u => u.IsActive && u.CompanyId == employee.CompanyId && !string.IsNullOrWhiteSpace(u.Email))
+                .DistinctBy(u => u.Email);
+
+            var body = $"""
+                <p>{WebUtility.HtmlEncode(employee.FirstName)} {WebUtility.HtmlEncode(employee.LastName)} has submitted a leave request.</p>
+                <p><strong>Leave Type:</strong> {WebUtility.HtmlEncode(leaveType?.Name ?? "Leave")}<br/>
+                <strong>Dates:</strong> {leave.StartDate:yyyy-MM-dd} to {leave.EndDate:yyyy-MM-dd} ({leave.Days} day(s))<br/>
+                <strong>Reason:</strong> {WebUtility.HtmlEncode(leave.Reason ?? "\u2014")}</p>
+                """;
+
+            foreach (var recipient in recipients)
+                await emailService.SendAsync(recipient.Email!, "New Leave Request Submitted", body, ct);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Leave request notification failed for leave request {LeaveRequestId}.", leave.Id);
+        }
     }
 }
 
 public record ApproveLeaveCommand(Guid LeaveRequestId, string ReviewedBy) : IRequest<Result>;
 
-public class ApproveLeaveHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<ApproveLeaveCommand, Result>
+public class ApproveLeaveHandler(
+    IAppDbContext db,
+    ICurrentUser currentUser,
+    IEmailService emailService,
+    ILogger<ApproveLeaveHandler> logger) : IRequestHandler<ApproveLeaveCommand, Result>
 {
     public async Task<Result> Handle(ApproveLeaveCommand request, CancellationToken ct)
     {
@@ -72,13 +114,18 @@ public class ApproveLeaveHandler(IAppDbContext db, ICurrentUser currentUser) : I
         if (balance is not null) balance.UsedDays += leave.Days;
 
         await db.SaveChangesAsync(ct);
+        await LeaveDecisionNotifier.SendAsync(db, emailService, logger, employee, leave, "approved", ct);
         return Result.Ok();
     }
 }
 
 public record RejectLeaveCommand(Guid LeaveRequestId, string ReviewedBy, string Note) : IRequest<Result>;
 
-public class RejectLeaveHandler(IAppDbContext db, ICurrentUser currentUser) : IRequestHandler<RejectLeaveCommand, Result>
+public class RejectLeaveHandler(
+    IAppDbContext db,
+    ICurrentUser currentUser,
+    IEmailService emailService,
+    ILogger<RejectLeaveHandler> logger) : IRequestHandler<RejectLeaveCommand, Result>
 {
     public async Task<Result> Handle(RejectLeaveCommand request, CancellationToken ct)
     {
@@ -94,6 +141,34 @@ public class RejectLeaveHandler(IAppDbContext db, ICurrentUser currentUser) : IR
         leave.ReviewedAt = DateTime.UtcNow;
         leave.ReviewNote = request.Note;
         await db.SaveChangesAsync(ct);
+        await LeaveDecisionNotifier.SendAsync(db, emailService, logger, employee, leave, "rejected", ct);
         return Result.Ok();
+    }
+}
+
+/// <summary>Shared leave decision email, used by both the approve and reject flows.</summary>
+file static class LeaveDecisionNotifier
+{
+    public static async Task SendAsync(
+        IAppDbContext db, IEmailService emailService, ILogger logger,
+        Domain.Employees.Employee employee, LeaveRequest leave, string decision, CancellationToken ct)
+    {
+        if (string.IsNullOrWhiteSpace(employee.Email)) return;
+        try
+        {
+            var leaveType = await db.LeaveTypes.FirstOrDefaultAsync(t => t.Id == leave.LeaveTypeId, ct);
+            var body = $"""
+                <p>Hi {WebUtility.HtmlEncode(employee.FirstName)},</p>
+                <p>Your leave request has been <strong>{decision}</strong>.</p>
+                <p><strong>Leave Type:</strong> {WebUtility.HtmlEncode(leaveType?.Name ?? "Leave")}<br/>
+                <strong>Dates:</strong> {leave.StartDate:yyyy-MM-dd} to {leave.EndDate:yyyy-MM-dd} ({leave.Days} day(s))</p>
+                {(string.IsNullOrWhiteSpace(leave.ReviewNote) ? "" : $"<p><strong>Note:</strong> {WebUtility.HtmlEncode(leave.ReviewNote)}</p>")}
+                """;
+            await emailService.SendAsync(employee.Email, $"Your Leave Request Has Been {char.ToUpper(decision[0])}{decision[1..]}", body, ct);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Leave decision notification failed for leave request {LeaveRequestId}.", leave.Id);
+        }
     }
 }

@@ -14,6 +14,7 @@ import { AuthService } from '../auth.service';
 export class RegisterComponent {
   loading = signal(false);
   error = signal('');
+  showPassword = signal(false);
 
   form: ReturnType<FormBuilder['group']>;
 

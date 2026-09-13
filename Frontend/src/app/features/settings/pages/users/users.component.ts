@@ -58,7 +58,10 @@ import { PaginationComponent } from '../../../../shared/components/pagination/pa
           </div>
           <div class="col-12 col-md-5 col-lg-3">
             <label class="form-label">Temporary Password</label>
-            <input class="form-control" type="password" formControlName="password" autocomplete="new-password">
+            <div class="input-group">
+              <input class="form-control" [type]="showPassword() ? 'text' : 'password'" formControlName="password" autocomplete="new-password">
+              <button class="btn btn-outline-secondary" type="button" (click)="showPassword.set(!showPassword())"><i class="bi" [class.bi-eye]="!showPassword()" [class.bi-eye-slash]="showPassword()"></i></button>
+            </div>
           </div>
           <div class="col-12 col-md-3 col-lg-1 d-flex align-items-end">
             <button class="btn btn-dark w-100" type="submit" [disabled]="form.invalid || !selectedCompanyId()">Add</button>
@@ -116,6 +119,7 @@ export class UsersComponent {
   readonly employees = signal<EmployeeList[]>([]);
   readonly companies = signal<Company[]>([]);
   readonly selectedCompanyId = signal<string | null>(this.auth.companyId());
+  readonly showPassword = signal(false);
   readonly error = signal('');
   readonly message = signal('');
   readonly pageNumber = signal(1);

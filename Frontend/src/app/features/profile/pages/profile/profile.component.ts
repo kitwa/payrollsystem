@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../../core/auth/auth.service';
 import { EmployeeService } from '../../../employees/services/employee.service';
 import { SettingsService } from '../../../settings/services/settings.service';
@@ -9,7 +10,7 @@ import { Company } from '../../../settings/models/settings.models';
 @Component({
 	selector: 'app-profile',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, RouterLink],
 	template: `
 		<section class="mb-3">
 			<h1 class="h3 mb-1">My Profile</h1>
@@ -47,6 +48,18 @@ import { Company } from '../../../settings/models/settings.models';
 						} @else {
 							<p class="text-muted small mb-0">No employee record is linked to this account.</p>
 						}
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section class="row g-3 mt-1">
+			<div class="col-12">
+				<article class="card border-0 shadow-sm h-100">
+					<div class="card-body">
+						<h2 class="h5 mb-2">Security</h2>
+						<p class="text-muted small mb-3">Update the password used to sign in to your account.</p>
+						<a class="btn btn-outline-dark" routerLink="/change-password">Change Password</a>
 					</div>
 				</article>
 			</div>

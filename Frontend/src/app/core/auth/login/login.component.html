@@ -30,7 +30,12 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="login-password">Password</label>
-            <input id="login-password" formControlName="password" type="password" class="form-control form-control-lg" autocomplete="current-password">
+            <div class="input-group">
+              <input id="login-password" formControlName="password" [type]="showPassword() ? 'text' : 'password'" class="form-control form-control-lg" autocomplete="current-password">
+              <button class="btn btn-outline-secondary" type="button" (click)="showPassword.set(!showPassword())" [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'">
+                <i class="bi" [class.bi-eye]="!showPassword()" [class.bi-eye-slash]="showPassword()"></i>
+              </button>
+            </div>
           </div>
           @if (error()) {
             <div class="alert alert-danger py-2" role="alert">{{ error() }}</div>

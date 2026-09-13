@@ -32,7 +32,7 @@ import { UserService } from '../../settings/services/user.service';
           <div class="col-12 col-md-3"><label class="form-label">First Name</label><input class="form-control" formControlName="firstName"></div>
           <div class="col-12 col-md-3"><label class="form-label">Last Name</label><input class="form-control" formControlName="lastName"></div>
           <div class="col-12 col-md-3"><label class="form-label">Email</label><input class="form-control" type="email" formControlName="email"></div>
-          <div class="col-12 col-md-2"><label class="form-label">Temporary Password</label><input class="form-control" type="password" formControlName="password" autocomplete="new-password"></div>
+          <div class="col-12 col-md-2"><label class="form-label">Temporary Password</label><div class="input-group"><input class="form-control" [type]="showSuperAdminPassword() ? 'text' : 'password'" formControlName="password" autocomplete="new-password"><button class="btn btn-outline-secondary" type="button" (click)="showSuperAdminPassword.set(!showSuperAdminPassword())"><i class="bi" [class.bi-eye]="!showSuperAdminPassword()" [class.bi-eye-slash]="showSuperAdminPassword()"></i></button></div></div>
           <div class="col-12 col-md-1 d-flex align-items-end"><button class="btn btn-dark w-100" type="submit" [disabled]="superAdminForm.invalid">Add</button></div>
         </form>
       </div>
@@ -161,6 +161,7 @@ export class ManagementComponent {
 
   @ViewChild('confirmDialog') confirmDialog!: ConfirmDialogComponent;
 
+  readonly showSuperAdminPassword = signal(false);
   readonly adminCompanies = signal<AdminCompanyDto[]>([]);
   readonly adminError = signal('');
   readonly superAdminForm = this.fb.group({
