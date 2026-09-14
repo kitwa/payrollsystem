@@ -61,9 +61,9 @@ import { SubscriptionSummaryDto } from '../../billing/models/billing.models';
 						<i class="bi bi-diagram-3"></i>
 						<span>Add Department</span>
 					</a>
-					<a class="action-card" routerLink="/leave/request">
-						<i class="bi bi-calendar-plus"></i>
-						<span>Capture Leave</span>
+					<a class="action-card" routerLink="/settings/users">
+						<i class="bi me-2 bi-person-gear"></i>
+						<span>Add User</span>
 					</a>
 					<a class="action-card" routerLink="/reports">
 						<i class="bi bi-file-earmark-bar-graph"></i>
