@@ -44,7 +44,8 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ng test
 ```
 
-## Running end-to-end tests
+## Running end-to-end tests#### add new certificate cliniquecarehub.co.za
+sudo certbot certonly --cert-name cliniquecarehub.co.za -d cliniquecarehub.co.za -d www.cliniquecarehub.co.za
 
 For end-to-end (e2e) testing, run:
 
@@ -62,3 +63,45 @@ For more information on using the Angular CLI, including detailed command refere
 docker run --detach --name payrollsa --env "MARIADB_ROOT_PASSWORD=V9!kR7@qL2#xN8$pT4^mW6&zH1*eY3" -p 3306:3306 mariadb:latest
 
 docker run --detach --name payrollsa --env 'MARIADB_ROOT_PASSWORD=HippoFixer1502@' --env 'MARIADB_DATABASE=root' --env 'MARIADB_USER=payrollsa' --env 'MARIADB_PASSWORD=V9!kR7@qL2#xN8$pT4^mW6&zH1*eY3' -p 3306:3306 mariadb:latest
+
+
+
+# On the Server
+
+#### add new certificate for subdomain payroll.kibokohouse.com
+
+sudo certbot certonly --cert-name payrollsa -d payrollsa.kibokohouse.com
+
+## run docker on the server 
+
+docker stop payrollsa && docker rm payrollsa
+docker pull dominichdocker/payrollsa:latest
+
+
+###  run sql
+CREATE DATABASE IF NOT EXISTS payrollsa
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+CREATE USER IF NOT EXISTS 'payrollsa'@'%' IDENTIFIED BY 'V9!kR7@qL2#xN8$pT4^mW6&zH1*eY3';
+
+GRANT ALL PRIVILEGES ON payrollsa.* TO 'payrollsa'@'%';
+
+FLUSH PRIVILEGES;
+
+### run the docker image
+
+docker run -d --name payrollsa --network root_reseau -e ASPNETCORE_URLS=http://+:80 -e DB_HOST=mariadb -e DB_NAME=payrollsa -e DB_USER=payrollsa -e DB_PASSWORD='V9!kR7@qL2#xN8$pT4^mW6&zH1*eY3' dominichdocker/payrollsa:latest
+
+docker logs payrollsa
+
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' payrollsa 
+
+# Add to site available
+
+cd /etc/nginx/sites-available
+nano docker-proxy
+
+sudo systemctl stop nginx
+sudo systemctl restart nginx
+systemctl status nginx.service

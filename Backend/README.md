@@ -4,8 +4,13 @@
 - create ripo on docker called payrollsa
 ### Client 
 ng build
-### API
+
+### Pyaroll.Api
+
 - dotnet build
+
+### Backend
+
 - docker build -t dominichdocker/payrollsa .
-- docker login
+
 - docker push dominichdocker/payrollsa:latest
