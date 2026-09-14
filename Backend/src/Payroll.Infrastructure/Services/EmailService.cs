@@ -17,6 +17,7 @@ public class EmailService(IConfiguration config, ILogger<EmailService> logger) :
     private string Password => config["EmailSettings:Password"] ?? string.Empty;
     private string FromAddress => config["EmailSettings:From"] ?? User;
     private string FromName => config["EmailSettings:FromName"] ?? "Payroll SA";
+    private string WebsiteUrl => config["SupportSettings:FrontendBaseUrl"] ?? string.Empty;
 
     public Task SendAsync(string to, string subject, string htmlBody, CancellationToken ct = default) =>
         SendMessageAsync(to, subject, htmlBody, null, null, ct);
@@ -51,7 +52,7 @@ public class EmailService(IConfiguration config, ILogger<EmailService> logger) :
         message.To.Add(MailboxAddress.Parse(to));
         message.Subject = subject;
 
-        var builder = new BodyBuilder { HtmlBody = EmailTemplate.Render(subject, htmlBody) };
+        var builder = new BodyBuilder { HtmlBody = EmailTemplate.Render(subject, htmlBody, WebsiteUrl) };
         if (attachment is not null && attachmentName is not null)
             builder.Attachments.Add(attachmentName, attachment, new ContentType("application", "pdf"));
 

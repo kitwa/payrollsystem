@@ -79,12 +79,12 @@ import { Company } from '../../../settings/models/settings.models';
 								<button
 									class="btn btn-outline-danger btn-sm"
 									type="button"
-									[disabled]="!isSuperAdmin()"
-									[title]="isSuperAdmin() ? 'Delete this payroll for support.' : 'Only Super Admin users can delete payroll.'"
+									[disabled]="!canDelete(period)"
+									[title]="canDelete(period) ? 'Delete this payroll period.' : deleteDisabledReason(period)"
 									(click)="deletePeriod(period)"
 								>Delete</button>
 							</div>
-							@if (!isSuperAdmin()) { <small class="text-muted d-block mt-1">Payroll deletion is restricted to Super Admin support users.</small> }
+							@if (!canDelete(period)) { <small class="text-muted d-block mt-1">{{ deleteDisabledReason(period) }}</small> }
 						</div>
 					</article>
 				</div>
@@ -192,9 +192,9 @@ export class PayrollListComponent {
 	setEmployeeSearch(event: Event): void { this.employeeSearch.set((event.target as HTMLInputElement).value); }
 
 	async deletePeriod(period: PayrollPeriod): Promise<void> {
-		if (!this.isSuperAdmin()) {
+		if (!this.canDelete(period)) {
 			this.messageTone.set('error');
-			this.message.set('Only Super Admin users can delete payroll periods.');
+			this.message.set(this.deleteDisabledReason(period));
 			return;
 		}
 
@@ -213,5 +213,19 @@ export class PayrollListComponent {
 	}
 
 	companyName(companyId: string): string { return this.companies().find(company => company.id === companyId)?.name ?? 'Current company'; }
+
+	isAdmin(): boolean { return this.auth.isInRole('Admin'); }
+
+	canDelete(period: PayrollPeriod): boolean {
+		return this.isSuperAdmin() || (this.isAdmin() && period.status === PayrollStatus.Draft);
+	}
+
+	deleteDisabledReason(period: PayrollPeriod): string {
+		if (this.isSuperAdmin()) return '';
+		if (this.isAdmin()) return period.status === PayrollStatus.Draft
+			? ''
+			: 'Only draft payroll periods can be deleted. Contact Super Admin support for other statuses.';
+		return 'Payroll deletion is restricted to Admin and Super Admin users.';
+	}
 }
 

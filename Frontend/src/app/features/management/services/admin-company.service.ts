@@ -28,4 +28,8 @@ export class AdminCompanyService {
   setActivityHistory(companyId: string, enabled: boolean) {
     return this.http.put<void>(`${this.url}/${companyId}/activity-history`, { enabled });
   }
+
+  setActivityHistoryForAll(enabled: boolean) {
+    return this.http.put<void>(`${this.url}/activity-history/all`, { enabled });
+  }
 }

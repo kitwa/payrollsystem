@@ -42,7 +42,11 @@ import { UserService } from '../../settings/services/user.service';
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <div><h2 class="h5 mb-1">Companies</h2><p class="text-muted small mb-0">Subscription status and account access for every tenant.</p></div>
-          <button class="btn btn-sm btn-outline-secondary" type="button" (click)="loadAdminCompanies()">Refresh</button>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-success" type="button" (click)="setActivityHistoryForAll(true)">Enable Activity History for All</button>
+            <button class="btn btn-sm btn-outline-danger" type="button" (click)="setActivityHistoryForAll(false)">Disable Activity History for All</button>
+            <button class="btn btn-sm btn-outline-secondary" type="button" (click)="loadAdminCompanies()">Refresh</button>
+          </div>
         </div>
         <div class="table-responsive">
           <table class="table align-middle mb-0">
@@ -270,6 +274,15 @@ export class ManagementComponent {
           : item));
       },
       error: response => this.adminError.set(response.error?.errors?.[0] ?? 'Unable to update activity history setting.')
+    });
+  }
+
+  setActivityHistoryForAll(enabled: boolean): void {
+    this.adminCompanyService.setActivityHistoryForAll(enabled).subscribe({
+      next: () => {
+        this.adminCompanies.update(companies => companies.map(item => ({ ...item, isActivityHistoryEnabled: enabled })));
+      },
+      error: response => this.adminError.set(response.error?.errors?.[0] ?? 'Unable to update activity history setting for all companies.')
     });
   }
 

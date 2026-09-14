@@ -125,6 +125,12 @@ public class GetSupportTicketHandler(
         if (ticket is null) return Result<SupportTicketDetailDto>.Fail("Support ticket not found.");
         if (!CanAccess(ticket)) return Result<SupportTicketDetailDto>.Fail("You are not authorized to view this ticket.");
 
+        if (!currentUser.IsInRole(Constants.Roles.SuperAdmin) && !ticket.IsReadByCompany)
+        {
+            ticket.IsReadByCompany = true;
+            await db.SaveChangesAsync(ct);
+        }
+
         var company = await db.Companies.FirstOrDefaultAsync(item => item.Id == ticket.CompanyId, ct);
         var user = await userManager.FindByIdAsync(ticket.CreatedByUserId.ToString());
         return Result<SupportTicketDetailDto>.Ok(new SupportTicketDetailDto(
@@ -147,6 +153,22 @@ public class GetSupportTicketHandler(
 
     private bool CanAccess(SupportTicket ticket) => currentUser.IsInRole(Constants.Roles.SuperAdmin)
         || currentUser.CompanyId == ticket.CompanyId;
+}
+
+public record GetUnreadSupportTicketCountQuery(Guid CompanyId) : IRequest<Result<int>>;
+
+public class GetUnreadSupportTicketCountHandler(IAppDbContext db, ICurrentUser currentUser)
+    : IRequestHandler<GetUnreadSupportTicketCountQuery, Result<int>>
+{
+    public async Task<Result<int>> Handle(GetUnreadSupportTicketCountQuery request, CancellationToken ct)
+    {
+        if (!TenantAccess.CanAccessCompany(currentUser, request.CompanyId))
+            return Result<int>.Fail("You are not authorized to view this company's tickets.");
+
+        var count = await db.SupportTickets.CountAsync(
+            t => t.CompanyId == request.CompanyId && !t.IsDeleted && !t.IsReadByCompany, ct);
+        return Result<int>.Ok(count);
+    }
 }
 
 public record CreateSupportTicketDto(string Subject, SupportTicketType Type, string Description);
@@ -259,6 +281,7 @@ public class UpdateSupportTicketStatusHandler(
         ticket.Status = request.Status;
         ticket.ModifiedAt = DateTime.UtcNow;
         ticket.ModifiedBy = currentUser.UserId.ToString();
+        if (previousStatus != request.Status) ticket.IsReadByCompany = false;
         if (request.Status == SupportTicketStatus.Closed)
         {
             ticket.ClosedAt ??= DateTime.UtcNow;

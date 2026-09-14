@@ -33,7 +33,12 @@
 					<nav class="nav flex-column gap-1">
 						@for (item of mainNav; track item.path) {
 							@if (isAllowed(item)) {
-								<a class="nav-link sidebar-link" [routerLink]="item.path" [class.active]="isRouteActive(item.path)" (click)="closeMobileMenu()"><i class="bi me-2" [class]="item.icon"></i>{{ item.label }}</a>
+								<a class="nav-link sidebar-link d-flex align-items-center" [routerLink]="item.path" [class.active]="isRouteActive(item.path)" (click)="closeMobileMenu()">
+									<i class="bi me-2" [class]="item.icon"></i>{{ item.label }}
+									@if (item.path === '/support/tickets' && unreadTicketCount() > 0) {
+										<span class="badge bg-danger rounded-pill ms-auto">{{ unreadTicketCount() }}</span>
+									}
+								</a>
 							}
 						}
 					</nav>

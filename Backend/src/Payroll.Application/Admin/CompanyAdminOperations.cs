@@ -144,6 +144,25 @@ public class EnableCompanyHandler(IAppDbContext db, ICurrentUser currentUser) : 
     }
 }
 
+public record SetActivityHistoryForAllCompaniesCommand(bool Enabled) : IRequest<Result>;
+
+public class SetActivityHistoryForAllCompaniesHandler(IAppDbContext db, ICurrentUser currentUser)
+    : IRequestHandler<SetActivityHistoryForAllCompaniesCommand, Result>
+{
+    public async Task<Result> Handle(SetActivityHistoryForAllCompaniesCommand request, CancellationToken ct)
+    {
+        if (!currentUser.IsInRole(Constants.Roles.SuperAdmin))
+            return Result.Fail("Only Super Admin users can change activity history settings.");
+
+        var companies = await db.Companies.Where(c => !c.IsDeleted).ToListAsync(ct);
+        foreach (var company in companies)
+            company.IsActivityHistoryEnabled = request.Enabled;
+
+        await db.SaveChangesAsync(ct);
+        return Result.Ok();
+    }
+}
+
 public record DeleteCompanyCommand(Guid CompanyId) : IRequest<Result>;
 
 public class DeleteCompanyHandler(

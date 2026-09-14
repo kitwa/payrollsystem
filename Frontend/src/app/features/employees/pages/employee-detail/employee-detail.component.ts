@@ -63,7 +63,7 @@ import { Employee } from '../../models/employee.models';
 				<article class="card border-0 shadow-sm mb-3">
 					<div class="card-body">
 						<h2 class="h6 text-muted">Compensation</h2>
-						<p class="salary">R {{ employee.basicSalary | number:'1.0-0' }}</p>
+						<p class="salary">R {{ employee.basicSalary | number:'1.2-2' }}</p>
 						<p class="mb-0 text-muted">{{ payFrequencyLabel(employee.payFrequency) }}</p>
 					</div>
 				</article>

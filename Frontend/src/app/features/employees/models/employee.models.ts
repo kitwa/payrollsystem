@@ -49,6 +49,8 @@ export interface CreateEmployee {
   department?: string;
   startDate: string;
   basicSalary: number;
+  allowLogin?: boolean;
+  loginRole?: string;
 }
 
 export interface Department {

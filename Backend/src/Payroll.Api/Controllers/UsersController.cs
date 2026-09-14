@@ -34,4 +34,9 @@ public class UsersController(IMediator mediator) : BaseApiController(mediator)
     [HttpPut("{id:guid}/status")]
     public async Task<IActionResult> UpdateStatus(Guid id, [FromBody] UpdateUserStatusDto dto, CancellationToken ct) =>
         FromResult(await Mediator.Send(new UpdateUserStatusCommand(id, dto.IsActive), ct));
+
+    /// <summary>Delete a user account.</summary>
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new DeleteUserCommand(id), ct));
 }

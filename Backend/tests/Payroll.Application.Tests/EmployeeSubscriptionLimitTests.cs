@@ -1,5 +1,8 @@
 using FluentAssertions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using NSubstitute;
 using Payroll.Application.Billing;
 using Payroll.Application.Common.Interfaces;
 using Payroll.Application.Employees.Commands;
@@ -8,6 +11,7 @@ using Payroll.Domain.Billing;
 using Payroll.Domain.Companies;
 using Payroll.Domain.Employees;
 using Payroll.Domain.Employees.Enums;
+using Payroll.Domain.Identity;
 using Payroll.Infrastructure.Persistence;
 using SharedConstants = Payroll.Shared.Constants;
 
@@ -60,13 +64,20 @@ public class EmployeeSubscriptionLimitTests
         return company.Id;
     }
 
+    private static CreateEmployeeHandler CreateHandler(AppDbContext db, ICurrentUser currentUser) =>
+        new(db, currentUser, new SubscriptionService(db),
+            Substitute.For<UserManager<AppUser>>(Substitute.For<IUserStore<AppUser>>(), null, null, null, null, null, null, null, null),
+            Substitute.For<IEmailService>(),
+            Substitute.For<ISupportNotificationSettings>(),
+            Substitute.For<ILogger<CreateEmployeeHandler>>());
+
     [Fact]
     public async Task CreateEmployee_is_blocked_once_the_plan_employee_limit_is_reached()
     {
         var companyId = await SeedCompanyOnPlanAsync("SMALL_BUSINESS", maxEmployees: 5);
 
         var currentUser = new FakeCurrentUser(companyId, isAdmin: true);
-        var handler = new CreateEmployeeHandler(_db, currentUser, new SubscriptionService(_db));
+        var handler = CreateHandler(_db, currentUser);
 
         var dto = new CreateEmployeeDto(
             companyId, "New", "Hire", "ID9999999999", new DateTime(1990, 1, 1),
@@ -85,7 +96,7 @@ public class EmployeeSubscriptionLimitTests
         var companyId = await SeedCompanyOnPlanAsync("SMALL_BUSINESS", maxEmployees: 4);
 
         var currentUser = new FakeCurrentUser(companyId, isAdmin: true);
-        var handler = new CreateEmployeeHandler(_db, currentUser, new SubscriptionService(_db));
+        var handler = CreateHandler(_db, currentUser);
 
         var dto = new CreateEmployeeDto(
             companyId, "New", "Hire", "ID9999999999", new DateTime(1990, 1, 1),

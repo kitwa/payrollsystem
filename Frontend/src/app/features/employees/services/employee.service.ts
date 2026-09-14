@@ -70,4 +70,8 @@ export class EmployeeService {
       params: new HttpParams().set('terminationDate', terminationDate)
     });
   }
+
+  delete(id: string) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }

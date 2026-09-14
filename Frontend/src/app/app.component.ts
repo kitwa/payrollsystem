@@ -6,6 +6,7 @@ import { AuthService } from './core/auth/auth.service';
 import { SeoService } from './core/seo/seo.service';
 import { InstallPromptComponent } from './shared/components/install-prompt/install-prompt.component';
 import { SupportChatbotComponent } from './shared/components/support-chatbot/support-chatbot.component';
+import { SupportTicketService } from './features/support/services/support-ticket.service';
 
 type NavItem = {
   label: string;
@@ -25,12 +26,14 @@ export class AppComponent {
   private readonly auth = inject(AuthService);
   private readonly seo = inject(SeoService);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
+  private readonly supportTicketService = inject(SupportTicketService);
 
   readonly appName = 'Payroll SA';
   readonly currentPath = signal(this.normalizedPath(this.router.url));
   readonly mobileMenuOpen = signal(false);
   readonly settingsOpen = signal(false);
   readonly accountOpen = signal(false);
+  readonly unreadTicketCount = signal(0);
 
   readonly user = this.auth.currentUser;
   readonly isLoggedIn = this.auth.isLoggedIn;
@@ -65,7 +68,8 @@ export class AppComponent {
 
   readonly showShell = computed(() => {
     const path = this.currentPath();
-    return !['/', '/login', '/register', '/reset-password'].includes(path);
+    const publicAuthPaths = ['/', '/login', '/register', '/reset-password', '/forgot-password'];
+    return this.isLoggedIn() && !publicAuthPaths.includes(path);
   });
 
   constructor() {
@@ -77,6 +81,20 @@ export class AppComponent {
       if (!this.isPublicPath(this.currentPath())) {
         this.seo.noIndex();
       }
+      this.refreshUnreadTicketCount();
+    });
+    this.refreshUnreadTicketCount();
+  }
+
+  private refreshUnreadTicketCount(): void {
+    const companyId = this.auth.companyId();
+    if (!companyId || !this.auth.isInRole('Admin')) {
+      this.unreadTicketCount.set(0);
+      return;
+    }
+    this.supportTicketService.getUnreadCount(companyId).subscribe({
+      next: count => this.unreadTicketCount.set(count),
+      error: () => this.unreadTicketCount.set(0)
     });
   }
 

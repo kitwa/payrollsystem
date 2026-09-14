@@ -48,4 +48,10 @@ public class EmployeesController(IMediator mediator) : BaseApiController(mediato
     [Authorize(Policy = Constants.Policies.RequirePayrollManagerRole)]
     public async Task<IActionResult> Terminate(Guid id, [FromQuery] DateTime terminationDate, CancellationToken ct) =>
         FromResult(await Mediator.Send(new TerminateEmployeeCommand(id, terminationDate), ct));
+
+    /// <summary>Delete an employee. Admin and Super Admin only.</summary>
+    [HttpDelete("{id:guid}")]
+    [Authorize(Policy = Constants.Policies.RequireAdminRole)]
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new DeleteEmployeeCommand(id), ct));
 }

@@ -28,4 +28,8 @@ export class UserService {
   updateStatus(userId: string, isActive: boolean) {
     return this.http.put(`${this.url}/${userId}/status`, { isActive });
   }
+
+  delete(userId: string) {
+    return this.http.delete(`${this.url}/${userId}`);
+  }
 }

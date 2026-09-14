@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/auth/auth.service';
@@ -9,11 +9,12 @@ import { Company } from '../../models/settings.models';
 import { ManagedUser, CreateUserRequest } from '../../models/user.models';
 import { UserService } from '../../services/user.service';
 import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
+import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, PaginationComponent],
+  imports: [CommonModule, ReactiveFormsModule, PaginationComponent, ConfirmDialogComponent],
   template: `
     <section class="mb-3">
       <h1 class="h3 mb-1">User Accounts</h1>
@@ -62,9 +63,18 @@ import { PaginationComponent } from '../../../../shared/components/pagination/pa
               <input class="form-control" [type]="showPassword() ? 'text' : 'password'" formControlName="password" autocomplete="new-password">
               <button class="btn btn-outline-secondary" type="button" (click)="showPassword.set(!showPassword())"><i class="bi" [class.bi-eye]="!showPassword()" [class.bi-eye-slash]="showPassword()"></i></button>
             </div>
+            @if (form.controls.password.value) {
+              <ul class="list-unstyled small mt-2 mb-0">
+                @for (check of passwordChecks(); track check.label) {
+                  <li [class.text-success]="check.passed" [class.text-danger]="!check.passed">
+                    <i class="bi" [class.bi-check-circle-fill]="check.passed" [class.bi-x-circle-fill]="!check.passed"></i> {{ check.label }}
+                  </li>
+                }
+              </ul>
+            }
           </div>
           <div class="col-12 col-md-3 col-lg-1 d-flex align-items-end">
-            <button class="btn btn-dark w-100" type="submit" [disabled]="form.invalid || !selectedCompanyId()">Add</button>
+            <button class="btn btn-dark w-100" type="submit" [disabled]="form.invalid || !selectedCompanyId() || !passwordValid()">Add</button>
           </div>
         </form>
         <small class="text-muted d-block mt-2">The employee must have an email address. They can use this password to sign in.</small>
@@ -95,7 +105,12 @@ import { PaginationComponent } from '../../../../shared/components/pagination/pa
                     </select>
                   </td>
                   <td><span class="badge" [class.bg-success]="user.isActive" [class.bg-secondary]="!user.isActive">{{ user.isActive ? 'Active' : 'Disabled' }}</span></td>
-                  <td class="text-end"><button class="btn btn-sm btn-outline-secondary" type="button" (click)="toggleStatus(user)">{{ user.isActive ? 'Disable' : 'Enable' }}</button></td>
+                  <td class="text-end">
+                    <button class="btn btn-sm btn-outline-secondary me-2" type="button" (click)="toggleStatus(user)">{{ user.isActive ? 'Disable' : 'Enable' }}</button>
+                    @if (!isCurrentUser(user)) {
+                      <button class="btn btn-sm btn-outline-danger" type="button" (click)="deleteUser(user)">Delete</button>
+                    }
+                  </td>
                 </tr>
               } @empty {
                 <tr><td colspan="5" class="text-center text-muted py-4">No user accounts found.</td></tr>
@@ -106,6 +121,8 @@ import { PaginationComponent } from '../../../../shared/components/pagination/pa
         <app-pagination [page]="pageNumber()" [pageSize]="pageSize" [total]="users().length" (pageChange)="pageNumber.set($event)"></app-pagination>
       </div>
     </section>
+
+    <app-confirm-dialog #confirmDialog></app-confirm-dialog>
   `
 })
 export class UsersComponent {
@@ -114,6 +131,8 @@ export class UsersComponent {
   private readonly userService = inject(UserService);
   private readonly employeeService = inject(EmployeeService);
   private readonly settingsService = inject(SettingsService);
+
+  @ViewChild('confirmDialog') confirmDialog!: ConfirmDialogComponent;
 
   readonly users = signal<ManagedUser[]>([]);
   readonly employees = signal<EmployeeList[]>([]);
@@ -138,6 +157,19 @@ export class UsersComponent {
     const linked = new Set(this.users().map(user => user.employeeId).filter(Boolean));
     return this.employees().filter(employee => !linked.has(employee.id));
   });
+
+  readonly passwordChecks = computed(() => {
+    const password = this.form.controls.password.value ?? '';
+    return [
+      { label: 'At least 8 characters', passed: password.length >= 8 },
+      { label: 'One uppercase letter', passed: /[A-Z]/.test(password) },
+      { label: 'One lowercase letter', passed: /[a-z]/.test(password) },
+      { label: 'One number', passed: /\d/.test(password) },
+      { label: 'One special character', passed: /[^A-Za-z0-9]/.test(password) }
+    ];
+  });
+
+  readonly passwordValid = computed(() => this.passwordChecks().every(check => check.passed));
 
   constructor() {
     if (this.canSelectCompany()) {
@@ -218,6 +250,22 @@ export class UsersComponent {
     this.userService.updateStatus(user.userId, !user.isActive).subscribe({
       next: () => { this.message.set('User status updated.'); this.load(); },
       error: response => this.showError(response, 'Unable to update user status.')
+    });
+  }
+
+  async deleteUser(user: ManagedUser): Promise<void> {
+    const confirmed = await this.confirmDialog.show({
+      title: 'Delete user account',
+      message: `Delete the account for ${user.firstName} ${user.lastName}? This cannot be undone.`,
+      confirmLabel: 'Delete',
+      tone: 'danger'
+    });
+    if (!confirmed) return;
+
+    this.clearFeedback();
+    this.userService.delete(user.userId).subscribe({
+      next: () => { this.message.set('User account deleted.'); this.load(); },
+      error: response => this.showError(response, 'Unable to delete user account.')
     });
   }
 

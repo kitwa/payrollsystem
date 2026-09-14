@@ -3,9 +3,12 @@ namespace Payroll.Infrastructure.Services;
 /// <summary>Wraps plain HTML content in the single shared Payroll SA blue-themed email layout (header/body/footer).</summary>
 public static class EmailTemplate
 {
-    public static string Render(string title, string bodyHtml)
+    public static string Render(string title, string bodyHtml, string? websiteUrl = null)
     {
         var year = DateTime.UtcNow.Year;
+        var websiteLink = string.IsNullOrWhiteSpace(websiteUrl) ? "" : $"""
+            <p style="margin:0 0 8px;font-size:12px;"><a href="{websiteUrl}" style="color:#0d6efd;text-decoration:none;font-weight:600;">Visit Payroll SA</a></p>
+            """;
         return $"""
             <!DOCTYPE html>
             <html>
@@ -22,6 +25,7 @@ public static class EmailTemplate
                                 <div style="font-size:14px;line-height:1.6;color:#212529;">{bodyHtml}</div>
                             </td></tr>
                             <tr><td style="background:#f8f9fa;padding:16px 32px;text-align:center;border-top:1px solid #e9ecef;">
+                                {websiteLink}
                                 <p style="margin:0;font-size:12px;color:#6c757d;">&copy; {year} Payroll SA. All rights reserved.</p>
                                 <p style="margin:4px 0 0;font-size:12px;color:#6c757d;">This is an automated message &mdash; please do not reply.</p>
                             </td></tr>

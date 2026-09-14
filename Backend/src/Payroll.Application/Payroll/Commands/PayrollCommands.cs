@@ -149,14 +149,23 @@ public class DeletePayrollHandler(IAppDbContext db, ICurrentUser currentUser) : 
             .Include(p => p.Lines)
             .FirstOrDefaultAsync(p => p.Id == request.PeriodId && !p.IsDeleted, ct);
         if (period is null) return Result.Fail("Payroll period not found.");
+
         if (!currentUser.IsInRole(Constants.Roles.SuperAdmin))
-            return Result.Fail("Only Super Admin users can delete payroll periods.");
+        {
+            if (!currentUser.IsInRole(Constants.Roles.Admin) || !TenantAccess.CanManageCompany(currentUser, period.CompanyId))
+                return Result.Fail("You are not authorized to delete this payroll period.");
+            if (period.Status != PayrollStatus.Draft)
+                return Result.Fail("Only draft payroll periods can be deleted. Contact Super Admin support for other statuses.");
+        }
 
         var lineIds = period.Lines.Select(line => line.Id).ToList();
         var earnings = await db.Earnings.Where(earning => lineIds.Contains(earning.PayrollLineId)).ToListAsync(ct);
         var deductions = await db.Deductions.Where(deduction => lineIds.Contains(deduction.PayrollLineId)).ToListAsync(ct);
+        // One-off EmployeeDeduction overrides scoped to this period would otherwise block deletion with a FK violation.
+        var periodDeductions = await db.EmployeeDeductions.Where(d => d.PayrollPeriodId == period.Id).ToListAsync(ct);
         db.Earnings.RemoveRange(earnings);
         db.Deductions.RemoveRange(deductions);
+        db.EmployeeDeductions.RemoveRange(periodDeductions);
         db.PayrollLines.RemoveRange(period.Lines);
         db.PayrollPeriods.Remove(period);
         await db.SaveChangesAsync(ct);

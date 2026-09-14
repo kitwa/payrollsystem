@@ -25,6 +25,11 @@ public class SupportTicketsController(IMediator mediator) : BaseApiController(me
     public async Task<IActionResult> Get(Guid id, CancellationToken ct) =>
         FromResult(await Mediator.Send(new GetSupportTicketQuery(id), ct));
 
+    /// <summary>Count of tickets with unseen Super Admin status changes, for the sidebar notification badge.</summary>
+    [HttpGet("unread-count")]
+    public async Task<IActionResult> GetUnreadCount([FromQuery] Guid companyId, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new GetUnreadSupportTicketCountQuery(companyId), ct));
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateSupportTicketDto dto, CancellationToken ct) =>
         FromResult(await Mediator.Send(new CreateSupportTicketCommand(dto), ct));

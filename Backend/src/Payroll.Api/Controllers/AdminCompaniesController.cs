@@ -30,6 +30,11 @@ public class AdminCompaniesController(IMediator mediator) : BaseApiController(me
     [HttpPut("{id:guid}/activity-history")]
     public async Task<IActionResult> SetActivityHistory(Guid id, [FromBody] SetActivityHistoryRequest request, CancellationToken ct) =>
         FromResult(await Mediator.Send(new SetActivityHistoryCommand(id, request.Enabled), ct));
+
+    /// <summary>Enable or disable Access &amp; Activity History for every company at once.</summary>
+    [HttpPut("activity-history/all")]
+    public async Task<IActionResult> SetActivityHistoryForAll([FromBody] SetActivityHistoryRequest request, CancellationToken ct) =>
+        FromResult(await Mediator.Send(new SetActivityHistoryForAllCompaniesCommand(request.Enabled), ct));
 }
 
 public record SetActivityHistoryRequest(bool Enabled);

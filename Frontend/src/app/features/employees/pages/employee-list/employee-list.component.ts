@@ -1,15 +1,16 @@
-﻿import { Component, computed, inject, signal } from '@angular/core';
+﻿import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../../core/auth/auth.service';
 import { EmployeeService } from '../../services/employee.service';
 import { EmployeeList } from '../../models/employee.models';
 import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
+import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
 	selector: 'app-employee-list',
 	standalone: true,
-	imports: [CommonModule, RouterLink, PaginationComponent],
+	imports: [CommonModule, RouterLink, PaginationComponent, ConfirmDialogComponent],
 	template: `
 		<section class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
 			<div>
@@ -78,7 +79,10 @@ import { PaginationComponent } from '../../../../shared/components/pagination/pa
 									</td>
 									<td class="text-end">
 										<a class="btn btn-sm btn-outline-secondary me-2" [routerLink]="['/employees', employee.id]">View</a>
-										<a class="btn btn-sm btn-outline-dark" [routerLink]="['/employees', employee.id, 'edit']">Edit</a>
+										<a class="btn btn-sm btn-outline-dark me-2" [routerLink]="['/employees', employee.id, 'edit']">Edit</a>
+										@if (canDelete()) {
+											<button class="btn btn-sm btn-outline-danger" type="button" (click)="deleteEmployee(employee)">Delete</button>
+										}
 									</td>
 								</tr>
 							} @empty {
@@ -92,6 +96,8 @@ import { PaginationComponent } from '../../../../shared/components/pagination/pa
 				<app-pagination [page]="pageNumber()" [pageSize]="pageSize" [total]="totalCount()" (pageChange)="loadPage($event)"></app-pagination>
 			</div>
 		</section>
+
+		<app-confirm-dialog #confirmDialog></app-confirm-dialog>
 	`,
 	styles: [
 		`
@@ -138,6 +144,9 @@ export class EmployeeListComponent {
 	private readonly auth = inject(AuthService);
 	private readonly employeeService = inject(EmployeeService);
 
+	@ViewChild('confirmDialog') confirmDialog!: ConfirmDialogComponent;
+
+	readonly canDelete = computed(() => this.auth.isInRole('Admin') || this.auth.isInRole('SuperAdmin'));
 	readonly query = signal('');
 	readonly department = signal('All departments');
 	readonly employees = signal<EmployeeList[]>([]);
@@ -159,6 +168,21 @@ export class EmployeeListComponent {
 			this.pageNumber.set(result.pageNumber);
 			this.totalCount.set(result.totalCount);
 			this.employees.set(result.items);
+		});
+	}
+
+	async deleteEmployee(employee: EmployeeList): Promise<void> {
+		const confirmed = await this.confirmDialog.show({
+			title: 'Delete employee',
+			message: `Delete ${employee.firstName} ${employee.lastName}? This cannot be undone.`,
+			confirmLabel: 'Delete',
+			tone: 'danger'
+		});
+		if (!confirmed) return;
+
+		this.employeeService.delete(employee.id).subscribe({
+			next: () => this.loadPage(this.pageNumber()),
+			error: () => {}
 		});
 	}
 

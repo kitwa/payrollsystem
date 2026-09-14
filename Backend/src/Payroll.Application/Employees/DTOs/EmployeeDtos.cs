@@ -58,7 +58,9 @@ public record CreateEmployeeDto(
     string? JobTitle,
     string? Department,
     DateTime StartDate,
-    decimal BasicSalary);
+    decimal BasicSalary,
+    bool AllowLogin = false,
+    string? LoginRole = null);
 
 public record UpdateEmployeeDto(
     string FirstName,

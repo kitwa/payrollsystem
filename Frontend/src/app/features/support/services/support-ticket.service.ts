@@ -43,6 +43,10 @@ export class SupportTicketService {
     return this.http.get<{ email: string }>(`${environment.apiUrl}support/contact`);
   }
 
+  getUnreadCount(companyId: string) {
+    return this.http.get<number>(`${this.url}/unread-count`, { params: new HttpParams().set('companyId', companyId) });
+  }
+
   updateStatus(id: string, status: SupportTicketStatus) {
     return this.http.put<SupportTicketDetail>(`${this.url}/${id}/status`, { status });
   }

@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Payroll.Application.Common;
 using Payroll.Application.Common.Interfaces;
 using Payroll.Application.Users.DTOs;
@@ -57,7 +58,10 @@ public record CreateUserCommand(CreateUserDto Dto) : IRequest<Result<Guid>>;
 public class CreateUserHandler(
     IAppDbContext db,
     UserManager<AppUser> userManager,
-    ICurrentUser currentUser) : IRequestHandler<CreateUserCommand, Result<Guid>>
+    ICurrentUser currentUser,
+    IEmailService emailService,
+    ISupportNotificationSettings notificationSettings,
+    ILogger<CreateUserHandler> logger) : IRequestHandler<CreateUserCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateUserCommand request, CancellationToken ct)
     {
@@ -105,6 +109,7 @@ public class CreateUserHandler(
             return Result<Guid>.Fail(roleResult.Errors.Select(e => e.Description));
         }
 
+        await AccountInviteEmailer.SendSetPasswordEmailAsync(userManager, emailService, notificationSettings, logger, user, ct);
         return Result<Guid>.Ok(user.Id);
     }
 
@@ -221,5 +226,29 @@ public class UpdateUserStatusHandler(
         return result.Succeeded
             ? Result.Ok()
             : Result.Fail(result.Errors.Select(e => e.Description));
+    }
+}
+
+public record DeleteUserCommand(Guid UserId) : IRequest<Result>;
+
+public class DeleteUserHandler(
+    UserManager<AppUser> userManager,
+    ICurrentUser currentUser) : IRequestHandler<DeleteUserCommand, Result>
+{
+    public async Task<Result> Handle(DeleteUserCommand request, CancellationToken ct)
+    {
+        var user = await userManager.FindByIdAsync(request.UserId.ToString());
+        if (user is null) return Result.Fail("User not found.");
+        if (user.CompanyId is null || !TenantAccess.CanAccessCompany(currentUser, user.CompanyId.Value))
+            return Result.Fail("You are not authorized to delete this user.");
+        if (currentUser.UserId == user.Id)
+            return Result.Fail("You cannot delete your own account.");
+
+        var roles = await userManager.GetRolesAsync(user);
+        if (roles.Contains(Constants.Roles.Admin) && !currentUser.IsInRole(Constants.Roles.SuperAdmin))
+            return Result.Fail("Only Super Admin users can delete Admin accounts.");
+
+        var result = await userManager.DeleteAsync(user);
+        return result.Succeeded ? Result.Ok() : Result.Fail(result.Errors.Select(e => e.Description));
     }
 }

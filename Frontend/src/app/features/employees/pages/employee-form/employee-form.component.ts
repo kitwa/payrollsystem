@@ -60,12 +60,9 @@ import { DepartmentService } from '../../services/employee.service';
     <div class="d-flex justify-content-between align-items-center mb-1">
         <label class="form-label mb-0">Department</label>
 
-        <a
-            routerLink="/settings/departments"
-            class="btn btn-sm btn-outline-primary"
-        >
+        <button type="button" class="btn btn-sm btn-outline-primary" (click)="openDepartmentModal()">
             + Add Department
-        </a>
+        </button>
     </div>
 
     <select class="form-select" formControlName="department">
@@ -106,7 +103,7 @@ import { DepartmentService } from '../../services/employee.service';
 					</div>
 					<div class="col-12 col-md-4">
 						<label class="form-label">Basic Salary</label>
-						<input type="number" class="form-control" formControlName="basicSalary">
+						<input type="number" step="0.01" min="0" class="form-control" formControlName="basicSalary">
 					</div>
 					<div class="col-12 col-md-4">
 						<label class="form-label">Status</label>
@@ -123,6 +120,28 @@ import { DepartmentService } from '../../services/employee.service';
 						<div class="col-12 col-md-3"><label class="form-label">Account Number</label><input class="form-control" formControlName="accountNumber"></div>
 						<div class="col-12 col-md-3"><label class="form-label">Branch Code</label><input class="form-control" formControlName="branchCode"></div>
 						<div class="col-12 col-md-3"><label class="form-label">Account Type</label><input class="form-control" formControlName="accountType"></div>
+					} @else {
+						<div class="col-12"><hr></div>
+						<div class="col-12">
+							<div class="form-check form-switch mb-2">
+								<input class="form-check-input" type="checkbox" role="switch" id="allow-login-switch" formControlName="allowLogin">
+								<label class="form-check-label" for="allow-login-switch">Allow employee to log in</label>
+							</div>
+							@if (form.value.allowLogin) {
+								<div class="row g-2 align-items-end">
+									<div class="col-12 col-md-4">
+										<label class="form-label">Login Role</label>
+										<select class="form-select" formControlName="loginRole">
+											<option value="Employee">Employee</option>
+											<option value="PayrollManager">Payroll Manager</option>
+										</select>
+									</div>
+									<div class="col-12 col-md-8">
+										<small class="text-muted">An account will be created automatically and the employee will be emailed a link to set their own password.</small>
+									</div>
+								</div>
+							}
+						</div>
 					}
 
 					@if (saved()) {
@@ -149,6 +168,28 @@ import { DepartmentService } from '../../services/employee.service';
 				</form>
 			</div>
 		</section>
+
+		@if (showDepartmentModal()) {
+			<div class="modal d-block" tabindex="-1" role="dialog" style="background:rgba(0,0,0,.5);">
+				<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h2 class="modal-title h5 mb-0">Add Department</h2>
+							<button type="button" class="btn-close" aria-label="Close" (click)="closeDepartmentModal()"></button>
+						</div>
+						<div class="modal-body">
+							<label class="form-label">Department Name</label>
+							<input class="form-control" [value]="newDepartmentName()" (input)="newDepartmentName.set($any($event.target).value)" (keyup.enter)="createDepartment()">
+							@if (departmentError()) { <div class="alert alert-danger mt-2 mb-0 py-2 small">{{ departmentError() }}</div> }
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-secondary" (click)="closeDepartmentModal()">Cancel</button>
+							<button type="button" class="btn btn-dark" [disabled]="creatingDepartment()" (click)="createDepartment()">{{ creatingDepartment() ? 'Creating…' : 'Create' }}</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
 	`
 })
 export class EmployeeFormComponent {
@@ -163,6 +204,10 @@ export class EmployeeFormComponent {
 	readonly error = signal('');
 	readonly showUpgradeCta = signal(false);
 	readonly departments = signal<Department[]>([]);
+	readonly showDepartmentModal = signal(false);
+	readonly newDepartmentName = signal('');
+	readonly departmentError = signal('');
+	readonly creatingDepartment = signal(false);
 	readonly isEditMode = !!this.route.snapshot.paramMap.get('id');
 	readonly employeeId = this.route.snapshot.paramMap.get('id');
 	private employee: Employee | null = null;
@@ -182,6 +227,8 @@ export class EmployeeFormComponent {
 		employmentType: [0, Validators.required],
 		basicSalary: [0, [Validators.required, Validators.min(1)]],
 		status: [0, Validators.required],
+		allowLogin: [false],
+		loginRole: ['Employee'],
 		bankName: [''],
 		accountNumber: [''],
 		branchCode: [''],
@@ -265,7 +312,9 @@ export class EmployeeFormComponent {
 			jobTitle: value.jobTitle ?? undefined,
 			department: value.department?.trim() || undefined,
 			startDate: value.startDate!,
-				basicSalary: value.basicSalary!
+				basicSalary: value.basicSalary!,
+				allowLogin: value.allowLogin ?? false,
+				loginRole: value.loginRole ?? 'Employee'
 			}).subscribe({ next: () => this.router.navigate(['/employees']), error: response => this.setError(response, 'Unable to create employee.') });
 	}
 
@@ -273,6 +322,39 @@ export class EmployeeFormComponent {
 		const message = response.error?.errors?.[0] ?? fallback;
 		this.error.set(message);
 		this.showUpgradeCta.set(message.toLowerCase().includes('upgrade') && (this.auth.isInRole('Admin') || this.auth.isInRole('SuperAdmin')));
+	}
+
+	openDepartmentModal(): void {
+		this.newDepartmentName.set('');
+		this.departmentError.set('');
+		this.showDepartmentModal.set(true);
+	}
+
+	closeDepartmentModal(): void {
+		this.showDepartmentModal.set(false);
+	}
+
+	createDepartment(): void {
+		const companyId = this.auth.companyId();
+		const name = this.newDepartmentName().trim();
+		if (!companyId || !name || this.creatingDepartment()) return;
+
+		this.creatingDepartment.set(true);
+		this.departmentError.set('');
+		this.departmentService.create(companyId, name).subscribe({
+			next: () => {
+				this.creatingDepartment.set(false);
+				this.showDepartmentModal.set(false);
+				this.departmentService.getAll(companyId).subscribe(departments => {
+					this.departments.set(departments);
+					this.form.patchValue({ department: name });
+				});
+			},
+			error: response => {
+				this.creatingDepartment.set(false);
+				this.departmentError.set(response.error?.errors?.[0] ?? 'Unable to create department.');
+			}
+		});
 	}
 
 	private saveBankDetailsAndNavigate(value: ReturnType<typeof this.form.getRawValue>): void {

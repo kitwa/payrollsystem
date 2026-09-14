@@ -31,4 +31,6 @@ public class SupportTicket : BaseEntity
     public SupportTicketStatus Status { get; set; } = SupportTicketStatus.Open;
     public DateTime? ClosedAt { get; set; }
     public Guid? ClosedByUserId { get; set; }
+    /// <summary>False when a Super Admin status change hasn't yet been seen by the company that raised the ticket.</summary>
+    public bool IsReadByCompany { get; set; } = true;
 }
