@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+**/.vs/
+**/*.user
+Backend/src/Payroll.Api/logs/
+Backend/src/Payroll.Api/wwwroot/
+Frontend/node_modules/
+Frontend/dist/
+.git/
