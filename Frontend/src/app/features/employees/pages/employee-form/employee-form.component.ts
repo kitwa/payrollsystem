@@ -125,7 +125,7 @@ import { DepartmentService } from '../../services/employee.service';
 						<div class="col-12">
 							<div class="form-check form-switch mb-2">
 								<input class="form-check-input" type="checkbox" role="switch" id="allow-login-switch" formControlName="allowLogin">
-								<label class="form-check-label" for="allow-login-switch">Allow employee to log in</label>
+								<label class="form-check-label" for="allow-login-switch">Allow employee self-service login</label>
 							</div>
 							@if (form.value.allowLogin) {
 								<div class="row g-2 align-items-end">
