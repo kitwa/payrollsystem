@@ -327,7 +327,7 @@ file static class SupportTicketNotifier
 
             if (!string.IsNullOrWhiteSpace(ticket.CreatedByEmail))
                 await emailService.SendAsync(ticket.CreatedByEmail, $"Support Ticket #{ticket.TicketNumber} Received",
-                    $"<p>Your support ticket has been received and is currently being reviewed.</p>{body}", ct);
+                    $"<p>Your support ticket has been received and is currently being reviewed.</p>{body}", EmailSenderType.Support, ct);
 
             await NotifySuperAdminsAsync(emailService, userManager, notificationSettings, $"New Support Ticket #{ticket.TicketNumber}", body, ct);
         }
@@ -354,7 +354,7 @@ file static class SupportTicketNotifier
                 """;
 
             if (!string.IsNullOrWhiteSpace(ticket.CreatedByEmail))
-                await emailService.SendAsync(ticket.CreatedByEmail, subject, body, ct);
+                await emailService.SendAsync(ticket.CreatedByEmail, subject, body, EmailSenderType.Support, ct);
 
             await NotifySuperAdminsAsync(emailService, userManager, notificationSettings, subject, body, ct);
         }
@@ -373,12 +373,12 @@ file static class SupportTicketNotifier
 
         foreach (var admin in superAdmins.Where(a => a.IsActive && !string.IsNullOrWhiteSpace(a.Email)))
         {
-            await emailService.SendAsync(admin.Email!, subject, body, ct);
+            await emailService.SendAsync(admin.Email!, subject, body, EmailSenderType.Support, ct);
             notified.Add(admin.Email!);
         }
 
         if (!string.IsNullOrWhiteSpace(notificationSettings.SupportEmail) && !notified.Contains(notificationSettings.SupportEmail))
-            await emailService.SendAsync(notificationSettings.SupportEmail, subject, body, ct);
+            await emailService.SendAsync(notificationSettings.SupportEmail, subject, body, EmailSenderType.Support, ct);
     }
 
     private static string BuildLink(ISupportNotificationSettings notificationSettings, Guid ticketId) =>

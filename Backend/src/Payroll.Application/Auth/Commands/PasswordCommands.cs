@@ -49,7 +49,7 @@ public class ForgotPasswordHandler(
         var baseUrl = configuration["SupportSettings:FrontendBaseUrl"] ?? "http://localhost:4200";
         var link = $"{baseUrl.TrimEnd('/')}/reset-password?email={Uri.EscapeDataString(email)}&token={Uri.EscapeDataString(encodedToken)}";
         await emailService.SendAsync(email, "Reset your Payroll SA password",
-            $"<p>We received a request to reset your Payroll SA password.</p><p><a href=\"{link}\">Reset your password</a></p><p>This link expires according to your Identity token settings. If you did not request this, you can ignore this email.</p>", ct);
+            $"<p>We received a request to reset your Payroll SA password.</p><p><a href=\"{link}\">Reset your password</a></p><p>This link expires according to your Identity token settings. If you did not request this, you can ignore this email.</p>", EmailSenderType.System, ct);
         return generic;
     }
 }
@@ -90,7 +90,7 @@ file static class PasswordChangeNotifier
                 <p>Hi {user.FirstName},</p>
                 <p>This is a confirmation that the password for your Payroll SA account was just changed.</p>
                 <p>If you did not make this change, please contact your administrator immediately.</p>
-                """);
+                """, EmailSenderType.System);
         }
         catch (Exception ex)
         {

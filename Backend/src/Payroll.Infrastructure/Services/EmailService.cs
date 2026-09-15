@@ -15,14 +15,22 @@ public class EmailService(IConfiguration config, ILogger<EmailService> logger) :
     private int Port => config.GetValue("EmailSettings:Port", 587);
     private string User => config["EmailSettings:User"] ?? string.Empty;
     private string Password => config["EmailSettings:Password"] ?? string.Empty;
-    private string FromAddress => config["EmailSettings:From"] ?? User;
-    private string FromName => config["EmailSettings:FromName"] ?? "Payroll SA";
+    private string FromName => config["EmailSettings:FromName"] ?? "Kiboko Payroll";
     private string WebsiteUrl => config["SupportSettings:FrontendBaseUrl"] ?? string.Empty;
 
-    public Task SendAsync(string to, string subject, string htmlBody, CancellationToken ct = default) =>
-        SendMessageAsync(to, subject, htmlBody, null, null, ct);
+    /// <summary>Resolves the "From" address alias for the given sender type; falls back to the authenticated mailbox if unconfigured.</summary>
+    private string FromAddress(EmailSenderType senderType) => senderType switch
+    {
+        EmailSenderType.Support => config["EmailSettings:Aliases:Support"] ?? User,
+        EmailSenderType.Billing => config["EmailSettings:Aliases:Billing"] ?? User,
+        EmailSenderType.System => config["EmailSettings:Aliases:System"] ?? User,
+        _ => config["EmailSettings:Aliases:Info"] ?? User,
+    };
 
-    public Task SendPayslipAsync(string to, string employeeName, byte[] pdfBytes, string filename, CancellationToken ct = default)
+    public Task SendAsync(string to, string subject, string htmlBody, EmailSenderType senderType = EmailSenderType.Info, CancellationToken ct = default) =>
+        SendMessageAsync(to, subject, htmlBody, null, null, senderType, ct);
+
+    public Task SendPayslipAsync(string to, string employeeName, byte[] pdfBytes, string filename, EmailSenderType senderType = EmailSenderType.Billing, CancellationToken ct = default)
     {
         var subject = "Your payslip is available";
         var body = $"""
@@ -32,11 +40,11 @@ public class EmailService(IConfiguration config, ILogger<EmailService> logger) :
             <p>Regards,<br/>{FromName}</p>
             """;
 
-        return SendMessageAsync(to, subject, body, pdfBytes, filename, ct);
+        return SendMessageAsync(to, subject, body, pdfBytes, filename, senderType, ct);
     }
 
     private async Task SendMessageAsync(
-        string to, string subject, string htmlBody, byte[]? attachment, string? attachmentName, CancellationToken ct)
+        string to, string subject, string htmlBody, byte[]? attachment, string? attachmentName, EmailSenderType senderType, CancellationToken ct)
     {
         if (!Enabled)
         {
@@ -48,7 +56,7 @@ public class EmailService(IConfiguration config, ILogger<EmailService> logger) :
             throw new InvalidOperationException("EmailSettings:Host is not configured.");
 
         var message = new MimeMessage();
-        message.From.Add(new MailboxAddress(FromName, FromAddress));
+        message.From.Add(new MailboxAddress(FromName, FromAddress(senderType)));
         message.To.Add(MailboxAddress.Parse(to));
         message.Subject = subject;
 

@@ -32,7 +32,7 @@ public static class AccountInviteEmailer
                 <p>An account has been created for you on Payroll SA. Please create your own password before logging in.</p>
                 <p><a href="{link}">Create your password</a></p>
                 <p>If you weren't expecting this email, you can safely ignore it.</p>
-                """, ct);
+                """, EmailSenderType.System, ct);
         }
         catch (Exception ex)
         {

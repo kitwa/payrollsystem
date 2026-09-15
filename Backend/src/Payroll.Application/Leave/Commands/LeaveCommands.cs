@@ -78,7 +78,7 @@ public class RequestLeaveHandler(
                 """;
 
             foreach (var recipient in recipients)
-                await emailService.SendAsync(recipient.Email!, "New Leave Request Submitted", body, ct);
+                await emailService.SendAsync(recipient.Email!, "New Leave Request Submitted", body, EmailSenderType.Info, ct);
         }
         catch (Exception ex)
         {
@@ -164,7 +164,7 @@ file static class LeaveDecisionNotifier
                 <strong>Dates:</strong> {leave.StartDate:yyyy-MM-dd} to {leave.EndDate:yyyy-MM-dd} ({leave.Days} day(s))</p>
                 {(string.IsNullOrWhiteSpace(leave.ReviewNote) ? "" : $"<p><strong>Note:</strong> {WebUtility.HtmlEncode(leave.ReviewNote)}</p>")}
                 """;
-            await emailService.SendAsync(employee.Email, $"Your Leave Request Has Been {char.ToUpper(decision[0])}{decision[1..]}", body, ct);
+            await emailService.SendAsync(employee.Email, $"Your Leave Request Has Been {char.ToUpper(decision[0])}{decision[1..]}", body, EmailSenderType.Info, ct);
         }
         catch (Exception ex)
         {

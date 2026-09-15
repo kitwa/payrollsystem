@@ -14,3 +14,8 @@ ng build
 - docker build -t dominichdocker/payrollsa .
 
 - docker push dominichdocker/payrollsa:latest
+
+
+### On server 
+
+docker stop payrollsa && docker rm payrollsa

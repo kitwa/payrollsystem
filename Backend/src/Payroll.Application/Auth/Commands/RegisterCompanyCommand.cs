@@ -138,7 +138,7 @@ public class RegisterCompanyHandler(
                 <p>Welcome to Payroll SA! Your company <strong>{WebUtility.HtmlEncode(company.Name)}</strong> has been registered successfully and your free trial has started.</p>
                 <p>You can now log in to add employees, run payroll, and manage leave.</p>
                 <p>Regards,<br/>The Payroll SA Team</p>
-                """, ct);
+                """, EmailSenderType.Info, ct);
         }
         catch (Exception ex)
         {
@@ -158,7 +158,7 @@ public class RegisterCompanyHandler(
                 """;
 
             foreach (var superAdmin in superAdmins.Where(a => a.IsActive && !string.IsNullOrWhiteSpace(a.Email)))
-                await emailService.SendAsync(superAdmin.Email!, $"New Company Registered: {company.Name}", body, ct);
+                await emailService.SendAsync(superAdmin.Email!, $"New Company Registered: {company.Name}", body, EmailSenderType.System, ct);
         }
         catch (Exception ex)
         {

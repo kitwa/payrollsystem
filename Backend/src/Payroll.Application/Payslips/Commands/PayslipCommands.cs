@@ -36,7 +36,7 @@ public class EmailPayslipHandler(
             await emailService.SendPayslipAsync(
                 line.Employee.Email,
                 $"{line.Employee.FirstName} {line.Employee.LastName}",
-                pdf, fileName, ct);
+                pdf, fileName, EmailSenderType.Billing, ct);
         }
         catch (Exception ex)
         {
@@ -94,7 +94,7 @@ public class EmailPeriodPayslipsHandler(
                 var pdf = await pdfService.GeneratePayslipAsync(line.Id, ct);
                 await emailService.SendPayslipAsync(
                     line.Employee.Email, employeeName, pdf,
-                    $"payslip-{period.Year}-{period.Month:00}.pdf", ct);
+                    $"payslip-{period.Year}-{period.Month:00}.pdf", EmailSenderType.Billing, ct);
 
                 line.PayslipEmailedAt = DateTime.UtcNow;
                 line.PayslipEmailedTo = line.Employee.Email;
